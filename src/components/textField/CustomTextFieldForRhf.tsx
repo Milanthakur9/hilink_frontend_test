@@ -7,23 +7,7 @@ import {
   Path,
   FieldErrors,
 } from "react-hook-form";
-import { styled } from "@mui/material/styles";
-import TextField, { TextFieldProps } from "@mui/material/TextField";
-
-const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => ({
-  "& .MuiOutlinedInput-root": {
-    color: "#000",
-    // Class for the border around the input field
-    "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: theme.palette.primary.main,
-      borderWidth: "2px",
-    },
-    // Class for the label of the input field
-    "& .MuiInputLabel-outlined": {
-      color: "#fff ",
-    },
-  },
-}));
+import CustomTextField from "@/@core/components/mui/text-field";
 
 interface CustomTextFieldForRhfFieldProps<TField extends FieldValues> {
   control: Control<TField>;
@@ -56,7 +40,7 @@ const CustomTextFieldForRhf = <TField extends FieldValues>(
       control={control}
       rules={{ required: errors ? true : false }}
       render={({ field: { value, onChange } }) => (
-        <TextFieldStyled
+        <CustomTextField
           autoComplete={name}
           fullWidth
           value={value}
@@ -70,6 +54,7 @@ const CustomTextFieldForRhf = <TField extends FieldValues>(
           aria-describedby="validation-name"
           multiline={multiLine}
           rows={rows}
+          InputLabelProps={{ shrink: true }}
         />
       )}
     />
