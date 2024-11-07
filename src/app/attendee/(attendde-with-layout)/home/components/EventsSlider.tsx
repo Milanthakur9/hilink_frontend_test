@@ -1,6 +1,6 @@
 "use client";
 import { Box, Button, Container, Typography, useTheme } from "@mui/material";
-import Image from "next/image";
+// import Image from "next/image";
 import React, { useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import eventSliderCover from "@/assets/background_patterns/halftone-texture-background-4-reverse.png";
@@ -79,10 +79,14 @@ const EventsSliderForAttendeeHomePage = () => {
     },
   ];
 
-  const [index, setIndex] = useState<number>(0);
-  const [eventList, setEventList] = useState<EventListType[] | null>(
-    eventListDemo
-  );
+  const [
+    index,
+    // setIndex
+  ] = useState<number>(0);
+  const [
+    eventList,
+    // setEventList
+  ] = useState<EventListType[] | null>(eventListDemo);
 
   return (
     eventList && (

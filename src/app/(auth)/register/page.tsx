@@ -24,13 +24,13 @@ import { useState } from "react";
 import Icon from "@/@core/components/icon";
 import Button from "@mui/material/Button";
 
-const SlideImageStyled = styled(Image)(({ theme }) => ({
+const SlideImageStyled = styled(Image)(({}) => ({
   objectFit: "cover",
   width: "100%",
   height: "100%",
 }));
 
-const Item = styled(Paper)(({ theme }) => ({
+const Item = styled(Paper)(({}) => ({
   textAlign: "center",
   borderRadius: 0,
   boxShadow: "none",
@@ -41,16 +41,16 @@ const TypographyColorStyled = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
 }));
 
-const items = [
-  {
-    name: "Random Name #1",
-    description: "Probably the most random thing you have ever seen!",
-  },
-  {
-    name: "Random Name #2",
-    description: "Hello World!",
-  },
-];
+// const items = [
+//   {
+//     name: "Random Name #1",
+//     description: "Probably the most random thing you have ever seen!",
+//   },
+//   {
+//     name: "Random Name #2",
+//     description: "Hello World!",
+//   },
+// ];
 
 const slideImages = [
   {
@@ -105,7 +105,6 @@ const RegisterPage = () => {
 
   const {
     control,
-    setError,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -126,7 +125,11 @@ const RegisterPage = () => {
       return;
     }
 
-    const { confirmPassword, email, firstName, lastName, password } = data;
+    // const { confirmPassword, email, firstName, lastName, password } = data;
+
+    return data;
+
+    console.log(data);
   };
 
   return (
@@ -233,6 +236,7 @@ const RegisterPage = () => {
             }}
           >
             <Image alt="background-cover" src={registerPageCover} />
+
             <Box sx={{ zIndex: 10, width: "70%" }}>
               <TypographyColorStyled
                 variant="h2"

@@ -8,10 +8,10 @@ import typography from "./typography";
 declare module "@mui/material/styles" {
   interface Palette {
     customColors: {
-      primaryMain?: string;
-      primaryDark1?: string;
-      primaryDark2?: string;
-      primaryWhite?: string;
+      primaryMain: string;
+      primaryDark1: string;
+      primaryDark2: string;
+      primaryWhite: string;
       dark: string;
       main: string;
       light: string;
@@ -19,10 +19,10 @@ declare module "@mui/material/styles" {
   }
   interface PaletteOptions {
     customColors: {
-      primaryMain?: string;
-      primaryDark1?: string;
-      primaryDark2?: string;
-      primaryWhite?: string;
+      primaryMain: string;
+      primaryDark1: string;
+      primaryDark2: string;
+      primaryWhite: string;
       dark?: string;
       main?: string;
       light?: string;

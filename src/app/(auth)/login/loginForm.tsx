@@ -1,7 +1,7 @@
 "use client";
 
 import Grid from "@mui/material/Grid2";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Link from "next/link";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -36,7 +36,7 @@ interface FormData {
 }
 
 const LoginForm = () => {
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const {
     control,
@@ -49,7 +49,8 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: FormData) => {
-    const { email, password } = data;
+    // const { email, password } = data;
+    console.log(data);
   };
 
   return (

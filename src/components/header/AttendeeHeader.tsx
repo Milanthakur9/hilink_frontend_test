@@ -5,14 +5,14 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+// import Typography from "@mui/material/Typography";
+// import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+// import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
+// import Tooltip from "@mui/material/Tooltip";
+// import MenuItem from "@mui/material/MenuItem";
 import LogoWithLink from "../logo/LogoWithLink";
 import { useTheme } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
@@ -21,13 +21,13 @@ import { useRouter } from "next/navigation";
 import CloseIcon from "@mui/icons-material/Close";
 import Divider from "@mui/material/Divider";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
+// import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import FolderIcon from "@mui/icons-material/Folder";
-import ImageIcon from "@mui/icons-material/Image";
-import DescriptionIcon from "@mui/icons-material/Description";
+// import FolderIcon from "@mui/icons-material/Folder";
+// import ImageIcon from "@mui/icons-material/Image";
+// import DescriptionIcon from "@mui/icons-material/Description";
 
-const pages = ["Products", "Pricing", "Blog"];
+// const pages = ["Products", "Pricing", "Blog"];
 const attendeePages = [
   {
     name: "Events",
@@ -46,7 +46,7 @@ const attendeePages = [
     link: "/lastPage",
   },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+// const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function AttendeeHeader() {
   const theme = useTheme();
@@ -162,9 +162,16 @@ function AttendeeHeader() {
           {/* </Box> */}
         </Toolbar>
         <Drawer
-          SlideProps={{
-            sx: { width: { sm: "50%", xs: "100%" } },
-          }}
+          // sx={{
+          //   ".mui-lcq0sc-MuiPaper-root-MuiDrawer-paper ": {
+          //     width: "100%",
+          //   },
+          // }}
+          SlideProps={
+            {
+              // sx: { width: { sm: "50%", xs: "100%" } },
+            }
+          }
           anchor="right"
           open={open}
           onClose={toggleDrawer(false)}
