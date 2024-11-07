@@ -10,7 +10,7 @@ import Link from "next/link";
 // import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
 import LoginForm from "./loginForm";
 
-const Item = styled(Paper)(({}) => ({
+const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   borderRadius: 0,
   boxShadow: "none",
@@ -20,7 +20,7 @@ const Item = styled(Paper)(({}) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  background: `repeating-linear-gradient(80deg, rgba(0,0,0,0.6) 100%,#f99d63 50%,rgba(0,0,0,0.6),#f99d63 70%),url(${loginPageCover.src}),repeating-linear-gradient(80deg, rgba(0,0,0,0.6) 100%,rgba(0,0,0,0.6) 70%),url(${loginPageCover.src}),url(${loginPageCover.src}),repeating-linear-gradient(80deg, rgba(0,0,0,0.3) 100%,rgba(0,0,0,0.3) 70%),url(${loginPageCover.src})`,
+  background: `repeating-linear-gradient(80deg, rgba(0,0,0,0.6) 100%,${theme.palette.primary.main} 50%,rgba(0,0,0,0.6),${theme.palette.primary.main} 70%),url(${loginPageCover.src}),repeating-linear-gradient(80deg, rgba(0,0,0,0.6) 100%,rgba(0,0,0,0.6) 70%),url(${loginPageCover.src}),url(${loginPageCover.src}),repeating-linear-gradient(80deg, rgba(0,0,0,0.3) 100%,rgba(0,0,0,0.3) 70%),url(${loginPageCover.src})`,
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",

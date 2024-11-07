@@ -5,6 +5,9 @@ const nextConfig = {
   trailingSlash: true,
   reactStrictMode: false,
   transpilePackages: ["mui-one-time-password-input"],
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;

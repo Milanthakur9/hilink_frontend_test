@@ -162,11 +162,11 @@ function AttendeeHeader() {
           {/* </Box> */}
         </Toolbar>
         <Drawer
-          // sx={{
-          //   ".mui-lcq0sc-MuiPaper-root-MuiDrawer-paper ": {
-          //     width: "100%",
-          //   },
-          // }}
+          sx={{
+            "& .MuiDrawer-paper": {
+              width: { sm: "50%", xs: "100%" }, // Ensure the drawer paper width is also responsive
+            },
+          }}
           SlideProps={
             {
               // sx: { width: { sm: "50%", xs: "100%" } },
