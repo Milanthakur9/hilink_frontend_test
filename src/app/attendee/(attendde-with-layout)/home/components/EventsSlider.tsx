@@ -92,7 +92,7 @@ const EventsSliderForAttendeeHomePage = () => {
     eventList && (
       <Carousel
         index={index}
-        interval={10000}
+        interval={4500}
         animation="slide"
         indicators={true}
         indicatorIconButtonProps={{
@@ -116,7 +116,7 @@ const EventsSliderForAttendeeHomePage = () => {
             color: theme.palette.primary.main,
           },
         }}
-        stopAutoPlayOnHover
+        // stopAutoPlayOnHover
         swipe
         sx={{
           background: `url(${eventSliderCover.src})`,
@@ -151,7 +151,6 @@ const EventsSliderForAttendeeHomePage = () => {
                     justifyContent: { xs: "center", md: "right" },
                     textAlign: { xs: "center", md: "right" },
                     "& > img": {
-                      border: "1px solid green",
                       height: { xs: "170px", md: "240px" },
                       width: { xs: "170px", md: "240px" },
                       borderRadius: 6,

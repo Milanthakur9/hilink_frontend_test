@@ -16,7 +16,7 @@ const DefaultPalette = (mode: Palette["mode"]): Palette => {
   const lightColor = "32,37,36";
   // const lightColor = "47, 43, 61";
   // const lightColor = "rgb(47, 43, 61)";
-  const darkColor = "#e5e5e5";
+  const darkColor = "#fff";
   // const darkColor = "rgb(208, 212, 241)";
   const darkPaperBgColor = colors.primaryDark1;
   const mainColor = mode === "light" ? lightColor : darkColor;
@@ -103,7 +103,7 @@ const DefaultPalette = (mode: Palette["mode"]): Palette => {
       // primary: `rgba(${mainColor}, 0.78)`,
       // secondary: `rgba(${mainColor}, 0.68)`,
       // disabled: `rgba(${mainColor}, 0.42)`,
-      primary: hexToRGBA(mainColor, 0.78),
+      primary: hexToRGBA(mainColor, 1),
       secondary: hexToRGBA(mainColor, 0.68),
       disabled: hexToRGBA(mainColor, 0.42),
     },

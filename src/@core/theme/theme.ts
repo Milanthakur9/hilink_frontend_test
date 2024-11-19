@@ -1,6 +1,7 @@
 "use client";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { themeOptions } from "./ThemeOptions";
+// import { themeDetails } from './utils/theme';
 
 // Extend the MUI Theme to include custom colors
 // declare module "@mui/material/styles" {

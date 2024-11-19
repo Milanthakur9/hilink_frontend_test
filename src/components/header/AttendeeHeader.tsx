@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -66,18 +65,20 @@ function AttendeeHeader() {
       }}
     >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box
-            sx={{
-              display: {
-                flexGrow: 1,
-              },
-            }}
-          >
-            <LogoWithLink />
+        <Toolbar
+          disableGutters
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <Box>
+            <LogoWithLink logoColor="white" />
           </Box>
           {/* monitor screen */}
-          <Box
+          {/* <Box
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
@@ -100,7 +101,7 @@ function AttendeeHeader() {
                 {page.name}
               </Link>
             ))}
-          </Box>
+          </Box> */}
 
           <IconButton
             edge="start"
@@ -109,8 +110,7 @@ function AttendeeHeader() {
             onClick={toggleDrawer(true)}
             sx={{
               display: {
-                sm: "flex",
-                md: "none",
+                xs: "none",
                 color: theme.palette.customColors.primaryWhite,
               },
             }}
@@ -119,14 +119,27 @@ function AttendeeHeader() {
           </IconButton>
 
           {/* The outside of the drawer */}
-
-          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              // display: { md: "flex", alignItems: "center" },
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              "& a": {
+                display: "table",
+                textDecoration: "none",
+                fontSize: "1rem",
+                color: theme.palette.customColors.primaryWhite,
+              },
+            }}
+          >
+            <Link href={"/login"}>Log In</Link>
             <Button
               variant="contained"
-              sx={{ borderRadius: 10, py: 1.5 }}
-              onClick={() => router.push("/login")}
+              sx={{ borderRadius: 10, py: 3 }}
+              onClick={() => router.push("/creator/events/new/")}
             >
-              Login
+              Create An Event
             </Button>
           </Box>
           {/* after login */}
@@ -167,11 +180,6 @@ function AttendeeHeader() {
               width: { sm: "50%", xs: "100%" }, // Ensure the drawer paper width is also responsive
             },
           }}
-          SlideProps={
-            {
-              // sx: { width: { sm: "50%", xs: "100%" } },
-            }
-          }
           anchor="right"
           open={open}
           onClose={toggleDrawer(false)}

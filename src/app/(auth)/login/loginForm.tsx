@@ -1,5 +1,4 @@
 "use client";
-
 import Grid from "@mui/material/Grid2";
 import { styled } from "@mui/material/styles";
 import Link from "next/link";
