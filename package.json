@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "rimraf ./build && next build",
+    "build": "rimraf ./build && next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
