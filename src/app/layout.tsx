@@ -3,8 +3,11 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import ThemeComponent from "@/@core/theme/ThemeComponent";
+import "./fonts/DroidSans.ttf";
+import "./fonts/DroidSansBold.ttf";
 
 const droidSans = localFont({
+  // src: "./fonts/DroidSans.ttf",
   src: "./fonts/DroidSans.ttf",
   variable: "--font-DroidSans",
   // weight: "100 900",
