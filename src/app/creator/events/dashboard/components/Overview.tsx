@@ -19,6 +19,7 @@ import Image from "next/image";
 import HappyImg from "../../../../../../happy.gif";
 import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
+import { useRouter } from "next/navigation";
 const data = [
   {
     date: "Nov 12",
@@ -55,6 +56,8 @@ const data = [
 ];
 
 function Overview() {
+  const router = useRouter();
+
   return (
     <Box sx={{ padding: "4% 0%" }}>
       {/* Events by test start  */}
@@ -371,7 +374,9 @@ function Overview() {
               fontSize: "16px",
               transition: "all .1s linear",
               "&:hover": { transform: "scale(1.051)" },
+              cursor: "pointer",
             }}
+            onClick={() => router.push("/creator/events/dashboard/pastEvents")}
           >
             View Past Events
           </Button>
@@ -440,7 +445,10 @@ function Overview() {
                 <PersonIcon sx={{ color: "#ff914d", fontSize: "80px" }} />
               </Avatar>
             </Box>
-            <Box sx={{ width: "70%" }}>
+            <Box
+              sx={{ width: "70%", cursor: "pointer" }}
+              onClick={() => router.push("/creator/events/dashboard/attendee")}
+            >
               <Typography sx={{ color: "#fff", fontSize: "14px" }}>
                 Order #7314206 - 11/13/2024, 11:18 AM test
               </Typography>
@@ -463,6 +471,7 @@ function Overview() {
               transition: "all .1s linear",
               "&:hover": { transform: "scale(1.051)" },
             }}
+            onClick={() => router.push("/creator/events/dashboard/order")}
           >
             View More
           </Button>

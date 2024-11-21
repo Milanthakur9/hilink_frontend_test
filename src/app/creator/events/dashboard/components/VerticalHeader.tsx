@@ -43,7 +43,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function CreatorTabs() {
+export default function CreatorVerticalTab() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -64,6 +64,7 @@ export default function CreatorTabs() {
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}
+            orientation="vertical"
             onChange={handleChange}
             aria-label="basic tabs example"
             variant="scrollable"
@@ -114,6 +115,7 @@ export default function CreatorTabs() {
           <Finance />
         </TabPanel>
         <TabPanel value={value} index={4}>
+          {/* Profile Content */}
           <Profile />
         </TabPanel>
         <TabPanel value={value} index={5}>

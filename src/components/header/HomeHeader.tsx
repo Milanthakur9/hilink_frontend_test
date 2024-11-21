@@ -93,7 +93,7 @@ function HomeHeader() {
               <Button
                 variant="outlined"
                 sx={{ borderRadius: 10, py: 1.5 }}
-                onClick={() => router.push("/creator/events/new/")}
+                onClick={() => router.push("/eventType")}
                 endIcon={<ArrowRightAltIcon />}
               >
                 Launch an event
@@ -170,7 +170,7 @@ function HomeHeader() {
               <Button
                 variant="outlined"
                 sx={{ m: 1, width: 1, borderRadius: 30 }}
-                onClick={() => router.push("/createEvent")}
+                onClick={() => router.push("/eventType")}
                 endIcon={<ArrowRightAltIcon />}
               >
                 Launch an event
