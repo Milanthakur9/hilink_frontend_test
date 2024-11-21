@@ -4,40 +4,40 @@ import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import ThemeComponent from "@/@core/theme/ThemeComponent";
 
-const droidSans = localFont({
-  src: [
-    {
-      path: "fonts/DroidSans.ttf",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-DroidSans",
-});
-
-const droidSansBold = localFont({
-  src: [
-    {
-      path: "fonts/DroidSansBold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-DroidSansBold",
-});
-
 // const droidSans = localFont({
-//   // src: "./fonts/DroidSans.ttf",
-//   src: "/fonts/DroidSans.ttf",
+//   src: [
+//     {
+//       path: "./../assets/fonts/DroidSans.ttf",
+//       weight: "400",
+//       style: "normal",
+//     },
+//   ],
 //   variable: "--font-DroidSans",
-//   // weight: "100 900",
 // });
 
 // const droidSansBold = localFont({
-//   src: "/fonts/DroidSansBold.ttf",
-//   variable: "--font-DroidSans-Bold",
-//   // weight: "100 900",
+//   src: [
+//     {
+//       path: "./../assets/fonts/DroidSansBold.ttf",
+//       weight: "700",
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--font-DroidSansBold",
 // });
+
+const droidSans = localFont({
+  // src: "./fonts/DroidSans.ttf",
+  src: "./../assets/fonts/DroidSans.ttf",
+  variable: "--font-DroidSans",
+  // weight: "100 900",
+});
+
+const droidSansBold = localFont({
+  src: "./../assets/fonts/DroidSansBold.ttf",
+  variable: "--font-DroidSans-Bold",
+  // weight: "100 900",
+});
 
 export const metadata: Metadata = {
   title: "hi link",
