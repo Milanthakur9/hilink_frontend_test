@@ -84,6 +84,13 @@ const TextFieldStyled = styled(TextField)<TextFieldProps>(({ theme }) => ({
       opacity: 0.8,
     },
   },
+  // ** For Date Picker
+  "& + .react-datepicker__close-icon": {
+    top: 11,
+    "&:after": {
+      fontSize: "1.6rem !important",
+    },
+  },
 }));
 
 const CustomTextField = forwardRef((props: TextFieldProps, ref) => {

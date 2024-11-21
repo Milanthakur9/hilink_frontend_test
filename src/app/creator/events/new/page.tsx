@@ -1794,15 +1794,6 @@ function EventPage() {
                     transform: "translate(-50%,-50%)",
                   }}
                 >
-                  {/* <Button sx={{background:'#202524',border:'1px solid #ff914d',borderRadius:'25px',textTransform:'capitalize',fontSize:'20px'}} component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<AddCircleIcon sx={{color:'#fff'}}/>}
-                            >
-                              Upload Poster <sup>*</sup>
-                              <VisuallyHiddenInput
-                                type="file"
-                                onChange={(event) => console.log(event.target.files)}
-                                multiple
-                              />
-                            </Button> */}
                   {backgroundImage ? (
                     <Button
                       sx={{

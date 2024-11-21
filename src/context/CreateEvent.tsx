@@ -1,31 +1,32 @@
 import { createContext, ReactNode, useState } from "react";
+import { EventInfoDataType } from "./type";
 
-interface EventInfoDataType {
-  eventName: string;
-  eventAddress: string;
-  startTime: string;
-  endTime: string;
-  venueName: string;
-  phone: string;
-  email: string;
-}
+const defaultEventInfo: EventInfoDataType = {
+  poster: null,
+  eventName: "",
+  eventAddress: "",
+  startTime: "",
+  endTime: "",
+  venueName: "",
+  phone: "",
+  email: "",
+};
 
 interface DefaultProviderType {
-  eventInfoData: EventInfoDataType | null;
-  setEventInfoData: (value: EventInfoDataType | null) => void;
+  eventInfoData: EventInfoDataType;
+  setEventInfoData: React.Dispatch<React.SetStateAction<EventInfoDataType>>;
 }
 
 const defaultProvider: DefaultProviderType = {
-  eventInfoData: null,
+  eventInfoData: defaultEventInfo,
   setEventInfoData: () => null,
 };
 
 const CreateEventContext = createContext(defaultProvider);
 
 const CreateEventContextProvider = ({ children }: { children: ReactNode }) => {
-  const [eventInfoData, setEventInfoData] = useState<EventInfoDataType | null>(
-    defaultProvider.eventInfoData
-  );
+  const [eventInfoData, setEventInfoData] =
+    useState<EventInfoDataType>(defaultEventInfo);
 
   const value = {
     eventInfoData,
