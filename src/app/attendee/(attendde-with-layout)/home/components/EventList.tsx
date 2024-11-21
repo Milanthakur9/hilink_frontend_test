@@ -669,7 +669,7 @@ const EventList = ({ isSticky }: { isSticky: boolean }) => {
                           transform: "scale(1.04)",
                         },
                       }}
-                      onClick={() => router.push(`/event/info/2`)}
+                      onClick={() => router.push(`/event/info?event=2`)}
                     >
                       <CardContent>
                         <Box

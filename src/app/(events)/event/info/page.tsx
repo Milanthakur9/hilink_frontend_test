@@ -4,9 +4,9 @@ import CreatorProfile from "@/components/profile/CreatorProfile";
 import { Box, Button, Container, Typography } from "@mui/material";
 // import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Icon from "@/@core/components/icon";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export type EventInfoProps = {
   params: { eventId: string };
@@ -33,8 +33,10 @@ const fakeEventInfo = {
   song: "song.mp3",
 };
 
-const EventInfoPage = ({ params }: EventInfoProps) => {
-  const eventId = Number(params.eventId) || 0;
+const EventInfoPage = () => {
+  const searchParams = useSearchParams();
+
+  const eventId = Number(searchParams.get("event"));
   console.log({ eventId });
   const router = useRouter();
   const [
@@ -47,10 +49,10 @@ const EventInfoPage = ({ params }: EventInfoProps) => {
     // fetch event info with id
   }, [eventId]);
 
-  if (eventId == 0) return <p>Loading...</p>;
+  //   if (eventId == 0) return <p>Loading...</p>;
 
   return (
-    <>
+    <Suspense fallback="loading...">
       <Box
         sx={{
           // height: "100vh",
@@ -222,7 +224,7 @@ const EventInfoPage = ({ params }: EventInfoProps) => {
           </Box>
         </Container>
       </Box>
-    </>
+    </Suspense>
   );
 };
 

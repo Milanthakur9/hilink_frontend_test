@@ -1,5 +1,6 @@
 import EventInfoFooter from "@/components/footer/EventInfoFooter";
 import "../../../../app/globals.css";
+import { Suspense } from "react";
 
 export default function RootLayout({
   children,
@@ -8,8 +9,10 @@ export default function RootLayout({
 }>) {
   return (
     <div>
-      {children}
-      <EventInfoFooter />
+      <Suspense>
+        {children}
+        <EventInfoFooter />
+      </Suspense>
     </div>
   );
 }
