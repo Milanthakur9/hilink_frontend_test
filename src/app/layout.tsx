@@ -3,20 +3,19 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import ThemeComponent from "@/@core/theme/ThemeComponent";
-// import "./fonts/DroidSans.ttf";
-// import "./fonts/DroidSansBold.ttf";
-import "../../public/fonts/DroidSans.ttf";
-import "../../public/fonts/DroidSansBold.ttf";
+
+const fonts1 = "/fonts/DroidSans.ttf";
+const fonts2 = "/fonts/DroidSansBold.ttf";
 
 const droidSans = localFont({
   // src: "./fonts/DroidSans.ttf",
-  src: "../../public/fonts/DroidSans.ttf",
+  src: fonts1,
   variable: "--font-DroidSans",
   // weight: "100 900",
 });
 
 const droidSansBold = localFont({
-  src: "../../public/fonts/DroidSansBold.ttf",
+  src: fonts2,
   variable: "--font-DroidSans-Bold",
   // weight: "100 900",
 });
