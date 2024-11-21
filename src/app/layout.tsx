@@ -7,7 +7,7 @@ import ThemeComponent from "@/@core/theme/ThemeComponent";
 const droidSans = localFont({
   src: [
     {
-      path: "/fonts/DroidSans.ttf",
+      path: "fonts/DroidSans.ttf",
       weight: "400",
       style: "normal",
     },
@@ -18,7 +18,7 @@ const droidSans = localFont({
 const droidSansBold = localFont({
   src: [
     {
-      path: "/fonts/DroidSansBold.ttf",
+      path: "fonts/DroidSansBold.ttf",
       weight: "700",
       style: "normal",
     },
