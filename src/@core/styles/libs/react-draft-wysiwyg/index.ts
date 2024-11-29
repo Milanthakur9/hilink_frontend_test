@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 
 export const EditorWrapper = styled("div")(({ theme }) => ({
   "& .rdw-editor-wrapper": {
-    border: `1px solid ${theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
     "& .rdw-editor-toolbar": {
       border: 0,
       marginBottom: 0,

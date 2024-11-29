@@ -4,7 +4,8 @@ import { Palette } from "@mui/material";
 // import { Skin } from "src/@core/layouts/types";
 
 const colors = {
-  primaryMain: "#FF914D",
+  primaryMain: "#FFF",
+  orange: "#ff914d",
   primaryDark1: "#151618",
   primaryDark2: "#202524",
   primaryWhite: "#FFFFFF",
@@ -35,6 +36,7 @@ const DefaultPalette = (mode: Palette["mode"]): Palette => {
       dark: darkColor,
       main: mainColor,
       light: lightColor,
+      orange: colors.orange,
       primaryMain: colors.primaryMain,
       primaryDark1: colors.primaryDark1,
       primaryDark2: colors.primaryDark2,

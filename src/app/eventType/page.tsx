@@ -1,12 +1,20 @@
 "use client";
-
-import * as React from "react";
-import { Button, Box, Typography } from "@mui/material";
-import HMBG from "../../../hmbg.png";
+import React, { useState } from "react";
+import { Button, Box, Typography, useTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useSpring, animated } from "@react-spring/web";
+import HMBG from "../../../hmbg.png";
+import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
 
 const LaunchEvent: React.FC = () => {
+  const [active, setActive] = useState<"sell" | "rsvp">("sell");
   const router = useRouter();
+  const theme = useTheme();
+
+  const borderAnimation = useSpring({
+    left: active === "sell" ? "2%" : "48%",
+    config: { duration: 100 },
+  });
 
   return (
     <Box
@@ -16,7 +24,7 @@ const LaunchEvent: React.FC = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundImage: `repeating-linear-gradient(80deg, rgba(0,0,0,0.6) 100%,#f99d63 50%,rgba(0,0,0,0.6),#f99d63 70%),url(${HMBG.src}),repeating-linear-gradient(80deg, rgba(0,0,0,0.6) 100%,rgba(0,0,0,0.6) 70%),url(${HMBG.src}),url(${HMBG.src}),repeating-linear-gradient(80deg, rgba(0,0,0,0.3) 100%,rgba(0,0,0,0.3) 70%),url(${HMBG.src})`,
+        backgroundImage: `repeating-linear-gradient(80deg, rgba(0,0,0,0.1) 100%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.4),rgba(0,0,0,0.4) 70%),url(${HMBG.src})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -28,81 +36,102 @@ const LaunchEvent: React.FC = () => {
         gutterBottom
         sx={{
           color: "transparent",
-          background: "linear-gradient(60deg,#ff914d,#fff,#ff914d)",
           WebkitBackgroundClip: "text",
           fontWeight: "bold",
         }}
       >
         {`Let's launch your event`}
       </Typography>
+
       <Box
         sx={{
+          position: "relative",
           display: "flex",
           gap: 2,
-          mt: 0,
-          border: "1px solid #ff914d",
-          borderRadius: "60px",
-          padding: "5px",
+          mt: 4,
+          width: "400px",
+          border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+          borderRadius: "30px",
+          p: 2,
         }}
       >
+        <animated.div
+          style={{
+            position: "absolute",
+            top: "11%",
+            left: borderAnimation.left,
+            width: "50%",
+            height: "80%",
+            border: `2px solid ${theme.palette.primary.main}`,
+            borderRadius: "60px",
+            pointerEvents: "none",
+            transition: "all 0.3s ease-in-out",
+          }}
+        />
+
         <Button
-          variant="contained"
+          onClick={() => setActive("sell")}
           sx={{
+            flex: 1,
             borderRadius: "60px",
             padding: "10px",
-            background: "#1516187a",
-            border: "1px solid #ff914d",
             fontWeight: "bold",
-            fontSize: "25px",
+            fontSize: "18px",
             textTransform: "capitalize",
+
+            color: active === "sell" ? "#fff" : theme.palette.text.primary,
           }}
         >
           Sell Tickets
         </Button>
+
         <Button
-          variant="contained"
+          onClick={() => setActive("rsvp")}
           sx={{
+            flex: 1,
             borderRadius: "60px",
             padding: "10px",
-            background: "transparent",
-            border: "none",
-            boxShadow: "none",
             fontWeight: "bold",
-            fontSize: "25px",
+            fontSize: "18px",
             textTransform: "capitalize",
+            color: active === "rsvp" ? "#fff" : theme.palette.text.primary,
           }}
         >
           RSVP Only
         </Button>
       </Box>
+
       <Button
         variant="contained"
         sx={{
           mt: 12,
           borderRadius: "60px",
           padding: "10px 35px",
-          background: "#1516187a",
-          border: "1px solid #ff914d",
+          background: `${hexToRGBA(
+            theme.palette.customColors.primaryDark1,
+            0.2
+          )}`,
           fontWeight: "bold",
           fontSize: "25px",
           textTransform: "capitalize",
           transition: "all 0.2s linear",
+          border: `1px solid ${theme.palette.customColors.primaryWhite}`,
           "&:hover": {
             transform: "scale(1.051)",
-            background: "#ff914d30",
           },
         }}
         onClick={() => router.push("/creator/events/new")}
       >
         Continue
       </Button>
+
       <Typography
         variant="body2"
         sx={{
           mt: 2,
           fontSize: "20px",
-          textDecoration: "underline #ff914d",
-          color: "#ff914d",
+          textDecoration: `underline ${theme.palette.customColors.primaryWhite}`,
+          color: theme.palette.customColors.primaryWhite,
           cursor: "pointer",
         }}
         onClick={() => router.push("/")}

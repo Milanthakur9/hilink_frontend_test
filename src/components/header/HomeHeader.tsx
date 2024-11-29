@@ -78,7 +78,7 @@ function HomeHeader() {
                 key={page.name}
                 href={page.link}
                 style={{
-                  color: theme.palette.primary.main,
+                  color: theme.palette.customColors.primaryWhite,
                   fontSize: "14px",
                   display: "table",
                   textDecoration: "none",

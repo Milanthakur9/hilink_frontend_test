@@ -6,6 +6,7 @@ import {
   Divider,
   InputBase,
   Typography,
+  useTheme,
 } from "@mui/material";
 import {
   ResponsiveContainer,
@@ -57,6 +58,9 @@ const data = [
 
 function Overview() {
   const router = useRouter();
+  const theme = useTheme();
+  const orange = theme.palette.customColors.orange;
+  const white = theme.palette.customColors.primaryWhite;
 
   return (
     <Box sx={{ padding: "4% 0%" }}>
@@ -88,48 +92,39 @@ function Overview() {
         <Box
           sx={{
             display: "flex",
-            border: "1px solid #ff914d",
+            border: `1px solid ${orange}`,
             padding: "5px 20px",
             borderRadius: "8px",
           }}
         >
-          <Typography sx={{ color: "#fff", "&:hover": { cursor: "pointer" } }}>
-            1W
-          </Typography>
+          <Typography sx={{ "&:hover": { cursor: "pointer" } }}>1W</Typography>
           <Typography
             sx={{
-              color: "#fff",
               margin: "0 20px",
               "&:hover": { cursor: "pointer" },
             }}
           >
             1M
           </Typography>
-          <Typography sx={{ color: "#fff", "&:hover": { cursor: "pointer" } }}>
-            ALL
-          </Typography>
+          <Typography sx={{ "&:hover": { cursor: "pointer" } }}>ALL</Typography>
         </Box>
         {/* week days  */}
         {/* tickets & revanue  */}
         <Box sx={{ display: "flex", marginTop: { md: "0", xs: "20px" } }}>
           <Box sx={{ marginRight: "15px", textAlign: "center" }}>
-            <Typography sx={{ color: "#fff", fontSize: "12px" }}>
-              Revenue This Week
-            </Typography>
+            <Typography sx={{ fontSize: "12px" }}>Revenue This Week</Typography>
             <Typography
               variant="h6"
-              sx={{ fontWeight: "bold", color: "#fff", fontSize: "14px" }}
+              sx={{ fontWeight: "bold", fontSize: "14px" }}
             >
               $0.00
             </Typography>
           </Box>
           <Box sx={{ marginRight: "5px", textAlign: "center" }}>
-            <Typography sx={{ color: "#fff", fontSize: "12px" }}>
-              Tickets This Week
-            </Typography>
+            <Typography sx={{ fontSize: "12px" }}>Tickets This Week</Typography>
             <Typography
               variant="h6"
-              sx={{ fontWeight: "bold", color: "#fff", fontSize: "14px" }}
+              sx={{ fontWeight: "bold", fontSize: "14px" }}
             >
               1
             </Typography>
@@ -137,13 +132,13 @@ function Overview() {
         </Box>
         {/* tickets & revanue  */}
       </Box>
-      <Divider sx={{ background: "#ff914d", opacity: 0.4, margin: "5px 0%" }} />
+      <Divider sx={{ background: orange, opacity: 0.4, margin: "5px 0%" }} />
       {/* Events by test end  */}
       {/* Chart start  */}
       <Box sx={{ marginTop: "3%" }}>
         <ResponsiveContainer width="100%" aspect={3}>
           <LineChart data={data}>
-            <Line type="monotone" dataKey="events" stroke="#ff914d"></Line>
+            <Line type="monotone" dataKey="events" stroke={orange}></Line>
             {/* <CartesianGrid/> */}
             <Tooltip />
             <XAxis dataKey="date" interval={"preserveStartEnd"} />
@@ -172,7 +167,10 @@ function Overview() {
         >
           <Box
             sx={{
-              background: { md: "#202524", xs: "none" },
+              background: {
+                md: theme.palette.customColors.primaryDark2,
+                xs: "none",
+              },
               minWidth: "150px",
               textAlign: "center",
               padding: "5px",
@@ -181,14 +179,17 @@ function Overview() {
               borderRadius: "10px",
             }}
           >
-            <Typography sx={{ color: "#fff" }}>Events</Typography>
-            <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>
+            <Typography>Events</Typography>
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
               2
             </Typography>
           </Box>
           <Box
             sx={{
-              background: { md: "#202524", xs: "none" },
+              background: {
+                md: theme.palette.customColors.primaryDark2,
+                xs: "none",
+              },
               minWidth: "150px",
               textAlign: "center",
               padding: "5px",
@@ -199,14 +200,17 @@ function Overview() {
               marginBlock: { md: "0", xs: "20px" },
             }}
           >
-            <Typography sx={{ color: "#fff" }}>Total Attendees</Typography>
-            <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>
+            <Typography>Total Attendees</Typography>
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
               1
             </Typography>
           </Box>
           <Box
             sx={{
-              background: { md: "#202524", xs: "none" },
+              background: {
+                md: theme.palette.customColors.primaryDark2,
+                xs: "none",
+              },
               minWidth: "150px",
               textAlign: "center",
               padding: "5px",
@@ -215,8 +219,8 @@ function Overview() {
               borderRadius: "10px",
             }}
           >
-            <Typography sx={{ color: "#fff" }}>Total Revenue</Typography>
-            <Typography variant="h6" sx={{ fontWeight: "bold", color: "#fff" }}>
+            <Typography>Total Revenue</Typography>
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
               $0.00
             </Typography>
           </Box>
@@ -231,9 +235,9 @@ function Overview() {
           <Button
             sx={{
               width: { md: "100%", xs: "80%" },
-              background: "#ff914d",
+              background: orange,
               borderRadius: "30px",
-              color: "#fff",
+              color: white,
               padding: "5px 20px",
               fontSize: "20px",
               transition: "all .1s linear",
@@ -250,70 +254,73 @@ function Overview() {
       <Box
         sx={{
           display: "flex",
+          flexDirection: { md: "row", xs: "column" },
           justifyContent: "space-between",
           margin: "6% 0%",
         }}
       >
         <Box
           sx={{
-            width: "55%",
+            width: { md: "55%", xs: "100%" },
             background: "#202524",
             padding: "20px",
             borderRadius: "20px",
           }}
         >
-          <Typography
-            sx={{ color: "#fff", fontSize: "16px", marginBottom: "10px" }}
-          >
+          <Typography sx={{ fontSize: "16px", marginBottom: "10px" }}>
             Events
           </Typography>
           <Box
             sx={{
-              width: "fit-content",
+              width: { md: "100%", xs: "100%" },
               display: "flex",
+              flexDirection: { md: "row", xs: "column" },
               justifyContent: "space-between",
               background: "#151618",
               padding: "15px",
               borderRadius: "10px",
             }}
           >
-            <Box sx={{ width: "25%" }}>
+            <Box sx={{ width: "25%", margin: { md: "0", xs: "0 auto" } }}>
               <Image
                 src={HappyImg}
-                style={{ width: "100%", height: "inherit" }}
                 alt="happy"
+                style={{ width: "100%", height: "inherit" }}
               ></Image>
             </Box>
             <Box
               sx={{
                 width: "70%",
+                margin: { md: "0", xs: "0 auto" },
+                textAlign: { md: "normal", xs: "center" },
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
             >
-              <Typography sx={{ color: "#fff", fontSize: "16px" }}>
+              <Typography sx={{ fontSize: "16px" }}>
                 Congrats on the success of tj!
               </Typography>
+
               <Box
                 sx={{
-                  width: { md: "58%", xs: "100%" },
+                  width: { md: "100%", xs: "100%" },
                   margin: "3% 0%",
                   display: "flex",
+                  justifyContent: "center",
                 }}
               >
                 <Box
                   sx={{
-                    background: { md: "#202524", xs: "none" },
-                    minWidth: "150px",
                     textAlign: "center",
-                    padding: "5px",
                     boxShadow:
                       "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
                     borderRadius: "10px",
+                    marginInline: "10px",
+                    marginBlock: { md: "0", xs: "20px" },
                   }}
                 >
-                  <Typography sx={{ color: "#ff914d", fontSize: "12px" }}>
+                  <Typography sx={{ color: orange, fontSize: "12px" }}>
                     Tickets Sold
                   </Typography>
                   <Typography
@@ -325,10 +332,7 @@ function Overview() {
                 </Box>
                 <Box
                   sx={{
-                    background: { md: "#202524", xs: "none" },
-                    minWidth: "150px",
                     textAlign: "center",
-                    padding: "5px",
                     boxShadow:
                       "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
                     borderRadius: "10px",
@@ -336,26 +340,27 @@ function Overview() {
                     marginBlock: { md: "0", xs: "20px" },
                   }}
                 >
-                  <Typography sx={{ color: "#ff914d", fontSize: "12px" }}>
+                  <Typography sx={{ color: orange, fontSize: "12px" }}>
                     Revenue
                   </Typography>
                   <Typography
                     variant="h6"
-                    sx={{ fontWeight: "bold", color: "#fff", fontSize: "14px" }}
+                    sx={{ fontWeight: "bold", fontSize: "14px" }}
                   >
                     $0.00
                   </Typography>
                 </Box>
               </Box>
               <Button
+                onClick={() => router.push(`/owner/groups/overview`)}
                 sx={{
-                  width: { md: "100%", xs: "80%" },
-                  background: "#ff914d",
+                  width: { md: "100%", xs: "100%" },
+                  background: orange,
                   borderRadius: "10px",
-                  color: "#fff",
                   padding: "5px 20px",
-                  fontSize: "16px",
+                  fontSize: "2.5vh",
                   transition: "all .1s linear",
+                  color: `${theme.palette.customColors.primaryWhite}`,
                   "&:hover": { transform: "scale(1.051)" },
                 }}
               >
@@ -364,34 +369,32 @@ function Overview() {
             </Box>
           </Box>
           <Button
+            onClick={() => router.push(`/creator/events/dashboard/pastEvents`)}
             sx={{
               marginTop: "3%",
-              width: { md: "100%", xs: "80%" },
-              background: "#ff914d",
+              width: { md: "100%", xs: "100%" },
+              background: orange,
               borderRadius: "10px",
-              color: "#fff",
+              color: white,
               padding: "5px 20px",
-              fontSize: "16px",
+              fontSize: "2.5vh",
               transition: "all .1s linear",
               "&:hover": { transform: "scale(1.051)" },
-              cursor: "pointer",
             }}
-            onClick={() => router.push("/creator/events/dashboard/pastEvents")}
           >
             View Past Events
           </Button>
         </Box>
         <Box
           sx={{
-            width: "40%",
-            background: "#202524",
+            width: { md: "40%", xs: "100%" },
+            margin: { md: "0 0 18px 0", xs: "4% 0%" },
+            background: theme.palette.customColors.primaryDark2,
             borderRadius: "20px",
             padding: "20px",
           }}
         >
-          <Typography
-            sx={{ color: "#fff", fontSize: "16px", marginBottom: "10px" }}
-          >
+          <Typography sx={{ fontSize: "16px", marginBottom: "10px" }}>
             Recent Orders
           </Typography>
           {/* search bar start  */}
@@ -401,7 +404,7 @@ function Overview() {
               display: "flex",
               alignItems: "center",
               width: "100%",
-              border: "1px solid #ff914d",
+              border: `1px solid ${orange}`,
               margin: "4% auto",
               borderRadius: "20px",
               background: "rgba( 255, 145, 77, 0.25 )",
@@ -409,9 +412,9 @@ function Overview() {
               backdropFilter: "blur( 4px )",
             }}
           >
-            <SearchIcon sx={{ color: "#fff" }} />
+            <SearchIcon sx={{ color: white }} />
             <InputBase
-              sx={{ ml: 1, flex: 1, color: "#ff914d" }}
+              sx={{ ml: 1, flex: 1, color: orange }}
               placeholder="Search (Event Name , Email ,Oreder #)"
               inputProps={{ "aria-label": "search google maps" }}
             />
@@ -420,20 +423,22 @@ function Overview() {
           <Box
             sx={{
               display: "flex",
+              flexDirection: { md: "row", xs: "column" },
               justifyContent: "space-between",
               alignItems: "center",
               background: "#151618",
               padding: "15px",
-              borderRadius: "20px",
+              borderRadius: "10px",
             }}
           >
-            <Box sx={{ width: "25%" }}>
+            <Box sx={{ width: { md: "25%", xs: "45%" } }}>
               <Avatar
                 sx={{
-                  bgcolor: "#202524",
+                  bgcolor: theme.palette.customColors.primaryDark2,
+                  margin: { md: "0", xs: "0 auto 12%" },
                   marginBottom: "3%",
-                  width: 120,
-                  height: 120,
+                  width: "100px",
+                  height: "100px",
                   boxShadow:
                     "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
                   transition: "all .3s linear",
@@ -442,36 +447,43 @@ function Overview() {
                   },
                 }}
               >
-                <PersonIcon sx={{ color: "#ff914d", fontSize: "80px" }} />
+                <PersonIcon sx={{ color: orange, fontSize: "18vh" }} />
               </Avatar>
             </Box>
-            <Box
-              sx={{ width: "70%", cursor: "pointer" }}
-              onClick={() => router.push("/creator/events/dashboard/attendee")}
-            >
-              <Typography sx={{ color: "#fff", fontSize: "14px" }}>
+            <Box sx={{ width: { md: "60%", xs: "80%" } }}>
+              <Typography
+                sx={{
+                  color: "#fff",
+                  fontSize: "14px",
+                  textAlign: { md: "left", xs: "center" },
+                }}
+              >
                 Order #7314206 - 11/13/2024, 11:18 AM test
               </Typography>
               <Divider
-                sx={{ background: "#ff914d", opacity: 0.2, margin: "1px 0%" }}
+                sx={{ background: orange, opacity: 0.2, margin: "1px 0%" }}
               />
-              <Typography sx={{ color: "#fff" }}>Sartaj Gill</Typography>
-              <Typography sx={{ color: "#fff" }}>$0.00</Typography>
+              <Typography sx={{ textAlign: { md: "left", xs: "center" } }}>
+                Sartaj Gill
+              </Typography>
+              <Typography sx={{ textAlign: { md: "left", xs: "center" } }}>
+                $0.00
+              </Typography>
             </Box>
           </Box>
           <Button
+            onClick={() => router.push(`/creator/events/dashboard/order`)}
             sx={{
               marginTop: "3%",
-              width: { md: "100%", xs: "80%" },
-              background: "#ff914d",
+              width: { md: "100%", xs: "100%" },
+              background: orange,
               borderRadius: "10px",
-              color: "#fff",
+              color: white,
               padding: "5px 20px",
-              fontSize: "16px",
+              fontSize: "2.5vh",
               transition: "all .1s linear",
               "&:hover": { transform: "scale(1.051)" },
             }}
-            onClick={() => router.push("/creator/events/dashboard/order")}
           >
             View More
           </Button>
@@ -484,7 +496,6 @@ function Overview() {
         <Typography
           variant="h2"
           sx={{
-            color: "#fff",
             fontSize: "15px",
             fontWeight: "bold",
             textTransform: "uppercase",
@@ -495,7 +506,6 @@ function Overview() {
 
         <Typography
           sx={{
-            color: "#fff",
             fontSize: "14px",
             fontWeight: "lighter",
             textTransform: "capitalize",
@@ -508,9 +518,9 @@ function Overview() {
         <Button
           sx={{
             background: "#202524",
-            border: "1px solid #ff914d",
+            border: `1px solid ${orange}`,
             paddingInline: "20px",
-            color: "#ff914d",
+            color: orange,
             fontSize: "12px",
           }}
         >

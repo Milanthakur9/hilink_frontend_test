@@ -12,6 +12,7 @@ declare module "@mui/material/styles" {
       primaryDark1: string;
       primaryDark2: string;
       primaryWhite: string;
+      orange: string;
       dark: string;
       main: string;
       light: string;
@@ -19,6 +20,7 @@ declare module "@mui/material/styles" {
   }
   interface PaletteOptions {
     customColors: {
+      orange: string;
       primaryMain: string;
       primaryDark1: string;
       primaryDark2: string;
