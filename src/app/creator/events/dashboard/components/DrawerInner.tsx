@@ -75,10 +75,11 @@ function DrawerInner() {
     <div>
       <Box
         sx={{
+          paddingTop:'15%',
           display: "flex",
-          height: "85vh",
+          height: "95vh",
           flexDirection: "column",
-          justifyContent: "space-evenly",
+          justifyContent: "space-between",
         }}
       >
         <Box>
@@ -162,6 +163,7 @@ function DrawerInner() {
           {/* events by test  */}
           <Box sx={{ marginTop: "10%" }}>
             <Button
+            onClick={()=>router.push(`/creator/events/new/`)}
               sx={{
                 width: { md: "100%", xs: "100%" },
                 background: orange,
@@ -192,6 +194,7 @@ function DrawerInner() {
                   marginTop: "6%",
                   position: "relative",
                   width: "fit-content",
+                  overflow:'hidden',
                   "&:before": {
                     position: "absolute",
                     width: "100%",
@@ -222,7 +225,7 @@ function DrawerInner() {
         </Box>
         {/* svg logo */}
         <Box>
-          <Image src={Svlogo} height="60" alt="hilink logo" />
+          <Image src={Svlogo} height="40" alt="hilink logo" />
         </Box>
         {/* svg logo */}
       </Box>

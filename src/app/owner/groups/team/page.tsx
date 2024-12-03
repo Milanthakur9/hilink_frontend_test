@@ -178,19 +178,20 @@ function Page() {
           <Box
             sx={{
               display: "flex",
+              flexDirection:{md:'row',xs:'column'},
               justifyContent: "space-between",
               alignItems: "center",
               marginTop: "2%",
             }}
           >
-            <Box>
+            <Box sx={{width:{md:'fit-content',xs:'100%'}}}>
               <Typography>1 result(s)</Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ display: "flex", alignItems: "center",width:{md:'fit-content',xs:'100%'} }}>
               <Typography>Last Updated 10:51am </Typography>
               <RefreshIcon sx={{ marginLeft: "10px" }} />
             </Box>
-            <Box>
+            <Box sx={{width:{md:'fit-content',xs:'100%'}}}>
               <Button
                 sx={{
                   background: orange,
@@ -198,6 +199,7 @@ function Page() {
                   paddingInline: "20px",
                   marginRight: "20px",
                   borderRadius: "5px",
+                  
                 }}
               >
                 Previous
@@ -208,6 +210,7 @@ function Page() {
                   color: white,
                   paddingInline: "20px",
                   borderRadius: "5px",
+                  // margin:{md:'0',xs:'2% 0 0 0'}
                 }}
               >
                 Next
@@ -315,19 +318,20 @@ function Page() {
           <Box
             sx={{
               display: "flex",
+              flexDirection:{md:'row',xs:'column'},
               justifyContent: "space-between",
               alignItems: "center",
               marginTop: "2%",
             }}
           >
-            <Box>
+            <Box sx={{width:{md:'fit-content',xs:'100%'}}}>
               <Typography>1 result(s)</Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ display: "flex", alignItems: "center",width:{md:'fit-content',xs:'100%'} }}>
               <Typography>Last Updated 12:42pm </Typography>
               <RefreshIcon sx={{ marginLeft: "10px" }} />
             </Box>
-            <Box>
+            <Box sx={{width:{md:'fit-content',xs:'100%'}}}>
               <Button
                 sx={{
                   background: orange,
@@ -387,7 +391,7 @@ function Page() {
               alignItems: "center",
               width: "100%",
               // border: "1px solid #ff914d",
-              margin: "1% auto 0",
+              margin: {md:"1% auto 0",xs:'3% 0'},
               borderRadius: "20px",
               background: `${hexToRGBA(
                 theme.palette.customColors.primaryDark1,
@@ -455,19 +459,20 @@ function Page() {
         <Box
           sx={{
             display: "flex",
+            flexDirection:{md:'row',xs:'column'},
             justifyContent: "space-between",
             alignItems: "center",
             margin: "2% 0%",
           }}
         >
-          <Box>
+          <Box sx={{width:{md:'fit-content',xs:'100%'}}}>
             <Typography>0 result(s)</Typography>
           </Box>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "center",width:{md:'fit-content',xs:'100%'} }}>
             <Typography>Last Updated 12:42pm</Typography>
             <RefreshIcon sx={{ marginLeft: "10px" }} />
           </Box>
-          <Box>
+          <Box sx={{width:{md:'fit-content',xs:'100%'}}}>
             <Button
               sx={{
                 background: orange,

@@ -13,7 +13,7 @@ import {
   Tooltip,
 } from "recharts";
 // icon
-import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+// import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 
 const OverviewPage = () => {
   const theme = useTheme();
@@ -303,6 +303,7 @@ const OverviewPage = () => {
         <Box
           sx={{
             display: "flex",
+            flexDirection:{md:'row',xs:'column'},
             justifyContent: "space-between",
             margin: "3% 0",
           }}
@@ -345,6 +346,8 @@ const OverviewPage = () => {
               padding: "20px",
               background: theme.palette.customColors.primaryDark2,
               borderRadius: "20px",
+              margin:{md:'0',xs:'2% 0'},
+              minHeight:{md:'auto',xs:'250px'},
             }}
           >
             <Typography variant="h3">Recent Order</Typography>
@@ -483,12 +486,13 @@ const OverviewPage = () => {
             <Typography>Attendee Location</Typography>
 
             <Box sx={{ paddingTop: "10%", textAlign: "center" }}>
-              <TravelExploreIcon
+              {/* <TravelExploreIcon
                 sx={{ fontSize: "10vh", alignSelf: "center" }}
               />
               <Typography sx={{ marginTop: "20px", fontSize: "20px" }}>
                 No attendee location available
-              </Typography>
+              </Typography> */}
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.0360977185!2d-74.30933341658171!3d40.69753995848721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1733224344473!5m2!1sen!2sin"  height="450" style={{border:'0',width:'100%',height:'inherit'}}  loading="lazy"></iframe>
             </Box>
           </Box>
         </Box>

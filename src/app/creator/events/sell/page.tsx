@@ -1,12 +1,11 @@
 "use client";
 // |import { useTheme } from "@mui/material";
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Box, Button, FormControlLabel, Switch, SwitchProps, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 // import HMBG from "../../hmbg.png";
 import HMBG from "../../../../../hmbg.png";
 // import  Grid from '@mui/material';
 import Grid from "@mui/material/Grid";
-import Drop from "./components/Drop"
 
 // import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import InputBase from "@mui/material/InputBase";
@@ -15,8 +14,8 @@ import InputBase from "@mui/material/InputBase";
 // import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 // import DirectionsIcon from "@mui/icons-material/Directions";
-import EmailIcon from "@mui/icons-material/Email";
-import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+// import EmailIcon from "@mui/icons-material/Email";
+// import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
 // import Tabs from '@mui/material/Tabs';
 // import Tab from '@mui/material/Tab';
@@ -43,6 +42,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import StarIcon from "@mui/icons-material/Star";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 // import DeleteIcon from '@mui/icons-material/Delete';
 // import Grid from '@mui/material';
 
@@ -86,44 +86,6 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 // import { Margin } from "@mui/icons-material";
 
 import { styled } from "@mui/material/styles";
-
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
-
-// phone number field 
-const PhoneInputStyled = styled(PhoneInput)(({ theme }) => ({
-  '& .form-control': {
-    width:'100%',
-    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-    color: theme.palette.customColors.primaryWhite,
-    border:`1px solid ${theme.palette.customColors.primaryWhite}`,
-  },
-  '& .flag-dropdown': {
-    // background: 'transparent',
-    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-    color: theme.palette.customColors.primaryWhite,
-    border:`1px solid ${theme.palette.customColors.primaryWhite}`,
-    '&:hover': {
-      backgroundColor: 'transparent !important'
-    }
-  },
-  '& .country-list': {
-    background: 'black'
-  },
-  '& .country-list li:hover': {
-    color: 'black'
-  },
-  '& .country-list li[aria-selected="true"]': {
-    color: 'black'
-  }
-}))
-
-// interface Country {
-// code: string;
-// name: string;
-// }
 
 // const schema = yup.object().shape({
 //   eventName: yup.string().required("Please enter your event name"),
@@ -227,6 +189,68 @@ const itemData = [
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
+// const IOSSwitch = styled((props: SwitchProps) => (
+//   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+// ))(({ theme }) => ({
+//   width: 42,
+//   height: 26,
+//   padding: 0,
+//   "& .MuiSwitch-switchBase": {
+//     padding: 0,
+//     margin: 2,
+//     transitionDuration: "300ms",
+//     "&.Mui-checked": {
+//       transform: "translateX(16px)",
+//       color: "#ff914d",
+//       "& + .MuiSwitch-track": {
+//         backgroundColor: "#151618",
+//         opacity: 1,
+//         border: 0,
+//         ...theme.applyStyles("dark", {
+//           backgroundColor: "#2ECA45",
+//         }),
+//       },
+//       "&.Mui-disabled + .MuiSwitch-track": {
+//         opacity: 0.5,
+//       },
+//     },
+//     "&.Mui-focusVisible .MuiSwitch-thumb": {
+//       color: "#33cf4d",
+//       border: "6px solid #fff",
+//     },
+//     "&.Mui-disabled .MuiSwitch-thumb": {
+//       color: theme.palette.grey[100],
+//       ...theme.applyStyles("dark", {
+//         color: theme.palette.grey[600],
+//       }),
+//     },
+//     "&.Mui-disabled + .MuiSwitch-track": {
+//       opacity: 0.7,
+//       ...theme.applyStyles("dark", {
+//         opacity: 0.3,
+//       }),
+//     },
+//   },
+//   "& .MuiSwitch-thumb": {
+//     boxSizing: "border-box",
+//     width: 22,
+//     height: 22,
+//   },
+//   "& .MuiSwitch-track": {
+//     borderRadius: 26 / 2,
+//     backgroundColor: "#ff914d",
+//     opacity: 1,
+//     transition: theme.transitions.create(["background-color"], {
+//       duration: 500,
+//     }),
+//     ...theme.applyStyles("dark", {
+//       backgroundColor: "#39393D",
+//     }),
+//   },
+// }));
+
+// tooltip start for image popup message
+
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
@@ -286,7 +310,7 @@ import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import dayjs from "dayjs";
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from '@mui/icons-material/Close';
 // const currencies = [
 //   {
 //     value: "Festival",
@@ -325,28 +349,12 @@ const style = {
   p: 4,
 };
 
-// const VisuallyHiddenInput = styled('input')({
-//   clip: 'rect(0 0 0 0)',
-//   clipPath: 'inset(50%)',
-//   height: 1,
-//   overflow: 'hidden',
-//   position: 'absolute',
-//   bottom: 0,
-//   left: 0,
-//   whiteSpace: 'nowrap',
-//   width: 1,
-// });
-
-interface Image {
-  src: string;
-}
-
 const createStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: { md: "fit-content", xs: "90%" },
+  width: { md: "fit-content", xs: "fit-content" },
   bgcolor: `repeating-linear-gradient(80deg, rgba(0,0,0,0.1) 100%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.4),rgba(0,0,0,0.4) 70%)`,
   border: "none",
   outline: "none",
@@ -357,19 +365,73 @@ const createStyle = {
   p: 8,
 };
 
+const IOSSwitch = styled((props: SwitchProps) => (
+  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+))(({ theme }) => ({
+  width: 42,
+  height: 26,
+  padding: 0,
+  "& .MuiSwitch-switchBase": {
+    padding: 0,
+    margin: 2,
+    transitionDuration: "300ms",
+    "&.Mui-checked": {
+      transform: "translateX(16px)",
+      color: theme.palette.customColors.orange,
+      "& + .MuiSwitch-track": {
+        backgroundColor: "#151618",
+        opacity: 1,
+        border: 0,
+        ...theme.applyStyles("dark", {
+          backgroundColor: theme.palette.customColors.primaryDark1,
+        }),
+      },
+      "&.Mui-disabled + .MuiSwitch-track": {
+        opacity: 0.5,
+      },
+    },
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: theme.palette.customColors.orange,
+      border: `6px solid ${theme.palette.customColors.primaryWhite}`,
+    },
+    "&.Mui-disabled .MuiSwitch-thumb": {
+      color: theme.palette.grey[100],
+      ...theme.applyStyles("dark", {
+        color: theme.palette.grey[600],
+      }),
+    },
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: 0.7,
+      ...theme.applyStyles("dark", {
+        opacity: 0.3,
+      }),
+    },
+  },
+  "& .MuiSwitch-thumb": {
+    boxSizing: "border-box",
+    width: 22,
+    height: 22,
+  },
+  "& .MuiSwitch-track": {
+    borderRadius: 26 / 2,
+    backgroundColor: theme.palette.customColors.orange,
+    opacity: 1,
+    transition: theme.transitions.create(["background-color"], {
+      duration: 500,
+    }),
+    ...theme.applyStyles("dark", {
+      backgroundColor: theme.palette.customColors.primaryDark1,
+    }),
+  },
+}));
+
+interface Image {
+  src: string;
+}
 function EventPage() {
-
-  const [create, setCreate] = React.useState(false);
-  const handleOpenCreate = () => setCreate(true);
-  const handleCloseCreate = () => setCreate(false);
-
-  const [launch, setLaunch] = React.useState(false);
-  const handleOpenLaunch = () => setLaunch(true);
-  const handleCloseLaunch = () => setLaunch(false);
-
   // const theme = useTheme();
   const router = useRouter();
-  const theme = useTheme();
+  const theme = useTheme()
   // theme.palette.customColors.orange
   // hexToRGBA(theme.palette.customColors.orange,0.2)
 
@@ -405,6 +467,16 @@ function EventPage() {
     }
   };
 
+  // const [bgImage, setBgImage] = useState<string | null>(null);
+  // console.log(bgImage);
+  // const handleBgImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     const imageUrl = URL.createObjectURL(file);
+  //     setBgImage(imageUrl);
+  //   }
+  // };
+
   // offcanvas DrawerList start
   const [Canvas, setCanvas] = React.useState(false);
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -427,20 +499,15 @@ function EventPage() {
         background: "rgba( 32, 37, 36, 0.95 )",
         boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
         backdropFilter: "blur( 8.5px )",
-        padding: "10px", 
+        padding: "10px",
       }}
       role="presentation"
     >
-      <CloseIcon
-        onClick={() => setCanvas(false)}
-        sx={{
-          position: "absolute",
-          right: "2%",
-          top: "2%",
-          "&:hover": { cursor: "pointer" },
-        }}
-      />
-      <Typography variant="h4" sx={{ fontSize: "20px", margin: "10px 0px" }}>
+      <CloseIcon onClick={()=>setCanvas(false)} sx={{position:'absolute',right:'2%',top:'2%','&:hover':{cursor:'pointer'}}}/>
+      <Typography
+        variant="h4"
+        sx={{ fontSize: "20px", margin: "10px 0px",  }}
+      >
         Edit Tickts
       </Typography>
       {/* textfeild start  */}
@@ -488,14 +555,8 @@ function EventPage() {
             variant="outlined"
             size="small"
             sx={{
-              background: `${hexToRGBA(
-                theme.palette.customColors.primaryDark1,
-                0.2
-              )}`,
-              boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                theme.palette.customColors.orange,
-                0.22
-              )}`,
+              background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
               backdropFilter: "blur( 4px )",
               width: "100%",
               "& .MuiOutlinedInput-root": {
@@ -529,14 +590,8 @@ function EventPage() {
             variant="outlined"
             size="small"
             sx={{
-              background: `${hexToRGBA(
-                theme.palette.customColors.primaryDark1,
-                0.2
-              )}`,
-              boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                theme.palette.customColors.orange,
-                0.22
-              )}`,
+              background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
               backdropFilter: "blur( 4px )",
               width: "100%",
               "& .MuiOutlinedInput-root": {
@@ -584,14 +639,8 @@ function EventPage() {
             variant="outlined"
             size="small"
             sx={{
-              background: `${hexToRGBA(
-                theme.palette.customColors.primaryDark1,
-                0.2
-              )}`,
-              boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                theme.palette.customColors.orange,
-                0.22
-              )}`,
+              background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
               backdropFilter: "blur( 4px )",
               width: "100%",
               "& .MuiOutlinedInput-root": {
@@ -632,11 +681,7 @@ function EventPage() {
                 sx={{ color: theme.palette.customColors.primaryWhite }}
                 {...label}
                 icon={<CropSquareIcon />}
-                checkedIcon={
-                  <SquareIcon
-                    sx={{ color: theme.palette.customColors.primaryWhite }}
-                  />
-                }
+                checkedIcon={<SquareIcon sx={{ color: theme.palette.customColors.primaryWhite }} />}
               />
             </Box>
             <Box>
@@ -665,70 +710,52 @@ function EventPage() {
                 }}
               >
                 <Box sx={{ width: "48%" }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoItem label="">
-                      <MobileDateTimePicker
-                        sx={{
-                          // Custom styling for the TextField
-                          "& .MuiInputBase-root": {
-                            width: "100%",
-                            color: theme.palette.customColors.primaryWhite, // Change input text color
-                            background: `${hexToRGBA(
-                              theme.palette.customColors.primaryDark1,
-                              0.2
-                            )}`,
-                            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                              theme.palette.customColors.orange,
-                              0.22
-                            )}`,
-                            borderRadius: "35px",
-                          },
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor:
-                              theme.palette.customColors.primaryWhite, // Change border color
-                          },
-                          "&:hover .MuiOutlinedInput-notchedOutline": {
-                            borderColor:
-                              theme.palette.customColors.primaryWhite, // Hover effect
-                          },
-                        }}
-                        defaultValue={dayjs("2022-04-17T15:30")}
-                      />
-                    </DemoItem>
-                  </LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            
+                                            <DemoItem label="">
+                                            <MobileDateTimePicker sx={{
+                                            // Custom styling for the TextField
+                                            "& .MuiInputBase-root": {
+                                                width:'100%',
+                                                color: theme.palette.customColors.primaryWhite, // Change input text color
+                                                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                                                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                                                borderRadius: "35px",
+                                            },
+                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Change border color
+                                            },
+                                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Hover effect
+                                            },
+                                            }} defaultValue={dayjs('2022-04-17T15:30')} />
+                                            </DemoItem>
+                                            
+                                    </LocalizationProvider>
                 </Box>
                 <Box sx={{ width: "48%" }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoItem label="">
-                      <MobileDateTimePicker
-                        sx={{
-                          // Custom styling for the TextField
-                          "& .MuiInputBase-root": {
-                            width: "100%",
-                            color: theme.palette.customColors.primaryWhite, // Change input text color
-                            background: `${hexToRGBA(
-                              theme.palette.customColors.primaryDark1,
-                              0.2
-                            )}`,
-                            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                              theme.palette.customColors.orange,
-                              0.22
-                            )}`,
-                            borderRadius: "35px",
-                          },
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor:
-                              theme.palette.customColors.primaryWhite, // Change border color
-                          },
-                          "&:hover .MuiOutlinedInput-notchedOutline": {
-                            borderColor:
-                              theme.palette.customColors.primaryWhite, // Hover effect
-                          },
-                        }}
-                        defaultValue={dayjs("2022-04-17T15:30")}
-                      />
-                    </DemoItem>
-                  </LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            
+                                            <DemoItem label="">
+                                            <MobileDateTimePicker sx={{
+                                            // Custom styling for the TextField
+                                            "& .MuiInputBase-root": {
+                                                width:'100%',
+                                                color: theme.palette.customColors.primaryWhite, // Change input text color
+                                                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                                                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                                                borderRadius: "35px",
+                                            },
+                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Change border color
+                                            },
+                                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Hover effect
+                                            },
+                                            }} defaultValue={dayjs('2022-04-17T15:30')} />
+                                            </DemoItem>
+                                            
+                                    </LocalizationProvider>
                 </Box>
               </Box>
             </LocalizationProvider>
@@ -755,11 +782,7 @@ function EventPage() {
                 sx={{ color: theme.palette.customColors.primaryWhite }}
                 {...label}
                 icon={<CropSquareIcon />}
-                checkedIcon={
-                  <SquareIcon
-                    sx={{ color: theme.palette.customColors.primaryWhite }}
-                  />
-                }
+                checkedIcon={<SquareIcon sx={{ color: theme.palette.customColors.primaryWhite }} />}
               />
             </Box>
             <Box>
@@ -788,70 +811,52 @@ function EventPage() {
                 }}
               >
                 <Box sx={{ width: "48%" }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoItem label="">
-                      <MobileDateTimePicker
-                        sx={{
-                          // Custom styling for the TextField
-                          "& .MuiInputBase-root": {
-                            width: "100%",
-                            color: theme.palette.customColors.primaryWhite, // Change input text color
-                            background: `${hexToRGBA(
-                              theme.palette.customColors.primaryDark1,
-                              0.2
-                            )}`,
-                            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                              theme.palette.customColors.orange,
-                              0.22
-                            )}`,
-                            borderRadius: "35px",
-                          },
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor:
-                              theme.palette.customColors.primaryWhite, // Change border color
-                          },
-                          "&:hover .MuiOutlinedInput-notchedOutline": {
-                            borderColor:
-                              theme.palette.customColors.primaryWhite, // Hover effect
-                          },
-                        }}
-                        defaultValue={dayjs("2022-04-17T15:30")}
-                      />
-                    </DemoItem>
-                  </LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            
+                                            <DemoItem label="">
+                                            <MobileDateTimePicker sx={{
+                                            // Custom styling for the TextField
+                                            "& .MuiInputBase-root": {
+                                                width:'100%',
+                                                color: theme.palette.customColors.primaryWhite, // Change input text color
+                                                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                                                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                                                borderRadius: "35px",
+                                            },
+                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Change border color
+                                            },
+                                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Hover effect
+                                            },
+                                            }} defaultValue={dayjs('2022-04-17T15:30')} />
+                                            </DemoItem>
+                                            
+                                    </LocalizationProvider>
                 </Box>
                 <Box sx={{ width: "48%" }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoItem label="">
-                      <MobileDateTimePicker
-                        sx={{
-                          // Custom styling for the TextField
-                          "& .MuiInputBase-root": {
-                            width: "100%",
-                            color: theme.palette.customColors.primaryWhite, // Change input text color
-                            background: `${hexToRGBA(
-                              theme.palette.customColors.primaryDark1,
-                              0.2
-                            )}`,
-                            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                              theme.palette.customColors.orange,
-                              0.22
-                            )}`,
-                            borderRadius: "35px",
-                          },
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor:
-                              theme.palette.customColors.primaryWhite, // Change border color
-                          },
-                          "&:hover .MuiOutlinedInput-notchedOutline": {
-                            borderColor:
-                              theme.palette.customColors.primaryWhite, // Hover effect
-                          },
-                        }}
-                        defaultValue={dayjs("2022-04-17T15:30")}
-                      />
-                    </DemoItem>
-                  </LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            
+                                            <DemoItem label="">
+                                            <MobileDateTimePicker sx={{
+                                            // Custom styling for the TextField
+                                            "& .MuiInputBase-root": {
+                                                width:'100%',
+                                                color: theme.palette.customColors.primaryWhite, // Change input text color
+                                                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                                                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                                                borderRadius: "35px",
+                                            },
+                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Change border color
+                                            },
+                                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Hover effect
+                                            },
+                                            }} defaultValue={dayjs('2022-04-17T15:30')} />
+                                            </DemoItem>
+                                            
+                                    </LocalizationProvider>
                 </Box>
               </Box>
             </LocalizationProvider>
@@ -873,29 +878,20 @@ function EventPage() {
       {/* TxtEditor end  */}
 
       {/* Accordion start 1 */}
-      <Box sx={{ margin: "3% 0 0 0" }}>
+      <Box sx={{ margin: "3% 0 0 0"}}>
         <Accordion
           defaultExpanded
           sx={{
             color: theme.palette.customColors.primaryWhite, // Change input text color
-            background: `${hexToRGBA(
-              theme.palette.customColors.primaryDark1,
-              0.2
-            )}`,
-            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-              theme.palette.customColors.orange,
-              0.22
-            )}`,
+            background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+            boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
             backdropFilter: "blur( 4px )",
             border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+            padding:'0 2%'
           }}
         >
           <AccordionSummary
-            expandIcon={
-              <ExpandMoreIcon
-                sx={{ color: theme.palette.customColors.primaryWhite }}
-              />
-            }
+            expandIcon={<ExpandMoreIcon sx={{ color: theme.palette.customColors.primaryWhite}} />}
             aria-controls="panel1-content"
             id="panel1-header"
           >
@@ -923,13 +919,7 @@ function EventPage() {
                       sx={{ color: theme.palette.customColors.primaryWhite }}
                       {...label}
                       icon={<CropSquareIcon />}
-                      checkedIcon={
-                        <SquareIcon
-                          sx={{
-                            color: theme.palette.customColors.primaryWhite,
-                          }}
-                        />
-                      }
+                      checkedIcon={<SquareIcon sx={{ color: theme.palette.customColors.primaryWhite }} />}
                     />
                   </Box>
                   <Box>
@@ -970,14 +960,8 @@ function EventPage() {
                           width: "100%",
                           display: "flex",
                           color: theme.palette.customColors.primaryWhite, // Change input text color
-                          background: `${hexToRGBA(
-                            theme.palette.customColors.primaryDark1,
-                            0.2
-                          )}`,
-                          boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                            theme.palette.customColors.orange,
-                            0.22
-                          )}`,
+                          background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                          boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
                           backdropFilter: "blur( 4px )",
                           border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                           padding: "10px 5px",
@@ -1013,14 +997,8 @@ function EventPage() {
                           width: "100%",
                           display: "flex",
                           color: theme.palette.customColors.primaryWhite, // Change input text color
-                          background: `${hexToRGBA(
-                            theme.palette.customColors.primaryDark1,
-                            0.2
-                          )}`,
-                          boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                            theme.palette.customColors.orange,
-                            0.22
-                          )}`,
+                          background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                          boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
                           backdropFilter: "blur( 4px )",
                           border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                           padding: "10px 5px",
@@ -1058,13 +1036,15 @@ function EventPage() {
             <Box sx={{ display: "flex", marginTop: "5px" }}>
               <Box sx={{ marginRight: "0px" }}>
                 {/* <Checkbox sx={{color:'#ff914d'}} {...label} icon={<CropSquareIcon />} checkedIcon={<SquareIcon sx={{color:'#ff914d'}} />} /> */}
-                {/* <FormControlLabel
+                <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  // label="iOS style"
-                /> */}
+                  label=""
+                />
               </Box>
               <Box>
-                <Typography sx={{ fontSize: "18px", margin: "0px 0px" }}>
+                <Typography
+                  sx={{ fontSize: "18px", margin: "0px 0px"}}
+                >
                   Hide Tier
                 </Typography>
                 <Typography
@@ -1078,12 +1058,12 @@ function EventPage() {
             <Box sx={{ display: "flex", marginTop: "5px" }}>
               <Box sx={{ marginRight: "0px" }}>
                 {/* <Checkbox sx={{color:'#ff914d'}} {...label} icon={<CropSquareIcon />} checkedIcon={<SquareIcon sx={{color:'#ff914d'}} />} /> */}
-                {/* <FormControlLabel
+                <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  // label="iOS style"
-                /> */}
+                  label=""
+                />
               </Box>
-              <Box sx={{ margin: "2% 0%" }}>
+              <Box sx={{margin:'2% 0%'}}>
                 <Typography
                   sx={{ fontSize: "18px", margin: "0px 0px", color: "#fff" }}
                 >
@@ -1100,16 +1080,20 @@ function EventPage() {
             <Box sx={{ display: "flex", marginTop: "5px" }}>
               <Box sx={{ marginRight: "0px" }}>
                 {/* <Checkbox sx={{color:'#ff914d'}} {...label} icon={<CropSquareIcon />} checkedIcon={<SquareIcon sx={{color:'#ff914d'}} />} /> */}
-                {/* <FormControlLabel
+                <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  // label="iOS style"
-                /> */}
+                  label=""
+                />
               </Box>
               <Box>
-                <Typography sx={{ fontSize: "18px", margin: "0px 0px" }}>
+                <Typography
+                  sx={{ fontSize: "18px", margin: "0px 0px"}}
+                >
                   Disable Ticket
                 </Typography>
-                <Typography sx={{ fontSize: "16px", margin: "0px 0px" }}>
+                <Typography
+                  sx={{ fontSize: "16px", margin: "0px 0px"}}
+                >
                   Ticket remains visible but customers will not be able to
                   purchase this ticket
                 </Typography>
@@ -1124,28 +1108,19 @@ function EventPage() {
       <Accordion
         sx={{
           color: theme.palette.customColors.primaryWhite, // Change input text color
-          background: `${hexToRGBA(
-            theme.palette.customColors.primaryDark1,
-            0.2
-          )}`,
-          boxShadow: `0 8px 32px 0 ${hexToRGBA(
-            theme.palette.customColors.orange,
-            0.22
-          )}`,
-          backdropFilter: "blur( 4px )",
-          border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+            background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+            boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+            backdropFilter: "blur( 4px )",
+            border: `1px solid ${theme.palette.customColors.primaryWhite}`,
           // backdropFilter: "blur( 4px )",
           // border: "1px solid #ff914d",
           borderRadius: "5px",
           marginTop: "10px",
+          padding:'0 2%'
         }}
       >
         <AccordionSummary
-          expandIcon={
-            <ExpandMoreIcon
-              sx={{ color: theme.palette.customColors.primaryWhite }}
-            />
-          }
+          expandIcon={<ExpandMoreIcon sx={{ color: theme.palette.customColors.primaryWhite }} />}
           aria-controls="panel2-content"
           id="panel2-header"
         >
@@ -1167,10 +1142,7 @@ function EventPage() {
                 icon={<CropSquareIcon />}
                 checkedIcon={
                   <SquareIcon
-                    sx={{
-                      color: theme.palette.customColors.primaryWhite,
-                      borderRadius: "200px",
-                    }}
+                    sx={{ color: theme.palette.customColors.primaryWhite, borderRadius: "200px" }}
                   />
                 }
               />
@@ -1199,22 +1171,22 @@ function EventPage() {
                 icon={<CropSquareIcon />}
                 checkedIcon={
                   <SquareIcon
-                    sx={{
-                      color: theme.palette.customColors.primaryWhite,
-                      borderRadius: "200px",
-                    }}
+                    sx={{ color: theme.palette.customColors.primaryWhite, borderRadius: "200px" }}
                   />
                 }
               />
             </Box>
             <Box>
-              <Typography sx={{ fontSize: "18px", margin: "0px 0px" }}>
+              <Typography
+                sx={{ fontSize: "18px", margin: "0px 0px"}}
+              >
                 Password Protected
               </Typography>
               <Typography
                 sx={{
                   fontSize: "16px",
                   margin: "0px 0px 10px 0px",
+                 
                 }}
               >
                 Customers must enter a password on the event page to purchase
@@ -1229,14 +1201,8 @@ function EventPage() {
                 size="small"
                 sx={{
                   color: theme.palette.customColors.primaryWhite, // Change input text color
-                  background: `${hexToRGBA(
-                    theme.palette.customColors.primaryDark1,
-                    0.2
-                  )}`,
-                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                    theme.palette.customColors.orange,
-                    0.22
-                  )}`,
+                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
                   backdropFilter: "blur( 4px )",
                   // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                   transformOrigin: "center top",
@@ -1270,14 +1236,8 @@ function EventPage() {
         <Button
           sx={{
             color: theme.palette.customColors.primaryWhite, // Change input text color
-            background: `${hexToRGBA(
-              theme.palette.customColors.primaryDark1,
-              0.2
-            )}`,
-            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-              theme.palette.customColors.orange,
-              0.22
-            )}`,
+            background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+            boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
             backdropFilter: "blur( 4px )",
             border: `1px solid ${theme.palette.customColors.primaryWhite}`,
             padding: "9px 25px",
@@ -1291,14 +1251,8 @@ function EventPage() {
         <Button
           sx={{
             color: theme.palette.customColors.primaryWhite, // Change input text color
-            background: `${hexToRGBA(
-              theme.palette.customColors.primaryDark1,
-              0.2
-            )}`,
-            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-              theme.palette.customColors.orange,
-              0.22
-            )}`,
+            background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+            boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
             backdropFilter: "blur( 4px )",
             border: `1px solid ${theme.palette.customColors.primaryWhite}`,
             padding: "9px 25px",
@@ -1326,13 +1280,7 @@ function EventPage() {
     width: "100%",
   });
 
-  const [phone, setNumberPhone] = React.useState<string>('')
-  const handlePhoneNumberChange = (value: any, country: any) => {
-    console.log(value, country)
-    setNumberPhone(value)
-  }
-
-  const [isPhone, setPhone] = useState(false);
+  // const [isPhone, setPhone] = useState(false);
   // const [isEmail, setEmail] = useState();
   // const [date, setDate] = React.useState<Dayjs | null>(dayjs("2022-04-17"));
   const [open, setOpen] = React.useState(false);
@@ -1358,6 +1306,16 @@ function EventPage() {
 
   const handleCloseYoutube = () => {
     setYoutube(false);
+  };
+
+  const [isDescription, setDescription] = React.useState<boolean>(false);
+
+  const handleOpenDescription = () => {
+    setDescription(true);
+  };
+
+  const handleCloseDescription = () => {
+    setDescription(false);
   };
 
   const [isAddEvent, setAddEvent] = React.useState<boolean>(false);
@@ -1407,11 +1365,11 @@ function EventPage() {
   // }
 
   const [open2, setOpen2] = React.useState(false);
-  // const handleOpen2 = () => setOpen2(true);
+  const handleOpen2 = () => setOpen2(true);
   const handleClose2 = () => setOpen2(false);
 
   const [open3, setOpen3] = React.useState(false);
-  const handleOpen3 = () => setOpen3(true);
+  // const handleOpen3 = () => setOpen3(true);
   const handleClose3 = () => setOpen3(false);
 
   // const [value, setValue] = React.useState("one");
@@ -1432,22 +1390,29 @@ function EventPage() {
 
   // popup 2 switch
 
- 
+
+  const [create, setCreate] = React.useState(false);
+  const handleOpenCreate = () => setCreate(true);
+  const handleCloseCreate = () => setCreate(false);
+
+  const [launch, setLaunch] = React.useState(false);
+  const handleOpenLaunch = () => setLaunch(true);
+  const handleCloseLaunch = () => setLaunch(false);
+
 
 
   return (
     <>
-           {/* header start  */}
-    <Box
+      {/* header start  */}
+      <Box
           sx={{
             display: { xs: "none", md: "flex" },
             width: "100%",
             justifyContent: "space-between",
             alignItems: "center",
             padding: "10px 25px",
-            position:'fixed',
-            top:'0%',
-            left:'0%',
+            position: "fixed",
+            top: "0",
             zIndex: "66",
             background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
                               boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
@@ -1478,8 +1443,7 @@ function EventPage() {
           >
             <Box
               sx={{
-                width: "30%",
-                // background: `${hexToRGBA(theme.palette.customColors.primaryWhite,1)}`,
+                width: "48%",
                 background:`repeating-linear-gradient(65deg,${hexToRGBA(theme.palette.customColors.primaryDark2,1)} 20px,${hexToRGBA(theme.palette.customColors.primaryWhite,1)} 20px,${hexToRGBA(theme.palette.customColors.orange,1)} 600px)`,
                 boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                 // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
@@ -1489,17 +1453,7 @@ function EventPage() {
             ></Box>
             <Box
               sx={{
-                width: "30%",
-                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                height: "15px",
-                borderRadius: "5px",
-              }}
-            ></Box>
-            <Box
-              sx={{
-                width: "30%",
+                width: "48%",
                 background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
                 boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                 border: `1px solid ${theme.palette.customColors.primaryWhite}`,
@@ -1537,8 +1491,8 @@ function EventPage() {
               </Box>
 
                 <Box sx={{display:'flex',flexDirection:{md:'row',xs:'column'},justifyContent:'space-between',alignItems:'center'}}>
-                  <Button sx={{width:{md:'48%',xs:'100%'},border:`1px solid ${theme.palette.customColors.primaryWhite}`,color:theme.palette.customColors.primaryWhite}}>Save as  draft</Button>
-                  <Button onClick={handleOpenLaunch} sx={{width:{md:'48%',xs:'100%'},border:`1px solid ${theme.palette.customColors.primaryWhite}`,color:theme.palette.customColors.primaryWhite,marginTop:{md:'0',xs:'5%'}}}>Launch</Button>
+                  <Button sx={{width:{md:'48%',xs:'100%'},border:`1px solid ${theme.palette.customColors.orange}`}}>Save as  draft</Button>
+                  <Button onClick={handleOpenLaunch} sx={{width:{md:'48%',xs:'100%'},border:`1px solid ${theme.palette.customColors.orange}`}}>Launch</Button>
                 </Box>
 
                 <Typography variant="h5" sx={{textAlign:'center',margin:'20px 0','&:hover':{textDecoration:`underline solid ${theme.palette.customColors.primaryWhite}`}}}>Keep editing</Typography>
@@ -1563,7 +1517,7 @@ function EventPage() {
                 <Typography sx={{margin:'2% 0'}}>you must complete a short financial onbording before you can start selling tickets</Typography>
 
                 <Box sx={{textAlign:'center',margin:'4% 0'}}>
-                  <Button sx={{border:`1px solid ${theme.palette.customColors.primaryWhite}`,color:theme.palette.customColors.primaryWhite,paddingInline:'20px'}}>Enable payments</Button>
+                  <Button sx={{background:theme.palette.customColors.orange}}>Enable payments</Button>
                 </Box>
 
                 <Typography id="modal-modal-title" variant="h3">
@@ -1580,8 +1534,11 @@ function EventPage() {
         </Box>
         {/* header end  */}
       {/* main start */}
+
       <Box
         sx={{
+          // height: '100vh',
+          // backgroundImage: `repeating-linear-gradient(80deg, rgba(0,0,0,0.6) 100%,#f99d63 50%,rgba(0,0,0,0.6),#f99d63 70%),url(${HMBG.src}),repeating-linear-gradient(80deg, rgba(0,0,0,0.6) 100%,rgba(0,0,0,0.6) 70%),url(${HMBG.src}),url(${HMBG.src}),repeating-linear-gradient(80deg, rgba(0,0,0,0.3) 100%,rgba(0,0,0,0.3) 70%),url(${HMBG.src})`,
           backgroundImage: backgroundImage
             ? `repeating-linear-gradient(80deg, rgba(0,0,0,0.1) 100%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.4),rgba(0,0,0,0.4) 70%),url(${backgroundImage})`
             : `repeating-linear-gradient(80deg, rgba(0,0,0,0.1) 100%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.4),rgba(0,0,0,0.4) 70%),url(${HMBG.src}),repeating-linear-gradient(80deg, rgba(0,0,0,0.1) 100%,rgba(0,0,0,0.1) 70%)`,
@@ -1594,17 +1551,18 @@ function EventPage() {
           padding: { md: "2% 0%", xs: "2% 0 % 0%" },
         }}
       >
-     
+      
 
         {/* section start      */}
         <Box
           sx={{
             backdropFilter: "blur(2px)",
-            padding: { md: "5% 0%", xs: "2% 0% 45% 0%" },
+            padding: { md: "5% 0%", xs: "2% 0% 85% 0%" },
           }}
         >
           {/* container      */}
-          <Box sx={{ width: { md: "65%", xs: "90%" }, margin: "0px auto 0"}}>
+          <Box sx={{ width: { md: "65%", xs: "90%" }, margin: "15px auto 0"
+          }}>
             {/* mn start  */}
             <Typography
               variant="h4"
@@ -1632,14 +1590,8 @@ function EventPage() {
                   label="My Event"
                   variant="outlined"
                   sx={{
-                    background: `${hexToRGBA(
-                      theme.palette.customColors.primaryDark1,
-                      0.2
-                    )}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                      theme.palette.customColors.orange,
-                      0.22
-                    )}`,
+                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
                     // background: "rgba( 21, 22, 24, 0.25 )",
                     // boxShadow: "0 8px 32px 0 rgba(255,145,77,0.32)",
                     backdropFilter: "blur( 14px )",
@@ -1673,78 +1625,60 @@ function EventPage() {
                 >
                   {/* left */}
                   <Box sx={{ width: "49%" }}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DemoItem label="">
-                        <MobileDateTimePicker
-                          sx={{
-                            // Custom styling for the TextField
-                            "& .MuiInputBase-root": {
-                              width: "100%",
-                              color: theme.palette.customColors.primaryWhite, // Change input text color
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                                theme.palette.customColors.orange,
-                                0.22
-                              )}`,
-                              borderRadius: "5px",
-                            },
-                            "& .MuiOutlinedInput-notchedOutline": {
-                              borderColor:
-                                theme.palette.customColors.primaryWhite, // Change border color
-                            },
-                            "&:hover .MuiOutlinedInput-notchedOutline": {
-                              borderColor:
-                                theme.palette.customColors.primaryWhite, // Hover effect
-                            },
-                          }}
-                          defaultValue={dayjs("2022-04-17T15:30")}
-                        />
-                      </DemoItem>
-                    </LocalizationProvider>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            
+                                            <DemoItem label="">
+                                            <MobileDateTimePicker sx={{
+                                            // Custom styling for the TextField
+                                            "& .MuiInputBase-root": {
+                                                width:'100%',
+                                                color: theme.palette.customColors.primaryWhite, // Change input text color
+                                                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                                                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                                                borderRadius: "5px",
+                                            },
+                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Change border color
+                                            },
+                                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Hover effect
+                                            },
+                                            }} defaultValue={dayjs('2022-04-17T15:30')} />
+                                            </DemoItem>
+                                            
+                  </LocalizationProvider>
                   </Box>
                   {/* right */}
                   <Box sx={{ width: "49%" }}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DemoItem label="">
-                        <MobileDateTimePicker
-                          sx={{
-                            // Custom styling for the TextField
-                            "& .MuiInputBase-root": {
-                              width: "100%",
-                              color: theme.palette.customColors.primaryWhite, // Change input text color
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                                theme.palette.customColors.orange,
-                                0.22
-                              )}`,
-                              borderRadius: "5px",
-                            },
-                            "& .MuiOutlinedInput-notchedOutline": {
-                              borderColor:
-                                theme.palette.customColors.primaryWhite, // Change border color
-                            },
-                            "&:hover .MuiOutlinedInput-notchedOutline": {
-                              borderColor:
-                                theme.palette.customColors.primaryWhite, // Hover effect
-                            },
-                          }}
-                          defaultValue={dayjs("2022-04-17T15:30")}
-                        />
-                      </DemoItem>
-                    </LocalizationProvider>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            
+                                            <DemoItem label="">
+                                            <MobileDateTimePicker sx={{
+                                            // Custom styling for the TextField
+                                            "& .MuiInputBase-root": {
+                                                width:'100%',
+                                                color: theme.palette.customColors.primaryWhite, // Change input text color
+                                                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                                                borderRadius: "5px",
+                                            },
+                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Change border color
+                                            },
+                                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                                                borderColor: theme.palette.customColors.primaryWhite, // Hover effect
+                                            },
+                                            }} defaultValue={dayjs('2022-04-17T15:30')} />
+                                            </DemoItem>
+                                            
+                  </LocalizationProvider>
                   </Box>
                 </Box>
                 {/* inner main  */}
 
                 {/* venue Name */}
                 <TextField
-                  autoComplete="off"
+                autoComplete="off"
                   id="outlined-basic"
                   label="venue Name"
                   size="small"
@@ -1752,14 +1686,8 @@ function EventPage() {
                   sx={{
                     // background: "rgba( 255, 145, 77, 0.25 )",
                     // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-                    background: `${hexToRGBA(
-                      theme.palette.customColors.primaryDark1,
-                      0.2
-                    )}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                      theme.palette.customColors.orange,
-                      0.22
-                    )}`,
+                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
                     backdropFilter: "blur( 4px )",
                     width: "100%",
                     "& .MuiOutlinedInput-root": {
@@ -1790,21 +1718,14 @@ function EventPage() {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="end">
-                        <RoomIcon
-                          sx={{
-                            color: theme.palette.customColors.primaryWhite,
-                          }}
-                        />
+                        <RoomIcon sx={{ color: theme.palette.customColors.primaryWhite }} />
                       </InputAdornment>
                     ),
                   }}
                   sx={{
                     mt: 2,
-                    background: `${hexToRGBA(
-                      theme.palette.customColors.primaryDark1,
-                      0.2
-                    )}`,
-                    // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,  
                     backdropFilter: "blur( 4px )",
                     width: "100%",
                     "& .MuiOutlinedInput-root": {
@@ -1824,98 +1745,133 @@ function EventPage() {
                     },
                   }}
                 />
-                {/* Address         */}
-
-                {/* select start  */}
-                <Drop/>
-                {/* select end   */}
-
-                {/* <TxtEditor /> */}
-
-                <UncontrolledRte />
-                {/* text editor  */}
-
-                {/* Email of phone number start  */}
-                <Box
+                {/* Tickets start */}
+            <Box
+              sx={{
+                borderBottom: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                color: theme.palette.customColors.primaryWhite,
+                padding: "5% 0% 0%",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              {/* Tickets left start */}
+              <Box>
+                <Typography
+                  variant="h3"
                   sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginTop: "50px",
+                    fontWeight: "bold",
+                    margin: "10px 0px",
+                    // color: "#fff",
                   }}
                 >
+                  Tickets
+                </Typography>
+              </Box>
+              {/* Tickets left end */}
+              {/* Tickets right start */}
+              <Box>
+                <Button
+                  onClick={toggleDrawer(true)}
+
+                  sx={{
+                    padding: "9px 25px",
+                    // color: "#fff",
+                    borderRadius: "35px",
+                    background: theme.palette.customColors.primaryWhite,
+                    color: theme.palette.customColors.primaryDark1,
+                    // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                    backdropFilter: "blur( 4px )",
+                  }}
+                  variant="contained"
+                  startIcon={<ArrowOutwardIcon />}
+                >
+                  Add Tickets
+                </Button>
+                <Drawer open={Canvas} onClose={toggleDrawer(false)}>
+                  {DrawerList}
+                </Drawer>
+              </Box>
+              {/* Tickets right end */}
+
+                  
+
+            </Box>
+            {/* Tickets end */}
+               
+            <Box sx={{ display: "flex", marginTop: "15px" }}>
+                  <Box sx={{ marginRight: "20px" }}>
+                    <Checkbox
+                      sx={{ color: theme.palette.customColors.primaryWhite}}
+                      {...label}
+                      icon={<CropSquareIcon />}
+                      checkedIcon={
+                        <SquareIcon
+                          sx={{ color: theme.palette.customColors.primaryWhite, borderRadius: "200px" }}
+                        />
+                      }
+                    />
+                  </Box>
                   <Box>
                     <Typography
-                      variant="h5"
                       sx={{
-                        fontWeight: "bold",
-                        fontSize: "18px",
+                        margin: "0px 0px",
                         color: "#fff",
                       }}
                     >
-                      Email or Phone Number
+                      Require Approval
                     </Typography>
-                  </Box>
-                  <Box
-                    onClick={() => setPhone((prev) => !prev)}
-                    sx={{ cursor: "pointer" }}
-                  >
-                    <EmailIcon sx={{ color: "#fff" }} />
-                    <ChangeCircleIcon
+                    <Typography
                       sx={{
-                        transform: "translate(-10px , 5px)",
-                        fontSize: "25px",
+                        margin: "0px 0px",
                         color: "#fff",
                       }}
-                    />
+                    >
+                      Attendees must be approved by you before they can RSVP.
+                    </Typography>
                   </Box>
                 </Box>
-                {isPhone ? (
-                  <TextField
-                    autoComplete="off"
-                    id="outlined-basic"
-                    // label="Email or Phone Number"
-                    placeholder="Email "
-                    size="small"
-                    variant="outlined"
-                    sx={{
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-                      backdropFilter: "blur( 4px )",
-                      marginTop: "8px",
-                      width: "100%",
-                      "& .MuiOutlinedInput-root": {
-                        color: "#fff",
-                        fontFamily: "Arial",
-                        fontWeight: "noraml",
-                        // Class for the border around the input field
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          borderColor: theme.palette.customColors.primaryWhite,
-                          borderWidth: "1px",
-                        },
-                      },
-                      // Class for the label of the input field
-                      "& .MuiInputLabel-outlined": {
-                        // color: "#ff914d",
-                        fontWeight: "normal",
-                      },
-                    }}
-                  />
-                ) : (
-                    <PhoneInputStyled sx={{width:'100%'}}
-                      country={'us'}
-                      value={phone}
-                      // onChange={phone => setPhone(phone)}
-                      onChange={handlePhoneNumberChange}
-                      countryCodeEditable={false}
-                      disableCountryCode={false}
+                {/* data 1   */}
+                {/* data 2   */}
+                <Box sx={{ display: "flex", marginTop: "15px" }}>
+                  <Box sx={{ marginRight: "20px" }}>
+                    <Checkbox
+                      value={isPass}
+                      onChange={() => setIsPass((prev) => !prev)}
+                      sx={{ color: theme.palette.customColors.primaryWhite }}
+                      {...label}
+                      icon={<CropSquareIcon />}
+                      checkedIcon={
+                        <SquareIcon
+                          sx={{ color: theme.palette.customColors.primaryWhite, borderRadius: "200px" }}
+                        />
+                      }
                     />
-                )}
-                {/* Email of phone number end */}
-              </Box>
+                  </Box>
+                  <Box>
+                    <Typography
+                      sx={{
+                        margin: "0px 0px",
+                        // color: "#fff",
+                      }}
+                    >Limit event capacity
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        margin: "0px 0px",
+                        // color: "#fff",
+                      }}
+                    >
+                      Limit the number of guests who can RSVP to this event. Leave blank for unlimited RSVPs.
+                    </Typography>
+                  </Box>
+                </Box>   
+
+                <Typography sx={{margin:'25px 0',textAlign:'center'}}>This event is currently an RSVP event.</Typography>
+             
+            </Box>
 
               {/* image part start */}
               <Box
@@ -1940,10 +1896,7 @@ function EventPage() {
                   "&:hover": {
                     // transform:'scale(1.1)'
                     // background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                      theme.palette.customColors.orange,
-                      0.22
-                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
                     border: `1px solid ${theme.palette.customColors.orange}`,
                   },
                 }}
@@ -1976,13 +1929,10 @@ function EventPage() {
                   {backgroundImage ? (
                     <Button
                       sx={{
-                        background: `${hexToRGBA(
-                          theme.palette.customColors.primaryDark1,
-                          0.2
-                        )}`,
+                        background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
                         border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                         color: theme.palette.customColors.primaryWhite,
-                        // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                    // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
                         // border: "1px solid #ff914d",
                         // background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
                         borderRadius: "25px",
@@ -1998,15 +1948,9 @@ function EventPage() {
                       <label
                         htmlFor="file-upload"
                         style={{
-                          background: `${hexToRGBA(
-                            theme.palette.customColors.primaryDark1,
-                            0.2
-                          )}`,
+                          background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
                           border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                          boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                            theme.palette.customColors.orange,
-                            0.22
-                          )}`,
+                          boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
                           color: theme.palette.customColors.primaryWhite,
                           padding: "12px 25px",
                           borderRadius: "25px",
@@ -2020,10 +1964,7 @@ function EventPage() {
                         id="file-upload"
                         style={{
                           // border: "1px solid #ff914d",
-                          background: `${hexToRGBA(
-                            theme.palette.customColors.primaryDark1,
-                            0.2
-                          )}`,
+                          background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
                           border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                           width: "150px",
                           display: "none",
@@ -2046,10 +1987,7 @@ function EventPage() {
                     // border: "1px solid #ff914d",
                     margin: "4% auto 0",
                     borderRadius: "10px",
-                    background: `${hexToRGBA(
-                      theme.palette.customColors.primaryDark1,
-                      0.2
-                    )}`,
+                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
                     border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                     color: theme.palette.customColors.primaryWhite,
                     backdropFilter: "blur( 4px )",
@@ -2066,17 +2004,11 @@ function EventPage() {
                   />
                   {/* </IconButton> */}
                   <InputBase
-                    sx={{
-                      ml: 1,
-                      flex: 1,
-                      color: theme.palette.customColors.primaryWhite,
-                    }}
+                    sx={{ ml: 1, flex: 1, color: theme.palette.customColors.primaryWhite }}
                     placeholder="Search Google Maps"
                     inputProps={{ "aria-label": "search google maps" }}
                   />
-                  <SearchIcon
-                    sx={{ color: theme.palette.customColors.primaryWhite }}
-                  />
+                  <SearchIcon sx={{ color: theme.palette.customColors.primaryWhite }} />
                 </Box>
                 {/* search bar end  */}
 
@@ -2114,9 +2046,9 @@ function EventPage() {
                           mt: 2,
                           fontSize: "20px",
                           fontWeight: "bold",
-                          //       background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                          // color: theme.palette.customColors.primaryWhite,
+                    //       background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                    // color: theme.palette.customColors.primaryWhite,
                         }}
                       >
                         Admission Settings
@@ -2165,7 +2097,9 @@ function EventPage() {
                             }}
                           >
                             Admission Settings{" "}
-                            <Typography sx={{ marginLeft: "15px" }}>
+                            <Typography
+                              sx={{  marginLeft: "15px" }}
+                            >
                               $10.00
                             </Typography>
                           </Typography>
@@ -2175,10 +2109,7 @@ function EventPage() {
                             sx={{
                               color: theme.palette.customColors.primaryWhite,
                               // background: "#ff914d",
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
+                              background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
                               border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                               // color: theme.palette.customColors.primaryWhite,
                               padding: "10px",
@@ -2192,10 +2123,7 @@ function EventPage() {
                           <EditIcon
                             sx={{
                               color: theme.palette.customColors.primaryWhite,
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
+                              background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
                               padding: "10px",
                               border: `1px solid ${theme.palette.customColors.primaryWhite}`,
 
@@ -2234,10 +2162,10 @@ function EventPage() {
                               marginRight: "15px",
                               "&:hover": {
                                 cursor: "pointer",
-                                background:
-                                  theme.palette.customColors.primaryWhite,
+                                background: theme.palette.customColors.primaryWhite,
                                 color: theme.palette.customColors.primaryDark1,
                                 // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+
                               },
                             }}
                           >
@@ -2245,8 +2173,7 @@ function EventPage() {
                           </Button>
                           <Button
                             sx={{
-                              background:
-                                theme.palette.customColors.primaryWhite,
+                              background: theme.palette.customColors.primaryWhite,
                               padding: "9px 25px",
                               color: theme.palette.customColors.primaryDark1,
                               borderRadius: "25px",
@@ -2263,7 +2190,6 @@ function EventPage() {
                         </Box>
                       </Box>
                       {/* button part end */}
-                      <CloseIcon onClick={handleClose3} sx={{position:'absolute',right:'2%',top:'5%',cursor:'pointer'}}/>
                     </Box>
                   </Modal>
 
@@ -2271,7 +2197,7 @@ function EventPage() {
 
                   {/* popup 2 start */}
 
-                  {/* <HtmlTooltip
+                  <HtmlTooltip
                     title={
                       <React.Fragment>
                         <Typography
@@ -2286,7 +2212,7 @@ function EventPage() {
                   >
                     <Button>
                       <TuneIcon
-                        // onClick={handleOpen2}
+                        onClick={handleOpen2}
                         sx={{
                           background: theme.palette.customColors.primaryWhite,
                           color: theme.palette.customColors.primaryDark1,
@@ -2303,26 +2229,7 @@ function EventPage() {
                         }}
                       />
                     </Button>
-                  </HtmlTooltip> */}
-                   <Button>
-                      <TuneIcon
-                        // onClick={handleOpen2}
-                        sx={{
-                          background: theme.palette.customColors.primaryWhite,
-                          color: theme.palette.customColors.primaryDark1,
-                          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                          fontSize: "40px",
-                          padding: "5px",
-                          transform: "rotate(180deg)",
-                          transition: "all 0.21s linear",
-                          borderRadius: "50%",
-                          "&:hover": {
-                            cursor: "pointer",
-                            transform: "rotate(90deg)",
-                          },
-                        }}
-                      />
-                    </Button>
+                  </HtmlTooltip>
 
                   <Modal
                     open={open2}
@@ -2364,9 +2271,7 @@ function EventPage() {
                             border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                             borderRadius: "35px",
                             overflow: "auto",
-                            "& .MuiSvgIcon-root": {
-                              color: theme.palette.customColors.primaryWhite,
-                            },
+                            "& .MuiSvgIcon-root": { color: theme.palette.customColors.primaryWhite},
                           }}
                           // input={<OutlinedInput label="Name" />}
                           // MenuProps={MenuProps}
@@ -2516,8 +2421,7 @@ function EventPage() {
                                 style={{
                                   // background: "#202524",
                                   border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                                  color:
-                                    theme.palette.customColors.primaryWhite,
+                                  color: theme.palette.customColors.primaryWhite,
                                   padding: "12px 25px",
                                   borderRadius: "25px",
                                   fontSize: "2vh",
@@ -2559,8 +2463,7 @@ function EventPage() {
                             // borderRadius:'5px'
                           },
                           "&::-webkit-scrollbar-thumb": {
-                            backgroundColor:
-                              theme.palette.customColors.primaryWhite,
+                            backgroundColor: theme.palette.customColors.primaryWhite,
                             color: theme.palette.customColors.primaryWhite,
                             // borderRadius:'5px'
                           },
@@ -2585,7 +2488,6 @@ function EventPage() {
                           </ImageListItem>
                         ))}
                       </ImageList>
-                      <CloseIcon onClick={handleClose} sx={{position:'absolute',right:'2%',top:'2%',cursor:'pointer'}}/>
                     </Box>
                   </Modal>
 
@@ -2595,134 +2497,9 @@ function EventPage() {
               {/* image part end  */}
             </Box>
 
-            {/* Tickets start */}
-            <Box
-              sx={{
-                borderBottom: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                color: theme.palette.customColors.primaryWhite,
-                padding: "5% 0% 0%",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              {/* Tickets left start */}
-              <Box>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontWeight: "bold",
-                    fontSize: "30px",
-                    margin: "10px 0px",
-                    // color: "#fff",
-                  }}
-                >
-                  Tickets
-                </Typography>
-              </Box>
-              {/* Tickets left end */}
-              {/* Tickets right start */}
-              <Box>
-                {/* <Button sx={{background:'#ff914d',padding:'9px 25px',color:'#fff',borderRadius:'35px'}}>Edit Tickets</Button> */}
-                <Button
-                  onClick={handleOpen3}
-                  sx={{
-                    padding: "9px 25px",
-                    // color: "#fff",
-                    borderRadius: "35px",
-                    background: theme.palette.customColors.primaryWhite,
-                    color: theme.palette.customColors.primaryDark1,
-                    // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                    backdropFilter: "blur( 4px )",
-                  }}
-                  variant="contained"
-                  startIcon={<ArrowOutwardIcon />}
-                >
-                  Edit Tickets
-                </Button>
-              </Box>
-              {/* Tickets right end */}
-            </Box>
-            {/* Tickets end */}
+            
 
-            {/* Default Tickets start */}
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                // background: "#ff914d",
-                background: `${hexToRGBA(
-                  theme.palette.customColors.primaryDark1,
-                  0.2
-                )}`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                  theme.palette.customColors.orange,
-                  0.22
-                )}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                borderRadius: "15px",
-                padding: "2%",
-                margin: "6% 0%",
-              }}
-            >
-              {/* Default Tickets left start  */}
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography
-                  sx={{
-                    fontWeight: "normal",
-                    fontSize: "20px",
-                    margin: "10px 0px 0px",
-                    color: "#fff",
-                  }}
-                >
-                  Default Tickets
-                </Typography>
-                <Typography
-                  sx={{
-                    fontWeight: "normal",
-                    fontSize: "20px",
-                    margin: "10px 0px",
-                    // color: "#fff",
-                  }}
-                >
-                  $ 10
-                </Typography>
-              </Box>
-              {/* Default Tickets left end  */}
-
-              {/* Default Tickets right start  */}
-              <Box>
-                {/* offcanvas add */}
-                <Button onClick={toggleDrawer(true)}>
-                  <EditIcon
-                    sx={{
-                      color: theme.palette.customColors.primaryWhite,
-                      // background: "#151618",
-                      // boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                        theme.palette.customColors.orange,
-                        0.22
-                      )}`,
-                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                      padding: "10px",
-                      fontSize: "40px",
-                      borderRadius: "50%",
-                    }}
-                  />
-                </Button>
-                <Drawer open={Canvas} onClose={toggleDrawer(false)}>
-                  {DrawerList}
-                </Drawer>
-                {/* offcanvas add */}
-              </Box>
-              {/* Default Tickets right end  */}
-            </Box>
-            {/* Default Tickets end */}
+            
 
             {/* looking start */}
             <Box
@@ -2737,31 +2514,22 @@ function EventPage() {
                 },
                 "&::-webkit-scrollbar-track": {
                   // background: "#151618",
-                  background: `${hexToRGBA(
-                    theme.palette.customColors.primaryDark1,
-                    0.2
-                  )}`,
-                  // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
-                  // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                   borderRadius: "5px",
                 },
                 "&::-webkit-scrollbar-thumb": {
-                  background: `${hexToRGBA(
-                    theme.palette.customColors.primaryWhite,
-                    1
-                  )}`,
+                  background: `${hexToRGBA(theme.palette.customColors.primaryWhite,1)}`,
                   // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
                   // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                   borderRadius: "5px",
                 },
                 "&::-webkit-scrollbar-thumb:hover": {
                   // background: "#ff914d",
-                  background: `${hexToRGBA(
-                    theme.palette.customColors.primaryWhite,
-                    1
-                  )}`,
-                  // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
-                  // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                  background: `${hexToRGBA(theme.palette.customColors.primaryWhite,1)}`,
+                // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                   cursor: "grab",
                 },
                 overflowY: "hidden",
@@ -2771,15 +2539,9 @@ function EventPage() {
               {/* looking box  1 */}
               <Box
                 sx={{
-                  background: `${hexToRGBA(
-                    theme.palette.customColors.primaryDark1,
-                    0.2
-                  )}`,
-                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                    theme.palette.customColors.orange,
-                    0.12
-                  )}`,
-                  border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                   padding: "30px 10px",
                   marginRight: "20px",
                   borderRadius: "15px",
@@ -2819,14 +2581,8 @@ function EventPage() {
                   </Typography>
                   <Button
                     sx={{
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                        theme.palette.customColors.orange,
-                        0.12
-                      )}`,
+                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                       border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                       padding: "9px 25px",
                       borderRadius: "35px",
@@ -2857,14 +2613,8 @@ function EventPage() {
               {/* looking box  2 */}
               <Box
                 sx={{
-                  background: `${hexToRGBA(
-                    theme.palette.customColors.primaryDark1,
-                    0.2
-                  )}`,
-                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                    theme.palette.customColors.orange,
-                    0.12
-                  )}`,
+                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                   border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                   padding: "30px 10px",
                   marginRight: "20px",
@@ -2906,14 +2656,8 @@ function EventPage() {
                   </Typography>
                   <Button
                     sx={{
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                        theme.palette.customColors.orange,
-                        0.12
-                      )}`,
+                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                       border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                       padding: "9px 25px",
                       borderRadius: "35px",
@@ -2944,14 +2688,8 @@ function EventPage() {
               {/* looking box  3 */}
               <Box
                 sx={{
-                  background: `${hexToRGBA(
-                    theme.palette.customColors.primaryDark1,
-                    0.2
-                  )}`,
-                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                    theme.palette.customColors.orange,
-                    0.12
-                  )}`,
+                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                   border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                   padding: "30px 10px",
                   marginRight: "20px",
@@ -2993,14 +2731,8 @@ function EventPage() {
                   </Typography>
                   <Button
                     sx={{
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                        theme.palette.customColors.orange,
-                        0.12
-                      )}`,
+                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                       border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                       padding: "9px 25px",
                       borderRadius: "35px",
@@ -3031,14 +2763,8 @@ function EventPage() {
               {/* looking box  4 */}
               <Box
                 sx={{
-                  background: `${hexToRGBA(
-                    theme.palette.customColors.primaryDark1,
-                    0.2
-                  )}`,
-                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                    theme.palette.customColors.orange,
-                    0.12
-                  )}`,
+                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                   border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                   padding: "30px 10px",
                   marginRight: "20px",
@@ -3080,14 +2806,8 @@ function EventPage() {
                   </Typography>
                   <Button
                     sx={{
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                        theme.palette.customColors.orange,
-                        0.12
-                      )}`,
+                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                       border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                       padding: "9px 25px",
                       borderRadius: "35px",
@@ -3118,15 +2838,9 @@ function EventPage() {
               {/* looking box  5 */}
               <Box
                 sx={{
-                  background: `${hexToRGBA(
-                    theme.palette.customColors.primaryDark1,
-                    0.2
-                  )}`,
-                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                    theme.palette.customColors.orange,
-                    0.12
-                  )}`,
-                  border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                   padding: "30px 10px",
                   borderRadius: "15px",
                   Width: "48%",
@@ -3166,15 +2880,9 @@ function EventPage() {
                   </Typography>
                   <Button
                     sx={{
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                        theme.palette.customColors.orange,
-                        0.12
-                      )}`,
-                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                       padding: "9px 25px",
                       borderRadius: "35px",
                       display: "flex",
@@ -3227,10 +2935,7 @@ function EventPage() {
               <Box>
                 {/* event setting start */}
                 <Box
-                  sx={{
-                    borderBottom: `2px solid ${theme.palette.customColors.primaryWhite}`,
-                    margin: "10px 0px",
-                  }}
+                  sx={{ borderBottom: `2px solid ${theme.palette.customColors.primaryWhite}`, margin: "10px 0px" }}
                 >
                   <Typography
                     variant="h6"
@@ -3239,7 +2944,7 @@ function EventPage() {
                     Event Settings
                   </Typography>
                 </Box>
-                <Typography>
+                <Typography >
                   Increase sales by driving organic discovery and list your
                   event on the Posh Explore Page
                 </Typography>
@@ -3249,15 +2954,12 @@ function EventPage() {
                 <Box sx={{ display: "flex", marginTop: "15px" }}>
                   <Box sx={{ marginRight: "20px" }}>
                     <Checkbox
-                      sx={{ color: theme.palette.customColors.primaryWhite }}
+                      sx={{ color: theme.palette.customColors.primaryWhite}}
                       {...label}
                       icon={<CropSquareIcon />}
                       checkedIcon={
                         <SquareIcon
-                          sx={{
-                            color: theme.palette.customColors.primaryWhite,
-                            borderRadius: "200px",
-                          }}
+                          sx={{ color: theme.palette.customColors.primaryWhite, borderRadius: "200px" }}
                         />
                       }
                     />
@@ -3295,10 +2997,7 @@ function EventPage() {
                       icon={<CropSquareIcon />}
                       checkedIcon={
                         <SquareIcon
-                          sx={{
-                            color: theme.palette.customColors.primaryWhite,
-                            borderRadius: "200px",
-                          }}
+                          sx={{ color: theme.palette.customColors.primaryWhite, borderRadius: "200px" }}
                         />
                       }
                     />
@@ -3332,14 +3031,8 @@ function EventPage() {
                   placeholder="Password"
                   size="small"
                   sx={{
-                    background: `${hexToRGBA(
-                      theme.palette.customColors.primaryDark1,
-                      0.2
-                    )}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                      theme.palette.customColors.orange,
-                      0.12
-                    )}`,
+                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                     // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                     backdropFilter: "blur( 4px )",
                     transformOrigin: "center top",
@@ -3695,8 +3388,12 @@ function EventPage() {
                         />
                       </Box>
                       <Box sx={{ width: "75%", paddingLeft: "20px" }}>
-                        <Typography>Kendall Jenner</Typography>
-                        <Typography>{`OMG you're going Eli???`}</Typography>
+                        <Typography >
+                          Kendall Jenner
+                        </Typography>
+                        <Typography>
+                          {`OMG you're going Eli???`}
+                        </Typography>
                       </Box>
                     </Box>
                     <Box
@@ -3722,8 +3419,10 @@ function EventPage() {
                         />
                       </Box>
                       <Box sx={{ width: "75%", paddingLeft: "20px" }}>
-                        <Typography>David Davidov</Typography>
-                        <Typography>
+                        <Typography >
+                          David Davidov
+                        </Typography>
+                        <Typography >
                           Anyone wanna meet up before the event? 👀
                         </Typography>
                       </Box>
@@ -3746,6 +3445,7 @@ function EventPage() {
                       <Box>
                         <Typography
                           sx={{
+                            
                             fontSize: "22px",
                             fontWeight: "bold",
                           }}
@@ -3754,13 +3454,13 @@ function EventPage() {
                         </Typography>
                       </Box>
                       <Box>
-                        {/* <AddCircleIcon
+                        <AddCircleIcon
                           sx={{
                             color: theme.palette.customColors.primaryWhite,
                             "&:hover": { cursor: "pointer" },
                             marginRight: "8px",
                           }}
-                        /> */}
+                        />
                         <DeleteIcon
                           onClick={handleCloseGallery}
                           sx={{
@@ -3773,7 +3473,7 @@ function EventPage() {
 
                     <Box
                       sx={{
-                        border: `2px dashed ${theme.palette.customColors.primaryWhite}`,
+                        border: `2px dashed ${theme.palette.customColors.primaryWhite}` ,
                         padding: "20px",
                         borderRadius: "20px",
                         margin: "3% 0%",
@@ -3808,11 +3508,7 @@ function EventPage() {
                           sx={{ background: "none", boxShadow: "none" }}
                         >
                           {/* Upload files */}
-                          <AddCircleIcon
-                            sx={{
-                              color: theme.palette.customColors.primaryWhite,
-                            }}
-                          />
+                          <AddCircleIcon  sx={{color:theme.palette.customColors.primaryWhite}}/>
                           <VisuallyHiddenInput
                             type="file"
                             onChange={handleAddImage}
@@ -3853,8 +3549,7 @@ function EventPage() {
                                   position: "absolute",
                                   top: 5,
                                   right: 5,
-                                  background:
-                                    theme.palette.customColors.primaryDark1,
+                                  background: theme.palette.customColors.primaryDark1,
                                   // backgroundColor: "white",
                                   borderRadius: "100%",
                                   opacity: 0.8,
@@ -3886,7 +3581,7 @@ function EventPage() {
                           display: "flex",
                           justifyContent: "space-between",
                           alignItems: "center",
-                          borderBottom: ` 1px solid ${theme.palette.customColors.primaryWhite}`,
+                          borderBottom:  ` 1px solid ${theme.palette.customColors.primaryWhite}` ,
                           paddingBottom: "10px",
                         }}
                       >
@@ -3901,13 +3596,13 @@ function EventPage() {
                           </Typography>
                         </Box>
                         <Box>
-                          {/* <AddCircleIcon
+                          <AddCircleIcon
                             sx={{
                               color: theme.palette.customColors.primaryWhite,
                               "&:hover": { cursor: "pointer" },
                               marginRight: "8px",
                             }}
-                          /> */}
+                          />
                           <DeleteIcon
                             onClick={handleCloseAddEvent}
                             sx={{
@@ -3926,24 +3621,18 @@ function EventPage() {
                             margin: "5px 0px",
                             "&:hover": {
                               cursor: "pointer",
-                              color: theme.palette.customColors.primaryWhite,
+                              color:theme.palette.customColors.primaryWhite,
                               textDecoration: "underline 1px solid",
                             },
                           }}
                         >
                           <Checkbox
-                            sx={{
-                              color: theme.palette.customColors.primaryWhite,
-                            }}
+                            sx={{ color: theme.palette.customColors.primaryWhite}}
                             {...label}
                             icon={<CropSquareIcon />}
                             checkedIcon={
                               <SquareIcon
-                                sx={{
-                                  color:
-                                    theme.palette.customColors.primaryWhite,
-                                  borderRadius: "200px",
-                                }}
+                                sx={{ color: theme.palette.customColors.primaryWhite, borderRadius: "200px" }}
                               />
                             }
                           />{" "}
@@ -3961,14 +3650,8 @@ function EventPage() {
                             size="small"
                             variant="outlined"
                             sx={{
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                                theme.palette.customColors.orange,
-                                0.12
-                              )}`,
+                               background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                               // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                               backdropFilter: "blur( 4px )",
                               width: "100%",
@@ -3979,8 +3662,7 @@ function EventPage() {
                                 fontWeight: "noraml",
                                 // Class for the border around the input field
                                 "& .MuiOutlinedInput-notchedOutline": {
-                                  borderColor:
-                                    theme.palette.customColors.primaryWhite,
+                                  borderColor: theme.palette.customColors.primaryWhite,
                                   borderWidth: "1px",
                                 },
                               },
@@ -3999,14 +3681,8 @@ function EventPage() {
                       sx={{
                         width: { md: "60%", xs: "100%" },
                         padding: "20px",
-                        background: `${hexToRGBA(
-                          theme.palette.customColors.primaryDark1,
-                          0.2
-                        )}`,
-                        boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                          theme.palette.customColors.orange,
-                          0.12
-                        )}`,
+                        background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                        boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                         border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                         borderRadius: "25px",
                       }}
@@ -4027,14 +3703,8 @@ function EventPage() {
                               fontSize: "50px",
                               borderRadius: "50%",
                               // border: "1px solid #ff914d",
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                                theme.palette.customColors.orange,
-                                0.12
-                              )}`,
+                              background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                               border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                               backdropFilter: "blur( 4px )",
                             }}
@@ -4046,14 +3716,8 @@ function EventPage() {
                                 padding: "10px",
                                 fontSize: "50px",
                                 borderRadius: "50%",
-                                background: `${hexToRGBA(
-                                  theme.palette.customColors.primaryDark1,
-                                  0.2
-                                )}`,
-                                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                                  theme.palette.customColors.orange,
-                                  0.12
-                                )}`,
+                                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                                 border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                                 backdropFilter: "blur( 4px )",
                               }}
@@ -4069,14 +3733,8 @@ function EventPage() {
                             size="small"
                             variant="outlined"
                             sx={{
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                                theme.palette.customColors.orange,
-                                0.12
-                              )}`,
+                              background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                               // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                               width: "100%",
                               "& .MuiOutlinedInput-root": {
@@ -4085,8 +3743,7 @@ function EventPage() {
                                 fontWeight: "noraml",
                                 // Class for the border around the input field
                                 "& .MuiOutlinedInput-notchedOutline": {
-                                  borderColor:
-                                    theme.palette.customColors.primaryWhite,
+                                  borderColor: theme.palette.customColors.primaryWhite,
                                   borderWidth: "1px",
                                 },
                               },
@@ -4113,37 +3770,21 @@ function EventPage() {
                                     // slotProps={{ field: { size: "small" } }}
                                     enableAccessibleFieldDOMStructure
                                     sx={{
-                                      svg: {
-                                        color:
-                                          theme.palette.customColors
-                                            .primaryWhite,
-                                        opacity: "0.4",
-                                      },
+                                      svg: { color: theme.palette.customColors.primaryWhite, opacity: "0.4" },
                                       label: {
-                                        color:
-                                          theme.palette.customColors
-                                            .primaryWhite,
+                                        color: theme.palette.customColors.primaryWhite,
                                         opacity: "0.4",
                                       },
                                       width: "100%",
-                                      color:
-                                        theme.palette.customColors.primaryWhite,
+                                      color: theme.palette.customColors.primaryWhite,
                                       // border: "1px solid #ff914d",
                                       borderRadius: "5px",
-                                      background: `${hexToRGBA(
-                                        theme.palette.customColors.primaryDark1,
-                                        0.2
-                                      )}`,
-                                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                                        theme.palette.customColors.orange,
-                                        0.12
-                                      )}`,
+                                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                                      boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                                       border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                                       backdropFilter: "blur( 4px )",
                                       "& .MuiInputLabel-root.Mui-focused": {
-                                        color:
-                                          theme.palette.customColors
-                                            .primaryWhite,
+                                        color: theme.palette.customColors.primaryWhite,
                                       }, //styles the label
                                       "& .MuiOutlinedInput-root": {
                                         "&:hover > fieldset": {
@@ -4165,37 +3806,21 @@ function EventPage() {
                                     // slotProps={{ field: { size: "small" } }}
                                     enableAccessibleFieldDOMStructure
                                     sx={{
-                                      svg: {
-                                        color:
-                                          theme.palette.customColors
-                                            .primaryWhite,
-                                        opacity: "0.4",
-                                      },
+                                      svg: { color: theme.palette.customColors.primaryWhite, opacity: "0.4" },
                                       label: {
-                                        color:
-                                          theme.palette.customColors
-                                            .primaryWhite,
+                                        color: theme.palette.customColors.primaryWhite,
                                         opacity: "0.4",
                                       },
                                       width: "100%",
-                                      color:
-                                        theme.palette.customColors.primaryWhite,
+                                      color: theme.palette.customColors.primaryWhite,
                                       // border: "1px solid #ff914d",
                                       borderRadius: "5px",
-                                      background: `${hexToRGBA(
-                                        theme.palette.customColors.primaryDark1,
-                                        0.2
-                                      )}`,
-                                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                                        theme.palette.customColors.orange,
-                                        0.12
-                                      )}`,
+                                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                                      boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                                       border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                                       backdropFilter: "blur( 4px )",
                                       "& .MuiInputLabel-root.Mui-focused": {
-                                        color:
-                                          theme.palette.customColors
-                                            .primaryWhite,
+                                        color: theme.palette.customColors.primaryWhite,
                                       }, //styles the label
                                       "& .MuiOutlinedInput-root": {
                                         "&:hover > fieldset": {
@@ -4222,15 +3847,9 @@ function EventPage() {
                         size="small"
                         variant="outlined"
                         sx={{
-                          background: `${hexToRGBA(
-                            theme.palette.customColors.primaryDark1,
-                            0.2
-                          )}`,
-                          boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                            theme.palette.customColors.orange,
-                            0.12
-                          )}`,
-                          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                          background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                              // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                           backdropFilter: "blur( 4px )",
                           width: "100%",
                           marginTop: "2%",
@@ -4240,8 +3859,7 @@ function EventPage() {
                             fontWeight: "noraml",
                             // Class for the border around the input field
                             "& .MuiOutlinedInput-notchedOutline": {
-                              borderColor:
-                                theme.palette.customColors.primaryWhite,
+                              borderColor: theme.palette.customColors.primaryWhite,
                               borderWidth: "1px",
                             },
                           },
@@ -4264,14 +3882,8 @@ function EventPage() {
                           onClick={handleCloseAddEvent}
                           sx={{
                             width: "49%",
-                            background: `${hexToRGBA(
-                              theme.palette.customColors.primaryDark1,
-                              0.2
-                            )}`,
-                            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                              theme.palette.customColors.orange,
-                              0.12
-                            )}`,
+                            background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                            boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                             border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                             padding: "9px 25px",
                             borderRadius: "25px",
@@ -4285,21 +3897,13 @@ function EventPage() {
                         <Button
                           sx={{
                             width: "49%",
-                            background: `${hexToRGBA(
-                              theme.palette.customColors.primaryWhite,
-                              1
-                            )}`,
-                            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                              theme.palette.customColors.orange,
-                              0.12
-                            )}`,
-                            border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                            background: `${hexToRGBA(theme.palette.customColors.primaryWhite,1)}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                             padding: "9px 25px",
                             color: theme.palette.customColors.primaryDark1,
                             borderRadius: "25px",
-                            "&:hover": {
-                              color: theme.palette.customColors.primaryWhite,
-                            },
+                            '&:hover':{color:theme.palette.customColors.primaryWhite}
                           }}
                         >
                           save
@@ -4350,7 +3954,7 @@ function EventPage() {
                         display: "flex",
                         alignItems: "center",
                         width: "100%",
-                        border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                        border: `1px solid ${theme.palette.customColors.primaryWhite}` ,
                         margin: "2% auto 0",
                         borderRadius: "10px",
                         background: "rgba( 32, 37, 36, 0.45 )",
@@ -4361,17 +3965,11 @@ function EventPage() {
                       <YouTubeIcon sx={{ color: "#ff0033" }} />
                       {/* </IconButton> */}
                       <InputBase
-                        sx={{
-                          ml: 1,
-                          flex: 1,
-                          color: theme.palette.customColors.primaryWhite,
-                        }}
+                        sx={{ ml: 1, flex: 1, color: theme.palette.customColors.primaryWhite }}
                         placeholder="Search Google Maps"
                         inputProps={{ "aria-label": "search google maps" }}
                       />
-                      <SearchIcon
-                        sx={{ color: theme.palette.customColors.primaryWhite }}
-                      />
+                      <SearchIcon sx={{ color: theme.palette.customColors.primaryWhite }} />
                     </Box>
                     {/* search bar end  */}
                     <Typography
@@ -4389,6 +3987,46 @@ function EventPage() {
                 )}
                 {/* youtube popup end */}
 
+
+                {/* Description popup start */}
+                {isDescription && (
+                  <Box sx={{ margin: "6% 0%" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        borderBottom: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                        paddingBottom: "10px",
+                      }}
+                    >
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontSize: "22px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Description
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <DeleteIcon
+                          onClick={handleCloseDescription}
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                            "&:hover": { cursor: "pointer" },
+                          }}
+                        />
+                      </Box>
+                    </Box>
+
+                    <UncontrolledRte/>
+                  
+                  </Box>
+                )}
+                {/* Description popup end */}
+
                 <Box
                   sx={{
                     display: "flex",
@@ -4405,15 +4043,9 @@ function EventPage() {
                       padding: "25px",
                       // border: "1px solid #ff914d",
                       borderRadius: "12px",
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                        theme.palette.customColors.orange,
-                        0.12
-                      )}`,
-                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                       backdropFilter: "blur( 4px )",
                     }}
                   >
@@ -4424,14 +4056,8 @@ function EventPage() {
                     <Button
                       onClick={handleOpenYoutube}
                       sx={{
-                        background: `${hexToRGBA(
-                          theme.palette.customColors.primaryDark1,
-                          0.2
-                        )}`,
-                        boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                          theme.palette.customColors.orange,
-                          0.12
-                        )}`,
+                        background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                        boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                         border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                         color: theme.palette.customColors.primaryWhite,
                         borderRadius: "25px",
@@ -4452,58 +4078,64 @@ function EventPage() {
                       padding: "25px",
                       // border: "1px solid #ff914d",
                       borderRadius: "12px",
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                        theme.palette.customColors.orange,
-                        0.12
-                      )}`,
-                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                       backdropFilter: "blur( 4px )",
                     }}
                   >
-                    <Typography
+                    <Typography sx={{ color: "#fff", margin: "3% 0%" }}>
+                    Include additional info about your event to set the tone for guests.
+                    </Typography>
+                    <Button
+                      onClick={handleOpenDescription}
                       sx={{
+                        background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                        boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                        border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                         color: theme.palette.customColors.primaryWhite,
-                        margin: "3% 0%",
+                        borderRadius: "25px",
+                        padding: "9px 25px",
+                        textTransform: "capitalize",
                       }}
+                      variant="outlined"
+                      startIcon={<FormatAlignLeftIcon sx={{ color: "#fff" }} />}
+                      endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
                     >
+                      Add a Description
+                    </Button>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      minHeight: "180px",
+                      width: { md: "45%", xs: "100%" },
+                      padding: "25px",
+                      // border: "1px solid #ff914d",
+                      borderRadius: "12px",
+                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      backdropFilter: "blur( 4px )",
+                    }}
+                  >
+                    <Typography sx={{ color: theme.palette.customColors.primaryWhite, margin: "3% 0%" }}>
                       {`From DJs to sponsors, showcase your event's key players.`}
                     </Typography>
                     <Button
                       onClick={handleOpenAddEvent}
                       sx={{
                         // background: "#202524",
-                        background: `${hexToRGBA(
-                          theme.palette.customColors.primaryDark1,
-                          0.2
-                        )}`,
-                        boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                          theme.palette.customColors.orange,
-                          0.12
-                        )}`,
+                        background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                        boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                         border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                         borderRadius: "25px",
                         padding: "9px 25px",
                         textTransform: "capitalize",
                       }}
                       variant="outlined"
-                      startIcon={
-                        <StarIcon
-                          sx={{
-                            color: theme.palette.customColors.primaryWhite,
-                          }}
-                        />
-                      }
-                      endIcon={
-                        <ArrowRightAltIcon
-                          sx={{
-                            color: theme.palette.customColors.primaryWhite,
-                          }}
-                        />
-                      }
+                      startIcon={<StarIcon sx={{ color: theme.palette.customColors.primaryWhite }} />}
+                      endIcon={<ArrowRightAltIcon sx={{ color: theme.palette.customColors.primaryWhite }} />}
                     >
                       Add Event Features
                     </Button>
@@ -4515,37 +4147,20 @@ function EventPage() {
                       padding: "25px",
                       // border: "1px solid #ff914d",
                       borderRadius: "12px",
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                        theme.palette.customColors.orange,
-                        0.12
-                      )}`,
+                      background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                       border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                       backdropFilter: "blur( 4px )",
                     }}
                   >
-                    <Typography
-                      sx={{
-                        color: theme.palette.customColors.primaryWhite,
-                        margin: "3% 0%",
-                      }}
-                    >
+                    <Typography sx={{ color: theme.palette.customColors.primaryWhite, margin: "3% 0%" }}>
                       {`Add images to showcase your event's vibe.`}
                     </Typography>
                     <Button
                       onClick={handleOpenGallery}
                       sx={{
-                        background: `${hexToRGBA(
-                          theme.palette.customColors.primaryDark1,
-                          0.2
-                        )}`,
-                        boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                          theme.palette.customColors.orange,
-                          0.12
-                        )}`,
+                        background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                        boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                         border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                         color: theme.palette.customColors.primaryWhite,
                         borderRadius: "25px",
@@ -4553,20 +4168,8 @@ function EventPage() {
                         textTransform: "capitalize",
                       }}
                       variant="outlined"
-                      startIcon={
-                        <CollectionsIcon
-                          sx={{
-                            color: theme.palette.customColors.primaryWhite,
-                          }}
-                        />
-                      }
-                      endIcon={
-                        <ArrowRightAltIcon
-                          sx={{
-                            color: theme.palette.customColors.primaryWhite,
-                          }}
-                        />
-                      }
+                      startIcon={<CollectionsIcon sx={{ color: theme.palette.customColors.primaryWhite }} />}
+                      endIcon={<ArrowRightAltIcon sx={{ color: theme.palette.customColors.primaryWhite }} />}
                     >
                       Add a Gallery
                     </Button>
@@ -4603,11 +4206,11 @@ function EventPage() {
         </Box>
         {/* section end  */}
 
-        
+       
       </Box>
       {/* main end  */}
-      {/* mobile header start  */}
-        <Box
+       {/* mobile header start  */}
+       <Box
           sx={{
             display: { xs: "flex", md: "none" },
             flexDirection: "column-reverse",
@@ -4617,14 +4220,8 @@ function EventPage() {
             padding: "10px 25px",
             position: "fixed",
             bottom: "0",
-            background: `${hexToRGBA(
-              theme.palette.customColors.primaryDark1,
-              0.2
-            )}`,
-            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-              theme.palette.customColors.orange,
-              0.12
-            )}`,
+            background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+            boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
             // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
             backdropFilter: "blur( 10px )",
           }}
@@ -4633,15 +4230,9 @@ function EventPage() {
             <Button
               sx={{
                 // background: "#151618",
-                background: `${hexToRGBA(
-                  theme.palette.customColors.primaryDark1,
-                  0.2
-                )}`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                  theme.palette.customColors.orange,
-                  0.12
-                )}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                 padding: "9px 25px",
                 color: theme.palette.customColors.primaryWhite,
                 borderRadius: "15px",
@@ -4650,17 +4241,10 @@ function EventPage() {
               Exit Event Creator
             </Button>
             <Button
-            onClick={handleOpenCreate}
               sx={{
-                background: `${hexToRGBA(
-                  theme.palette.customColors.primaryDark1,
-                  0.2
-                )}`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                  theme.palette.customColors.orange,
-                  0.12
-                )}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                 padding: "9px 25px",
                 color: theme.palette.customColors.primaryWhite,
                 borderRadius: "15px",
@@ -4679,12 +4263,9 @@ function EventPage() {
           >
             <Box
               sx={{
-                width: "30%",
+                width: "48%",
                 background:`repeating-linear-gradient(65deg,${hexToRGBA(theme.palette.customColors.primaryDark2,1)} 20px,${hexToRGBA(theme.palette.customColors.primaryWhite,1)} 20px,${hexToRGBA(theme.palette.customColors.orange,1)} 600px)`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                  theme.palette.customColors.orange,
-                  0.12
-                )}`,
+                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
                 // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                 height: "15px",
                 borderRadius: "5px",
@@ -4692,26 +4273,16 @@ function EventPage() {
             ></Box>
             <Box
               sx={{
-                width: "30%",
+                width: "48%",
                 background: "#151618",
                 height: "15px",
                 borderRadius: "5px",
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                // background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                //               boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
               }}
             ></Box>
-            <Box
-              sx={{
-                width: "30%",
-                background: "#151618",
-                height: "15px",
-                borderRadius: "5px",
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                  theme.palette.customColors.orange,
-                  0.12
-                )}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-              }}
-            ></Box>
+           
           </Box>
         </Box>
         {/* mobile header end  */}

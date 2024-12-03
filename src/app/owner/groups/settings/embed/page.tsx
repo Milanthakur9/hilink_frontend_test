@@ -37,7 +37,7 @@ function Page() {
         <Box
           sx={{
             background: theme.palette.customColors.primaryDark2,
-            fontSize: "20px",
+            fontSize: '2.5vh',
             padding: "30px",
             borderRadius: "20px",
             margin: "3% 0",

@@ -87,7 +87,7 @@ function Page() {
                   transition: "all .2s linear",
                   "&:hover": {
                     cursor: "pointer",
-                    transform: "scale(1.08)",
+                    transform: "scale(0.95)",
                     boxShadow: `0 8px 52px 0 ${hexToRGBA(
                       theme.palette.customColors.orange,
                       0.22

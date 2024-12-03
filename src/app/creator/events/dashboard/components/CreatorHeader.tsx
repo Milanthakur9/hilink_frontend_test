@@ -71,7 +71,7 @@ export default function CreatorHeader() {
         sx={{
           position: "absolute",
           color: "#fff",
-          right: "2%",
+          right: "5%",
           top: "2%",
           transition: "all .2s linear",
           "&:hover": {
@@ -107,7 +107,7 @@ export default function CreatorHeader() {
               color="inherit"
             >
               <PersonIcon
-                onClick={() => router.push(`/profile`)}
+                onClick={() => router.push(`/dashboard/account`)}
                 sx={{
                   color: white,
                   background: dark1,
@@ -174,7 +174,7 @@ export default function CreatorHeader() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
+      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
     </Box>

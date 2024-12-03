@@ -176,7 +176,6 @@ function SettingHeader() {
               sx={{
                 background: orange,
                 color: `${theme.palette.customColors.primaryWhite}`,
-
                 transition: "all .1s linear",
                 margin: "10px 10px 10px 0",
                 borderRadius: "5px",

@@ -120,7 +120,7 @@ const LaunchEvent: React.FC = () => {
             transform: "scale(1.051)",
           },
         }}
-        onClick={() => router.push("/creator/events/new")}
+        onClick={() => router.push(active === 'sell' ? "/creator/events/new" : "/creator/events/sell")}
       >
         Continue
       </Button>

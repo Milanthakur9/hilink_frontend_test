@@ -5,20 +5,111 @@ import {
   Divider,
   InputBase,
   Typography,
+  useTheme
 } from "@mui/material";
+import Checkbox from '@mui/material/Checkbox';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+// import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
+// icon
 import React from "react";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import PersonIcon from "@mui/icons-material/Person";
+import CloseIcon from '@mui/icons-material/Close';
 
 // import { FontSize } from 'mui-tiptap';
 import SearchIcon from "@mui/icons-material/Search";
 import { useRouter } from "next/navigation";
 
+// modal 
+
+const checkData = [
+  {
+    name:'Financed Orders'
+  },
+  {
+    name:'Refunded Orders'
+  },
+  {
+    name:'Scanned Orders'
+  },
+  {
+    name:'Disputed Orders'
+  },
+  {
+    name:'Table Orders'
+  },
+  {
+    name:'Canceled Orders'
+  },
+  {
+    name:'Kickback Orders'
+  },
+]
+
+import Modal from '@mui/material/Modal';
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: { md: "30%", xs: "100%" },
+  bgcolor: "#151618",
+  border: "none",
+  outline: "none",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 4,
+};
+
 function Orders() {
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const router = useRouter();
+  const theme = useTheme()
+  const orange = theme.palette.customColors.orange
+  const white = theme.palette.customColors.primaryWhite
 
   return (
     <div>
+
+
+      {/* modal start  */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+            <Box sx={{textAlign:'center'}}>
+                <Typography variant="h2">Apply Filter</Typography>
+            </Box>
+            <Box sx={{margin:'3% 0'}}>
+                {
+                  checkData.map((item)=>{
+                    return(
+                      <FormGroup key={item.name}>
+                        <FormControlLabel control={<Checkbox sx={{color:orange}} />} label={item.name} />
+                      </FormGroup>
+                    )
+                  })
+                }
+            </Box>
+            <Box sx={{textAlign:'center'}}>
+            <Button sx={{background:orange,paddingInline:'20px',color:white}}>Confirm</Button>
+            </Box>
+            <CloseIcon onClick={handleClose} sx={{position:'absolute',right:'5%',top:'5%',color:white,'&:hover':{color:orange,cursor:'pointer'}}}/>
+        </Box>
+      </Modal>
+      {/* modal end  */}
+
+    {/*  */}
+
       <Box
         sx={{
           display: "flex",
@@ -62,6 +153,7 @@ function Orders() {
           }}
         >
           <Button
+            onClick={handleOpen}
             sx={{
               width: "100%",
               background:

@@ -11,8 +11,9 @@ function page() {
       <CreatorHeader />
       <Box
         sx={{
-          width: { md: "100%", xs: "100%" },
+          width: { md: "99%", xs: "99%" },
           // height: '50vh',
+          margin:'0 auto',
           minHeight: { md: "450px", xs: "250px" },
           // margin: { md: "0%", xs: "0% auto 6%" },
           backgroundImage: `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,

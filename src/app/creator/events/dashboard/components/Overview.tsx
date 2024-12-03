@@ -233,6 +233,7 @@ function Overview() {
           }}
         >
           <Button
+            onClick={()=>router.push(`/creator/events/new/`)}
             sx={{
               width: { md: "100%", xs: "80%" },
               background: orange,

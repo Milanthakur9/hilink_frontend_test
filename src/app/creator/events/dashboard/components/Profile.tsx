@@ -1,57 +1,59 @@
-import { Box, Button, Divider, TextField, Typography } from "@mui/material";
+import { Box, Button, Divider, TextField, Typography ,useTheme} from "@mui/material";
 import React, { useState } from "react";
+import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
+// import { useRouter } from 'next/navigation';
 // Switch
 import Switch, { SwitchProps } from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
+// import FormControlLabel from "@mui/material/FormControlLabel";
 import styled from "@emotion/styled";
 // switch start
-const IOSSwitch = styled((props: SwitchProps) => (
-  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-))(({}) => ({
-  width: 42,
-  height: 26,
-  padding: 0,
-  "& .MuiSwitch-switchBase": {
-    padding: 0,
-    margin: 2,
-    transitionDuration: "300ms",
-    "&.Mui-checked": {
-      transform: "translateX(16px)",
-      color: "#ff914d",
-      "& + .MuiSwitch-track": {
-        backgroundColor: "#151618",
-        opacity: 1,
-        border: 0,
-      },
-      "&.Mui-disabled + .MuiSwitch-track": {
-        opacity: 0.5,
-      },
-    },
-    "&.Mui-focusVisible .MuiSwitch-thumb": {
-      color: "#33cf4d",
-      border: "6px solid #fff",
-    },
-    "&.Mui-disabled .MuiSwitch-thumb": {
-      // color: theme.palette.grey[100],
-      // ...theme.applyStyles('dark', {
-      //   color: theme.palette.grey[600],
-      // }),
-    },
-    "&.Mui-disabled + .MuiSwitch-track": {
-      opacity: 0.7,
-    },
-  },
-  "& .MuiSwitch-thumb": {
-    boxSizing: "border-box",
-    width: 22,
-    height: 22,
-  },
-  "& .MuiSwitch-track": {
-    borderRadius: 26 / 2,
-    backgroundColor: "#ff914d",
-    opacity: 1,
-  },
-}));
+// const IOSSwitch = styled((props: SwitchProps) => (
+//   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+// ))(({}) => ({
+//   width: 42,
+//   height: 26,
+//   padding: 0,
+//   "& .MuiSwitch-switchBase": {
+//     padding: 0,
+//     margin: 2,
+//     transitionDuration: "300ms",
+//     "&.Mui-checked": {
+//       transform: "translateX(16px)",
+//       color: "#ff914d",
+//       "& + .MuiSwitch-track": {
+//         backgroundColor: "#151618",
+//         opacity: 1,
+//         border: 0,
+//       },
+//       "&.Mui-disabled + .MuiSwitch-track": {
+//         opacity: 0.5,
+//       },
+//     },
+//     "&.Mui-focusVisible .MuiSwitch-thumb": {
+//       color: "#33cf4d",
+//       border: "6px solid #fff",
+//     },
+//     "&.Mui-disabled .MuiSwitch-thumb": {
+//       // color: theme.palette.grey[100],
+//       // ...theme.applyStyles('dark', {
+//       //   color: theme.palette.grey[600],
+//       // }),
+//     },
+//     "&.Mui-disabled + .MuiSwitch-track": {
+//       opacity: 0.7,
+//     },
+//   },
+//   "& .MuiSwitch-thumb": {
+//     boxSizing: "border-box",
+//     width: 22,
+//     height: 22,
+//   },
+//   "& .MuiSwitch-track": {
+//     borderRadius: 26 / 2,
+//     backgroundColor: "#ff914d",
+//     opacity: 1,
+//   },
+// }));
 
 // switch end
 
@@ -61,6 +63,12 @@ import PanoramaIcon from "@mui/icons-material/Panorama";
 // import styled from '@emotion/styled';
 
 function Profile() {
+  const theme = useTheme()
+  // const router = useRouter()
+  const orange = theme.palette.customColors.orange;
+  const white = theme.palette.customColors.primaryWhite;
+  const dark1 = theme.palette.customColors.primaryDark1;
+  const dark2 = theme.palette.customColors.primaryDark2;
   const [profileBackgroundImage, setProfileBackgroundImage] = useState<
     string | null
   >(null);
@@ -106,8 +114,8 @@ function Profile() {
             cursor: "pointer",
             // transform:'scale(1.1)'
             boxShadow: "0px 0px 19px 20px rgba(255,145,77,0.12)",
-            border: "1px solid #ff914d",
-            backgroundColor: "#1f1f1f",
+            border: `1px solid ${orange}`,
+            backgroundColor: dark1,
             backgroundBlendMode: "overlay",
           },
         }}
@@ -132,9 +140,9 @@ function Profile() {
           {profileBackgroundImage ? (
             <Button
               sx={{
-                background: "#202524",
-                border: "1px solid #ff914d",
-                color: "#ff914d",
+                background: dark2,
+                border: `1px solid ${orange}`,
+                color: orange,
                 borderRadius: "10px",
               }}
               variant="contained"
@@ -147,12 +155,12 @@ function Profile() {
             <>
               <label htmlFor="file-upload1" style={{ cursor: "pointer" }}>
                 {/* Upload Poster <sup>*</sup> */}
-                <CloudUploadIcon sx={{ color: "#ff914d", fontSize: "35px" }} />
+                <CloudUploadIcon sx={{ color: orange, fontSize: "35px" }} />
               </label>
               <input
                 id="file-upload1"
                 style={{
-                  border: "1px solid #ff914d",
+                  border: `1px solid ${orange}`,
                   width: "150px",
                   display: "none",
                   padding: "5px 25px",
@@ -173,6 +181,7 @@ function Profile() {
           justifyContent: "space-between",
           width: { md: "70%", xs: "95%" },
           margin: "0 auto",
+          padding:'0 0 5%'
         }}
       >
         <Box sx={{ width: "20%", margin: { md: "0", xs: "0 auto" } }}>
@@ -198,7 +207,7 @@ function Profile() {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 objectFit: "cover",
-                border: "1px solid #ff914d",
+                border: `1px solid ${orange}`,
                 // backgroundBlendMode: "overlay",
                 borderRadius: "50%",
                 transition: "all 0.1s linear",
@@ -207,7 +216,7 @@ function Profile() {
                   cursor: "pointer",
                   // transform:'scale(1.1)'
                   boxShadow: "0px 0px 19px 20px rgba(255,145,77,0.12)",
-                  border: "1px solid #ff914d",
+                  border: `1px solid ${orange}`,
                   backgroundColor: "#1f1f1f",
                   backgroundBlendMode: "overlay",
                 },
@@ -225,8 +234,8 @@ function Profile() {
                   <Button
                     sx={{
                       background: "#202524",
-                      border: "1px solid #ff914d",
-                      color: "#ff914d",
+                      border: `1px solid ${orange}`,
+                      color: orange,
                       borderRadius: "10px",
                     }}
                     variant="contained"
@@ -238,13 +247,13 @@ function Profile() {
                   <>
                     <label htmlFor="file-upload" style={{ cursor: "pointer" }}>
                       <CloudUploadIcon
-                        sx={{ color: "#ff914d", fontSize: "35px" }}
+                        sx={{ color: orange, fontSize: "35px" }}
                       />
                     </label>
                     <input
                       id="file-upload"
                       style={{
-                        border: "1px solid #ff914d",
+                        border: `1px solid ${orange}`,
                         width: "150px",
                         display: "none",
                         padding: "5px 25px",
@@ -261,8 +270,8 @@ function Profile() {
             <Button
               sx={{
                 width: { md: "100%", xs: "200px" },
-                color: "#fff",
-                background: "#ff914d",
+                color: white,
+                background: orange,
                 paddingInline: "20px",
                 fontSize: "12px",
                 marginTop: "10px",
@@ -282,37 +291,38 @@ function Profile() {
               size="small"
               variant="outlined"
               sx={{
-                background: "rgba( 32, 37, 36, 0.25 )",
-                boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
                 backdropFilter: "blur( 4px )",
                 width: "50%",
                 "& .MuiOutlinedInput-root": {
-                  color: "#ff914d",
+                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                  border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                  color: orange,
+                  borderColor: orange,
+                  borderRadius: "25px",
                   fontFamily: "Arial",
                   fontWeight: "noraml",
                   // Class for the border around the input field
                   "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#ff914d",
                     borderWidth: "1px",
-                    borderRadius: "30px",
                   },
                 },
                 // Class for the label of the input field
                 "& .MuiInputLabel-outlined": {
-                  color: "#ff914d",
+                  color: "",
                   fontWeight: "normal",
                 },
               }}
             />
           </Box>
           <Divider
-            sx={{ background: "#ff914d", opacity: 0.4, margin: "10px 0% 0" }}
+            sx={{ background: orange, opacity: 0.4, margin: "10px 0% 0" }}
           />
           <Typography
             variant="h2"
             sx={{
               margin: "12px 0% 3%",
-              color: "#fff",
+              
               fontSize: "25px",
               fontWeight: "bold",
             }}
@@ -333,7 +343,7 @@ function Profile() {
           >
             <Box sx={{ width: { md: "48%", xs: "100%" } }}>
               <Typography
-                sx={{ color: "#fff", margin: { md: 0, xs: "10px 0px" } }}
+                sx={{margin: { md: 0, xs: "10px 0px" } }}
               >
                 Biography
               </Typography>
@@ -349,25 +359,29 @@ function Profile() {
                 size="small"
                 variant="outlined"
                 sx={{
-                  background: "rgba( 32, 37, 36, 0.25 )",
-                  boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                  
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    color: "#ff914d",
+                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                  border: `1px solid ${theme.palette.customColors.orange}`,
+                  color: orange,
+                  borderColor: orange,
+                  borderRadius: "25px",
                     fontFamily: "Arial",
                     fontWeight: "noraml",
                     // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#ff914d",
-                      borderWidth: "1px",
-                      borderRadius: "30px",
+                      borderColor: "",
+                      // borderWidth: "1px",
+                      // borderRadius: "30px",
                     },
                   },
                   // Class for the label of the input field
                   "& .MuiInputLabel-outlined": {
-                    color: "#ff914d",
-                    fontWeight: "normal",
+                    color: "",
+                    // fontWeight: "normal",
                   },
                 }}
               />
@@ -402,24 +416,27 @@ function Profile() {
                 size="small"
                 variant="outlined"
                 sx={{
-                  background: "rgba( 32, 37, 36, 0.25 )",
-                  boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                  
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    color: "#ff914d",
+                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                    border: `1px solid ${theme.palette.customColors.orange}`,
+                    color: orange,
+                    borderColor: orange,
+                    borderRadius: "25px",
                     fontFamily: "Arial",
                     fontWeight: "noraml",
                     // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#ff914d",
+                      borderColor: "",
                       borderWidth: "1px",
-                      borderRadius: "30px",
                     },
                   },
                   // Class for the label of the input field
                   "& .MuiInputLabel-outlined": {
-                    color: "#ff914d",
+                    color: "",
                     fontWeight: "normal",
                   },
                 }}
@@ -455,24 +472,28 @@ function Profile() {
                 size="small"
                 variant="outlined"
                 sx={{
-                  background: "rgba( 32, 37, 36, 0.25 )",
-                  boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                 
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    color: "#ff914d",
+                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                    border: `1px solid ${theme.palette.customColors.orange}`,
+                    color: orange,
+                    borderColor: orange,
+                    borderRadius: "25px",
                     fontFamily: "Arial",
                     fontWeight: "noraml",
                     // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#ff914d",
+                      borderColor: "",
                       borderWidth: "1px",
-                      borderRadius: "30px",
+                      // borderRadius: "30px",
                     },
                   },
                   // Class for the label of the input field
                   "& .MuiInputLabel-outlined": {
-                    color: "#ff914d",
+                    color: "",
                     fontWeight: "normal",
                   },
                 }}
@@ -508,24 +529,27 @@ function Profile() {
                 size="small"
                 variant="outlined"
                 sx={{
-                  background: "rgba( 32, 37, 36, 0.25 )",
-                  boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                  
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    color: "#ff914d",
+                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                    border: `1px solid ${theme.palette.customColors.orange}`,
+                    color: orange,
+                    borderColor: orange,
+                    borderRadius: "25px",
                     fontFamily: "Arial",
                     fontWeight: "noraml",
                     // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#ff914d",
+                      borderColor: "",
                       borderWidth: "1px",
-                      borderRadius: "30px",
                     },
                   },
                   // Class for the label of the input field
                   "& .MuiInputLabel-outlined": {
-                    color: "#ff914d",
+                    color: "",
                     fontWeight: "normal",
                   },
                 }}
@@ -561,24 +585,26 @@ function Profile() {
                 size="small"
                 variant="outlined"
                 sx={{
-                  background: "rgba( 32, 37, 36, 0.25 )",
-                  boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    color: "#ff914d",
+                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                    border: `1px solid ${theme.palette.customColors.orange}`,
+                    color: orange,
+                    borderColor: orange,
+                    borderRadius: "25px",
                     fontFamily: "Arial",
                     fontWeight: "noraml",
                     // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#ff914d",
+                      borderColor: "",
                       borderWidth: "1px",
-                      borderRadius: "30px",
                     },
                   },
                   // Class for the label of the input field
                   "& .MuiInputLabel-outlined": {
-                    color: "#ff914d",
+                    color: "",
                     fontWeight: "normal",
                   },
                 }}
@@ -588,7 +614,7 @@ function Profile() {
           {/* Website URL      */}
 
           {/* Custom Links      */}
-          <Box
+          {/* <Box
             sx={{
               margin: "2% 0%",
               width: "100%",
@@ -620,7 +646,7 @@ function Profile() {
                 + Add Links To Your Profile
               </Button>
             </Box>
-          </Box>
+          </Box> */}
           {/* Custom Links      */}
 
           {/* Organization Profile URL      */}
@@ -650,24 +676,26 @@ function Profile() {
                 size="small"
                 variant="outlined"
                 sx={{
-                  background: "rgba( 32, 37, 36, 0.25 )",
-                  boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    color: "#ff914d",
+                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                    border: `1px solid ${theme.palette.customColors.orange}`,
+                    color: orange,
+                    borderColor: orange,
+                    borderRadius: "25px",
                     fontFamily: "Arial",
                     fontWeight: "noraml",
                     // Class for the border around the input field
                     "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#ff914d",
+                      borderColor: "",
                       borderWidth: "1px",
-                      borderRadius: "30px",
                     },
                   },
                   // Class for the label of the input field
                   "& .MuiInputLabel-outlined": {
-                    color: "#ff914d",
+                    color: "",
                     fontWeight: "normal",
                   },
                 }}
@@ -677,7 +705,7 @@ function Profile() {
           {/* Organization Profile URL      */}
 
           {/* Display Number of Attendees      */}
-          <Box
+          {/* <Box
             sx={{
               margin: "2% 0%",
               width: "100%",
@@ -700,7 +728,7 @@ function Profile() {
                 label=""
               />
             </Box>
-          </Box>
+          </Box> */}
           {/* Display Number of Attendees      */}
         </Box>
       </Box>
