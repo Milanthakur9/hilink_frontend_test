@@ -54,13 +54,15 @@ export default function CreatorHeader() {
     <Box
       sx={{
         "& .MuiDrawer-paper": {
-          width: { sm: "60%", xs: "100%" }, // Ensure the drawer paper width is also responsive
+          // width: { sm: "60%", xs: "100%" }, // Ensure the drawer paper width is also responsive
+          width: { md: "100%", xs: "100%" }, // Ensure the drawer paper width is also responsive
         },
         background: "rgba( 32, 37, 36, 0.95 )",
         boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
         backdropFilter: "blur( 8.5px )",
-        padding: "10px",
+        padding: "30px",
         height: "100vh",
+        width:{md:'100%',xs:'100%'}
       }}
       role="presentation"
     >

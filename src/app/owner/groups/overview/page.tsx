@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import React from "react";
+import Mapchart from '../../../creator/events/dashboard/components/Mapchart'
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
 import { useRouter } from "next/navigation";
@@ -135,7 +136,7 @@ const OverviewPage = () => {
         <Box sx={{ margin: "3% 0%" }}>
           <Box
             sx={{
-              background: theme.palette.customColors.primaryDark2,
+              background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)})`,
               boxShadow: `0 8px 50px 0 ${hexToRGBA(
                 theme.palette.customColors.primaryDark2,
                 0.55
@@ -192,7 +193,7 @@ const OverviewPage = () => {
                     transition: "all .1s linear",
                     borderRadius: "5px",
 
-                    "&:hover": { background: orange },
+                    "&:hover": { background: orange,color:theme.palette.customColors.primaryWhite },
                   }}
                 >
                   {item.name}
@@ -214,7 +215,7 @@ const OverviewPage = () => {
           <Box
             sx={{
               width: { md: "48%", xs: "100%" },
-              background: theme.palette.customColors.primaryDark2,
+              background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)}),url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-default-flyers/052824_Default_Flyer_1.webp)`,
               boxShadow: `0 8px 50px 0 ${hexToRGBA(
                 theme.palette.customColors.primaryDark2,
                 0.55
@@ -232,11 +233,10 @@ const OverviewPage = () => {
           <Box
             sx={{
               width: { md: "48%", xs: "100%" },
-              background: theme.palette.customColors.primaryDark2,
-              boxShadow: `0 8px 50px 0 ${hexToRGBA(
-                theme.palette.customColors.primaryDark2,
-                0.55
-              )}`,
+              backdropFilter:'blur(50px)',
+              background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)}),url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-default-flyers/052824_Default_Flyer_1.webp)`,             
+              boxShadow:`${hexToRGBA(theme.palette.customColors.primaryDark2,
+                0.85 )} 0px 22px 50px `,
               padding: "20px",
               borderRadius: "20px",
               margin: "2% 0",
@@ -492,7 +492,8 @@ const OverviewPage = () => {
               <Typography sx={{ marginTop: "20px", fontSize: "20px" }}>
                 No attendee location available
               </Typography> */}
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.0360977185!2d-74.30933341658171!3d40.69753995848721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1733224344473!5m2!1sen!2sin"  height="450" style={{border:'0',width:'100%',height:'inherit'}}  loading="lazy"></iframe>
+              {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.0360977185!2d-74.30933341658171!3d40.69753995848721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1733224344473!5m2!1sen!2sin"  height="450" style={{border:'0',width:'100%',height:'inherit'}}  loading="lazy"></iframe> */}
+              <Mapchart/>
             </Box>
           </Box>
         </Box>

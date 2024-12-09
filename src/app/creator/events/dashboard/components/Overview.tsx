@@ -18,9 +18,14 @@ import {
 } from "recharts";
 import Image from "next/image";
 import HappyImg from "../../../../../../happy.gif";
+import CreateIcon from "@mui/icons-material/Create";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRouter } from "next/navigation";
+import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
+import {Montserrat} from "@next/font/google"
 const data = [
   {
     date: "Nov 12",
@@ -56,6 +61,11 @@ const data = [
   },
 ];
 
+const montserrat = Montserrat({
+  subsets:['latin'],
+  weight:['100','900']
+})
+
 function Overview() {
   const router = useRouter();
   const theme = useTheme();
@@ -81,7 +91,8 @@ function Overview() {
               display: { md: "block", xs: "none" },
               color: "#fff",
               fontSize: "25px",
-              fontWeight: "bold",
+              fontWeight: 100,
+              fontFamily:montserrat
             }}
           >
             Events by test
@@ -167,15 +178,15 @@ function Overview() {
         >
           <Box
             sx={{
-              background: {
-                md: theme.palette.customColors.primaryDark2,
-                xs: "none",
-              },
+              // background: {
+              //   md: theme.palette.customColors.primaryDark2,
+              //   xs: "none",
+              // },
+              background:`linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)})`,
               minWidth: "150px",
               textAlign: "center",
               padding: "5px",
-              boxShadow:
-                "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
+              boxShadow: `0 0 16px 1px ${orange}`,
               borderRadius: "10px",
             }}
           >
@@ -186,10 +197,7 @@ function Overview() {
           </Box>
           <Box
             sx={{
-              background: {
-                md: theme.palette.customColors.primaryDark2,
-                xs: "none",
-              },
+             background:`linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)})`,
               minWidth: "150px",
               textAlign: "center",
               padding: "5px",
@@ -207,10 +215,7 @@ function Overview() {
           </Box>
           <Box
             sx={{
-              background: {
-                md: theme.palette.customColors.primaryDark2,
-                xs: "none",
-              },
+             background:`linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)})`,
               minWidth: "150px",
               textAlign: "center",
               padding: "5px",
@@ -263,7 +268,12 @@ function Overview() {
         <Box
           sx={{
             width: { md: "55%", xs: "100%" },
-            background: "#202524",
+            background:`linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.8)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.8)})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              // boxShadow: `0 0 16px 1px ${orange}`,
+              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
             padding: "20px",
             borderRadius: "20px",
           }}
@@ -277,9 +287,13 @@ function Overview() {
               display: "flex",
               flexDirection: { md: "row", xs: "column" },
               justifyContent: "space-between",
-              background: "#151618",
-              padding: "15px",
-              borderRadius: "10px",
+              background:
+              "linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-default-flyers/052824_Default_Flyer_1.webp)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            padding: "20px",
+            borderRadius: "20px"
             }}
           >
             <Box sx={{ width: "25%", margin: { md: "0", xs: "0 auto" } }}>
@@ -297,6 +311,7 @@ function Overview() {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                
               }}
             >
               <Typography sx={{ fontSize: "16px" }}>
@@ -308,11 +323,13 @@ function Overview() {
                   width: { md: "100%", xs: "100%" },
                   margin: "3% 0%",
                   display: "flex",
-                  justifyContent: "center",
+                  flexWrap:{md:'nowrap',xs:'wrap'},
+                  justifyContent: "space-around",
                 }}
               >
                 <Box
                   sx={{
+                    width: { md: "48%", xs: "100%" },
                     textAlign: "center",
                     boxShadow:
                       "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
@@ -333,6 +350,7 @@ function Overview() {
                 </Box>
                 <Box
                   sx={{
+                    width: { md: "48%", xs: "100%" },
                     textAlign: "center",
                     boxShadow:
                       "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
@@ -386,13 +404,20 @@ function Overview() {
             View Past Events
           </Button>
         </Box>
+        
         <Box
           sx={{
             width: { md: "40%", xs: "100%" },
             margin: { md: "0 0 18px 0", xs: "4% 0%" },
-            background: theme.palette.customColors.primaryDark2,
-            borderRadius: "20px",
-            padding: "20px",
+           background:`linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.8)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.8)})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          padding: "20px",
+          // boxShadow: `0 0 16px 1px ${orange}`,
+          boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
+          // box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+          borderRadius: "20px"
           }}
         >
           <Typography sx={{ fontSize: "16px", marginBottom: "10px" }}>
@@ -408,8 +433,8 @@ function Overview() {
               border: `1px solid ${orange}`,
               margin: "4% auto",
               borderRadius: "20px",
-              background: "rgba( 255, 145, 77, 0.25 )",
-              boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+              // background: "rgba( 255, 145, 77, 0.25 )",
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.18)}`,
               backdropFilter: "blur( 4px )",
             }}
           >
@@ -424,22 +449,26 @@ function Overview() {
           <Box
             sx={{
               display: "flex",
-              flexDirection: { md: "row", xs: "column" },
+              flexDirection: { md: "row",xs:'' },
               justifyContent: "space-between",
               alignItems: "center",
-              background: "#151618",
-              padding: "15px",
-              borderRadius: "10px",
+              background:
+                "linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-default-flyers/052824_Default_Flyer_1.webp)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              padding: "20px",
+              borderRadius: "100px"
             }}
           >
-            <Box sx={{ width: { md: "25%", xs: "45%" } }}>
+            <Box sx={{  }}>
               <Avatar
                 sx={{
                   bgcolor: theme.palette.customColors.primaryDark2,
-                  margin: { md: "0", xs: "0 auto 12%" },
+                  margin: { md: "0", xs: "0" },
                   marginBottom: "3%",
-                  width: "100px",
-                  height: "100px",
+                  width: "95px",
+                  height: "95px",
                   boxShadow:
                     "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
                   transition: "all .3s linear",
@@ -448,26 +477,26 @@ function Overview() {
                   },
                 }}
               >
-                <PersonIcon sx={{ color: orange, fontSize: "18vh" }} />
+                <PersonIcon sx={{ color: orange, fontSize: "10vh",height:'120px',width:'120px' }} />
               </Avatar>
             </Box>
-            <Box sx={{ width: { md: "60%", xs: "80%" } }}>
+            <Box sx={{ flexGrow:1,padding:'0 0px 0 10px' }}>
               <Typography
                 sx={{
                   color: "#fff",
                   fontSize: "14px",
-                  textAlign: { md: "left", xs: "center" },
+                  textAlign: { md: "left", xs: "left" },
                 }}
               >
                 Order #7314206 - 11/13/2024, 11:18 AM test
               </Typography>
               <Divider
-                sx={{ background: orange, opacity: 0.2, margin: "1px 0%" }}
+                sx={{ width:'80%',background: orange, opacity: 0.2, margin: "1px 0%" }}
               />
-              <Typography sx={{ textAlign: { md: "left", xs: "center" } }}>
+              <Typography sx={{ textAlign: { md: "left", xs: "left" } }}>
                 Sartaj Gill
               </Typography>
-              <Typography sx={{ textAlign: { md: "left", xs: "center" } }}>
+              <Typography sx={{ textAlign: { md: "left", xs: "left" } }}>
                 $0.00
               </Typography>
             </Box>
