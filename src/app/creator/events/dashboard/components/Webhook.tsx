@@ -76,7 +76,7 @@ function Webhooks() {
             margin: "2% 0%",
           }}
         >
-          Webhooks are automated messages sent from Posh when something happens,
+          Webhooks are automated messages sent from HILINK when something happens,
           allowing you to receive real-time updates about your events.
         </Typography>
 
@@ -112,7 +112,7 @@ function Webhooks() {
             }}
           >
             {" "}
-            Posh-Secret
+            HILINK-Secret
           </mark>
           . Contact support to regenerate your secret key.
         </Typography>
@@ -242,14 +242,14 @@ function Webhooks() {
                     ], <br />
                     date_purchased: 2020-01-01T00:00:00.000Z, <br />
                     order_number: 128291, <br />
-                    promo_code: POSH20, <br />
+                    promo_code: HILINK20, <br />
                     subtotal: 20, <br />
                     total: 22.41, <br />
                     event_name: `Devante Birthday Bash`, <br />
                     event_start: 2020-01-01T00:00:00.000Z, <br />
                     event_end: 2020-01-02T00:00:00.000Z, <br />
                     event_id: 5e1f5b1b1b1b1b1b1b1b1b1b, <br />
-                    tracking_link: posh-tracking-1, <br />
+                    tracking_link: HILINK-tracking-1, <br />
                     &#125; <br />
                   </code>
                 }
@@ -341,14 +341,14 @@ function Webhooks() {
                   &#125; <br />
                   ], <br />
                   date_purchased: 2020-01-01T00:00:00.000Z, <br />
-                  promo_code: POSH20, <br />
+                  promo_code: HILINK20, <br />
                   subtotal: 20, <br />
                   total: 22.41, <br />
                   event_name: Devante Birthday Bash, <br />
                   event_start: 2020-01-01T00:00:00.000Z, <br />
                   event_end: 2020-01-02T00:00:00.000Z, <br />
                   event_id: 5e1f5b1b1b1b1b1b1b1b1b1b, <br />
-                  tracking_link: posh-tracking-2, <br />
+                  tracking_link: HILINK-tracking-2, <br />
                   &#125; <br />
                 </code>
               </p>

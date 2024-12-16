@@ -26,6 +26,11 @@ const OverviewPage = () => {
     () => import("../overview/piechart"),
     { ssr: false }
   );
+  // Dynamically import the chart to prevent SSR issues
+  const CustomActiveGenderPieChart = dynamic(
+    () => import("../overview/genderChart"),
+    { ssr: false }
+  );
   // chart data
   const data = [
     {
@@ -137,10 +142,8 @@ const OverviewPage = () => {
           <Box
             sx={{
               background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)})`,
-              boxShadow: `0 8px 50px 0 ${hexToRGBA(
-                theme.palette.customColors.primaryDark2,
-                0.55
-              )}`,
+              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
+              
               width: { md: "30%", xs: "100%" },
               padding: "20px",
               borderRadius: "20px",
@@ -156,7 +159,7 @@ const OverviewPage = () => {
             }}
           >
             <Typography>Total Tickets Sold</Typography>
-            <Typography sx={{ color: orange, fontSize: "30px" }}>0</Typography>
+            <Typography variant="h3" sx={{ color: orange }}>0</Typography>
             <Typography>Total</Typography>
           </Box>
         </Box>
@@ -215,18 +218,15 @@ const OverviewPage = () => {
           <Box
             sx={{
               width: { md: "48%", xs: "100%" },
-              background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)}),url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-default-flyers/052824_Default_Flyer_1.webp)`,
-              boxShadow: `0 8px 50px 0 ${hexToRGBA(
-                theme.palette.customColors.primaryDark2,
-                0.55
-              )}`,
+              background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)})`,
+              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
               padding: "20px",
               borderRadius: "20px",
               margin: "2% 0",
             }}
           >
             <Typography>Revenue</Typography>
-            <Typography variant="h2" sx={{ color: orange }}>
+            <Typography variant="h3" sx={{ color: orange }}>
               $0.00
             </Typography>
           </Box>
@@ -234,16 +234,15 @@ const OverviewPage = () => {
             sx={{
               width: { md: "48%", xs: "100%" },
               backdropFilter:'blur(50px)',
-              background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)}),url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-default-flyers/052824_Default_Flyer_1.webp)`,             
-              boxShadow:`${hexToRGBA(theme.palette.customColors.primaryDark2,
-                0.85 )} 0px 22px 50px `,
+              background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)})`,
+              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
               padding: "20px",
               borderRadius: "20px",
               margin: "2% 0",
             }}
           >
             <Typography>Total Tickets Sold</Typography>
-            <Typography variant="h2" sx={{ color: orange }}>
+            <Typography variant="h3" sx={{ color: orange }}>
               0
             </Typography>
           </Box>
@@ -310,11 +309,8 @@ const OverviewPage = () => {
         >
           <Box
             sx={{
-              background: theme.palette.customColors.primaryDark2,
-              boxShadow: `0 8px 50px 0 ${hexToRGBA(
-                theme.palette.customColors.primaryDark2,
-                0.55
-              )}`,
+              background: theme.palette.customColors.primaryDark1,
+              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
               width: { md: "33%", xs: "100%" },
               padding: "20px",
               borderRadius: "20px",
@@ -330,8 +326,8 @@ const OverviewPage = () => {
             }}
           >
             <Box sx={{ margin: "2% 0" }}>
-              <Typography variant="h5">Total Tickets Sold</Typography>
-              <Typography variant="h2" sx={{ color: orange }}>
+              <Typography >Total Tickets Sold</Typography>
+              <Typography variant="h3" sx={{ color: orange }}>
                 0
               </Typography>
               <Typography>0 Ticket Types Sold</Typography>
@@ -344,7 +340,8 @@ const OverviewPage = () => {
             sx={{
               width: { md: "60%", xs: "100%" },
               padding: "20px",
-              background: theme.palette.customColors.primaryDark2,
+              background: theme.palette.customColors.primaryDark1,
+              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
               borderRadius: "20px",
               margin:{md:'0',xs:'2% 0'},
               minHeight:{md:'auto',xs:'250px'},
@@ -400,11 +397,8 @@ const OverviewPage = () => {
         >
           <Box
             sx={{
-              background: theme.palette.customColors.primaryDark2,
-              boxShadow: `0 8px 50px 0 ${hexToRGBA(
-                theme.palette.customColors.primaryDark2,
-                0.55
-              )}`,
+              background: theme.palette.customColors.primaryDark1,
+              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
               width: { md: "32%", xs: "100%" },
               padding: "20px",
               borderRadius: "20px",
@@ -420,20 +414,21 @@ const OverviewPage = () => {
             }}
           >
             <Typography>Gender Ratio</Typography>
-            <Typography variant="h2" sx={{ color: orange }}>
+            <Typography variant="h3" sx={{ color: orange }}>
               Male
             </Typography>
+            {/* gender chart start  */}
+            <CustomActiveGenderPieChart/>
+            {/* gender chart start  */}
             <Typography>Majority Gender</Typography>
           </Box>
           {/* pie chart section */}
           <Box sx={{ width: { md: "32%", xs: "100%" } }}>
             <Box
               sx={{
-                background: theme.palette.customColors.primaryDark2,
-                boxShadow: `0 8px 50px 0 ${hexToRGBA(
-                  theme.palette.customColors.primaryDark2,
-                  0.55
-                )}`,
+               background: theme.palette.customColors.primaryDark1,
+              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
+              width: { md: "100%", xs: "100%" },
                 padding: "20px",
                 borderRadius: "20px",
                 transition: "all .1s linear",
@@ -448,10 +443,10 @@ const OverviewPage = () => {
               }}
             >
               <Box sx={{ margin: "2% 0" }}>
-                <Typography variant="h5">
+                <Typography>
                   Your New Vs. Returning Accounts
                 </Typography>
-                <Typography variant="h2" sx={{ color: orange }}>
+                <Typography variant="h3" sx={{ color: orange }}>
                   0
                 </Typography>
                 <Typography>Unique Accounts</Typography>
@@ -464,11 +459,8 @@ const OverviewPage = () => {
           {/* pie chart section */}
           <Box
             sx={{
-              background: theme.palette.customColors.primaryDark2,
-              boxShadow: `0 8px 50px 0 ${hexToRGBA(
-                theme.palette.customColors.primaryDark2,
-                0.55
-              )}`,
+              background: theme.palette.customColors.primaryDark1,
+              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
               width: { md: "32%", xs: "100%" },
               padding: "20px",
               borderRadius: "20px",

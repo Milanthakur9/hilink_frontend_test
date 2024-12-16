@@ -106,7 +106,7 @@ function Page() {
                   {item.icons}
                 </Box>
                 <Box sx={{ width: "85%" }}>
-                  <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
+                  <Typography variant="h5" sx={{  fontWeight: "bold" }}>
                     {item.name}
                   </Typography>
                   <Typography>{item.description}</Typography>

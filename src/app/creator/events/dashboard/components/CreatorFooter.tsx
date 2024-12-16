@@ -99,7 +99,7 @@ export default function CreatorFooter() {
                   textDecoration: "underline 1px #fff",
                 },
               }}
-              primary="POSH TV"
+              primary="HILINK TV"
             />
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -222,7 +222,7 @@ export default function CreatorFooter() {
       </Container>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Typography variant="body2" align="center">
-          © {new Date().getFullYear()} Posh. All rights reserved.
+          © {new Date().getFullYear()} HILINK. All rights reserved.
         </Typography>
       </Container>
     </Box>

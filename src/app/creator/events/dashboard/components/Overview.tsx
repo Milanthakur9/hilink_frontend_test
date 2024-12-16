@@ -86,11 +86,10 @@ function Overview() {
         {/* text  */}
         <Box>
           <Typography
-            variant="h2"
+            variant="h3"
             sx={{
               display: { md: "block", xs: "none" },
-              color: "#fff",
-              fontSize: "25px",
+              
               fontWeight: 100,
               fontFamily:montserrat
             }}
@@ -268,11 +267,11 @@ function Overview() {
         <Box
           sx={{
             width: { md: "55%", xs: "100%" },
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            // boxShadow: `0 0 16px 1px ${orange}`,
             background:`linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.8)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.8)})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              // boxShadow: `0 0 16px 1px ${orange}`,
               boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
             padding: "20px",
             borderRadius: "20px",
@@ -287,8 +286,8 @@ function Overview() {
               display: "flex",
               flexDirection: { md: "row", xs: "column" },
               justifyContent: "space-between",
-              background:
-              "linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-default-flyers/052824_Default_Flyer_1.webp)",
+              background:`linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark2,0.8)},${hexToRGBA(theme.palette.customColors.primaryDark2,0.8)})`,
+              // boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -20px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -336,6 +335,7 @@ function Overview() {
                     borderRadius: "10px",
                     marginInline: "10px",
                     marginBlock: { md: "0", xs: "20px" },
+                    padding:'2% 0%'
                   }}
                 >
                   <Typography sx={{ color: orange, fontSize: "12px" }}>
@@ -357,6 +357,7 @@ function Overview() {
                     borderRadius: "10px",
                     marginInline: "10px",
                     marginBlock: { md: "0", xs: "20px" },
+                    padding:'2% 0%'
                   }}
                 >
                   <Typography sx={{ color: orange, fontSize: "12px" }}>
@@ -452,8 +453,7 @@ function Overview() {
               flexDirection: { md: "row",xs:'' },
               justifyContent: "space-between",
               alignItems: "center",
-              background:
-                "linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-default-flyers/052824_Default_Flyer_1.webp)",
+              background:`linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark2,0.8)},${hexToRGBA(theme.palette.customColors.primaryDark2,0.8)})`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",

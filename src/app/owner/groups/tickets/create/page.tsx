@@ -517,8 +517,9 @@ function Page() {
             sx={{
               width: "100%",
               background: orange,
+              color:theme.palette.customColors.primaryWhite,
               transition: "all .1s linear",
-              fontFamily: "arial",
+              // fontFamily: "arial",
               fontSize: "20px",
               marginTop: "2%",
               "&:hover": { transform: "scale(1.05)" },

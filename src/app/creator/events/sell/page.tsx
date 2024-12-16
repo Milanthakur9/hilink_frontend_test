@@ -2946,7 +2946,7 @@ function EventPage() {
                 </Box>
                 <Typography >
                   Increase sales by driving organic discovery and list your
-                  event on the Posh Explore Page
+                  event on the HILINK Explore Page
                 </Typography>
                 {/* event setting end */}
 
@@ -2981,7 +2981,7 @@ function EventPage() {
                         color: "#fff",
                       }}
                     >
-                      This lists your event publicly on the Posh Explore Page
+                      This lists your event publicly on the HILINK Explore Page
                     </Typography>
                   </Box>
                 </Box>

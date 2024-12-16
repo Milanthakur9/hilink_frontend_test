@@ -62,7 +62,7 @@ function Page() {
             }}
           >
             <Box sx={{ width: { md: "fit-content", xs: "100%" } }}>
-              <Typography sx={{ fontSize: "35px", fontWeight: "bold" }}>
+              <Typography variant="h2" sx={{  fontWeight: "bold" }}>
                 Ticket Types
               </Typography>
             </Box>

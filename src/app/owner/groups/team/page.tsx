@@ -80,7 +80,7 @@ function Page() {
             }}
           >
             <Box sx={{ width: { md: "fit-content", xs: "100%" } }}>
-              <Typography sx={{ fontSize: "35px", fontWeight: "bold" }}>
+              <Typography variant="h2" sx={{  fontWeight: "bold" }}>
                 Tracking Links
               </Typography>
             </Box>
@@ -228,7 +228,7 @@ function Page() {
             }}
           >
             <Box sx={{ width: { md: "fit-content", xs: "100%" } }}>
-              <Typography sx={{ fontSize: "35px", fontWeight: "bold" }}>
+              <Typography variant="h2" sx={{ fontWeight: "bold" }}>
                 Tracking Links
               </Typography>
             </Box>
@@ -366,7 +366,7 @@ function Page() {
             }}
           >
             <Box sx={{ width: { md: "fit-content", xs: "100%" } }}>
-              <Typography sx={{ fontSize: "35px", fontWeight: "bold" }}>
+              <Typography variant="h2" sx={{  fontWeight: "bold" }}>
                 Ticket Scanner Pins
               </Typography>
             </Box>

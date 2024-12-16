@@ -166,7 +166,7 @@ function AttendeePage() {
                 }}
                 variant="body2"
               >
-                Joined Posh in November 2024
+                Joined HILINK in November 2024
               </Typography>
             </Box>
             <Divider

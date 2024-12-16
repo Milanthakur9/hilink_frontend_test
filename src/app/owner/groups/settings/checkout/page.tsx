@@ -237,6 +237,7 @@ function Page() {
           <Button
             sx={{
               background: orange,
+              color:white,
               transition: "all .1s linear",
               width: { md: "60%", xs: "100%" },
               "&:hover": { transform: "scale(1.05)" },

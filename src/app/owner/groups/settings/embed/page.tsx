@@ -1,10 +1,26 @@
 "use client";
 import React from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
 import SettingHeader from "../SettingHeader";
+
+// icon 
+import ShareIcon from '@mui/icons-material/Share';
+import CodeIcon from '@mui/icons-material/Code';
 // import UncontrolledRte from '@/components/richTextEditor/UncontrolledRte';
+const buttonData = [
+  {
+    name : 'Share',
+    icon : <ShareIcon/>,
+    link : '/'
+  },
+  {
+    name : 'Embed Code',
+    icon : <CodeIcon/>,
+    link : '/'
+  },
+]
 function Page() {
   const theme = useTheme();
   const router = useRouter();
@@ -55,6 +71,15 @@ function Page() {
           &nbsp;&nbsp;&nbsp; {`width='100%'`} <br />
           &nbsp;&nbsp;&nbsp; {`style="border: none"`} <br />
           &gt; &lt; /iframe &gt; <br />
+        </Box>
+        <Box sx={{display:'flex',gap:2,flexDirection:{md:'row',xs:'column'}}}>
+        {
+          buttonData.map((item)=>{
+            return(
+                <Button  key={item.name} startIcon={item.icon} sx={{paddingInline:'20px',borderRadius:'5px',background:theme.palette.customColors.orange,color:theme.palette.customColors.primaryWhite,width:{md:'fit-content',xs:'fit-content'}}}>{item.name}</Button>
+              )
+            })
+          }
         </Box>
       </Box>
     </div>

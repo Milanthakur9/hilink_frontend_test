@@ -49,7 +49,7 @@ function Page() {
 
             <Divider sx={{background:orange,opacity:0.4,margin:'2% 0'}}></Divider>
 
-            <Typography>Posh automatically fights disputes (chargebacks) for you. View their status and other info below.</Typography>
+            <Typography>HILINK automatically fights disputes (chargebacks) for you. View their status and other info below.</Typography>
 
             <Box sx={{display:'flex',justifyContent:'space-between',margin:'2% 0',flexWrap:'wrap'}}>
 

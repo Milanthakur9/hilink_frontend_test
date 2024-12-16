@@ -18,6 +18,7 @@ import Modal from "@mui/material/Modal";
 // icon
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import CloseIcon from '@mui/icons-material/Close';
 // select
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -272,6 +273,7 @@ function SettingHeader() {
               <Button
                 sx={{
                   background: orange,
+                  color:white,
                   transition: "all .1s linear",
                   fontWeight: "normal",
                   paddingInline: "20px",
@@ -281,6 +283,7 @@ function SettingHeader() {
                 Export Report
               </Button>
             </Box>
+            <CloseIcon  onClick={() => setOpenReport(false)} sx={{cursor:'pointer',position:'absolute',right:'5%',top:'5%',fontSize:'25px','&:hover':{color:`${orange}`}}}/>
           </Box>
         </Modal>
         {/* modal 1 end */}
@@ -503,10 +506,11 @@ function SettingHeader() {
                 3-5 business days to be issued. Processing fees are not
                 refunded.
               </Typography>
-              <Button sx={{ background: orange, margin: "2% 0 0" }}>
+              <Button sx={{ background: orange, color:white,paddingInline:'20px',margin: "2% 0 0" }}>
                 Request Full Event Refund
               </Button>
             </Box>
+            <CloseIcon  onClick={() => setOpenRefund(false)} sx={{cursor:'pointer',position:'absolute',right:'5%',top:'5%',fontSize:'25px','&:hover':{color:`${orange}`}}}/>
           </Box>
         </Modal>
         {/* modal 2 end */}

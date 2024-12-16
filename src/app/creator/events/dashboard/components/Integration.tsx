@@ -16,7 +16,7 @@ function Integrations() {
           Integrations
         </Typography>
         <Typography sx={{ color: "#fff", margin: "2% 0%", fontSize: "18px" }}>
-          Connect other applications with Posh to superpower your organization.
+          Connect other applications with HILINK to superpower your organization.
         </Typography>
         {/* MailChimp & Audience box start    */}
         <Box
