@@ -1,15 +1,30 @@
 "use client";
 import React from 'react';
+import ReactLenis from 'lenis/react'
 import {
   Box,
   Button,
   Typography,
   useTheme,
 } from "@mui/material";
-import FluidCursor from './FluidCursor';
-import EventSection from './eventSection';
-import ImgSlider from './imgSlider';
-import RotatingImage from './rotateImage';
+import FluidCursor from './components/FluidCursor';
+import EventSection from './components/eventSection';
+import ImgSlider from './components/imgSlider';
+import RotatingImage from './components/rotateImage';
+// import ScrollSection from './components/ScrollSection';
+import HomeFooter from './components/HomeFooter';
+import Kickback from './components/Kickback';
+// import VerticalSlider from './VerticalSlider'
+import Expericence from './components/Expericence'
+import Torus from './components/Torus'
+import MousewheelSlider from './VerticalSlider';
+// import FAQ from './FAQ'
+
+const slides = [
+  { id: 1, btn:'Get Started' ,heading:'Create Timeless Events In Under A Minute',title:'customizable Event  pages',content: 'Encapsulate your vision with images, music, performer/speaker lineups, and more for both paid and RSVP events.' },
+  { id: 2, btn:'Get Started' ,heading:'Grow your community like clockwork',title:'embedded marketing tools',content: ' HILINK Organizers have sold up to 53% of their inventory through our free SMS CRM + Affiliate Marketing tools.' },
+  { id: 3, btn:'Get Started' ,heading:'Get Instant Access to Capital',title:'financiaL Flexibility',content: 'Receive daily payouts as tickets sell and manage upfront expenses more easily than ever before.' },
+];
 
 function Page() {
   const theme = useTheme();
@@ -19,6 +34,10 @@ function Page() {
 
   return (
     <>
+    <ReactLenis root>
+
+    <Box sx={{overflow:'hidden !important'}}>
+    {/* <Box sx={{background:'url(https://cdn.prod.website-files.com/65ef8a3bdecf96836a4ffd5e/65ef8a3bdecf96836a4ffe09_blob-img%2520(1)-p-800.png)',backgroundRepeat:'no-repeat',backgroundSize:'cover',height:'500px',width:'300px',position:'fixed',right:'-2%',top:'50%',zIndex:-1}}></Box> */}
     <Box sx={{background:`linear-gradient(#ffafbc8a,#ff914d66)`,height:'200px',width:'200px',position:'fixed',left:'-10%',top:'0%',zIndex:-1}}></Box>
     <Box sx={{background:`linear-gradient(#614385,#516395)`,height:'200px',width:'200px',position:'fixed',right:'0%',bottom:'0%',zIndex:-1}}></Box>
       <FluidCursor />
@@ -88,7 +107,40 @@ function Page() {
           <EventSection />
           <ImgSlider />
         </Box>
+        {/* <ScrollSection/> */}
+        <Box sx={{width:'90%',margin:'0 auto',overflow:'hiddden',position:'relative',zIndex:2}}>
+            {/* <div style={{ overflow: 'hidden' }}> */}
+              <MousewheelSlider slides={slides} />
+            {/* </div> */}
+             <Box sx={{zIndex:-2,position:'absolute',left:'10%',top:'50%',transform:'translate(-50%,-50%)'}}>
+            <Torus/>
+          </Box>
+        </Box>
+        <Box sx={{width:'90%',margin:'0 auto',padding:'2% 0'}}>
+          <Kickback/>
+        </Box>
+
+        <Box sx={{width:'90%',margin:'0 auto',padding:'1% 0',position:'relative',zIndex:2}}>
+            <Expericence/>
+            {/* <Box sx={{zIndex:-2,position:'absolute',left:'5%',top:'50%',transform:'translate(-50%,-50%)'}}>
+            <Torus/>
+          </Box> */}
+        </Box>
+
+         <Box sx={{margin:'4% 0'}}>
+          <HomeFooter/>
+          </Box> 
+
+
+        {/* <Box sx={{width:'60%',margin:'0 auto',padding:'3% 0'}}>
+          
+          <FAQ/>
+        </Box> */}
       </Box>
+    </Box>
+
+    </ReactLenis>
+
     </>
   );
 }
