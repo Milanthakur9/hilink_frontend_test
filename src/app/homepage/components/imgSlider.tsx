@@ -199,45 +199,53 @@
 import { Box, Typography,useTheme } from '@mui/material'
 import Image from 'next/image'
 import React from 'react'
+import event1 from '../../../assets/background_patterns/event1.webp'
+import event2 from '../../../assets/background_patterns/event2.webp'
+import event3 from '../../../assets/background_patterns/event3.webp'
+import event4 from '../../../assets/background_patterns/event4.webp'
+import event5 from '../../../assets/background_patterns/event5.webp'
+import event6 from '../../../assets/background_patterns/event6.webp'
+import event7 from '../../../assets/background_patterns/event7.webp'
+import event8 from '../../../assets/background_patterns/event8.webp'
 
 const imageSlid = [
     {
-        img: 'https://img.freepik.com/free-photo/decorated-wedding-hall-with-candles-round-tables-centerpieces_8353-10057.jpg?t=st=1734250509~exp=1734254109~hmac=e04fd176143a136f94af3a851752af724ae65d35d08c380a9ec41ed32bc81395&w=826',
+        img: event1,
         description: 'Holiday Party',
         link: '/'
     },
     {
-        img: 'https://img.freepik.com/free-photo/decorated-wedding-hall-with-candles-round-tables-centerpieces_8353-10057.jpg?t=st=1734250509~exp=1734254109~hmac=e04fd176143a136f94af3a851752af724ae65d35d08c380a9ec41ed32bc81395&w=826',
+        img: event2,
         description: 'Party',
         link: '/'
     },
     {
-        img: 'https://img.freepik.com/free-photo/decorated-wedding-hall-with-candles-round-tables-centerpieces_8353-10057.jpg?t=st=1734250509~exp=1734254109~hmac=e04fd176143a136f94af3a851752af724ae65d35d08c380a9ec41ed32bc81395&w=826',
+        img: event3,
         description: 'Annual Party',
         link: '/'
     },
     {
-        img: 'https://img.freepik.com/free-photo/decorated-wedding-hall-with-candles-round-tables-centerpieces_8353-10057.jpg?t=st=1734250509~exp=1734254109~hmac=e04fd176143a136f94af3a851752af724ae65d35d08c380a9ec41ed32bc81395&w=826',
+        img: event4,
         description: 'Freshers Party',
         link: '/'
     },
     {
-        img: 'https://img.freepik.com/free-photo/decorated-wedding-hall-with-candles-round-tables-centerpieces_8353-10057.jpg?t=st=1734250509~exp=1734254109~hmac=e04fd176143a136f94af3a851752af724ae65d35d08c380a9ec41ed32bc81395&w=826',
+        img: event5,
         description: 'Theme Party',
         link: '/'
     },
     {
-        img: 'https://img.freepik.com/free-photo/decorated-wedding-hall-with-candles-round-tables-centerpieces_8353-10057.jpg?t=st=1734250509~exp=1734254109~hmac=e04fd176143a136f94af3a851752af724ae65d35d08c380a9ec41ed32bc81395&w=826',
+        img: event6,
         description: 'New Year Party',
         link: '/'
     },
     {
-        img: 'https://img.freepik.com/free-photo/decorated-wedding-hall-with-candles-round-tables-centerpieces_8353-10057.jpg?t=st=1734250509~exp=1734254109~hmac=e04fd176143a136f94af3a851752af724ae65d35d08c380a9ec41ed32bc81395&w=826',
+        img: event7,
         description: 'Night Party',
         link: '/'
     },
     {
-        img: 'https://img.freepik.com/free-photo/decorated-wedding-hall-with-candles-round-tables-centerpieces_8353-10057.jpg?t=st=1734250509~exp=1734254109~hmac=e04fd176143a136f94af3a851752af724ae65d35d08c380a9ec41ed32bc81395&w=826',
+        img: event8,
         description: 'Event Party',
         link: '/'
     },
@@ -275,7 +283,7 @@ function ImgSlider() {
             marginRight: 4,  // Adjust spacing between images
             flexShrink: 0,
             textAlign: 'center',
-                borderRadius: '5px',
+                borderRadius: '25px',
                 backgroundColor: white,
             marginTop: index % 2 === 0 ? '90px' : '0',
           }}>
@@ -285,7 +293,7 @@ function ImgSlider() {
                 height: '200px',
                 position: 'relative',
                 overflow: 'hidden',
-                padding:'5px',
+                padding:'15px',
                 borderRadius: '5px',
               }}>
                 <Image 
@@ -294,7 +302,7 @@ function ImgSlider() {
                   layout="responsive" 
                   width={100} 
                   height={100} 
-                  style={{ objectFit: 'cover',height:'inherit',width:'100%',borderRadius:'5px' }}
+                  style={{ objectFit: 'cover',height:'inherit',width:'100%',borderRadius:'25px' }}
                 />
               </Box>
               <Typography variant="body2" sx={{ marginTop: 1,color:'#ff914d' }}>

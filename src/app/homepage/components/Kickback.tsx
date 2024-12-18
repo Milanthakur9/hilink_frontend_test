@@ -71,6 +71,7 @@ function Kickback() {
       <Box
         sx={{
           display: 'flex',
+          margin:{md:'0',xs:'3% 0 0 0'},
           flexDirection: { md: 'row-reverse', xs: 'column' },
           justifyContent: 'space-between',
           alignItems: 'center',

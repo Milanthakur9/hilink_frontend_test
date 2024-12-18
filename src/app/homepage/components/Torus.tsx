@@ -27,11 +27,11 @@ const Torus3D = () => {
     // Create a glass material
     const material = new THREE.MeshPhysicalMaterial({
       color: 0xFF914D,  // Bright color for the torus
-      shininess: 30,    // Adjust the shininess to make it look reflective
+      // shininess: 30,    // Adjust the shininess to make it look reflective
       opacity: 0.5,     // Set some transparency for glass effect
       transparent: true, // Make the material transparent
       reflectivity: 0.8, // High reflectivity for glass-like effect
-      refractionRatio: 0.98, // Simulate refraction
+      // refractionRatio: 0.98, // Simulate refraction
       transmission: 1,  // Full transmission (like glass)
       clearcoat: 1,     // Optional: adds a shiny clear coat
       clearcoatRoughness: 0.1 // Optional: fine-tunes the clear coat's smoothness

@@ -18,19 +18,30 @@ import Kickback from './components/Kickback';
 import Expericence from './components/Expericence'
 import Torus from './components/Torus'
 import MousewheelSlider from './VerticalSlider';
-// import FAQ from './FAQ'
+// import FAQ from './FAQ';
+import image2 from "../../assets/background_patterns/event2.webp"
+import event1 from '../../assets/background_patterns/event1.webp'
+import event3 from '../../assets/background_patterns/event4.webp'
+// import StackingCards from './components/StackingCard';
 
 const slides = [
-  { id: 1, btn:'Get Started' ,heading:'Create Timeless Events In Under A Minute',title:'customizable Event  pages',content: 'Encapsulate your vision with images, music, performer/speaker lineups, and more for both paid and RSVP events.' },
-  { id: 2, btn:'Get Started' ,heading:'Grow your community like clockwork',title:'embedded marketing tools',content: ' HILINK Organizers have sold up to 53% of their inventory through our free SMS CRM + Affiliate Marketing tools.' },
-  { id: 3, btn:'Get Started' ,heading:'Get Instant Access to Capital',title:'financiaL Flexibility',content: 'Receive daily payouts as tickets sell and manage upfront expenses more easily than ever before.' },
+  { id: 1, btn:'Get Started' ,heading:'Create Timeless Events In Under A Minute',title:'customizable Event  pages',content: 'Encapsulate your vision with images, music, performer/speaker lineups, and more for both paid and RSVP events.',imgsoruce:image2 },
+  { id: 2, btn:'Get Started' ,heading:'Grow your community like clockwork',title:'embedded marketing tools',content: ' HILINK Organizers have sold up to 53% of their inventory through our free SMS CRM + Affiliate Marketing tools.',imgsoruce:event1 },
+  { id: 3, btn:'Get Started' ,heading:'Get Instant Access to Capital',title:'financiaL Flexibility',content: 'Receive daily payouts as tickets sell and manage upfront expenses more easily than ever before.',imgsoruce:event3 },
 ];
+
+// const cards = [
+//   { id: 1, title: "Card 1", content: "This is the first card", buttonLabel: "Learn More" },
+//   { id: 2, title: "Card 2", content: "This is the second card", buttonLabel: "Learn More" },
+//   { id: 3, title: "Card 3", content: "This is the third card", buttonLabel: "Learn More" },
+// ];
 
 function Page() {
   const theme = useTheme();
   const orange = theme.palette.customColors.orange;
   const white = theme.palette.customColors.primaryWhite;
   const dark1 = theme.palette.customColors.primaryDark1;
+  const cards = Array.from({ length: 10 });
 
   return (
     <>
@@ -108,11 +119,14 @@ function Page() {
           <ImgSlider />
         </Box>
         {/* <ScrollSection/> */}
-        <Box sx={{width:'90%',margin:'0 auto',overflow:'hiddden',position:'relative',zIndex:2}}>
+        <Box  sx={{width:'90%',margin:'0 auto',overflow:'hiddden',position:'relative',zIndex:2}}>
             {/* <div style={{ overflow: 'hidden' }}> */}
               <MousewheelSlider slides={slides} />
+              
+               {/* <StackingCards/> */}
+               
             {/* </div> */}
-             <Box sx={{zIndex:-2,position:'absolute',left:'10%',top:'50%',transform:'translate(-50%,-50%)'}}>
+             <Box sx={{zIndex:-2,position:'absolute',left:'90%',top:'30%',transform:'translate(-50%,-50%)'}}>
             <Torus/>
           </Box>
         </Box>

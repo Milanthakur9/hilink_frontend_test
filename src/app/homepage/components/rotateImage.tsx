@@ -2,10 +2,12 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei'; // Optional for user interaction
+import { Mesh } from 'three';
+
 
 // Abstract Rotating Shape Component
 const RotatingShape = () => {
-  const meshRef = useRef();
+  const meshRef = useRef<Mesh>(null);
 
   // Continuous rotation animation
   useFrame(() => {
