@@ -17,7 +17,13 @@ import PlaceIcon from "@mui/icons-material/Place";
 import Buy from "./Buy";
 // import CustomCursor from '../homepage/FluidCursor' 
 // import FluidCursor from "../homepage/FluidCursor";
-
+// import type { StaticImageData } from 'next/image';
+import eImage from "../../assets/background_patterns/eimage.webp"
+import guest1 from "../../assets/background_patterns/guest1.webp"
+import guest2 from "../../assets/background_patterns/guest2.webp"
+import guest3 from "../../assets/background_patterns/guest3.webp"
+import guest4 from "../../assets/background_patterns/guest4.webp"
+import guest5 from "../../assets/background_patterns/guest5.webp"
 // slider 
 // import React, { useState } from "react";
 
@@ -63,71 +69,71 @@ const typoData = [
 
 const imageList = [
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-b1.s3.us-east-2.amazonaws.com/attendee-avi/61551de2a42f8900334b002c.jpg'
+    path:guest1
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/674381188683c42a88e367d7/600x1065.png'
+    path:guest2
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/674381188683c42a88e367d7/600x1065.png'
+    path:guest3
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/674381188683c42a88e367d7/600x1065.png'
+    path:guest4
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/674381188683c42a88e367d7/600x1065.png'
+    path:guest5
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/c3dd46b3-49fe-4b15-9769-462eecdec31b.jpg'
+    path:guest1
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/65ea4839502c6e873035a352/533x400.png'
+    path:guest2
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-originals-production.s3.amazonaws.com/6757b40b74ccad8f2dd5b931'
+    path:guest3
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/66dd2eff7ebdb5f90db8da78/600x800.png'
+    path:guest4
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/66c94412b66cdac415d840bd/600x897.webp'
+    path:guest5
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/59157e72-a11a-49fb-a26e-db6831bc577b.jpg'
+    path:guest1
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://postreact.s3.us-east-2.amazonaws.com/images/08f9c089-cfdc-475b-9fd5-10482ea8282c.jpg'
+    path:guest2
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://postreact.s3.us-east-2.amazonaws.com/images/08f9c089-cfdc-475b-9fd5-10482ea8282c.jpg'
+    path:guest3
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/671da34411b982c19690a147/600x600.webp'
+    path:guest4
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/2aea4de9-d7f9-408d-9e0a-a036ffd6e939.jpg'
+    path:guest5
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/6716c75a3838cee0433906ee/600x600.webp'
+    path:guest1
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/66b3ea9277fcf97da840f5bb/600x600.png'
+    path:guest2
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/f0b80913-f5bc-4bf1-b7be-7a05b62fb95b.jpg'
+    path:guest3
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/f0b80913-f5bc-4bf1-b7be-7a05b62fb95b.jpg'
+    path:guest4
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/6685b24db19989bd1a035542/600x800.webp'
+    path:guest5
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/66a39824e52bbb073f4e0a65/600x600.webp'
+    path:guest1
   },
   {
-    path:'https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/66a39824e52bbb073f4e0a65/600x600.webp'
-  },
+    path:guest2
+  }
 ]
 
 
@@ -143,8 +149,7 @@ function Page() {
         <Box>
       <Box
         sx={{
-          background:
-            "url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/674a14360aa93c8824e08dc1/1000x1250.png)",
+          background:`url(${eImage.src})`,
             backgroundColor:dark1,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -193,7 +198,7 @@ function Page() {
             </Box>
             <Box sx={{ width: { md: "45%", xs: "230px", padding: "35px" } }}>
               <Image
-                src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-alts-production.s3.amazonaws.com/674a14360aa93c8824e08dc1/1000x1250.png"
+                src={eImage}
                 style={{
                   width: "100%",
                   height: "inherit",
@@ -269,9 +274,9 @@ function Page() {
           <Typography variant="h3">GUESTLIST</Typography>
           <Box sx={{display:'flex',justifyContent:'center',alignContent:'space-evenly',flexWrap:'wrap',gap:4,margin:'4% 0'}}>
               {
-                imageList.map((item)=>{
+                imageList.map((item,i)=>{
                   return(
-                  <Box sx={{width:'100px',height:'100px',marginTop:'10px'}} key={item.path}>
+                  <Box sx={{width:'100px',height:'100px',marginTop:'10px'}} key={i}>
                         <Image style={{
                             width: "100%",
                             borderRadius: "100%",
@@ -347,6 +352,7 @@ function Page() {
           sx={{
             display: "flex",
             flexDirection: { md: "row", xs: "column" },
+            padding:'2% 0',
             alignItems: "center",
             justifyContent: "space-between",
           }}

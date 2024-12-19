@@ -18,6 +18,7 @@ import Kickback from './components/Kickback';
 import Expericence from './components/Expericence'
 import Torus from './components/Torus'
 import MousewheelSlider from './VerticalSlider';
+import Try from './Try'
 // import FAQ from './FAQ';
 import image2 from "../../assets/background_patterns/event2.webp"
 import event1 from '../../assets/background_patterns/event1.webp'
@@ -36,7 +37,7 @@ const slides = [
 //   { id: 3, title: "Card 3", content: "This is the third card", buttonLabel: "Learn More" },
 // ];
 
-function Page() {
+function HomePage() {
   const theme = useTheme();
   const orange = theme.palette.customColors.orange;
   const white = theme.palette.customColors.primaryWhite;
@@ -133,13 +134,16 @@ function Page() {
         <Box sx={{width:'90%',margin:'0 auto',padding:'2% 0'}}>
           <Kickback/>
         </Box>
-
         <Box sx={{width:'90%',margin:'0 auto',padding:'1% 0',position:'relative',zIndex:2}}>
             <Expericence/>
             {/* <Box sx={{zIndex:-2,position:'absolute',left:'5%',top:'50%',transform:'translate(-50%,-50%)'}}>
             <Torus/>
           </Box> */}
         </Box>
+
+        {/* <Box sx={{margin:'2% auto',width:'90%',}}>
+          <Try/>
+        </Box> */}
 
          <Box sx={{margin:'4% 0'}}>
           <HomeFooter/>
@@ -159,4 +163,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default HomePage;
