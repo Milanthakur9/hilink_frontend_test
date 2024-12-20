@@ -5,6 +5,8 @@ import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
 // icon
 import SearchIcon from "@mui/icons-material/Search";
 import VerifiedIcon from '@mui/icons-material/Verified';
+import CloseIcon from '@mui/icons-material/Close';
+import Otp from '../../../dashboard/orders/otp';
 // table
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,6 +15,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Modal from '@mui/material/Modal';
 
 function createData(
   member: string,
@@ -32,12 +35,61 @@ const rows = [
   // createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
+// modal style 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: { md: "70%", xs: "100%" },
+  bgcolor: "",
+  border: "none",
+  outline: "none",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 4,
+};
+
 function Page() {
   const theme = useTheme();
   const orange = theme.palette.customColors.orange;
   const white = theme.palette.customColors.primaryWhite;
+
+  // modal 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <div>
+      {/* modal start  */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <CloseIcon  onClick={() => setOpen(false)} sx={{cursor:'pointer',position:'absolute',right:'5%',top:'5%',fontSize:'25px',transition:'all .3s linear','&:hover':{color:`${orange}`,transform:'rotate(90deg) scale(1.010)'},zIndex:6}}/>
+          <Box sx={{height: "400px",
+                objectFit:'cover',
+                overflowY: "scroll",
+                "&::-webkit-scrollbar": {
+                  width: "8px",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  backgroundColor: theme.palette.customColors.orange, // Customize scrollbar thumb color
+                },
+                "&::-webkit-scrollbar-track": {
+                  backgroundColor: theme.palette.customColors.primaryDark2, // Customize scrollbar track color
+                },}}>
+                  
+              <Otp/>
+          </Box>
+              
+        </Box>
+      </Modal>
+      {/* modal end  */}
       <Box
         sx={{
           width: { md: "80%", xs: "95%" },
@@ -60,8 +112,8 @@ function Page() {
 
           <Box sx={{ textAlign: "center", marginTop: "5%" }}>
             <Typography variant="h5" sx={{ opacity: 0.5 }}>
-              Once people begin purchasing tickets, attendee information will
-              appear here!
+              {/* Once people begin purchasing tickets, attendee information will
+              appear here! */}
             </Typography>
           </Box>
 
@@ -119,6 +171,7 @@ function Page() {
                       </TableCell>
                       <TableCell align="center">
                         <Button
+                        onClick={handleOpen}
                           sx={{
                             border: `1px solid ${orange}`,
                             paddingInline: "25px",

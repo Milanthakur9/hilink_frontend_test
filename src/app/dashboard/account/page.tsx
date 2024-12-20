@@ -14,6 +14,8 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { Box, Button, Divider,Typography,useTheme } from '@mui/material';
 // import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
 import { useRouter } from 'next/navigation';
+import CreatorHeader from '@/app/creator/events/dashboard/components/CreatorHeader';
+import CreatorFooter from '@/app/creator/events/dashboard/components/CreatorFooter';
 
 function AccountPage() {
 
@@ -75,6 +77,8 @@ function AccountPage() {
 
 
   return (
+    <>
+    <CreatorHeader/>
     <Box sx={{background:'#151618',padding:'5% 0%'}}>
         {/* account page image start  */}
         <Box sx={{width:{md:'50%',xs:'90%'},margin:'0 auto'}}>
@@ -161,6 +165,8 @@ function AccountPage() {
             }
         </Box>
     </Box>
+    <CreatorFooter/>
+    </>
   )
 }
 

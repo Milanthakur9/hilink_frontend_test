@@ -107,7 +107,7 @@ const OtpVerificationPage = () => {
           <Image alt="logo" src={logo} />
 
           <TypographyColorStyled variant="body2">
-            Enter the six digit verification code sent to 98981234567 to login to
+            Enter the six digit verification code sent to your number to login to
             your account
           </TypographyColorStyled>
           <MuiOtpInput

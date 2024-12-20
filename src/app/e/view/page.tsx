@@ -16,12 +16,14 @@ import Image from "next/image";
 import PlaceIcon from "@mui/icons-material/Place";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import Logo from "./../../../assets/branding/HL_Clean_Transparent_white.svg";
-
+import eImage from "./../../../assets/background_patterns/Recentevent.webp"
 function Page() {
   const theme = useTheme();
+  const dark1 = theme.palette.customColors.primaryDark1;
+  const white = theme.palette.customColors.primaryWhite;
   return (
     <Box>
-      <Box
+      {/* <Box
         sx={{
           background:
             "url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://media.tenor.com/xXsD9Uhiq8QAAAAC/happy.gif)",
@@ -73,6 +75,71 @@ function Page() {
             <Box sx={{ width: { md: "25%", xs: "230px", padding: "35px" } }}>
               <Image
                 src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://media.tenor.com/xXsD9Uhiq8QAAAAC/happy.gif"
+                style={{
+                  width: "100%",
+                  height: "inherit",
+                  borderRadius: "20px",
+                }}
+                alt="dance-gif"
+                height={100}
+                width={100}
+              ></Image>
+            </Box>
+          </Box>
+        </Box>
+      </Box> */}
+      <Box
+        sx={{
+          background:`url(${eImage.src})`,
+            backgroundColor:dark1,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundBlendMode:'soft-light',
+        }}
+      >
+        <Box
+          sx={{ backdropFilter: "blur(35px)", width: "100%", padding: "5% 0%" }}
+        >
+          <Box
+            sx={{
+              width: { md: "80%", xs: "95%" },
+              margin: "0 auto",
+              display: "flex",
+              flexDirection: { md: "row", xs: "column-reverse" },
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Box sx={{ width: { md: "50%", xs: "100%" } }}>
+              <Typography
+                sx={{
+                  "&:hover": {
+                    cursor: "pointer",
+                    textDecoration: `underline solid ${white}`,
+                  },
+                }}
+              >
+                Events by test
+              </Typography>
+              <Typography variant='h1' sx={{  fontWeight: "bold" }}>
+              Weekend Unwind
+              </Typography>
+              <Typography sx={{ fontSize: "20px", margin: "2% 0 4% 0" }}>
+              HK Hall <br></br> Fri, Dec 13 at 11:30 PM - 4:00 AM (EST)
+              </Typography>
+              <Typography sx={{ fontSize: "20px", margin: "2% 0 2% 0" }}>
+                {" "}
+                <PlaceIcon
+                  sx={{ color: theme.palette.customColors.primaryWhite }}
+                />{" "}
+                607 West 48th Street, New York, NY, USA
+              </Typography>
+              <Typography>Santa Con Christmas 2024 Festival 1500+ in attendance : Santa Hats Encouraged ; Sounds By: Dj Exxtra , TDR & More</Typography>
+            </Box>
+            <Box sx={{ width: { md: "45%", xs: "380px", padding: "35px" } }}>
+              <Image
+                src={eImage}
                 style={{
                   width: "100%",
                   height: "inherit",
@@ -198,7 +265,7 @@ function Page() {
               Privacy Policy
             </Typography>
           </Box>
-          <Box>
+          <Box sx={{padding:{md:'2% 0',xs:'3% 0 8%'}}}>
             <Button
               sx={{
                 background: theme.palette.customColors.orange,

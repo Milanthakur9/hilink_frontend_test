@@ -196,7 +196,7 @@ function Page() {
               </Typography>
               <Typography>Santa Con Christmas 2024 Festival 1500+ in attendance : Santa Hats Encouraged ; Sounds By: Dj Exxtra , TDR & More</Typography>
             </Box>
-            <Box sx={{ width: { md: "45%", xs: "230px", padding: "35px" } }}>
+            <Box sx={{ width: { md: "45%", xs: "380px", padding: "35px" } }}>
               <Image
                 src={eImage}
                 style={{
@@ -355,6 +355,7 @@ function Page() {
             padding:'2% 0',
             alignItems: "center",
             justifyContent: "space-between",
+            margin:{md:'0',xs:'5% 0'}
           }}
         >
           <Box
@@ -368,7 +369,7 @@ function Page() {
             <Typography
               sx={{
                 textTransform: "uppercase",
-                margin: { md: "0 0 0 15px", xs: "10px 0px" },
+                margin: { md: "0 0 0 15px", xs: "10px 0px 0" },
               }}
             >
               Terms Of Service

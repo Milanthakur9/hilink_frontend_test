@@ -25,11 +25,11 @@ const navihgation = [
   },
   {
     name: "My Orders",
-    link: "/",
+    link: "/dashboard/orders",
   },
   {
     name: "My Acoounts",
-    link: "/profile",
+    link: "/dashboard/account/",
   },
 ];
 
