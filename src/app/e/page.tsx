@@ -24,6 +24,7 @@ import guest2 from "../../assets/background_patterns/guest2.webp"
 import guest3 from "../../assets/background_patterns/guest3.webp"
 import guest4 from "../../assets/background_patterns/guest4.webp"
 import guest5 from "../../assets/background_patterns/guest5.webp"
+import danceGirl from "../../assets/background_patterns/danceGirl.webp"
 // slider 
 // import React, { useState } from "react";
 
@@ -297,7 +298,7 @@ function Page() {
         <Box sx={{padding:'1% 0 7% 0'}}>
             <Box sx={{display:'flex',alignItems:'center'}}>
               <Box sx={{width:'120px',height:'120px'}}>
-                  <Image style={{width: "100%",borderRadius: "100%",height: "100%"}} src='https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://posh-images-originals-production.s3.amazonaws.com/673ca090f8e3e1316da0b224' alt="" height={20} width={20}/>
+                  <Image style={{width: "100%",borderRadius: "100%",height: "100%"}} src={danceGirl} alt="" height={20} width={20}/>
               </Box>
               <Box sx={{marginLeft:'15px'}}>
                 <Typography variant="h2">Live Aerialist</Typography>
