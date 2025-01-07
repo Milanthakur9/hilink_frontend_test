@@ -7,7 +7,7 @@ import {
   styled,
   TextField,
   Typography,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import Modal from "@mui/material/Modal";
@@ -16,46 +16,54 @@ import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import EmailIcon from "@mui/icons-material/Email";
 import Divider, { dividerClasses } from "@mui/material/Divider";
 import Image from "next/image";
-import { hexToRGBA } from '@/@core/utils/hex-to-rgba';
-import { useRouter } from 'next/navigation';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
+import { useRouter } from "next/navigation";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import Permissions from "./permissions";
+// import HostPermissions from "./hostPermissions";
+// import DoormanPermissions from "./DoormanPermissions";
 
-// phone number field 
+// phone number field
 const PhoneInputStyled = styled(PhoneInput)(({ theme }) => ({
-  '& .form-control': {
-    width:'100%',
-    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+  "& .form-control": {
+    width: "100%",
+    background: `${hexToRGBA(theme.palette.customColors.primaryDark1, 0.2)}`,
+    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+      theme.palette.customColors.orange,
+      0.12
+    )}`,
     color: theme.palette.customColors.orange,
-    border:`1px solid ${theme.palette.customColors.orange}`,
+    border: `1px solid ${theme.palette.customColors.orange}`,
   },
-  '& .flag-dropdown': {
+  "& .flag-dropdown": {
     // background: 'transparent',
-    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+    background: `${hexToRGBA(theme.palette.customColors.primaryDark1, 0.2)}`,
+    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+      theme.palette.customColors.orange,
+      0.12
+    )}`,
     color: theme.palette.customColors.orange,
-    border:`1px solid ${theme.palette.customColors.orange}`,
-    '&:hover': {
-      backgroundColor: 'transparent !important'
-    }
+    border: `1px solid ${theme.palette.customColors.orange}`,
+    "&:hover": {
+      backgroundColor: "transparent !important",
+    },
   },
-  '& .country-list': {
-    background: 'black'
+  "& .country-list": {
+    background: "black",
   },
-  '& .country-list li:hover': {
-    color: 'black'
+  "& .country-list li:hover": {
+    color: "black",
   },
   '& .country-list li[aria-selected="true"]': {
-    color: 'black'
-  }
-}))
+    color: "black",
+  },
+}));
 
 // interface Country {
 // code: string;
 // name: string;
 // }
-
 
 const style = {
   position: "absolute",
@@ -73,19 +81,17 @@ const style = {
 };
 
 const EventsByTestTeam = () => {
+  const theme = useTheme();
+  // const router = useRouter()
 
-  const theme = useTheme()
-    // const router = useRouter()
-
-  // number field mate 
-  const [phone, setNumberPhone] = React.useState<string>('')
+  // number field mate
+  const [phone, setNumberPhone] = React.useState<string>("");
   const handlePhoneNumberChange = (value: any, country: any) => {
-    console.log(value, country)
-    setNumberPhone(value)
-  }
+    console.log(value, country);
+    setNumberPhone(value);
+  };
 
-
-  const [isEmail,setIsEmail] = React.useState(true)
+  const [isEmail, setIsEmail] = React.useState(true);
   // const handleOpenEmail = () => setIsEmail(true);
   // const handleCloseEmail = () => setIsEmail(false);
 
@@ -186,7 +192,7 @@ const EventsByTestTeam = () => {
                 }}
               >
                 <Box
-                onClick={()=>setIsEmail(true)}
+                  onClick={() => setIsEmail(true)}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -197,7 +203,6 @@ const EventsByTestTeam = () => {
                   }}
                 >
                   <EmailIcon
-                  
                     sx={{
                       color: "#fff",
                       marginRight: "8px",
@@ -214,7 +219,7 @@ const EventsByTestTeam = () => {
                   sx={{ background: "#fff" }}
                 />
                 <Box
-                 onClick={()=>setIsEmail(false)}
+                  onClick={() => setIsEmail(false)}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -225,7 +230,6 @@ const EventsByTestTeam = () => {
                   }}
                 >
                   <PhoneIphoneIcon
-                 
                     sx={{
                       color: "#fff",
                       marginRight: "8px",
@@ -240,50 +244,58 @@ const EventsByTestTeam = () => {
               {/* Email & phone end  */}
 
               {/* search by email  */}
-             
-             {isEmail ? <TextField
-                autoComplete="off"
-                id="outlined-basic"
-                // label="venue Name"
-                placeholder="Search by email"
-                size="small"
-                variant="outlined"
-                sx={{
-                  // background: "rgba( 32, 37, 36, 0.25 )",
-                  // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-                  backdropFilter: "blur( 4px )",
-                  width: "100%",
-                  "& .MuiOutlinedInput-root": {
-                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                              borderRadius:'25px',
-                              color: theme.palette.customColors.orange,
-                              // border: 1px solid ${theme.palette.customColors.primaryWhite},
-                    fontFamily: "Arial",
-                    fontWeight: "noraml",
-                    // Class for the border around the input field
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "#ff914d",
-                      borderWidth: "1px",
+
+              {isEmail ? (
+                <TextField
+                  autoComplete="off"
+                  id="outlined-basic"
+                  // label="venue Name"
+                  placeholder="Search by email"
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    // background: "rgba( 32, 37, 36, 0.25 )",
+                    // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                    backdropFilter: "blur( 4px )",
+                    width: "100%",
+                    "& .MuiOutlinedInput-root": {
+                      background: `${hexToRGBA(
+                        theme.palette.customColors.primaryDark1,
+                        0.2
+                      )}`,
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                        theme.palette.customColors.orange,
+                        0.12
+                      )}`,
+                      borderRadius: "25px",
+                      color: theme.palette.customColors.orange,
+                      // border: 1px solid ${theme.palette.customColors.primaryWhite},
+                      fontFamily: "Arial",
+                      fontWeight: "noraml",
+                      // Class for the border around the input field
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "#ff914d",
+                        borderWidth: "1px",
+                      },
                     },
-                  },
-                  // Class for the label of the input field
-                  "& .MuiInputLabel-outlined": {
-                    color: "#ff914d",
-                    fontWeight: "normal",
-                  },
-                }}
-              />
-            :
-              <PhoneInputStyled sx={{width:'100%'}}
-                      country={'us'}
-                      value={phone}
-                      // onChange={phone => setPhone(phone)}
-                      onChange={handlePhoneNumberChange}
-                      countryCodeEditable={false}
-                      disableCountryCode={false}
-                    />
-              }
+                    // Class for the label of the input field
+                    "& .MuiInputLabel-outlined": {
+                      color: "#ff914d",
+                      fontWeight: "normal",
+                    },
+                  }}
+                />
+              ) : (
+                <PhoneInputStyled
+                  sx={{ width: "100%" }}
+                  country={"us"}
+                  value={phone}
+                  // onChange={phone => setPhone(phone)}
+                  onChange={handlePhoneNumberChange}
+                  countryCodeEditable={false}
+                  disableCountryCode={false}
+                />
+              )}
               {/* search by email end  */}
               <Box sx={{ textAlign: "center", margin: "5% 0%" }}>
                 <Button
@@ -348,9 +360,15 @@ const EventsByTestTeam = () => {
                             // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
                             width: "100%",
                             "& .MuiOutlinedInput-root": {
-                              background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                              borderRadius:'25px',
+                              background: `${hexToRGBA(
+                                theme.palette.customColors.primaryDark1,
+                                0.2
+                              )}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                                theme.palette.customColors.orange,
+                                0.12
+                              )}`,
+                              borderRadius: "25px",
                               color: theme.palette.customColors.orange,
                               backdropFilter: "blur( 4px )",
                               fontFamily: "Arial",
@@ -380,9 +398,15 @@ const EventsByTestTeam = () => {
                           sx={{
                             width: "100%",
                             "& .MuiOutlinedInput-root": {
-                              background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                              borderRadius:'25px',
+                              background: `${hexToRGBA(
+                                theme.palette.customColors.primaryDark1,
+                                0.2
+                              )}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                                theme.palette.customColors.orange,
+                                0.12
+                              )}`,
+                              borderRadius: "25px",
                               color: theme.palette.customColors.orange,
                               backdropFilter: "blur( 4px )",
                               fontFamily: "Arial",
@@ -415,9 +439,15 @@ const EventsByTestTeam = () => {
                         sx={{
                           width: "100%",
                           "& .MuiOutlinedInput-root": {
-                            background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                            boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                            borderRadius:'25px',
+                            background: `${hexToRGBA(
+                              theme.palette.customColors.primaryDark1,
+                              0.2
+                            )}`,
+                            boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                              theme.palette.customColors.orange,
+                              0.12
+                            )}`,
+                            borderRadius: "25px",
                             color: theme.palette.customColors.orange,
                             backdropFilter: "blur( 4px )",
                             fontFamily: "Arial",
@@ -438,16 +468,16 @@ const EventsByTestTeam = () => {
                     </Box>
                     {/* Email end  */}
 
-                 
-                    <Box sx={{margin:'2% 0'}}>
-                      <PhoneInputStyled sx={{width:'100%'}}
-                      country={'us'}
-                      value={phone}
-                      // onChange={phone => setPhone(phone)}
-                      onChange={handlePhoneNumberChange}
-                      countryCodeEditable={false}
-                      disableCountryCode={false}
-                    />
+                    <Box sx={{ margin: "2% 0" }}>
+                      <PhoneInputStyled
+                        sx={{ width: "100%" }}
+                        country={"us"}
+                        value={phone}
+                        // onChange={phone => setPhone(phone)}
+                        onChange={handlePhoneNumberChange}
+                        countryCodeEditable={false}
+                        disableCountryCode={false}
+                      />
                     </Box>
                     {/* Phone Number end  */}
 
@@ -510,11 +540,30 @@ const EventsByTestTeam = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Box sx={{ display: "flex", justifyContent: "space-between",padding:'5% 0' }}>
-                <Box sx={{ width: "30%", textAlign: "center",padding:'10px','&:hover':{cursor:'pointer',border:`1px solid ${theme.palette.customColors.primaryWhite}`,borderRadius:'20px',boxShadow:`0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`} }}>
-                  <Typography
-                    sx={{ fontSize: "20px", fontWeight: "bold" }}
-                  >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "5% 0",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: "30%",
+                    textAlign: "center",
+                    padding: "10px",
+                    "&:hover": {
+                      cursor: "pointer",
+                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      borderRadius: "20px",
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                        theme.palette.customColors.orange,
+                        0.12
+                      )}`,
+                    },
+                  }}
+                >
+                  <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
                     Doorman
                   </Typography>
                   <Image
@@ -528,15 +577,28 @@ const EventsByTestTeam = () => {
                     width={100}
                     alt="doorman"
                   ></Image>
-                  <Typography >
+                  <Typography>
                     Doorpeople can scan tickets and view the guestlist of any
                     group event.
                   </Typography>
                 </Box>
-                <Box sx={{ width: "30%", textAlign: "center",padding:'10px','&:hover':{cursor:'pointer',border:`1px solid ${theme.palette.customColors.primaryWhite}`,borderRadius:'20px',boxShadow:`0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`}  }}>
-                  <Typography
-                    sx={{  fontSize: "20px", fontWeight: "bold" }}
-                  >
+                <Box
+                  sx={{
+                    width: "30%",
+                    textAlign: "center",
+                    padding: "10px",
+                    "&:hover": {
+                      cursor: "pointer",
+                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      borderRadius: "20px",
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                        theme.palette.customColors.orange,
+                        0.12
+                      )}`,
+                    },
+                  }}
+                >
+                  <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
                     Host
                   </Typography>
                   <Image
@@ -550,17 +612,28 @@ const EventsByTestTeam = () => {
                     width={100}
                     alt="dance"
                   ></Image>
-                  <Typography >
-                    {
-                      `Hosts can view their sales and any revenue they've generated
-                    for events they're added to.`
-                    } 
+                  <Typography>
+                    {`Hosts can view their sales and any revenue they've generated
+                    for events they're added to.`}
                   </Typography>
                 </Box>
-                <Box sx={{ width: "30%", textAlign: "center",padding:'10px','&:hover':{cursor:'pointer',border:`1px solid ${theme.palette.customColors.primaryWhite}`,borderRadius:'20px',boxShadow:`0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`}  }}>
-                  <Typography
-                    sx={{ fontSize: "20px", fontWeight: "bold" }}
-                  >
+                <Box
+                  sx={{
+                    width: "30%",
+                    textAlign: "center",
+                    padding: "10px",
+                    "&:hover": {
+                      cursor: "pointer",
+                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      borderRadius: "20px",
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                        theme.palette.customColors.orange,
+                        0.12
+                      )}`,
+                    },
+                  }}
+                >
+                  <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
                     Admin
                   </Typography>
                   <Image
@@ -574,7 +647,7 @@ const EventsByTestTeam = () => {
                     width={100}
                     alt="Admin"
                   ></Image>
-                  <Typography >
+                  <Typography>
                     Admins can view all analytics and edit any details for any
                     event they are added to.
                   </Typography>
@@ -660,6 +733,10 @@ const EventsByTestTeam = () => {
               >
                 Last Login: A day ago
               </Typography>
+
+              <Permissions />
+              {/* <HostPermissions /> */}
+              {/* <DoormanPermissions /> */}
             </Box>
           </Grid>
         </Grid>

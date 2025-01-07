@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import React from "react";
-import Mapchart from '../../../creator/events/dashboard/components/Mapchart'
+import Mapchart from "../../../creator/events/dashboard/components/Mapchart";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
 import { useRouter } from "next/navigation";
@@ -141,9 +141,21 @@ const OverviewPage = () => {
         <Box sx={{ margin: "3% 0%" }}>
           <Box
             sx={{
-              background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)})`,
-              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
-              
+              background: `repeating-linear-gradient(${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.9
+              )},${hexToRGBA(theme.palette.customColors.primaryDark1, 0.9)})`,
+              boxShadow: `${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 10px 20px -10px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 30px 20px -45px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )}  0px -2px 6px 0px inset `,
+
               width: { md: "30%", xs: "100%" },
               padding: "20px",
               borderRadius: "20px",
@@ -159,7 +171,9 @@ const OverviewPage = () => {
             }}
           >
             <Typography>Total Tickets Sold</Typography>
-            <Typography variant="h3" sx={{ color: orange }}>0</Typography>
+            <Typography variant="h3" sx={{ color: orange }}>
+              0
+            </Typography>
             <Typography>Total</Typography>
           </Box>
         </Box>
@@ -196,7 +210,10 @@ const OverviewPage = () => {
                     transition: "all .1s linear",
                     borderRadius: "5px",
 
-                    "&:hover": { background: orange,color:theme.palette.customColors.primaryWhite },
+                    "&:hover": {
+                      background: orange,
+                      color: theme.palette.customColors.primaryWhite,
+                    },
                   }}
                 >
                   {item.name}
@@ -218,8 +235,20 @@ const OverviewPage = () => {
           <Box
             sx={{
               width: { md: "48%", xs: "100%" },
-              background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)})`,
-              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
+              background: `repeating-linear-gradient(${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.9
+              )},${hexToRGBA(theme.palette.customColors.primaryDark1, 0.9)})`,
+              boxShadow: `${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 10px 20px -10px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 30px 20px -45px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )}  0px -2px 6px 0px inset `,
               padding: "20px",
               borderRadius: "20px",
               margin: "2% 0",
@@ -233,9 +262,21 @@ const OverviewPage = () => {
           <Box
             sx={{
               width: { md: "48%", xs: "100%" },
-              backdropFilter:'blur(50px)',
-              background: `repeating-linear-gradient(${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)},${hexToRGBA(theme.palette.customColors.primaryDark1,0.9)})`,
-              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
+              backdropFilter: "blur(50px)",
+              background: `repeating-linear-gradient(${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.9
+              )},${hexToRGBA(theme.palette.customColors.primaryDark1, 0.9)})`,
+              boxShadow: `${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 10px 20px -10px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 30px 20px -45px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )}  0px -2px 6px 0px inset `,
               padding: "20px",
               borderRadius: "20px",
               margin: "2% 0",
@@ -302,7 +343,7 @@ const OverviewPage = () => {
         <Box
           sx={{
             display: "flex",
-            flexDirection:{md:'row',xs:'column'},
+            flexDirection: { md: "row", xs: "column" },
             justifyContent: "space-between",
             margin: "3% 0",
           }}
@@ -310,7 +351,16 @@ const OverviewPage = () => {
           <Box
             sx={{
               background: theme.palette.customColors.primaryDark1,
-              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
+              boxShadow: `${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 10px 20px -10px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 30px 20px -45px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )}  0px -2px 6px 0px inset `,
               width: { md: "33%", xs: "100%" },
               padding: "20px",
               borderRadius: "20px",
@@ -326,7 +376,7 @@ const OverviewPage = () => {
             }}
           >
             <Box sx={{ margin: "2% 0" }}>
-              <Typography >Total Tickets Sold</Typography>
+              <Typography>Total Tickets Sold</Typography>
               <Typography variant="h3" sx={{ color: orange }}>
                 0
               </Typography>
@@ -341,10 +391,19 @@ const OverviewPage = () => {
               width: { md: "60%", xs: "100%" },
               padding: "20px",
               background: theme.palette.customColors.primaryDark1,
-              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
+              boxShadow: `${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 10px 20px -10px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 30px 20px -45px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )}  0px -2px 6px 0px inset `,
               borderRadius: "20px",
-              margin:{md:'0',xs:'2% 0'},
-              minHeight:{md:'auto',xs:'250px'},
+              margin: { md: "0", xs: "2% 0" },
+              minHeight: { md: "auto", xs: "250px" },
             }}
           >
             <Typography variant="h3">Recent Order</Typography>
@@ -398,7 +457,16 @@ const OverviewPage = () => {
           <Box
             sx={{
               background: theme.palette.customColors.primaryDark1,
-              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
+              boxShadow: `${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 10px 20px -10px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 30px 20px -45px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )}  0px -2px 6px 0px inset `,
               width: { md: "32%", xs: "100%" },
               padding: "20px",
               borderRadius: "20px",
@@ -418,7 +486,7 @@ const OverviewPage = () => {
               Male
             </Typography>
             {/* gender chart start  */}
-            <CustomActiveGenderPieChart/>
+            <CustomActiveGenderPieChart />
             {/* gender chart start  */}
             <Typography>Majority Gender</Typography>
           </Box>
@@ -426,9 +494,18 @@ const OverviewPage = () => {
           <Box sx={{ width: { md: "32%", xs: "100%" } }}>
             <Box
               sx={{
-               background: theme.palette.customColors.primaryDark1,
-              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
-              width: { md: "100%", xs: "100%" },
+                background: theme.palette.customColors.primaryDark1,
+                boxShadow: `${hexToRGBA(
+                  theme.palette.customColors.orange,
+                  0.6
+                )} 0px 10px 20px -10px, ${hexToRGBA(
+                  theme.palette.customColors.orange,
+                  0.6
+                )} 0px 30px 20px -45px, ${hexToRGBA(
+                  theme.palette.customColors.orange,
+                  0.6
+                )}  0px -2px 6px 0px inset `,
+                width: { md: "100%", xs: "100%" },
                 padding: "20px",
                 borderRadius: "20px",
                 transition: "all .1s linear",
@@ -443,9 +520,7 @@ const OverviewPage = () => {
               }}
             >
               <Box sx={{ margin: "2% 0" }}>
-                <Typography>
-                  Your New Vs. Returning Accounts
-                </Typography>
+                <Typography>Your New Vs. Returning Accounts</Typography>
                 <Typography variant="h3" sx={{ color: orange }}>
                   0
                 </Typography>
@@ -460,7 +535,16 @@ const OverviewPage = () => {
           <Box
             sx={{
               background: theme.palette.customColors.primaryDark1,
-              boxShadow: `${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 10px 20px -10px, ${hexToRGBA(theme.palette.customColors.orange,0.6)} 0px 30px 20px -45px, ${hexToRGBA(theme.palette.customColors.orange,0.6)}  0px -2px 6px 0px inset `,
+              boxShadow: `${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 10px 20px -10px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )} 0px 30px 20px -45px, ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.6
+              )}  0px -2px 6px 0px inset `,
               width: { md: "32%", xs: "100%" },
               padding: "20px",
               borderRadius: "20px",
@@ -485,7 +569,7 @@ const OverviewPage = () => {
                 No attendee location available
               </Typography> */}
               {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.0360977185!2d-74.30933341658171!3d40.69753995848721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1733224344473!5m2!1sen!2sin"  height="450" style={{border:'0',width:'100%',height:'inherit'}}  loading="lazy"></iframe> */}
-              <Mapchart/>
+              <Mapchart />
             </Box>
           </Box>
         </Box>

@@ -23,6 +23,8 @@ import CustomTextFieldPassword from "@/components/textField/CustomTextFieldPassw
 import { useState } from "react";
 import Icon from "@/@core/components/icon";
 import Button from "@mui/material/Button";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const SlideImageStyled = styled(Image)(({}) => ({
   objectFit: "cover",
@@ -93,6 +95,14 @@ interface FormData {
 }
 
 const RegisterPage = () => {
+  var [firstName, setFirstName] = useState();
+  var [lastName, setLastName] = useState();
+  var [email, setEmail] = useState();
+  var [password, setPassword] = useState();
+  var [confirmPassword, setConfirmPassword] = useState();
+
+  var router = useRouter();
+
   const theme = useTheme();
   const isMdDown = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -118,6 +128,8 @@ const RegisterPage = () => {
   };
 
   const onSubmit = async (data: FormData) => {
+    console.log(data);
+
     if (!isTermsAndConditionAccepted) {
       setIsTermsAndConditionAcceptedError(true);
       // toast.error("Please Accept Terms And Condition");
@@ -127,9 +139,43 @@ const RegisterPage = () => {
 
     // const { confirmPassword, email, firstName, lastName, password } = data;
 
-    return data;
+    // return data;
+    // axios.post(`http://localhost:3333/v1/auth/register`, {
+    //   firstName: firstName,
+    //   lastName: lastName,
+    //   email: email,
+    //   password: password,
+    //   confirmPassword: confirmPassword,
+    // });
 
-    console.log(data);
+    const { confirmPassword, email, firstName, lastName, password } = data;
+
+    try {
+      const response = await axios.post(
+        `http://localhost:3333/v1/auth/register`,
+        {
+          // name: `${firstName} + ${lastName}`,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          country: "India",
+          phoneNo: "+92 8383883838",
+          // confirmPassword,
+        }
+      );
+
+      localStorage.setItem("userEmail", email);
+      console.log("Registration successful:", response.data);
+      router.push("/otp-verification");
+      // Add any success handling logic here, such as redirecting or showing a success message.
+    } catch (error) {
+      console.error("Error during registration:", error);
+      if (axios.isAxiosError(error)) {
+        console.error("Axios error response:", error.response?.data);
+      }
+      // Optionally display error messages to the user.
+    }
   };
 
   return (
@@ -262,6 +308,8 @@ const RegisterPage = () => {
                       label="first name"
                       placeHolder="First Name"
                       name="firstName"
+                      // value={firstName}
+                      // onChange={(e) => setFirstName(e.target.value)}
                     />
                   </Grid>
                   <Grid size={{ xs: 12, md: 6 }}>

@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import HMBG from "../../../../../hmbg.png";
 // import  Grid from '@mui/material';
 import Grid from "@mui/material/Grid";
-import Drop from "./components/Drop"
+import Drop from "./components/Drop";
 
 // import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import InputBase from "@mui/material/InputBase";
@@ -87,38 +87,44 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 import { styled } from "@mui/material/styles";
 
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
-
-// phone number field 
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import withAuth from "../../../../context/hoc/withAuth";
+// phone number field
 const PhoneInputStyled = styled(PhoneInput)(({ theme }) => ({
-  '& .form-control': {
-    width:'100%',
-    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+  "& .form-control": {
+    width: "100%",
+    background: `${hexToRGBA(theme.palette.customColors.primaryDark1, 0.2)}`,
+    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+      theme.palette.customColors.orange,
+      0.12
+    )}`,
     color: theme.palette.customColors.primaryWhite,
-    border:`1px solid ${theme.palette.customColors.primaryWhite}`,
+    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
   },
-  '& .flag-dropdown': {
+  "& .flag-dropdown": {
     // background: 'transparent',
-    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+    background: `${hexToRGBA(theme.palette.customColors.primaryDark1, 0.2)}`,
+    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+      theme.palette.customColors.orange,
+      0.12
+    )}`,
     color: theme.palette.customColors.primaryWhite,
-    border:`1px solid ${theme.palette.customColors.primaryWhite}`,
-    '&:hover': {
-      backgroundColor: 'transparent !important'
-    }
+    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+    "&:hover": {
+      backgroundColor: "transparent !important",
+    },
   },
-  '& .country-list': {
-    background: 'black'
+  "& .country-list": {
+    background: "black",
   },
-  '& .country-list li:hover': {
-    color: 'black'
+  "& .country-list li:hover": {
+    color: "black",
   },
   '& .country-list li[aria-selected="true"]': {
-    color: 'black'
-  }
-}))
+    color: "black",
+  },
+}));
 
 // interface Country {
 // code: string;
@@ -287,6 +293,7 @@ import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import dayjs from "dayjs";
 import CloseIcon from "@mui/icons-material/Close";
+import { axiosInstance } from "@/interceptor/axiosInterceptor";
 // const currencies = [
 //   {
 //     value: "Festival",
@@ -353,12 +360,11 @@ const createStyle = {
   borderRadius: "10px",
   backdropFilter: "blur(5px)",
   boxShadow: 24,
-  textAlign:'center',
+  textAlign: "center",
   p: 8,
 };
 
 function EventPage() {
-
   const [create, setCreate] = React.useState(false);
   const handleOpenCreate = () => setCreate(true);
   const handleCloseCreate = () => setCreate(false);
@@ -427,7 +433,7 @@ function EventPage() {
         background: "rgba( 32, 37, 36, 0.95 )",
         boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
         backdropFilter: "blur( 8.5px )",
-        padding: "10px", 
+        padding: "10px",
       }}
       role="presentation"
     >
@@ -1326,11 +1332,11 @@ function EventPage() {
     width: "100%",
   });
 
-  const [phone, setNumberPhone] = React.useState<string>('')
+  const [phone, setNumberPhone] = React.useState<string>("");
   const handlePhoneNumberChange = (value: any, country: any) => {
-    console.log(value, country)
-    setNumberPhone(value)
-  }
+    console.log(value, country);
+    setNumberPhone(value);
+  };
 
   const [isPhone, setPhone] = useState(false);
   // const [isEmail, setEmail] = useState();
@@ -1432,153 +1438,367 @@ function EventPage() {
 
   // popup 2 switch
 
- 
+  // post request
 
+  // interface OrganizationInfoType {
+  //   organizationId: number;
+  //   eventStatus: string;
+  //   isRsvp: boolean;
+  //   eventCapacity: number;
+  //   eventName: string;
+  //   startDateAndTime: string;
+  //   endDateAndTime: string;
+  //   venueName: string;
+  //   address: string;
+  //   category: string;
+  //   email: string;
+  //   phoneNo: string;
+  //   eventPoster: string;
+  //   createdAt?: string;
+  //   updatedAt?: string;
+  // }
+
+  // const [eventName, setEventName] = React.useState<string | null>(null);
+  // const [startDate, setStartDate] = React.useState<string | null>(null);
+  // const [endDate, setEndDate] = React.useState<string | null>(null);
+  // const [venue, setVenue] = React.useState<string | null>(null);
+  // const [address, setAddress] = React.useState<string | null>(null);
+  // const [email, setEmail] = React.useState<string | null>(null);
+  // const [phoneNumber, setPhoneNumber] = React.useState<string | null>(null);
+  // const [refresh, setRefresh] = useState<boolean>(false);
+
+  // const [organizationInfo, setOrganizationInfo] =
+  //   useState<OrganizationInfoType>({
+  //     id: 0,
+  //     eventName: "",
+  //     startDateAndTime: "",
+  //     endDateAndTime: "",
+  //     venueName: "",
+  //     address: "",
+  //     category: "",
+  //     email: "",
+  //     phoneNo: "",
+  //     eventPoster: "",
+  //     createdAt: "",
+  //     updatedAt: "",
+  //   });
+
+  // const updateOrganizationProfile = async () => {
+  //   const {
+  //     eventName,
+  //     startDateAndTime,
+  //     endDateAndTime,
+  //     venueName,
+  //     address,
+  //     category,
+  //     email,
+  //     phoneNo,
+  //     eventPoster,
+  //   } = organizationInfo;
+
+  //   try {
+  //     const requestData = {
+  //       eventName: eventName,
+  //       startDateAndTime: startDateAndTime,
+  //       endDateAndTime: endDateAndTime,
+  //       venueName: venueName,
+  //       address: address,
+  //       category: category,
+  //       email: email,
+  //       phoneNo: phoneNo,
+  //       eventPoster:
+  //         "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
+  //       // coverPhoto:
+  //       //   "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
+  //     };
+  //     const response = await axiosInstance.post(`v1/event/create`, requestData);
+
+  //     setRefresh((prev) => !prev);
+
+  //     console.log("event post  successfully:", response.data);
+  //   } catch (error) {
+  //     console.error("event post Error updating profile:", error);
+  //     // console.error(
+  //     //   "Error updating profile:",
+  //     //   error.response?.data || error.message
+  //     // );
+  //   }
+  // };
+
+  // post request
 
   return (
     <>
-           {/* header start  */}
-    <Box
+      {/* header start  */}
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+          width: "100%",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "10px 25px",
+          position: "fixed",
+          top: "0%",
+          left: "0%",
+          zIndex: "66",
+          background: `${hexToRGBA(
+            theme.palette.customColors.primaryDark1,
+            0.2
+          )}`,
+          boxShadow: `0 8px 32px 0 ${hexToRGBA(
+            theme.palette.customColors.orange,
+            0.12
+          )}`,
+          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+          backdropFilter: "blur( 4px )",
+        }}
+      >
+        <Box>
+          <Button
+            sx={{
+              background: `${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.2
+              )}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              padding: "9px 25px",
+              borderRadius: "15px",
+            }}
+            onClick={() => router.push("/")}
+          >
+            Exit Event Creator
+          </Button>
+        </Box>
+        <Box
           sx={{
-            display: { xs: "none", md: "flex" },
-            width: "100%",
+            display: "flex",
+            width: "40%",
             justifyContent: "space-between",
-            alignItems: "center",
-            padding: "10px 25px",
-            position:'fixed',
-            top:'0%',
-            left:'0%',
-            zIndex: "66",
-            background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                              // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-            backdropFilter: "blur( 4px )",
           }}
         >
-          <Box>
-            <Button
-              sx={{
-                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                padding: "9px 25px",
-                borderRadius: "15px",
-              }}
-              onClick={() => router.push("/")}
-            >
-              Exit Event Creator
-            </Button>
-          </Box>
           <Box
             sx={{
-              display: "flex",
-              width: "40%",
-              justifyContent: "space-between",
+              width: "30%",
+              // background: `${hexToRGBA(theme.palette.customColors.primaryWhite,1)}`,
+              background: `repeating-linear-gradient(65deg,${hexToRGBA(
+                theme.palette.customColors.primaryDark2,
+                1
+              )} 20px,${hexToRGBA(
+                theme.palette.customColors.primaryWhite,
+                1
+              )} 20px,${hexToRGBA(
+                theme.palette.customColors.orange,
+                1
+              )} 600px)`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              height: "15px",
+              borderRadius: "5px",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: "30%",
+              background: `${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.2
+              )}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              height: "15px",
+              borderRadius: "5px",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: "30%",
+              background: `${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.2
+              )}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              height: "15px",
+              borderRadius: "5px",
+            }}
+          ></Box>
+        </Box>
+        <Box>
+          <Button
+            onClick={handleOpenCreate}
+            sx={{
+              background: `${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.2
+              )}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              padding: "9px 25px",
+              borderRadius: "15px",
             }}
           >
-            <Box
-              sx={{
-                width: "30%",
-                // background: `${hexToRGBA(theme.palette.customColors.primaryWhite,1)}`,
-                background:`repeating-linear-gradient(65deg,${hexToRGBA(theme.palette.customColors.primaryDark2,1)} 20px,${hexToRGBA(theme.palette.customColors.primaryWhite,1)} 20px,${hexToRGBA(theme.palette.customColors.orange,1)} 600px)`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                height: "15px",
-                borderRadius: "5px",
-              }}
-            ></Box>
-            <Box
-              sx={{
-                width: "30%",
-                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                height: "15px",
-                borderRadius: "5px",
-              }}
-            ></Box>
-            <Box
-              sx={{
-                width: "30%",
-                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                height: "15px",
-                borderRadius: "5px",
-              }}
-            ></Box>
-          </Box>
-          <Box>
-            <Button onClick={handleOpenCreate}
-              sx={{
-                background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                padding: "9px 25px",
-                borderRadius: "15px",
-              }}
-            >
-              Create Event
-            </Button>
-            {/* crate event popup  */}
-            <Modal
-              open={create}
-              onClose={handleCloseCreate}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={createStyle}>
-                <Typography id="modal-modal-title" variant="h3">
-                  Ready to Launch your event?
-                </Typography>
+            Create Event
+          </Button>
+          {/* crate event popup  */}
+          <Modal
+            open={create}
+            onClose={handleCloseCreate}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={createStyle}>
+              <Typography id="modal-modal-title" variant="h3">
+                Ready to Launch your event?
+              </Typography>
 
-              <Box sx={{margin:'3% auto',width:'fit-content'}}>
-                <Image src='https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp' alt="create popup image" height={100} width={100} style={{height:'50vh',width:'fit-content'}}/>
+              <Box sx={{ margin: "3% auto", width: "fit-content" }}>
+                <Image
+                  src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp"
+                  alt="create popup image"
+                  height={100}
+                  width={100}
+                  style={{ height: "50vh", width: "fit-content" }}
+                />
               </Box>
 
-                <Box sx={{display:'flex',flexDirection:{md:'row',xs:'column'},justifyContent:'space-between',alignItems:'center'}}>
-                  <Button sx={{width:{md:'48%',xs:'100%'},border:`1px solid ${theme.palette.customColors.primaryWhite}`,color:theme.palette.customColors.primaryWhite}}>Save as  draft</Button>
-                  <Button onClick={handleOpenLaunch} sx={{width:{md:'48%',xs:'100%'},border:`1px solid ${theme.palette.customColors.primaryWhite}`,color:theme.palette.customColors.primaryWhite,marginTop:{md:'0',xs:'5%'}}}>Launch</Button>
-                </Box>
-
-                <Typography variant="h5" sx={{textAlign:'center',margin:'20px 0','&:hover':{textDecoration:`underline solid ${theme.palette.customColors.primaryWhite}`}}}>Keep editing</Typography>
-
-                <CloseIcon onClick={handleCloseCreate} sx={{position:'absolute',right:'2%',top:'2%','&:hover':{cursor:'pointer',color:theme.palette.customColors.orange}}}/>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { md: "row", xs: "column" },
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Button
+                  sx={{
+                    width: { md: "48%", xs: "100%" },
+                    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                    color: theme.palette.customColors.primaryWhite,
+                  }}
+                >
+                  Save as draft
+                </Button>
+                <Button
+                  onClick={handleOpenLaunch}
+                  sx={{
+                    width: { md: "48%", xs: "100%" },
+                    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                    color: theme.palette.customColors.primaryWhite,
+                    marginTop: { md: "0", xs: "5%" },
+                  }}
+                >
+                  Launch
+                </Button>
               </Box>
-            </Modal>
-            {/* crate event popup  */}
 
-            {/* launch event popup  */}
-            <Modal
-              open={launch}
-              onClose={handleCloseLaunch}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={createStyle}>
+              <Typography
+                variant="h5"
+                sx={{
+                  textAlign: "center",
+                  margin: "20px 0",
+                  "&:hover": {
+                    textDecoration: `underline solid ${theme.palette.customColors.primaryWhite}`,
+                  },
+                }}
+              >
+                Keep editing
+              </Typography>
 
-                <Typography id="modal-modal-title" variant="h3">
-                 Almost there... 
-                </Typography>
-                <Typography sx={{margin:'2% 0'}}>you must complete a short financial onbording before you can start selling tickets</Typography>
+              <CloseIcon
+                onClick={handleCloseCreate}
+                sx={{
+                  position: "absolute",
+                  right: "2%",
+                  top: "2%",
+                  "&:hover": {
+                    cursor: "pointer",
+                    color: theme.palette.customColors.orange,
+                  },
+                }}
+              />
+            </Box>
+          </Modal>
+          {/* crate event popup  */}
 
-                <Box sx={{textAlign:'center',margin:'4% 0'}}>
-                  <Button sx={{border:`1px solid ${theme.palette.customColors.primaryWhite}`,color:theme.palette.customColors.primaryWhite,paddingInline:'20px'}}>Enable payments</Button>
-                </Box>
+          {/* launch event popup  */}
+          <Modal
+            open={launch}
+            onClose={handleCloseLaunch}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={createStyle}>
+              <Typography id="modal-modal-title" variant="h3">
+                Almost there...
+              </Typography>
+              <Typography sx={{ margin: "2% 0" }}>
+                you must complete a short financial onbording before you can
+                start selling tickets
+              </Typography>
 
-                <Typography id="modal-modal-title" variant="h3">
-                 or,savec as a draft and do this later
-                 </Typography>
-
-                 <Typography variant="h5" sx={{textAlign:'center',margin:'20px 0','&:hover':{textDecoration:`underline solid ${theme.palette.customColors.primaryWhite}`}}}>Keep editing</Typography>
-                 
-                <CloseIcon onClick={handleCloseLaunch} sx={{position:'absolute',right:'2%',top:'2%','&:hover':{cursor:'pointer',color:theme.palette.customColors.orange}}}/>
+              <Box sx={{ textAlign: "center", margin: "4% 0" }}>
+                <Button
+                  sx={{
+                    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                    color: theme.palette.customColors.primaryWhite,
+                    paddingInline: "20px",
+                  }}
+                >
+                  Enable payments
+                </Button>
               </Box>
-            </Modal>
-            {/* launch event popup  */}
-          </Box>
+
+              <Typography id="modal-modal-title" variant="h3">
+                or,savec as a draft and do this later
+              </Typography>
+
+              <Typography
+                variant="h5"
+                sx={{
+                  textAlign: "center",
+                  margin: "20px 0",
+                  "&:hover": {
+                    textDecoration: `underline solid ${theme.palette.customColors.primaryWhite}`,
+                  },
+                }}
+              >
+                Keep editing
+              </Typography>
+
+              <CloseIcon
+                onClick={handleCloseLaunch}
+                sx={{
+                  position: "absolute",
+                  right: "2%",
+                  top: "2%",
+                  "&:hover": {
+                    cursor: "pointer",
+                    color: theme.palette.customColors.orange,
+                  },
+                }}
+              />
+            </Box>
+          </Modal>
+          {/* launch event popup  */}
         </Box>
-        {/* header end  */}
+      </Box>
+      {/* header end  */}
       {/* main start */}
       <Box
         sx={{
@@ -1594,8 +1814,6 @@ function EventPage() {
           padding: { md: "2% 0%", xs: "2% 0 % 0%" },
         }}
       >
-     
-
         {/* section start      */}
         <Box
           sx={{
@@ -1604,7 +1822,7 @@ function EventPage() {
           }}
         >
           {/* container      */}
-          <Box sx={{ width: { md: "65%", xs: "90%" }, margin: "0px auto 0"}}>
+          <Box sx={{ width: { md: "65%", xs: "90%" }, margin: "0px auto 0" }}>
             {/* mn start  */}
             <Typography
               variant="h4"
@@ -1827,7 +2045,7 @@ function EventPage() {
                 {/* Address         */}
 
                 {/* select start  */}
-                <Drop/>
+                <Drop />
                 {/* select end   */}
 
                 {/* <TxtEditor /> */}
@@ -1905,14 +2123,15 @@ function EventPage() {
                     }}
                   />
                 ) : (
-                    <PhoneInputStyled sx={{width:'100%'}}
-                      country={'us'}
-                      value={phone}
-                      // onChange={phone => setPhone(phone)}
-                      onChange={handlePhoneNumberChange}
-                      countryCodeEditable={false}
-                      disableCountryCode={false}
-                    />
+                  <PhoneInputStyled
+                    sx={{ width: "100%" }}
+                    country={"us"}
+                    value={phone}
+                    // onChange={phone => setPhone(phone)}
+                    onChange={handlePhoneNumberChange}
+                    countryCodeEditable={false}
+                    disableCountryCode={false}
+                  />
                 )}
                 {/* Email of phone number end */}
               </Box>
@@ -2263,7 +2482,15 @@ function EventPage() {
                         </Box>
                       </Box>
                       {/* button part end */}
-                      <CloseIcon onClick={handleClose3} sx={{position:'absolute',right:'2%',top:'5%',cursor:'pointer'}}/>
+                      <CloseIcon
+                        onClick={handleClose3}
+                        sx={{
+                          position: "absolute",
+                          right: "2%",
+                          top: "5%",
+                          cursor: "pointer",
+                        }}
+                      />
                     </Box>
                   </Modal>
 
@@ -2304,25 +2531,25 @@ function EventPage() {
                       />
                     </Button>
                   </HtmlTooltip> */}
-                   <Button>
-                      <TuneIcon
-                        // onClick={handleOpen2}
-                        sx={{
-                          background: theme.palette.customColors.primaryWhite,
-                          color: theme.palette.customColors.primaryDark1,
-                          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                          fontSize: "40px",
-                          padding: "5px",
-                          transform: "rotate(180deg)",
-                          transition: "all 0.21s linear",
-                          borderRadius: "50%",
-                          "&:hover": {
-                            cursor: "pointer",
-                            transform: "rotate(90deg)",
-                          },
-                        }}
-                      />
-                    </Button>
+                  <Button>
+                    <TuneIcon
+                      // onClick={handleOpen2}
+                      sx={{
+                        background: theme.palette.customColors.primaryWhite,
+                        color: theme.palette.customColors.primaryDark1,
+                        // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                        fontSize: "40px",
+                        padding: "5px",
+                        transform: "rotate(180deg)",
+                        transition: "all 0.21s linear",
+                        borderRadius: "50%",
+                        "&:hover": {
+                          cursor: "pointer",
+                          transform: "rotate(90deg)",
+                        },
+                      }}
+                    />
+                  </Button>
 
                   <Modal
                     open={open2}
@@ -2585,7 +2812,15 @@ function EventPage() {
                           </ImageListItem>
                         ))}
                       </ImageList>
-                      <CloseIcon onClick={handleClose} sx={{position:'absolute',right:'2%',top:'2%',cursor:'pointer'}}/>
+                      <CloseIcon
+                        onClick={handleClose}
+                        sx={{
+                          position: "absolute",
+                          right: "2%",
+                          top: "2%",
+                          cursor: "pointer",
+                        }}
+                      />
                     </Box>
                   </Modal>
 
@@ -4602,121 +4837,129 @@ function EventPage() {
           {/* container end  */}
         </Box>
         {/* section end  */}
-
-        
       </Box>
       {/* main end  */}
       {/* mobile header start  */}
-        <Box
-          sx={{
-            display: { xs: "flex", md: "none" },
-            flexDirection: "column-reverse",
-            width: { xs: "100%" },
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "10px 25px",
-            position: "fixed",
-            bottom: "0",
-            background: `${hexToRGBA(
-              theme.palette.customColors.primaryDark1,
-              0.2
-            )}`,
-            boxShadow: `0 8px 32px 0 ${hexToRGBA(
-              theme.palette.customColors.orange,
-              0.12
-            )}`,
-            // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-            backdropFilter: "blur( 10px )",
-          }}
-        >
-          <Box sx={{ display: "flex", gap: 2 }}>
-            <Button
-              sx={{
-                // background: "#151618",
-                background: `${hexToRGBA(
-                  theme.palette.customColors.primaryDark1,
-                  0.2
-                )}`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                  theme.palette.customColors.orange,
-                  0.12
-                )}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                padding: "9px 25px",
-                color: theme.palette.customColors.primaryWhite,
-                borderRadius: "15px",
-              }}
-            >
-              Exit Event Creator
-            </Button>
-            <Button
-            onClick={handleOpenCreate}
-              sx={{
-                background: `${hexToRGBA(
-                  theme.palette.customColors.primaryDark1,
-                  0.2
-                )}`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                  theme.palette.customColors.orange,
-                  0.12
-                )}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                padding: "9px 25px",
-                color: theme.palette.customColors.primaryWhite,
-                borderRadius: "15px",
-              }}
-            >
-              Create Event
-            </Button>
-          </Box>
-          <Box
+      <Box
+        sx={{
+          display: { xs: "flex", md: "none" },
+          flexDirection: "column-reverse",
+          width: { xs: "100%" },
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "10px 25px",
+          position: "fixed",
+          bottom: "0",
+          background: `${hexToRGBA(
+            theme.palette.customColors.primaryDark1,
+            0.2
+          )}`,
+          boxShadow: `0 8px 32px 0 ${hexToRGBA(
+            theme.palette.customColors.orange,
+            0.12
+          )}`,
+          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+          backdropFilter: "blur( 10px )",
+        }}
+      >
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Button
             sx={{
-              display: "flex",
-              width: "60%",
-              justifyContent: "space-between",
-              margin: "20px 0px",
+              // background: "#151618",
+              background: `${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.2
+              )}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              padding: "9px 25px",
+              color: theme.palette.customColors.primaryWhite,
+              borderRadius: "15px",
             }}
           >
-            <Box
-              sx={{
-                width: "30%",
-                background:`repeating-linear-gradient(65deg,${hexToRGBA(theme.palette.customColors.primaryDark2,1)} 20px,${hexToRGBA(theme.palette.customColors.primaryWhite,1)} 20px,${hexToRGBA(theme.palette.customColors.orange,1)} 600px)`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                  theme.palette.customColors.orange,
-                  0.12
-                )}`,
-                // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                height: "15px",
-                borderRadius: "5px",
-              }}
-            ></Box>
-            <Box
-              sx={{
-                width: "30%",
-                background: "#151618",
-                height: "15px",
-                borderRadius: "5px",
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-              }}
-            ></Box>
-            <Box
-              sx={{
-                width: "30%",
-                background: "#151618",
-                height: "15px",
-                borderRadius: "5px",
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                  theme.palette.customColors.orange,
-                  0.12
-                )}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-              }}
-            ></Box>
-          </Box>
+            Exit Event Creator
+          </Button>
+          <Button
+            onClick={handleOpenCreate}
+            sx={{
+              background: `${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.2
+              )}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              padding: "9px 25px",
+              color: theme.palette.customColors.primaryWhite,
+              borderRadius: "15px",
+            }}
+          >
+            Create Event
+          </Button>
         </Box>
-        {/* mobile header end  */}
+        <Box
+          sx={{
+            display: "flex",
+            width: "60%",
+            justifyContent: "space-between",
+            margin: "20px 0px",
+          }}
+        >
+          <Box
+            sx={{
+              width: "30%",
+              background: `repeating-linear-gradient(65deg,${hexToRGBA(
+                theme.palette.customColors.primaryDark2,
+                1
+              )} 20px,${hexToRGBA(
+                theme.palette.customColors.primaryWhite,
+                1
+              )} 20px,${hexToRGBA(
+                theme.palette.customColors.orange,
+                1
+              )} 600px)`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              height: "15px",
+              borderRadius: "5px",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: "30%",
+              background: "#151618",
+              height: "15px",
+              borderRadius: "5px",
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: "30%",
+              background: "#151618",
+              height: "15px",
+              borderRadius: "5px",
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+            }}
+          ></Box>
+        </Box>
+      </Box>
+      {/* mobile header end  */}
     </>
   );
 }
 
-export default EventPage;
+// export default EventPage;
+export default withAuth(EventPage);

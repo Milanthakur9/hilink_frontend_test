@@ -16,7 +16,12 @@ import MenuList from "@mui/material/MenuList";
 import Svlogo from "../../../../../assets/branding/HL_Clean_Transparent.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+// ** if change this event then change onChange also for routing
 const options = ["Events By Test", "New Organization"];
+// const options = [
+//   { id: 1, label: "Events By Test", link: "/" },
+//   { id: 2, label: "New Organization", link: "/" },
+// ];
 
 const navihgation = [
   {
@@ -52,6 +57,11 @@ function DrawerInner() {
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
     index: number
   ) => {
+    console.log(index);
+    if (index === 1) {
+      router.push("/organization");
+    }
+
     setSelectedIndex(index);
     setSplit(false);
   };
@@ -75,7 +85,7 @@ function DrawerInner() {
     <div>
       <Box
         sx={{
-          paddingTop:'15%',
+          paddingTop: "15%",
           display: "flex",
           height: "95vh",
           flexDirection: "column",
@@ -163,7 +173,7 @@ function DrawerInner() {
           {/* events by test  */}
           <Box sx={{ marginTop: "10%" }}>
             <Button
-            onClick={()=>router.push(`/creator/events/new/`)}
+              onClick={() => router.push(`/creator/events/new/`)}
               sx={{
                 width: { md: "100%", xs: "100%" },
                 background: orange,
@@ -194,7 +204,7 @@ function DrawerInner() {
                   marginTop: "6%",
                   position: "relative",
                   width: "fit-content",
-                  overflow:'hidden',
+                  overflow: "hidden",
                   "&:before": {
                     position: "absolute",
                     width: "100%",

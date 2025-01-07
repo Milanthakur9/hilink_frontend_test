@@ -1,32 +1,42 @@
 import React from "react";
-import { Box, Typography, Grid, Link, IconButton,useTheme } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Grid,
+  Link,
+  IconButton,
+  useTheme,
+} from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import CloseIcon from "@mui/icons-material/Close";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Svlogo from "../../../assets/branding/HL_Clean_Transparent_white.svg";
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
 
 const Footer: React.FC = () => {
-    const theme = useTheme();
+  const theme = useTheme();
+  const router = useRouter();
+
   return (
     <Box
       sx={{
-        width:'90%',
-        margin:'0 auto',
+        width: "90%",
+        margin: "0 auto",
         bgcolor: theme.palette.customColors.primaryDark1,
         color: "white",
         p: 6,
         px: { xs: 2, md: 6 },
         fontFamily: "Arial, sans-serif",
-        borderRadius:'20px',
-        boxShadow:'rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;'
+        borderRadius: "20px",
+        boxShadow:
+          "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;",
       }}
     >
       {/* Top Section */}
       <Grid container spacing={4} justifyContent="space-between">
         <Grid item xs={12} md={3}>
-        <Image src={Svlogo} height="40" alt="hilink logo" />
+          <Image src={Svlogo} height="40" alt="hilink logo" />
           <Typography variant="body1" sx={{ mb: 2 }}>
             Find your world.
           </Typography>
@@ -70,19 +80,15 @@ const Footer: React.FC = () => {
           <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
             RESOURCES
           </Typography>
-          {[
-            "Support",
-            "Request A Demo",
-            "FAQ",
-            "Tutorials",
-            "Newsletter",
-          ].map((item) => (
-            <Typography key={item} variant="body2" sx={{ mb: 1 }}>
-              <Link href="#" color="inherit" underline="none">
-                {item}
-              </Link>
-            </Typography>
-          ))}
+          {["Support", "Request A Demo", "FAQ", "Tutorials", "Newsletter"].map(
+            (item) => (
+              <Typography key={item} variant="body2" sx={{ mb: 1 }}>
+                <Link href="#" color="inherit" underline="none">
+                  {item}
+                </Link>
+              </Typography>
+            )
+          )}
         </Grid>
       </Grid>
 
@@ -94,20 +100,24 @@ const Footer: React.FC = () => {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-
-        sx={{ mt: 3,flexDirection:{md:'row',xs:'column'} }}
+        sx={{ mt: 3, flexDirection: { md: "row", xs: "column" } }}
       >
-        <Typography variant="body2">
-          ©2024 HILINK Group Inc.{" "}
-          <Link href="#" color="inherit" underline="none">
+        <Typography variant="body2">©2024 HILINK Group Inc. </Typography>
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Typography
+            sx={{ cursor: "pointer" }}
+            onClick={() => router.push(`/privacy`)}
+          >
             Privacy Policy
-          </Link>{" "}
+          </Typography>{" "}
           |{" "}
-          <Link href="#" color="inherit" underline="none">
+          <Typography
+            sx={{ cursor: "pointer" }}
+            onClick={() => router.push(`/tos`)}
+          >
             Terms of Service
-          </Link>
-        </Typography>
-
+          </Typography>
+        </Box>
         {/* Social Icons */}
         <Box>
           <IconButton href="#" sx={{ color: "white" }}>

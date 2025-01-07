@@ -1,74 +1,67 @@
-import { Box, Button, Divider, TextField, Typography ,useTheme} from "@mui/material";
-import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  Divider,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
-// import { useRouter } from 'next/navigation';
-// Switch
-import Switch, { SwitchProps } from "@mui/material/Switch";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-import styled from "@emotion/styled";
-// switch start
-// const IOSSwitch = styled((props: SwitchProps) => (
-//   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-// ))(({}) => ({
-//   width: 42,
-//   height: 26,
-//   padding: 0,
-//   "& .MuiSwitch-switchBase": {
-//     padding: 0,
-//     margin: 2,
-//     transitionDuration: "300ms",
-//     "&.Mui-checked": {
-//       transform: "translateX(16px)",
-//       color: "#ff914d",
-//       "& + .MuiSwitch-track": {
-//         backgroundColor: "#151618",
-//         opacity: 1,
-//         border: 0,
-//       },
-//       "&.Mui-disabled + .MuiSwitch-track": {
-//         opacity: 0.5,
-//       },
-//     },
-//     "&.Mui-focusVisible .MuiSwitch-thumb": {
-//       color: "#33cf4d",
-//       border: "6px solid #fff",
-//     },
-//     "&.Mui-disabled .MuiSwitch-thumb": {
-//       // color: theme.palette.grey[100],
-//       // ...theme.applyStyles('dark', {
-//       //   color: theme.palette.grey[600],
-//       // }),
-//     },
-//     "&.Mui-disabled + .MuiSwitch-track": {
-//       opacity: 0.7,
-//     },
-//   },
-//   "& .MuiSwitch-thumb": {
-//     boxSizing: "border-box",
-//     width: 22,
-//     height: 22,
-//   },
-//   "& .MuiSwitch-track": {
-//     borderRadius: 26 / 2,
-//     backgroundColor: "#ff914d",
-//     opacity: 1,
-//   },
-// }));
-
-// switch end
-
-// icon
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import PanoramaIcon from "@mui/icons-material/Panorama";
-// import styled from '@emotion/styled';
+import { axiosInstance } from "@/interceptor/axiosInterceptor";
+import { useRouter } from "next/navigation";
+
+interface OrganizationInfoType {
+  id: number;
+  name: string;
+  Biography: string;
+  coverPhoto: string;
+  profilePhoto: string;
+  instagramLink: string;
+  twitterLink: string;
+  websiteLink: string;
+  linkedInLink: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+const organizationInfoTextfieldKeys = {};
 
 function Profile() {
-  const theme = useTheme()
-  // const router = useRouter()
+  const [name, setName] = useState<string>("");
+  const [biography, setBiography] = useState<string>("");
+  const [instagramLink, setInstagramLink] = useState<string>("");
+  const [twitterLink, setTwitterLink] = useState<string>("");
+  const [websiteLink, setWebsiteLink] = useState<string>("");
+  const [linkedInLink, setLinkedInLink] = useState<string>("");
+  const [organizations, setOrganizations] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [refresh, setRefresh] = useState<boolean>(false);
+
+  const [organizationInfo, setOrganizationInfo] =
+    useState<OrganizationInfoType>({
+      id: 0,
+      name: "",
+      Biography: "",
+      coverPhoto: "",
+      profilePhoto: "",
+      instagramLink: "",
+      twitterLink: "",
+      websiteLink: "",
+      linkedInLink: "",
+      createdAt: "",
+      updatedAt: "",
+    });
+
+  const theme = useTheme();
+  const router = useRouter();
   const orange = theme.palette.customColors.orange;
   const white = theme.palette.customColors.primaryWhite;
   const dark1 = theme.palette.customColors.primaryDark1;
   const dark2 = theme.palette.customColors.primaryDark2;
+
   const [profileBackgroundImage, setProfileBackgroundImage] = useState<
     string | null
   >(null);
@@ -91,8 +84,86 @@ function Profile() {
     }
   };
 
+  // get
+  const fetchOrganizations = async () => {
+    try {
+      const response = await axiosInstance.get("v1/organization/info/1");
+
+      console.log(response.data);
+
+      setOrganizationInfo(response.data.organization); // Assuming the list of organizations is in `data.data`
+      if (response.data.success) {
+      } else {
+        setError(response.data.message || "Failed to fetch organizations.");
+      }
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred.");
+    } finally {
+    }
+  };
+
+  useEffect(() => {
+    fetchOrganizations();
+  }, [refresh]);
+
+  // update
+  const updateOrganizationProfile = async () => {
+    const {
+      name,
+      Biography,
+      instagramLink,
+      twitterLink,
+      websiteLink,
+      linkedInLink,
+    } = organizationInfo;
+
+    try {
+      const requestData = {
+        name: name,
+        biography: Biography,
+        instagramLink: instagramLink,
+        twitterLink: twitterLink,
+        websiteLink: websiteLink,
+        linkedInLink: linkedInLink,
+        profilePhoto:
+          "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
+        coverPhoto:
+          "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
+      };
+      const response = await axiosInstance.put(
+        `v1/organization/update/profile/1`,
+        requestData
+      );
+
+      setRefresh((prev) => !prev);
+
+      console.log("Profile updated successfully:", response.data);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      // console.error(
+      //   "Error updating profile:",
+      //   error.response?.data || error.message
+      // );
+    }
+  };
+
+  const handleProfileInfoChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const currentField = e.target.name;
+
+    setOrganizationInfo((prev) => {
+      return {
+        ...prev,
+        [currentField]: e.target.value,
+      };
+    });
+  };
+
+  // updateOrganizationProfile();
+
   return (
-    <div>
+    <>
       <Box
         sx={{
           width: { md: "100%", xs: "100%" },
@@ -181,7 +252,7 @@ function Profile() {
           justifyContent: "space-between",
           width: { md: "70%", xs: "95%" },
           margin: "0 auto",
-          padding:'0 0 5%'
+          padding: "0 0 5%",
         }}
       >
         <Box sx={{ width: "20%", margin: { md: "0", xs: "0 auto" } }}>
@@ -268,6 +339,7 @@ function Profile() {
               {/* profile image end  */}
             </Box>
             <Button
+              onClick={() => router.push(`/g`)}
               sx={{
                 width: { md: "100%", xs: "200px" },
                 color: white,
@@ -290,12 +362,21 @@ function Profile() {
               placeholder="Test"
               size="small"
               variant="outlined"
+              value={organizationInfo?.name}
+              onChange={handleProfileInfoChange}
+              name="name"
               sx={{
                 backdropFilter: "blur( 4px )",
                 width: "50%",
                 "& .MuiOutlinedInput-root": {
-                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                  boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                  background: `${hexToRGBA(
+                    theme.palette.customColors.primaryDark1,
+                    0.2
+                  )}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                    theme.palette.customColors.orange,
+                    0.12
+                  )}`,
                   border: `1px solid ${theme.palette.customColors.primaryWhite}`,
                   color: orange,
                   borderColor: orange,
@@ -322,7 +403,7 @@ function Profile() {
             variant="h2"
             sx={{
               margin: "12px 0% 3%",
-              
+
               fontSize: "25px",
               fontWeight: "bold",
             }}
@@ -342,14 +423,15 @@ function Profile() {
             }}
           >
             <Box sx={{ width: { md: "48%", xs: "100%" } }}>
-              <Typography
-                sx={{margin: { md: 0, xs: "10px 0px" } }}
-              >
+              <Typography sx={{ margin: { md: 0, xs: "10px 0px" } }}>
                 Biography
               </Typography>
             </Box>
             <Box sx={{ width: { md: "50%", xs: "100%" } }}>
               <TextField
+                value={organizationInfo?.Biography}
+                onChange={handleProfileInfoChange}
+                name="Biography"
                 multiline
                 rows={4}
                 autoComplete="off"
@@ -359,16 +441,21 @@ function Profile() {
                 size="small"
                 variant="outlined"
                 sx={{
-                  
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                  background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                  boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
-                  border: `1px solid ${theme.palette.customColors.orange}`,
-                  color: orange,
-                  borderColor: orange,
-                  borderRadius: "25px",
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.12
+                    )}`,
+                    border: `1px solid ${theme.palette.customColors.orange}`,
+                    color: orange,
+                    borderColor: orange,
+                    borderRadius: "25px",
                     fontFamily: "Arial",
                     fontWeight: "noraml",
                     // Class for the border around the input field
@@ -409,6 +496,9 @@ function Profile() {
             </Box>
             <Box sx={{ width: { md: "50%", xs: "100%" } }}>
               <TextField
+                value={organizationInfo?.instagramLink}
+                onChange={handleProfileInfoChange}
+                name="instagramLink"
                 autoComplete="off"
                 id="outlined-basic"
                 // label="venue Name"
@@ -416,12 +506,17 @@ function Profile() {
                 size="small"
                 variant="outlined"
                 sx={{
-                  
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.12
+                    )}`,
                     border: `1px solid ${theme.palette.customColors.orange}`,
                     color: orange,
                     borderColor: orange,
@@ -465,6 +560,9 @@ function Profile() {
             </Box>
             <Box sx={{ width: { md: "50%", xs: "100%" } }}>
               <TextField
+                value={organizationInfo?.twitterLink}
+                onChange={handleProfileInfoChange}
+                name="twitterLink"
                 autoComplete="off"
                 id="outlined-basic"
                 // label="venue Name"
@@ -472,12 +570,17 @@ function Profile() {
                 size="small"
                 variant="outlined"
                 sx={{
-                 
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.12
+                    )}`,
                     border: `1px solid ${theme.palette.customColors.orange}`,
                     color: orange,
                     borderColor: orange,
@@ -522,6 +625,9 @@ function Profile() {
             </Box>
             <Box sx={{ width: { md: "50%", xs: "100%" } }}>
               <TextField
+                value={organizationInfo?.linkedInLink}
+                onChange={handleProfileInfoChange}
+                name="linkedInLink"
                 autoComplete="off"
                 id="outlined-basic"
                 // label="venue Name"
@@ -529,12 +635,17 @@ function Profile() {
                 size="small"
                 variant="outlined"
                 sx={{
-                  
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.12
+                    )}`,
                     border: `1px solid ${theme.palette.customColors.orange}`,
                     color: orange,
                     borderColor: orange,
@@ -578,6 +689,9 @@ function Profile() {
             </Box>
             <Box sx={{ width: { md: "50%", xs: "100%" } }}>
               <TextField
+                value={organizationInfo?.websiteLink}
+                onChange={handleProfileInfoChange}
+                name="websiteLink"
                 autoComplete="off"
                 id="outlined-basic"
                 // label="venue Name"
@@ -588,8 +702,14 @@ function Profile() {
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.12
+                    )}`,
                     border: `1px solid ${theme.palette.customColors.orange}`,
                     color: orange,
                     borderColor: orange,
@@ -614,43 +734,9 @@ function Profile() {
           {/* Website URL      */}
 
           {/* Custom Links      */}
-          {/* <Box
-            sx={{
-              margin: "2% 0%",
-              width: "100%",
-              display: "flex",
-              flexDirection: { md: "row", xs: "column" },
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Box sx={{ width: { md: "48%", xs: "100%" } }}>
-              <Typography
-                sx={{ color: "#fff", margin: { md: 0, xs: "10px 0px" } }}
-              >
-                Custom Links
-              </Typography>
-            </Box>
-            <Box sx={{ width: { md: "50%", xs: "100%" } }}>
-              <Button
-                sx={{
-                  width: { md: "100%", xs: "100%" },
-                  background: "#ff914d",
-                  borderRadius: "30px",
-                  color: "#fff",
-                  fontSize: "12px",
-                  transition: "all .1s linear",
-                  "&:hover": { transform: "scale(1.051)" },
-                }}
-              >
-                + Add Links To Your Profile
-              </Button>
-            </Box>
-          </Box> */}
-          {/* Custom Links      */}
 
           {/* Organization Profile URL      */}
-          <Box
+          {/* <Box
             sx={{
               margin: "2% 0%",
               width: "100%",
@@ -679,8 +765,14 @@ function Profile() {
                   backdropFilter: "blur( 4px )",
                   width: "100%",
                   "& .MuiOutlinedInput-root": {
-                    background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.12)}`,
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.12
+                    )}`,
                     border: `1px solid ${theme.palette.customColors.orange}`,
                     color: orange,
                     borderColor: orange,
@@ -701,38 +793,57 @@ function Profile() {
                 }}
               />
             </Box>
-          </Box>
+          </Box> */}
           {/* Organization Profile URL      */}
-
-          {/* Display Number of Attendees      */}
-          {/* <Box
+          <Box
             sx={{
-              margin: "2% 0%",
-              width: "100%",
+              // position: "fixed",
+              // left: "10%",
+              // bottom: "2%",
+              // width: "fit-content",
               display: "flex",
-              flexDirection: { md: "row", xs: "column" },
-              justifyContent: "space-between",
+              flexWrap: "wrap",
               alignItems: "center",
+              justifyContent: "flex-end",
+              padding: "5px 40px",
+              marginTop: "70px",
+              backdropFilter: "blur(5px) saturate(180%)", // You can adjust the value here to control the blur effect
+              // background: `${hexToRGBA(dark2, 0.8)}`,
+              background: `linear-gradient(to right,${hexToRGBA(
+                dark1,
+                0.9
+              )},${hexToRGBA(white, 0.2)},${hexToRGBA(dark1, 0.2)})`,
             }}
           >
-            <Box sx={{ width: { md: "48%", xs: "100%" } }}>
-              <Typography
-                sx={{ color: "#fff", margin: { md: 0, xs: "10px 0px" } }}
+            <Typography sx={{ margin: "2% 0%" }}>
+              Would you like to save your changes?
+            </Typography>
+            <Box sx={{ display: "flex", gap: 2, marginLeft: "20px" }}>
+              <Button
+                sx={{
+                  background: white,
+                  color: dark1,
+                  paddingInline: "20px",
+                  "&:hover": { color: white },
+                }}
               >
-                Display Number of Attendees
-              </Typography>
+                DISCARD
+              </Button>
+              <Button
+                onClick={() => updateOrganizationProfile()}
+                sx={{
+                  background: orange,
+                  color: white,
+                  paddingInline: "20px",
+                }}
+              >
+                SAVE CHANGES
+              </Button>
             </Box>
-            <Box sx={{ width: { md: "50%", xs: "100%" } }}>
-              <FormControlLabel
-                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                label=""
-              />
-            </Box>
-          </Box> */}
-          {/* Display Number of Attendees      */}
+          </Box>
         </Box>
       </Box>
-    </div>
+    </>
   );
 }
 

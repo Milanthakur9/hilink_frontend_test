@@ -1,11 +1,11 @@
-import { Box, Button, Typography, useTheme } from '@mui/material';
-import Image from 'next/image';
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import shap from '../../../assets/background_patterns/shap2.png';
-import Drop from '../../../assets/background_patterns/drop3.png';
-import Drop1 from '../../../assets/background_patterns/ring.png';
+import { Box, Button, Typography, useTheme } from "@mui/material";
+import Image from "next/image";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import shap from "../../../assets/background_patterns/shap2.png";
+import Drop from "../../../assets/background_patterns/drop3.png";
+import Drop1 from "../../../assets/background_patterns/ring.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,11 +29,11 @@ function Kickback() {
         { rotation: 0 },
         {
           rotation: 360,
-          perspective: '600px',
+          perspective: "600px",
           scrollTrigger: {
             trigger: element,
-            start: 'top 80%',
-            end: 'bottom 20%',
+            start: "top 80%",
+            end: "bottom 20%",
             scrub: true,
           },
         }
@@ -46,11 +46,11 @@ function Kickback() {
         { rotation: 0 },
         {
           rotation: 360,
-          perspective: '600px',
+          perspective: "600px",
           scrollTrigger: {
             trigger: element2,
-            start: 'top 80%',
-            end: 'bottom 20%',
+            start: "top 80%",
+            end: "bottom 20%",
             scrub: true,
           },
         }
@@ -61,37 +61,47 @@ function Kickback() {
   return (
     <Box
       sx={{
-        display: 'flex',
-        margin: { md: '0', xs: '3% 0 0 0' },
-        flexDirection: { md: 'row-reverse', xs: 'column' },
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        transformStyle: 'preserve-3d',
+        display: "flex",
+        margin: { md: "0", xs: "3% 0 0 0" },
+        flexDirection: { md: "row-reverse", xs: "column" },
+        justifyContent: "space-between",
+        alignItems: "center",
+        transformStyle: "preserve-3d",
       }}
     >
-      <Box sx={{ width: { md: '48%', xs: '95%' } }}>
-        <Typography>KICKBACK</Typography>
+      <Box sx={{ width: { md: "48%", xs: "95%" } }}>
+        {/* <Typography>About Us</Typography> */}
         <Typography
           variant="h1"
           sx={{
-            margin: '2% 0',
+            margin: "2% 0",
             background: `linear-gradient(to bottom,${orange},${dark1})`,
-            backgroundClip: 'text',
-            color: 'transparent',
+            backgroundClip: "text",
+            color: "transparent",
           }}
         >
-          Turn Attendees Into Paid Affiliates
+          {/* Turn Attendees Into Paid Affiliates */}
+          About Us
         </Typography>
-        <Typography>
-          Create paid rewards that attendees can redeem for bringing their
-          friends to your events. Events have generated up to $35,000 in
-          additional revenue from Kickback!
+        <Typography variant="subtitle1">
+          At HiLink VIP, we’re revolutionizing the way events are experienced.
+          Our platform is designed to empower creators, organizers, and
+          event-goers by providing a seamless and stylish ticketing solution for
+          unforgettable moments. Whether you’re hosting an exclusive gathering,
+          a nightlife extravaganza, or a live entertainment event, HiLink VIP
+          connects you to your audience with ease and sophistication.
+        </Typography>
+        <Typography variant="subtitle1" sx={{ margin: "2% 0" }}>
+          We prioritize simplicity, innovation, and community, ensuring that
+          every aspect of your event journey—from ticketing to attendance—is
+          effortless and elevated. With tools built for success and a sleek user
+          experience, HiLink VIP turns every event into a VIP experience.
         </Typography>
         <Button
           sx={{
-            margin: '3% 0 0 0',
+            margin: "3% 0 0 0",
             color: white,
-            paddingInline: '20px',
+            paddingInline: "20px",
             background: `linear-gradient(to right,${orange},${dark2})`,
           }}
         >
@@ -101,25 +111,25 @@ function Kickback() {
 
       <Box
         sx={{
-          width: { md: '48%', xs: '95%' },
-          transformStyle: 'preserve-3d',
-          position: 'relative',
+          width: { md: "48%", xs: "95%" },
+          transformStyle: "preserve-3d",
+          position: "relative",
         }}
       >
         <Box
           ref={imageBoxRef}
           sx={{
-            position: 'absolute',
-            left: '4%',
-            top: '0',
-            width: '80%',
-            height: '80%',
+            position: "absolute",
+            left: "4%",
+            top: "0",
+            width: "80%",
+            height: "80%",
             zIndex: -2,
           }}
         >
           <Image
             src={Drop1}
-            style={{ width: '200px', height: '200px' }}
+            style={{ width: "200px", height: "200px" }}
             alt="animate"
             height={100}
             width={100}
@@ -129,17 +139,17 @@ function Kickback() {
         <Box
           ref={imageBoxRef2}
           sx={{
-            position: 'absolute',
-            right: '0%',
-            bottom: '0%',
-            width: '230px',
-            height: '230px',
+            position: "absolute",
+            right: "0%",
+            bottom: "0%",
+            width: "230px",
+            height: "230px",
             zIndex: -1,
           }}
         >
           <Image
             src={Drop}
-            style={{ width: '100%', height: 'inherit' }}
+            style={{ width: "100%", height: "inherit" }}
             alt="animate"
             height={100}
             width={100}
@@ -148,7 +158,7 @@ function Kickback() {
 
         <Image
           src={shap}
-          style={{ width: '80%', height: 'inherit' }}
+          style={{ width: "80%", height: "inherit" }}
           alt="kickback"
           height={100}
           width={100}
@@ -159,4 +169,3 @@ function Kickback() {
 }
 
 export default Kickback;
-

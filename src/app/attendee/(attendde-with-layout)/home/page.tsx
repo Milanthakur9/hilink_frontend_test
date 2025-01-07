@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import EventsSliderForAttendeeHomePage from "./components/EventsSlider";
 import EventList from "./components/EventList";
 import { Box } from "@mui/material";
+// import withAuth from "../../../../context/hoc/withAuth";
 
 const HomePage = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -40,3 +41,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+// export default withAuth(HomePage);

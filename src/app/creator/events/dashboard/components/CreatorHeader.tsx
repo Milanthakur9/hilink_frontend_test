@@ -62,7 +62,7 @@ export default function CreatorHeader() {
         backdropFilter: "blur( 8.5px )",
         padding: "30px",
         height: "100vh",
-        width:{md:'100%',xs:'100%'}
+        width: { md: "400px", xs: "100%" },
       }}
       role="presentation"
     >

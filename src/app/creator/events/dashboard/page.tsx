@@ -5,6 +5,7 @@ import CreatorFooter from "./components/CreatorFooter";
 import CreatorHeader from "./components/CreatorHeader";
 import CreatorTabs from "./components/CreatorTabs";
 import CreatorVerticalTab from "./components/VerticalHeader";
+import withAuth from "../../../../context/hoc/withAuth";
 
 const CreatorDashboard = () => {
   const theme = useTheme();
@@ -19,4 +20,5 @@ const CreatorDashboard = () => {
   );
 };
 
-export default CreatorDashboard;
+// export default CreatorDashboard;
+export default withAuth(CreatorDashboard);

@@ -1,5 +1,4 @@
 "use client";
-
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import otpVerificationCover from "../../../assets/background_patterns/halftone-texture-background-8.png";
 import Image from "next/image";
@@ -10,7 +9,8 @@ import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-
+import axios from "axios";
+import { useRouter } from "next/navigation";
 const Item = styled(Paper)(({}) => ({
   textAlign: "center",
   borderRadius: 0,
@@ -22,16 +22,45 @@ const TypographyColorStyled = styled(Typography)(({ theme }) => ({
 }));
 
 const OtpVerificationPage = () => {
+  const router = useRouter();
   const theme = useTheme();
   const isMdDown = useMediaQuery(theme.breakpoints.down("md"));
   const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
   const [otp, setOtp] = useState<string>("");
-
   const handleOtpChange = (newValue: string) => {
     setOtp(newValue);
   };
 
-  const handleOtpSubmit = async () => {};
+  const handleOtpSubmit = async () => {
+    const email = localStorage.getItem("userEmail");
+    try {
+      const response = await axios.patch(
+        "http://localhost:3333/v1/auth/confirm-email-otp",
+        {
+          email: email,
+          otp: otp,
+        }
+      );
+
+      console.log(response.data);
+
+      if (response.status === 200) {
+        console.log("OTP sent successfully:", response.data);
+      } else {
+        console.error("Failed to send OTP:", response.data);
+      }
+      router.push("/login");
+      localStorage.removeItem("userEmail");
+    } catch (error: any) {
+      if (error.response) {
+        console.error("Error response from server:", error.response.data);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Error in request setup:", error.message);
+      }
+    }
+  };
 
   return (
     <Box
@@ -107,8 +136,8 @@ const OtpVerificationPage = () => {
           <Image alt="logo" src={logo} />
 
           <TypographyColorStyled variant="body2">
-            Enter the six digit verification code sent to 98981234567 to login to
-            your account
+            Enter the six digit verification code sent to 98981234567 to login
+            to your account
           </TypographyColorStyled>
           <MuiOtpInput
             value={otp}
