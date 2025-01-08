@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import shap from "../../../assets/background_patterns/shap2.png";
+import shap from "../../../assets/background_patterns/eventbg1.png";
 import Drop from "../../../assets/background_patterns/drop3.png";
 import Drop1 from "../../../assets/background_patterns/ring.png";
 
@@ -62,8 +62,9 @@ function Kickback() {
     <Box
       sx={{
         display: "flex",
+        // gap: { md: 0, xs: 5 },
         margin: { md: "0", xs: "3% 0 0 0" },
-        flexDirection: { md: "row-reverse", xs: "column" },
+        flexDirection: { md: "row-reverse", xs: "column-reverse" },
         justifyContent: "space-between",
         alignItems: "center",
         transformStyle: "preserve-3d",
@@ -72,12 +73,14 @@ function Kickback() {
       <Box sx={{ width: { md: "48%", xs: "95%" } }}>
         {/* <Typography>About Us</Typography> */}
         <Typography
-          variant="h1"
+          variant="h2"
           sx={{
             margin: "2% 0",
             background: `linear-gradient(to bottom,${orange},${dark1})`,
             backgroundClip: "text",
             color: "transparent",
+            fontSize: "2.8rem",
+            textTransform: "capitalize",
           }}
         >
           {/* Turn Attendees Into Paid Affiliates */}
@@ -112,19 +115,22 @@ function Kickback() {
       <Box
         sx={{
           width: { md: "48%", xs: "95%" },
+          marginTop: { md: "0", xs: "10%" },
           transformStyle: "preserve-3d",
           position: "relative",
+          textAlign: "center",
         }}
       >
         <Box
           ref={imageBoxRef}
           sx={{
             position: "absolute",
-            left: "4%",
-            top: "0",
+            left: "-10%",
+            top: "-10%",
             width: "80%",
             height: "80%",
             zIndex: -2,
+            display: { md: "inline", xs: "none" },
           }}
         >
           <Image
@@ -141,9 +147,9 @@ function Kickback() {
           sx={{
             position: "absolute",
             right: "0%",
-            bottom: "0%",
-            width: "230px",
-            height: "230px",
+            bottom: "-10%",
+            width: { md: "230px", xs: "150px" },
+            height: { md: "230px", xs: "150px" },
             zIndex: -1,
           }}
         >
@@ -158,7 +164,12 @@ function Kickback() {
 
         <Image
           src={shap}
-          style={{ width: "80%", height: "inherit" }}
+          style={{
+            width: "60%",
+            height: "inherit",
+            margin: "0 auto",
+            borderRadius: "20px",
+          }}
           alt="kickback"
           height={100}
           width={100}

@@ -15,9 +15,9 @@ import Torus from "./components/Torus";
 import MousewheelSlider from "./VerticalSlider";
 import Try from "./Try";
 // import FAQ from './FAQ';
-import image2 from "../../assets/background_patterns/event2.webp";
-import event1 from "../../assets/background_patterns/event1.webp";
-import event3 from "../../assets/background_patterns/event4.webp";
+import image2 from "../../assets/background_patterns/event2.png";
+import event1 from "../../assets/background_patterns/event1.png";
+import event3 from "../../assets/background_patterns/event4.png";
 // import StackingCards from './components/StackingCard';
 
 const slides = [
@@ -70,7 +70,10 @@ function HomePage() {
           {/* <Box sx={{background:'url(https://cdn.prod.website-files.com/65ef8a3bdecf96836a4ffd5e/65ef8a3bdecf96836a4ffe09_blob-img%2520(1)-p-800.png)',backgroundRepeat:'no-repeat',backgroundSize:'cover',height:'500px',width:'300px',position:'fixed',right:'-2%',top:'50%',zIndex:-1}}></Box> */}
           <Box
             sx={{
-              background: `linear-gradient(#ffafbc8a,#ff914d66)`,
+              background: {
+                md: `linear-gradient(#ffafbc8a,#ff914d66)`,
+                xs: "none",
+              },
               height: "200px",
               width: "200px",
               position: "fixed",
@@ -81,7 +84,10 @@ function HomePage() {
           ></Box>
           <Box
             sx={{
-              background: `linear-gradient(#614385,#516395)`,
+              background: {
+                md: `linear-gradient(#614385,#516395)`,
+                xs: "none",
+              },
               height: "200px",
               width: "200px",
               position: "fixed",
@@ -115,8 +121,16 @@ function HomePage() {
                   }}
                 >
                   <Box sx={{ width: { md: "48%", xs: "100%" } }}>
-                    <Typography>HILINK VIP</Typography>
-                    <Typography variant="h1">
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ letterSpacing: "2px" }}
+                    >
+                      HILINK VIP
+                    </Typography>
+                    <Typography
+                      variant="h1"
+                      sx={{ fontSize: { md: "3.8rem", xs: "3rem" } }}
+                    >
                       We{" "}
                       <span
                         style={{
@@ -134,7 +148,7 @@ function HomePage() {
                       variant="subtitle1"
                       sx={{
                         margin: "2% 0",
-                        fontSize: { md: "22px", xs: "19px" },
+                        fontSize: { md: "20px", xs: "18px" },
                       }}
                     >
                       Become part of a thriving community of over 1 million
@@ -207,8 +221,8 @@ function HomePage() {
             <Box
               sx={{
                 width: "90%",
-                margin: "0 auto",
-                padding: "1% 0",
+                margin: "8% auto",
+                padding: "2% 0",
                 position: "relative",
                 zIndex: 2,
               }}

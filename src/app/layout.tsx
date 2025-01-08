@@ -4,8 +4,6 @@ import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import ThemeComponent from "@/@core/theme/ThemeComponent";
 import { AuthProvider } from "@/context/AuthContext";
-import { Provider } from "react-redux";
-import store from "../app/store";
 // import "../interceptor/axiosInterceptor";
 import axios from "axios";
 
@@ -79,9 +77,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           <AppRouterCacheProvider>
-            {/* <Provider store={store}> */}
             <ThemeComponent>{children}</ThemeComponent>
-            {/* </Provider> */}
           </AppRouterCacheProvider>
         </AuthProvider>
       </body>

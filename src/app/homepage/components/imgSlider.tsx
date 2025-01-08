@@ -127,12 +127,12 @@
 //                 overflow: 'hidden',
 //                 borderRadius: 1,
 //               }}>
-//                 <Image 
-//                   src={item.img} 
-//                   alt={item.description} 
-//                   layout="responsive" 
-//                   width={100} 
-//                   height={100} 
+//                 <Image
+//                   src={item.img}
+//                   alt={item.description}
+//                   layout="responsive"
+//                   width={100}
+//                   height={100}
 //                   style={{ objectFit: 'cover' }}
 //                 />
 //               </Box>
@@ -159,12 +159,12 @@
 //                 overflow: 'hidden',
 //                 borderRadius: 1,
 //               }}>
-//                 <Image 
-//                   src={item.img} 
-//                   alt={item.description} 
-//                   layout="responsive" 
-//                   width={100} 
-//                   height={100} 
+//                 <Image
+//                   src={item.img}
+//                   alt={item.description}
+//                   layout="responsive"
+//                   width={100}
+//                   height={100}
 //                   style={{ objectFit: 'cover' }}
 //                 />
 //               </Box>
@@ -193,119 +193,131 @@
 
 // export default ImgSlider;
 
-
-
-
-import { Box, Typography,useTheme } from '@mui/material'
-import Image from 'next/image'
-import React from 'react'
-import event1 from '../../../assets/background_patterns/event1.webp'
-import event2 from '../../../assets/background_patterns/event2.webp'
-import event3 from '../../../assets/background_patterns/event3.webp'
-import event4 from '../../../assets/background_patterns/event4.webp'
-import event5 from '../../../assets/background_patterns/event5.webp'
-import event6 from '../../../assets/background_patterns/event6.webp'
-import event7 from '../../../assets/background_patterns/event7.webp'
-import event8 from '../../../assets/background_patterns/event8.webp'
+import { Box, Typography, useTheme } from "@mui/material";
+import Image from "next/image";
+import React from "react";
+import event1 from "../../../assets/background_patterns/event1.png";
+import event2 from "../../../assets/background_patterns/event2.png";
+import event3 from "../../../assets/background_patterns/event3.png";
+import event4 from "../../../assets/background_patterns/event4.png";
+import event5 from "../../../assets/background_patterns/event5.png";
+import event6 from "../../../assets/background_patterns/event6.png";
+import event7 from "../../../assets/background_patterns/event7.png";
+import event8 from "../../../assets/background_patterns/event8.png";
 
 const imageSlid = [
-    {
-        img: event1,
-        description: 'Holiday Party',
-        link: '/'
-    },
-    {
-        img: event2,
-        description: 'Party',
-        link: '/'
-    },
-    {
-        img: event3,
-        description: 'Annual Party',
-        link: '/'
-    },
-    {
-        img: event4,
-        description: 'Freshers Party',
-        link: '/'
-    },
-    {
-        img: event5,
-        description: 'Theme Party',
-        link: '/'
-    },
-    {
-        img: event6,
-        description: 'New Year Party',
-        link: '/'
-    },
-    {
-        img: event7,
-        description: 'Night Party',
-        link: '/'
-    },
-    {
-        img: event8,
-        description: 'Event Party',
-        link: '/'
-    },
-   
-]
+  {
+    img: event1,
+    description: "Holiday Party",
+    link: "/",
+  },
+  {
+    img: event2,
+    description: "Party",
+    link: "/",
+  },
+  {
+    img: event3,
+    description: "Annual Party",
+    link: "/",
+  },
+  {
+    img: event4,
+    description: "Freshers Party",
+    link: "/",
+  },
+  {
+    img: event5,
+    description: "Theme Party",
+    link: "/",
+  },
+  {
+    img: event6,
+    description: "New Year Party",
+    link: "/",
+  },
+  {
+    img: event7,
+    description: "Night Party",
+    link: "/",
+  },
+  {
+    img: event8,
+    description: "Event Party",
+    link: "/",
+  },
+];
 
 function ImgSlider() {
   const theme = useTheme();
   const white = theme.palette.customColors.primaryWhite;
   const dark1 = theme.palette.customColors.primaryDark1;
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'row',
-      overflow: 'hidden',
-      width: '100%',
-      position: 'relative',
-      marginTop:'-24%',
-    }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        overflow: "hidden",
+        width: "100%",
+        position: "relative",
+        marginTop: "-24%",
+      }}
+    >
       {/* The sliding container */}
-      <Box sx={{
-        display: 'flex',
-        animation: 'scroll 15s linear infinite',  // Scroll animation
-        animationDirection:'alternate',
-        justifyContent: 'flex-start',  // Ensure items align horizontally
-        alignItems:'center',
-        '&:hover':{animationPlayState:'paused'}
-
-      }}>
+      <Box
+        sx={{
+          display: "flex",
+          animation: "scroll 15s linear infinite", // Scroll animation
+          animationDirection: "alternate",
+          justifyContent: "flex-start", // Ensure items align horizontally
+          alignItems: "center",
+          "&:hover": { animationPlayState: "paused" },
+        }}
+      >
         {imageSlid.map((item, index) => (
-          <Box key={index} sx={{
-            width:'26%',
-            minWidth: '26%', // Change this to 32%
-            // height: {md:'250px',xs:'200'},
-            marginRight: 4,  // Adjust spacing between images
-            flexShrink: 0,
-            textAlign: 'center',
-                borderRadius: '25px',
-                backgroundColor: white,
-            marginTop: index % 2 === 0 ? '90px' : '0',
-          }}>
-            <a href={item.link} style={{ textDecoration: 'none' }}>
-              <Box sx={{
-                width: '100%',
-                height: '200px',
-                position: 'relative',
-                overflow: 'hidden',
-                padding:'15px',
-                borderRadius: '5px',
-              }}>
-                <Image 
-                  src={item.img} 
-                  alt={item.description} 
-                  layout="responsive" 
-                  width={100} 
-                  height={100} 
-                  style={{ objectFit: 'cover',height:'inherit',width:'100%',borderRadius:'25px' }}
+          <Box
+            key={index}
+            sx={{
+              width: "26%",
+              minWidth: "26%", // Change this to 32%
+              // height: {md:'250px',xs:'200'},
+              marginRight: 4, // Adjust spacing between images
+              flexShrink: 0,
+              textAlign: "center",
+              borderRadius: "25px",
+              backgroundColor: white,
+              marginTop: index % 2 === 0 ? "90px" : "0",
+            }}
+          >
+            <a href={item.link} style={{ textDecoration: "none" }}>
+              <Box
+                sx={{
+                  width: "100%",
+                  height: "200px",
+                  position: "relative",
+                  overflow: "hidden",
+                  padding: "15px",
+                  borderRadius: "5px",
+                }}
+              >
+                <Image
+                  src={item.img}
+                  alt={item.description}
+                  layout="responsive"
+                  width={100}
+                  height={100}
+                  style={{
+                    objectFit: "cover",
+                    height: "inherit",
+                    width: "100%",
+                    borderRadius: "25px",
+                  }}
                 />
               </Box>
-              <Typography variant="body2" sx={{ marginTop: 1,color:'#ff914d' }}>
+              <Typography
+                variant="body2"
+                sx={{ marginTop: 1, color: "#ff914d" }}
+              >
                 {item.description}
               </Typography>
             </a>
@@ -313,32 +325,40 @@ function ImgSlider() {
         ))}
         {/* Duplicate the slider to create an infinite loop */}
         {imageSlid.map((item, index) => (
-          <Box key={index + 6} sx={{
-            width:'26%',
-            minWidth: '26%', // Change this to 32%
-            // height: '200px',
-            marginRight: 2,
-            flexShrink: 0,
-            textAlign: 'center'
-          }}>
-            <a href={item.link} style={{ textDecoration: 'none' }}>
-              <Box sx={{
-                width: '32%',
-                // height: '200px',
-                position: 'relative',
-                overflow: 'hidden',
-                borderRadius: 1,
-              }}>
-                <Image 
-                  src={item.img} 
-                  alt={item.description} 
-                  layout="responsive" 
-                  width={100} 
-                  height={100} 
-                  style={{ objectFit: 'cover' }}
+          <Box
+            key={index + 6}
+            sx={{
+              width: "26%",
+              minWidth: "26%", // Change this to 32%
+              // height: '200px',
+              marginRight: 2,
+              flexShrink: 0,
+              textAlign: "center",
+            }}
+          >
+            <a href={item.link} style={{ textDecoration: "none" }}>
+              <Box
+                sx={{
+                  width: "32%",
+                  // height: '200px',
+                  position: "relative",
+                  overflow: "hidden",
+                  borderRadius: 1,
+                }}
+              >
+                <Image
+                  src={item.img}
+                  alt={item.description}
+                  layout="responsive"
+                  width={100}
+                  height={100}
+                  style={{ objectFit: "cover" }}
                 />
               </Box>
-              <Typography variant="body2" sx={{ marginTop: 1,color:`${dark1} !important` }}>
+              <Typography
+                variant="body2"
+                sx={{ marginTop: 1, color: `${dark1} !important` }}
+              >
                 {item.description}
               </Typography>
             </a>
@@ -358,8 +378,7 @@ function ImgSlider() {
         }
       `}</style>
     </Box>
-  )
+  );
 }
 
 export default ImgSlider;
-

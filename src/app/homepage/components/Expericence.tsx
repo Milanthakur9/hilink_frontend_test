@@ -42,7 +42,7 @@ import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import shap from "../../../assets/background_patterns/shap2.png";
+import shap from "../../../assets/background_patterns/eventbg2.png";
 import Drop from "../../../assets/background_patterns/drop3.png";
 import Drop1 from "../../../assets/background_patterns/ring.png";
 import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
@@ -106,7 +106,7 @@ function Experience() {
         sx={{
           display: "flex",
           margin: { md: "0", xs: "3% 0 0 0" },
-          flexDirection: { md: "row", xs: "column" },
+          flexDirection: { md: "row", xs: "column-reverse" },
           justifyContent: "space-between",
           alignItems: "center",
           transformStyle: "preserve-3d",
@@ -154,19 +154,22 @@ function Experience() {
         <Box
           sx={{
             width: { md: "48%", xs: "95%" },
+            marginTop: { md: "0", xs: "10%" },
             transformStyle: "preserve-3d",
             position: "relative",
+            textAlign: "center",
           }}
         >
           <Box
             ref={imageBoxRef}
             sx={{
               position: "absolute",
-              left: "4%",
-              top: "0",
+              left: "-10%",
+              top: "-10%",
               width: "80%",
               height: "80%",
               zIndex: -2,
+              display: { md: "inline", xs: "none" },
             }}
           >
             <Image
@@ -183,9 +186,9 @@ function Experience() {
             sx={{
               position: "absolute",
               right: "0%",
-              bottom: "0%",
-              width: "230px",
-              height: "230px",
+              bottom: "-10%",
+              width: { md: "230px", xs: "150px" },
+              height: { md: "230px", xs: "150px" },
               zIndex: -1,
             }}
           >
@@ -200,7 +203,12 @@ function Experience() {
 
           <Image
             src={shap}
-            style={{ width: "80%", height: "inherit" }}
+            style={{
+              width: "60%",
+              height: "inherit",
+              margin: "0 auto",
+              borderRadius: "20px",
+            }}
             alt="kickback"
             height={100}
             width={100}
