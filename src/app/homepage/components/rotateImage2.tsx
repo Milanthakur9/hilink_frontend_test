@@ -35,7 +35,7 @@ const RotatingShapeCanvas = () => {
       <spotLight position={[5, 5, 5]} angle={0.15} intensity={1} />{" "}
       {/* Spot light */}
       <RotatingShape /> {/* The rotating abstract shape */}
-      <OrbitControls enableZoom={false} />{" "}
+      <OrbitControls enableZoom={true} />{" "}
       {/* Optional: Allow user to interact with the scene */}
     </Canvas>
   );

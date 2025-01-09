@@ -80,9 +80,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 // import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
-// import * as yup from "yup";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 // import { Margin } from "@mui/icons-material";
 
 import { styled } from "@mui/material/styles";
@@ -130,36 +130,6 @@ const PhoneInputStyled = styled(PhoneInput)(({ theme }) => ({
 // code: string;
 // name: string;
 // }
-
-// const schema = yup.object().shape({
-//   eventName: yup.string().required("Please enter your event name"),
-//   startTime: yup.string().required(),
-//   endTime: yup.string().required(),
-//   venueName: yup.string().required(),
-//   eventAddress: yup.string().required(),
-//   email: yup.string().email().optional(),
-//   phone: yup.string().optional(),
-// });
-
-// interface FormData {
-//   eventName: string;
-//   startTime: string;
-//   endTime: string;
-//   venueName: string;
-//   eventAddress: string;
-//   email: string;
-//   phone: string;
-// }
-
-// const defaultValues: FormData = {
-//   eventName: "",
-//   eventAddress: "",
-//   startTime: "",
-//   endTime: "",
-//   venueName: "",
-//   email: "",
-//   phone: "",
-// };
 
 function srcset(image: string, size: number, rows = 1, cols = 1) {
   return {
@@ -291,9 +261,33 @@ import { useRouter } from "next/navigation";
 import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import CloseIcon from "@mui/icons-material/Close";
 import { axiosInstance } from "@/interceptor/axiosInterceptor";
+interface OrganizationInfoType {
+  organizationId: number;
+  eventStatus: string;
+  isRsvp: boolean;
+  eventCapacity: number;
+  eventName: string;
+  startDateAndTime: string;
+  endDateAndTime: string;
+  venueName: string;
+  address: string;
+  category: string;
+  description: string;
+  email: string;
+  phoneNo: string;
+  youtubeVideoLink: string;
+  showOnExplore: boolean;
+  eventPassword: string;
+  showGuestList: boolean;
+  activity: boolean;
+  eventPoster: string;
+  galleryImages: [];
+  createdAt?: string;
+  updatedAt?: string;
+}
 // const currencies = [
 //   {
 //     value: "Festival",
@@ -1440,72 +1434,110 @@ function EventPage() {
 
   // post request
 
-  // interface OrganizationInfoType {
-  //   organizationId: number;
-  //   eventStatus: string;
-  //   isRsvp: boolean;
-  //   eventCapacity: number;
-  //   eventName: string;
-  //   startDateAndTime: string;
-  //   endDateAndTime: string;
-  //   venueName: string;
-  //   address: string;
-  //   category: string;
-  //   email: string;
-  //   phoneNo: string;
-  //   eventPoster: string;
-  //   createdAt?: string;
-  //   updatedAt?: string;
-  // }
+  const [eventName, setEventName] = React.useState<string | null>(null);
+  const [startDate, setStartDate] = React.useState<string | null>(null);
+  const [endDate, setEndDate] = React.useState<string | null>(null);
+  const [venue, setVenue] = React.useState<string | null>(null);
+  const [address, setAddress] = React.useState<string | null>(null);
+  const [email, setEmail] = React.useState<string | null>(null);
+  const [phoneNumber, setPhoneNumber] = React.useState<string | null>(null);
+  const [refresh, setRefresh] = useState<boolean>(false);
 
-  // const [eventName, setEventName] = React.useState<string | null>(null);
-  // const [startDate, setStartDate] = React.useState<string | null>(null);
-  // const [endDate, setEndDate] = React.useState<string | null>(null);
-  // const [venue, setVenue] = React.useState<string | null>(null);
-  // const [address, setAddress] = React.useState<string | null>(null);
-  // const [email, setEmail] = React.useState<string | null>(null);
-  // const [phoneNumber, setPhoneNumber] = React.useState<string | null>(null);
-  // const [refresh, setRefresh] = useState<boolean>(false);
+  const [organizationInfo, setOrganizationInfo] =
+    useState<OrganizationInfoType>({
+      organizationId: 0,
+      eventStatus: "",
+      isRsvp: true,
+      eventCapacity: 200,
+      eventName: "",
+      startDateAndTime: "",
+      endDateAndTime: "",
+      venueName: "",
+      address: "",
+      category: "",
+      description: "",
+      email: "",
+      phoneNo: "",
+      youtubeVideoLink: "",
+      showOnExplore: false,
+      eventPassword: "",
+      activity: true,
+      showGuestList: true,
+      eventPoster: "",
+      galleryImages: [],
+      createdAt: "",
+      updatedAt: "",
+    });
 
-  // const [organizationInfo, setOrganizationInfo] =
-  //   useState<OrganizationInfoType>({
-  //     id: 0,
-  //     eventName: "",
-  //     startDateAndTime: "",
-  //     endDateAndTime: "",
-  //     venueName: "",
-  //     address: "",
-  //     category: "",
-  //     email: "",
-  //     phoneNo: "",
-  //     eventPoster: "",
-  //     createdAt: "",
-  //     updatedAt: "",
-  //   });
+  const handleEventChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      const { name, value } = e.target;
+      setOrganizationInfo((prev) => ({ ...prev, [name]: value }));
+    } catch (error) {
+      console.error("Error handling input change:", error);
+    }
+  };
+
+  const updateOrganizationProfile = async () => {
+    try {
+      const response = await axiosInstance.post(
+        `v1/event/create`,
+        organizationInfo
+      );
+      console.log("Event posted successfully:", response.data);
+    } catch (error: any) {
+      console.error(
+        "Error posting event:",
+        error.response?.data || error.message
+      );
+    }
+  };
 
   // const updateOrganizationProfile = async () => {
   //   const {
+  //     eventStatus,
+  //     organizationId,
+  //     isRsvp,
+  //     eventCapacity,
   //     eventName,
   //     startDateAndTime,
   //     endDateAndTime,
   //     venueName,
   //     address,
   //     category,
+  //     description,
+  //     activity,
   //     email,
   //     phoneNo,
+  //     youtubeVideoLink,
+  //     showOnExplore,
+  //     eventPassword,
+  //     showGuestList,
   //     eventPoster,
+  //     galleryImages,
   //   } = organizationInfo;
 
   //   try {
   //     const requestData = {
+  //       organizationId,
+  //       eventStatus: eventStatus,
+  //       isRsvp: isRsvp,
+  //       eventCapacity: eventCapacity,
   //       eventName: eventName,
   //       startDateAndTime: startDateAndTime,
   //       endDateAndTime: endDateAndTime,
   //       venueName: venueName,
   //       address: address,
   //       category: category,
+  //       description: description,
   //       email: email,
   //       phoneNo: phoneNo,
+  //       activity: activity,
+  //       youtubeVideoLink: youtubeVideoLink,
+  //       showOnExplore: showOnExplore,
+  //       eventPassword: eventPassword,
+  //       showGuestList: showGuestList,
+  //       galleryImages: galleryImages,
   //       eventPoster:
   //         "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
   //       // coverPhoto:
@@ -1526,6 +1558,71 @@ function EventPage() {
   // };
 
   // post request
+
+  // yup validation
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleDateChange = (name: string, value: Dayjs | null) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value ? value.toISOString() : "",
+    }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await schema.validate(formData, { abortEarly: false });
+      alert("Event created successfully!");
+      setErrors({});
+    } catch (validationErrors: any) {
+      const validationErrorsMap: { [key: string]: string } = {};
+      validationErrors.inner.forEach((err: any) => {
+        validationErrorsMap[err.path] = err.message;
+      });
+      setErrors(validationErrorsMap);
+    }
+
+    console.log({ formData });
+  };
+
+  interface FormData {
+    eventName: string;
+    startTime: string;
+    endTime: string;
+    venueName: string;
+    eventAddress: string;
+    email: string;
+    phone: string;
+  }
+
+  const defaultValues: FormData = {
+    eventName: "",
+    startTime: "",
+    endTime: "",
+    venueName: "",
+    eventAddress: "",
+    email: "",
+    phone: "",
+  };
+
+  const schema = yup.object().shape({
+    eventName: yup.string().required("Please enter your event name"),
+    startTime: yup.string().required("Please enter the start time"),
+    endTime: yup.string().required("Please enter the end time"),
+    venueName: yup.string().required("Please enter the venue name"),
+    eventAddress: yup.string().required("Please enter the event address"),
+    email: yup.string().email("Invalid email format").optional(),
+    phone: yup.string().optional(),
+  });
+
+  const [formData, setFormData] = useState<FormData>(defaultValues);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  // yup validation
 
   return (
     <>
@@ -1638,7 +1735,9 @@ function EventPage() {
         </Box>
         <Box>
           <Button
-            onClick={handleOpenCreate}
+            // onClick={handleOpenCreate}
+            onClick={handleSubmit}
+            // handleSubmit(onSubmit)
             sx={{
               background: `${hexToRGBA(
                 theme.palette.customColors.primaryDark1,
@@ -1748,7 +1847,7 @@ function EventPage() {
                 Almost there...
               </Typography>
               <Typography sx={{ margin: "2% 0" }}>
-                you must complete a short financial onbording before you can
+                you must complete a short financial onboarding before you can
                 start selling tickets
               </Typography>
 
@@ -1849,6 +1948,9 @@ function EventPage() {
                   id="outlined-basic"
                   label="My Event"
                   variant="outlined"
+                  name="eventName"
+                  value={formData.eventName}
+                  onChange={handleChange}
                   sx={{
                     background: `${hexToRGBA(
                       theme.palette.customColors.primaryDark1,
@@ -1879,7 +1981,9 @@ function EventPage() {
                     },
                   }}
                 />
-
+                {errors.eventName && (
+                  <p style={{ color: "red" }}>{errors.eventName}</p>
+                )}
                 {/* inner main  */}
                 <Box
                   sx={{
@@ -1919,9 +2023,18 @@ function EventPage() {
                             },
                           }}
                           defaultValue={dayjs("2022-04-17T15:30")}
+                          name="startTime"
+                          value={dayjs(formData.startTime)}
+                          // onChange={handleChange}
+                          onChange={(newValue) =>
+                            handleDateChange("startTime", newValue)
+                          }
                         />
                       </DemoItem>
                     </LocalizationProvider>
+                    {errors.startTime && (
+                      <p style={{ color: "red" }}>{errors.startTime}</p>
+                    )}
                   </Box>
                   {/* right */}
                   <Box sx={{ width: "49%" }}>
@@ -1952,10 +2065,19 @@ function EventPage() {
                                 theme.palette.customColors.primaryWhite, // Hover effect
                             },
                           }}
+                          name="endTime"
+                          value={dayjs(formData.endTime)}
+                          // onChange={handleChange}
+                          onChange={(newValue) =>
+                            handleDateChange("endTime", newValue)
+                          }
                           defaultValue={dayjs("2022-04-17T15:30")}
                         />
                       </DemoItem>
                     </LocalizationProvider>
+                    {errors.endTime && (
+                      <p style={{ color: "red" }}>{errors.endTime}</p>
+                    )}
                   </Box>
                 </Box>
                 {/* inner main  */}
@@ -1967,6 +2089,9 @@ function EventPage() {
                   label="venue Name"
                   size="small"
                   variant="outlined"
+                  name="venueName"
+                  value={formData.venueName}
+                  onChange={handleChange}
                   sx={{
                     // background: "rgba( 255, 145, 77, 0.25 )",
                     // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
@@ -1997,6 +2122,9 @@ function EventPage() {
                     },
                   }}
                 />
+                {errors.venueName && (
+                  <p style={{ color: "red" }}>{errors.venueName}</p>
+                )}
                 {/* venue Name */}
 
                 {/* Address */}
@@ -2005,6 +2133,9 @@ function EventPage() {
                   label="Address"
                   size="small"
                   variant="outlined"
+                  name="eventAddress"
+                  value={formData.eventAddress}
+                  onChange={handleChange}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="end">
@@ -2042,6 +2173,9 @@ function EventPage() {
                     },
                   }}
                 />
+                {errors.eventAddress && (
+                  <p style={{ color: "red" }}>{errors.eventAddress}</p>
+                )}
                 {/* Address         */}
 
                 {/* select start  */}
@@ -2089,39 +2223,48 @@ function EventPage() {
                   </Box>
                 </Box>
                 {isPhone ? (
-                  <TextField
-                    autoComplete="off"
-                    id="outlined-basic"
-                    // label="Email or Phone Number"
-                    placeholder="Email "
-                    size="small"
-                    variant="outlined"
-                    sx={{
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-                      backdropFilter: "blur( 4px )",
-                      marginTop: "8px",
-                      width: "100%",
-                      "& .MuiOutlinedInput-root": {
-                        color: "#fff",
-                        fontFamily: "Arial",
-                        fontWeight: "noraml",
-                        // Class for the border around the input field
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          borderColor: theme.palette.customColors.primaryWhite,
-                          borderWidth: "1px",
+                  <>
+                    <TextField
+                      autoComplete="off"
+                      id="outlined-basic"
+                      // label="Email or Phone Number"
+                      placeholder="Email "
+                      size="small"
+                      variant="outlined"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      sx={{
+                        background: `${hexToRGBA(
+                          theme.palette.customColors.primaryDark1,
+                          0.2
+                        )}`,
+                        // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                        backdropFilter: "blur( 4px )",
+                        marginTop: "8px",
+                        width: "100%",
+                        "& .MuiOutlinedInput-root": {
+                          color: "#fff",
+                          fontFamily: "Arial",
+                          fontWeight: "noraml",
+                          // Class for the border around the input field
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor:
+                              theme.palette.customColors.primaryWhite,
+                            borderWidth: "1px",
+                          },
                         },
-                      },
-                      // Class for the label of the input field
-                      "& .MuiInputLabel-outlined": {
-                        // color: "#ff914d",
-                        fontWeight: "normal",
-                      },
-                    }}
-                  />
+                        // Class for the label of the input field
+                        "& .MuiInputLabel-outlined": {
+                          // color: "#ff914d",
+                          fontWeight: "normal",
+                        },
+                      }}
+                    />
+                    {errors.email && (
+                      <p style={{ color: "red" }}>{errors.email}</p>
+                    )}
+                  </>
                 ) : (
                   <PhoneInputStyled
                     sx={{ width: "100%" }}

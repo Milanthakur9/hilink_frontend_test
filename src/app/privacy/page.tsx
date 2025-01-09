@@ -1,7 +1,7 @@
 "use client";
 import { Box, Divider, Typography, useTheme } from "@mui/material";
 import React from "react";
-
+import ScrollTop from "../homepage/components/ScrollTop";
 function Page() {
   const theme = useTheme();
   var orange = theme.palette.customColors.orange;
@@ -10,6 +10,7 @@ function Page() {
   var white = theme.palette.customColors.primaryWhite;
   return (
     <>
+      <ScrollTop />
       <Box
         sx={{
           width: { md: "85%", xs: "95%" },

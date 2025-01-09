@@ -6,6 +6,7 @@ import FluidCursor from "./components/FluidCursor";
 import EventSection from "./components/eventSection";
 import ImgSlider from "./components/imgSlider";
 import RotatingImage from "./components/rotateImage";
+import RotatingImage2 from "./components/rotateImage2";
 // import ScrollSection from './components/ScrollSection';
 import HomeFooter from "./components/HomeFooter";
 import Kickback from "./components/Kickback";
@@ -18,6 +19,7 @@ import Try from "./Try";
 import image2 from "../../assets/background_patterns/event2.png";
 import event1 from "../../assets/background_patterns/event1.png";
 import event3 from "../../assets/background_patterns/event4.png";
+import ScrollToTop from "./components/ScrollTop";
 // import StackingCards from './components/StackingCard';
 
 const slides = [
@@ -66,6 +68,7 @@ function HomePage() {
   return (
     <>
       <ReactLenis root>
+        <ScrollToTop />
         <Box sx={{ overflow: "hidden !important" }}>
           {/* <Box sx={{background:'url(https://cdn.prod.website-files.com/65ef8a3bdecf96836a4ffd5e/65ef8a3bdecf96836a4ffe09_blob-img%2520(1)-p-800.png)',backgroundRepeat:'no-repeat',backgroundSize:'cover',height:'500px',width:'300px',position:'fixed',right:'-2%',top:'50%',zIndex:-1}}></Box> */}
           <Box
@@ -176,9 +179,23 @@ function HomePage() {
                         cursor: "grabbing",
                         marginTop: "-7%",
                       },
+                      display: { md: "inline-block", xs: "none" },
                     }}
                   >
                     <RotatingImage />
+                  </Box>
+                  <Box
+                    sx={{
+                      width: {
+                        md: "48%",
+                        xs: "100%",
+                        cursor: "grabbing",
+                        marginTop: "-7%",
+                      },
+                      display: { md: "none", xs: "inline-block" },
+                    }}
+                  >
+                    <RotatingImage2 />
                   </Box>
                 </Box>
               </Box>
