@@ -1,0 +1,3224 @@
+"use client";
+// |import { useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import HMBG from "../../../../../hmbg.png";
+import uploadImage from "../../../../assets/background_patterns/uploadImage.webp";
+import Grid from "@mui/material/Grid";
+import Drop from "../../../creator/events/new/components/Drop";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import EmailIcon from "@mui/icons-material/Email";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import RoomIcon from "@mui/icons-material/Room";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import EditIcon from "@mui/icons-material/Edit";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import Link from "@mui/material/Link";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import TuneIcon from "@mui/icons-material/Tune";
+import Modal from "@mui/material/Modal";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import DeleteIcon from "@mui/icons-material/Delete";
+import StarIcon from "@mui/icons-material/Star";
+import CollectionsIcon from "@mui/icons-material/Collections";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+// image list
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+// popup 2
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+
+// offcanvas mate
+// import Drawer from "@mui/material/Drawer";
+import Checkbox from "@mui/material/Checkbox";
+import CropSquareIcon from "@mui/icons-material/CropSquare";
+import SquareIcon from "@mui/icons-material/Square";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { styled } from "@mui/material/styles";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import withAuth from "../../../../context/hoc/withAuth";
+// phone number field
+const PhoneInputStyled = styled(PhoneInput)(({ theme }) => ({
+  "& .form-control": {
+    width: "100%",
+    background: `${hexToRGBA(theme.palette.customColors.primaryDark1, 0.2)}`,
+    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+      theme.palette.customColors.orange,
+      0.12
+    )}`,
+    color: theme.palette.customColors.primaryWhite,
+    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+  },
+  "& .flag-dropdown": {
+    // background: 'transparent',
+    background: `${hexToRGBA(theme.palette.customColors.primaryDark1, 0.2)}`,
+    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+      theme.palette.customColors.orange,
+      0.12
+    )}`,
+    color: theme.palette.customColors.primaryWhite,
+    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+    "&:hover": {
+      backgroundColor: "transparent !important",
+    },
+  },
+  "& .country-list": {
+    background: "black",
+  },
+  "& .country-list li:hover": {
+    color: "black",
+  },
+  '& .country-list li[aria-selected="true"]': {
+    color: "black",
+  },
+}));
+
+// interface Country {
+// code: string;
+// name: string;
+// }
+
+function srcset(image: string, size: number, rows = 1, cols = 1) {
+  return {
+    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+    srcSet: `${image}?w=${size * cols}&h=${
+      size * rows
+    }&fit=crop&auto=format&dpr=2 2x`,
+  };
+}
+
+const itemData = [
+  {
+    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+    title: "Breakfast",
+    rows: 2,
+    cols: 2,
+  },
+  {
+    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+    title: "Burger",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
+    title: "Camera",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+    title: "Coffee",
+    cols: 2,
+  },
+  {
+    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
+    title: "Hats",
+    cols: 2,
+  },
+  {
+    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+    title: "Honey",
+    author: "@arwinneil",
+    rows: 2,
+    cols: 2,
+  },
+  {
+    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
+    title: "Basketball",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
+    title: "Fern",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
+    title: "Mushrooms",
+    rows: 2,
+    cols: 2,
+  },
+  {
+    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
+    title: "Tomato basil",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
+    title: "Sea star",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
+    title: "Bike",
+    cols: 2,
+  },
+];
+
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
+const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#151618",
+    color: "#ff914d",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: "1px solid #ff914d",
+  },
+}));
+
+// tooltip end for image popup message
+
+const names = [
+  "Inter-Bold",
+  "Armino",
+  "Barlow",
+  "Bitter",
+  "Dosis",
+  "Heebo",
+  "Hindi",
+  "Inconsolata",
+  "Inter",
+  "Kanit",
+  "Karla",
+  "Lato",
+  "Lora",
+  "Manrope",
+  "Montserrat",
+  "Mukta",
+  "Mulish",
+  "Nunito",
+  "Oswald",
+  "Poppins",
+  "Quicksand",
+  "Raleway",
+  "Roboto",
+  "Rubik",
+  "Ubuntu",
+];
+
+import { IconButton } from "@mui/material";
+import Image from "next/image";
+import UncontrolledRte from "@/components/richTextEditor/UncontrolledRte";
+import { useRouter } from "next/navigation";
+import { hexToRGBA } from "@/@core/utils/hex-to-rgba";
+import { DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
+import dayjs, { Dayjs } from "dayjs";
+import CloseIcon from "@mui/icons-material/Close";
+import { axiosInstance } from "@/interceptor/axiosInterceptor";
+import OrgDetails from "./OrgDetails";
+import Guestlist from "./Guestlist";
+
+interface OrganizationInfoType {
+  organizationId: number;
+  eventStatus: string;
+  isRsvp: boolean;
+  eventCapacity: number;
+  eventName: string;
+  startDateAndTime: string;
+  endDateAndTime: string;
+  venueName: string;
+  address: string;
+  category: string;
+  description: string;
+  email: string;
+  phoneNo: string;
+  youtubeVideoLink: string;
+  showOnExplore: boolean;
+  eventPassword: string;
+  showGuestList: boolean;
+  activity: boolean;
+  eventPoster: string;
+  galleryImages: [];
+  createdAt?: string;
+  updatedAt?: string;
+}
+// const currencies = [
+//   {
+//     value: "Festival",
+//     label: "Festival",
+//   },
+//   {
+//     value: "Nightlife",
+//     label: "Nightlife",
+//   },
+//   {
+//     value: "Individual",
+//     label: "Individual",
+//   },
+//   {
+//     value: "Crusie",
+//     label: "Crusie",
+//   },
+//   {
+//     value: "Business / Card",
+//     label: "Business / Card",
+//   },
+// ];
+
+// popup style
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: { md: "60%", xs: "100%" },
+  bgcolor: "#151618",
+  border: "none",
+  outline: "none",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 4,
+};
+
+// const VisuallyHiddenInput = styled('input')({
+//   clip: 'rect(0 0 0 0)',
+//   clipPath: 'inset(50%)',
+//   height: 1,
+//   overflow: 'hidden',
+//   position: 'absolute',
+//   bottom: 0,
+//   left: 0,
+//   whiteSpace: 'nowrap',
+//   width: 1,
+// });
+
+interface Image {
+  src: string;
+}
+
+const createStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: { md: "fit-content", xs: "90%" },
+  bgcolor: `repeating-linear-gradient(80deg, rgba(0,0,0,0.1) 100%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.4),rgba(0,0,0,0.4) 70%)`,
+  border: "none",
+  outline: "none",
+  borderRadius: "10px",
+  backdropFilter: "blur(5px)",
+  boxShadow: 24,
+  textAlign: "center",
+  p: 8,
+};
+
+function EventPage() {
+  const [description, setDescription] = React.useState(true);
+  const handleOpenDescription = () => setDescription(true);
+  const handleCloseDescription = () => setDescription(false);
+
+  const [launch, setLaunch] = React.useState(false);
+  const handleOpenLaunch = () => setLaunch(true);
+  const handleCloseLaunch = () => setLaunch(false);
+
+  // const theme = useTheme();
+  const router = useRouter();
+  const theme = useTheme();
+  // theme.palette.customColors.orange
+  // hexToRGBA(theme.palette.customColors.orange,0.2)
+
+  const [images, setImages] = useState<Image[]>([]);
+
+  const handleAddImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      // const newImages =
+      Array.from(event.target.files).map((file) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImages((prevImages) => [
+            ...prevImages,
+            { src: reader.result as string },
+          ]);
+        };
+        reader.readAsDataURL(file); // Convert the file to a base64 URL
+        return { src: reader.result as string };
+      });
+    }
+  };
+
+  const handleDeleteImage = (index: number) => {
+    setImages(images.filter((_, i) => i !== index));
+  };
+
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setBackgroundImage(imageUrl);
+    }
+  };
+
+  // offcanvas DrawerList start
+  const [Canvas, setCanvas] = React.useState(false);
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setCanvas(newOpen);
+  };
+
+  const [isSalePeriod, setIsSalePeriod] = React.useState<boolean>(false);
+  const [isValidForm, setIsValidForm] = React.useState<boolean>(false);
+  const [isLimitQty, setIsLimitQty] = React.useState<boolean>(false);
+  const [isRquireApproval, setIsRquireApproval] =
+    React.useState<boolean>(false);
+  const [isPass, setIsPass] = React.useState<boolean>(false);
+
+  // offcanvas DrawerList end
+
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: "100%",
+  });
+
+  const [phone, setNumberPhone] = React.useState<string>("");
+  const handlePhoneNumberChange = (value: any, country: any) => {
+    console.log(value, country);
+    setNumberPhone(value);
+  };
+
+  const [isPhone, setPhone] = useState(false);
+  // const [isEmail, setEmail] = useState();
+  // const [date, setDate] = React.useState<Dayjs | null>(dayjs("2022-04-17"));
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [isAdvanceSetting, setIsAdvanceSetting] =
+    React.useState<boolean>(false);
+
+  const handleOpenAdvanceSetting = () => {
+    setIsAdvanceSetting(true);
+  };
+
+  const handleHideAdvanceSetting = () => {
+    setIsAdvanceSetting(false);
+  };
+
+  const [isYoutube, setYoutube] = React.useState<boolean>(false);
+
+  const handleOpenYoutube = () => {
+    setYoutube(true);
+  };
+
+  const handleCloseYoutube = () => {
+    setYoutube(false);
+  };
+
+  const [isAddEvent, setAddEvent] = React.useState<boolean>(false);
+
+  const handleOpenAddEvent = () => {
+    setAddEvent(true);
+  };
+  const handleCloseAddEvent = () => {
+    setAddEvent(false);
+  };
+
+  const [isGallery, setGallery] = React.useState<boolean>(false);
+
+  const handleOpenGallery = () => {
+    setGallery(true);
+  };
+  const handleCloseGallery = () => {
+    setGallery(false);
+  };
+
+  const [isVisible, setIsVisible] = React.useState(true);
+  const handleOpenVisible = () => {
+    setIsVisible(true);
+  };
+  const handleCloseVisible = () => {
+    setIsVisible(false);
+  };
+
+  const [isOpacity, setIsOpacity] = React.useState(true);
+  const handleOpenOpacity = () => {
+    setIsOpacity(true);
+  };
+  const handleCloseOpacity = () => {
+    setIsOpacity(false);
+  };
+
+  const [isTitle, setIsTitle] = React.useState<string>("");
+
+  const [showTitle, setShowTitle] = React.useState(false);
+  // const handleOpenTitle = () => {
+  //   setShowTitle(true);
+  // };
+
+  // const handleCloseTitle = () =>{
+  //   setShowTitle(false)
+  // }
+  // }
+
+  const [open2, setOpen2] = React.useState(false);
+  // const handleOpen2 = () => setOpen2(true);
+  const handleClose2 = () => setOpen2(false);
+
+  const [open3, setOpen3] = React.useState(false);
+  const handleOpen3 = () => setOpen3(true);
+  const handleClose3 = () => setOpen3(false);
+
+  // const [value, setValue] = React.useState("one");
+
+  // const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  //   setValue(newValue);
+  // };
+
+  // popup 2
+  const [personName, setPersonName] = React.useState<string[]>([]);
+
+  const handleChange2 = (event: SelectChangeEvent<typeof personName>) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(typeof value === "string" ? value.split(",") : value);
+  };
+
+  // popup 2 switch
+
+  // post request
+
+  const [eventName, setEventName] = React.useState<string | null>(null);
+  const [startDate, setStartDate] = React.useState<string | null>(null);
+  const [endDate, setEndDate] = React.useState<string | null>(null);
+  const [venue, setVenue] = React.useState<string | null>(null);
+  const [address, setAddress] = React.useState<string | null>(null);
+  const [email, setEmail] = React.useState<string | null>(null);
+  const [phoneNumber, setPhoneNumber] = React.useState<string | null>(null);
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const [organizationInfo, setOrganizationInfo] =
+    useState<OrganizationInfoType>({
+      organizationId: 0,
+      eventStatus: "",
+      isRsvp: true,
+      eventCapacity: 200,
+      eventName: "",
+      startDateAndTime: "",
+      endDateAndTime: "",
+      venueName: "",
+      address: "",
+      category: "",
+      description: "",
+      email: "",
+      phoneNo: "",
+      youtubeVideoLink: "",
+      showOnExplore: false,
+      eventPassword: "",
+      activity: true,
+      showGuestList: true,
+      eventPoster: "",
+      galleryImages: [],
+      createdAt: "",
+      updatedAt: "",
+    });
+
+  const handleEventChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      const { name, value } = e.target;
+      setOrganizationInfo((prev) => ({ ...prev, [name]: value }));
+    } catch (error) {
+      console.error("Error handling input change:", error);
+    }
+  };
+
+  const updateOrganizationProfile = async () => {
+    try {
+      const response = await axiosInstance.post(
+        `v1/event/create`,
+        organizationInfo
+      );
+      console.log("Event posted successfully:", response.data);
+    } catch (error: any) {
+      console.error(
+        "Error posting event:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  // get method
+  const fetchOrganizations = async () => {
+    try {
+      const response = await axiosInstance.get("v1/event/info/2");
+
+      console.log(response.data);
+
+      setOrganizationInfo(response.data.data); // Assuming the list of organizations is in `data.data`
+      if (response.data.success) {
+      } else {
+        setError(response.data.message || "Failed to fetch organizations.");
+      }
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred.");
+    } finally {
+    }
+  };
+
+  useEffect(() => {
+    fetchOrganizations();
+  }, [refresh]);
+  // get method
+
+  // const updateOrganizationProfile = async () => {
+  //   const {
+  //     eventStatus,
+  //     organizationId,
+  //     isRsvp,
+  //     eventCapacity,
+  //     eventName,
+  //     startDateAndTime,
+  //     endDateAndTime,
+  //     venueName,
+  //     address,
+  //     category,
+  //     description,
+  //     activity,
+  //     email,
+  //     phoneNo,
+  //     youtubeVideoLink,
+  //     showOnExplore,
+  //     eventPassword,
+  //     showGuestList,
+  //     eventPoster,
+  //     galleryImages,
+  //   } = organizationInfo;
+
+  //   try {
+  //     const requestData = {
+  //       organizationId,
+  //       eventStatus: eventStatus,
+  //       isRsvp: isRsvp,
+  //       eventCapacity: eventCapacity,
+  //       eventName: eventName,
+  //       startDateAndTime: startDateAndTime,
+  //       endDateAndTime: endDateAndTime,
+  //       venueName: venueName,
+  //       address: address,
+  //       category: category,
+  //       description: description,
+  //       email: email,
+  //       phoneNo: phoneNo,
+  //       activity: activity,
+  //       youtubeVideoLink: youtubeVideoLink,
+  //       showOnExplore: showOnExplore,
+  //       eventPassword: eventPassword,
+  //       showGuestList: showGuestList,
+  //       galleryImages: galleryImages,
+  //       eventPoster:
+  //         "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
+  //       // coverPhoto:
+  //       //   "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
+  //     };
+  //     const response = await axiosInstance.post(`v1/event/create`, requestData);
+
+  //     setRefresh((prev) => !prev);
+
+  //     console.log("event post  successfully:", response.data);
+  //   } catch (error) {
+  //     console.error("event post Error updating profile:", error);
+  //     // console.error(
+  //     //   "Error updating profile:",
+  //     //   error.response?.data || error.message
+  //     // );
+  //   }
+  // };
+
+  // post request
+
+  // yup validation
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleDateChange = (name: string, value: Dayjs | null) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value ? value.toISOString() : "",
+    }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await schema.validate(formData, { abortEarly: false });
+      alert("Event created successfully!");
+      setErrors({});
+    } catch (validationErrors: any) {
+      const validationErrorsMap: { [key: string]: string } = {};
+      validationErrors.inner.forEach((err: any) => {
+        validationErrorsMap[err.path] = err.message;
+      });
+      setErrors(validationErrorsMap);
+    }
+
+    console.log({ formData });
+  };
+
+  interface FormData {
+    eventName: string;
+    startTime: string;
+    endTime: string;
+    venueName: string;
+    eventAddress: string;
+    email: string;
+    phone: string;
+    // eventPoster: string;
+  }
+
+  const defaultValues: FormData = {
+    eventName: "",
+    startTime: "",
+    endTime: "",
+    venueName: "",
+    eventAddress: "",
+    email: "",
+    phone: "",
+    // eventPoster: "",
+  };
+
+  const schema = yup.object().shape({
+    eventName: yup.string().required("Please enter your event name"),
+    startTime: yup.string().required("Please enter the start time"),
+    endTime: yup.string().required("Please enter the end time"),
+    venueName: yup.string().required("Please enter the venue name"),
+    eventAddress: yup.string().required("Please enter the event address"),
+    email: yup.string().email("Invalid email format").optional(),
+    phone: yup.string().optional(),
+    // eventPoster: yup.string().optional(),
+  });
+
+  const [formData, setFormData] = useState<FormData>(defaultValues);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  // yup validation
+
+  return (
+    <>
+      {/* main start */}
+      <Box
+        sx={{
+          backgroundImage: backgroundImage
+            ? `repeating-linear-gradient(80deg, rgba(0,0,0,0.1) 100%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.4),rgba(0,0,0,0.4) 70%),url(${backgroundImage})`
+            : `repeating-linear-gradient(80deg, rgba(0,0,0,0.1) 100%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.4),rgba(0,0,0,0.4) 70%),url(${HMBG.src}),repeating-linear-gradient(80deg, rgba(0,0,0,0.1) 100%,rgba(0,0,0,0.1) 70%)`,
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundBlendMode: "overlay",
+          backgroundAttachment: "fixed",
+          backdropFilter: "blur(500px)",
+          padding: { md: "2% 0%", xs: "2% 0 % 0%" },
+        }}
+      >
+        {/* section start      */}
+        <Box
+          sx={{
+            backdropFilter: "blur(2px)",
+            padding: { md: "5% 0%", xs: "2% 0% 45% 0%" },
+          }}
+        >
+          {/* container      */}
+          <Box sx={{ width: { md: "85%", xs: "90%" }, margin: "0px auto 0" }}>
+            {/* mn start  */}
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: "bold",
+                fontSize: "20px",
+                padding: "5% 0px 10px 0",
+                color: "#fff",
+              }}
+            >
+              Event Details
+            </Typography>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: { md: "row", xs: "column-reverse" },
+                justifyContent: "space-between",
+              }}
+            >
+              <Box sx={{ width: { md: "48%", xs: "100%" } }}>
+                <TextField
+                  autoComplete="off"
+                  id="outlined-basic"
+                  label="My Event"
+                  variant="outlined"
+                  name="eventName"
+                  value={organizationInfo?.eventName}
+                  onChange={handleChange}
+                  sx={{
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.22
+                    )}`,
+                    // background: "rgba( 21, 22, 24, 0.25 )",
+                    // boxShadow: "0 8px 32px 0 rgba(255,145,77,0.32)",
+                    backdropFilter: "blur( 14px )",
+                    width: "100%",
+                    "& .MuiOutlinedInput-root": {
+                      color: "#fff",
+                      fontFamily: "Arial",
+                      fontWeight: "noraml",
+                      // Class for the border around the input field
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: theme.palette.customColors.primaryWhite,
+                        borderWidth: "1px",
+                      },
+                    },
+                    // Class for the label of the input field
+                    "& .MuiInputLabel-outlined": {
+                      // color: "#ff914d",
+                      fontWeight: "normal",
+                    },
+                  }}
+                />
+                {errors.eventName && (
+                  <p style={{ color: "red" }}>{errors.eventName}</p>
+                )}
+                {/* inner main  */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "space-between",
+                    padding: "15px 0px",
+                  }}
+                >
+                  {/* left */}
+                  <Box sx={{ width: "49%" }}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DemoItem label="">
+                        <MobileDateTimePicker
+                          sx={{
+                            // Custom styling for the TextField
+                            "& .MuiInputBase-root": {
+                              width: "100%",
+                              color: theme.palette.customColors.primaryWhite, // Change input text color
+                              background: `${hexToRGBA(
+                                theme.palette.customColors.primaryDark1,
+                                0.2
+                              )}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                                theme.palette.customColors.orange,
+                                0.22
+                              )}`,
+                              borderRadius: "5px",
+                            },
+                            "& .MuiOutlinedInput-notchedOutline": {
+                              borderColor:
+                                theme.palette.customColors.primaryWhite, // Change border color
+                            },
+                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                              borderColor:
+                                theme.palette.customColors.primaryWhite, // Hover effect
+                            },
+                          }}
+                          defaultValue={dayjs("2022-04-17T15:30")}
+                          name="startTime"
+                          value={dayjs(organizationInfo?.startDateAndTime)}
+                          // value={organizationInfo?.eventName}
+                          // onChange={handleChange}
+                          onChange={(newValue) =>
+                            handleDateChange("startTime", newValue)
+                          }
+                        />
+                      </DemoItem>
+                    </LocalizationProvider>
+                    {errors.startTime && (
+                      <p style={{ color: "red" }}>{errors.startTime}</p>
+                    )}
+                  </Box>
+                  {/* right */}
+                  <Box sx={{ width: "49%" }}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DemoItem label="">
+                        <MobileDateTimePicker
+                          sx={{
+                            // Custom styling for the TextField
+                            "& .MuiInputBase-root": {
+                              width: "100%",
+                              color: theme.palette.customColors.primaryWhite, // Change input text color
+                              background: `${hexToRGBA(
+                                theme.palette.customColors.primaryDark1,
+                                0.2
+                              )}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                                theme.palette.customColors.orange,
+                                0.22
+                              )}`,
+                              borderRadius: "5px",
+                            },
+                            "& .MuiOutlinedInput-notchedOutline": {
+                              borderColor:
+                                theme.palette.customColors.primaryWhite, // Change border color
+                            },
+                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                              borderColor:
+                                theme.palette.customColors.primaryWhite, // Hover effect
+                            },
+                          }}
+                          name="endTime"
+                          // value={dayjs(formData.endTime)}
+                          value={dayjs(organizationInfo?.endDateAndTime)}
+                          // onChange={handleChange}
+                          onChange={(newValue) =>
+                            handleDateChange("endTime", newValue)
+                          }
+                          defaultValue={dayjs("2022-04-17T15:30")}
+                        />
+                      </DemoItem>
+                    </LocalizationProvider>
+                    {errors.endTime && (
+                      <p style={{ color: "red" }}>{errors.endTime}</p>
+                    )}
+                  </Box>
+                </Box>
+                {/* inner main  */}
+
+                {/* venue Name */}
+                <TextField
+                  autoComplete="off"
+                  id="outlined-basic"
+                  label="venue Name"
+                  size="small"
+                  variant="outlined"
+                  name="venueName"
+                  value={organizationInfo?.venueName}
+                  onChange={handleChange}
+                  sx={{
+                    // background: "rgba( 255, 145, 77, 0.25 )",
+                    // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.22
+                    )}`,
+                    backdropFilter: "blur( 4px )",
+                    width: "100%",
+                    "& .MuiOutlinedInput-root": {
+                      color: "#fff",
+                      fontFamily: "Arial",
+                      fontWeight: "noraml",
+                      // Class for the border around the input field
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: theme.palette.customColors.primaryWhite,
+                        borderWidth: "1px",
+                      },
+                    },
+                    // Class for the label of the input field
+                    "& .MuiInputLabel-outlined": {
+                      color: theme.palette.customColors.primaryWhite,
+                      fontWeight: "normal",
+                    },
+                  }}
+                />
+                {errors.venueName && (
+                  <p style={{ color: "red" }}>{errors.venueName}</p>
+                )}
+                {/* venue Name */}
+
+                {/* Address */}
+                <TextField
+                  id="outlined-basic"
+                  label="Address"
+                  size="small"
+                  variant="outlined"
+                  name="eventAddress"
+                  // value={organizationInfo?.eventAddress}
+                  value={organizationInfo?.address}
+                  onChange={handleChange}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="end">
+                        <RoomIcon
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                          }}
+                        />
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    mt: 2,
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                    backdropFilter: "blur( 4px )",
+                    width: "100%",
+                    "& .MuiOutlinedInput-root": {
+                      color: "#fff",
+                      fontFamily: "Arial",
+                      fontWeight: "noraml",
+                      // Class for the border around the input field
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: theme.palette.customColors.primaryWhite,
+                        borderWidth: "1px",
+                      },
+                    },
+                    // Class for the label of the input field
+                    "& .MuiInputLabel-outlined": {
+                      color: theme.palette.customColors.primaryWhite,
+                      fontWeight: "normal",
+                    },
+                  }}
+                />
+                {errors.eventAddress && (
+                  <p style={{ color: "red" }}>{errors.eventAddress}</p>
+                )}
+                {/* Address         */}
+
+                {/* select start  */}
+                <Drop />
+                {/* select end   */}
+
+                {/* OrgDetails start  */}
+                <OrgDetails />
+                {/* OrgDetails end  */}
+              </Box>
+
+              {/* image part start */}
+              <Box
+                sx={{
+                  width: { md: "48%", xs: "80%" },
+                  // height: '50vh',
+                  minHeight: "450px",
+                  margin: { md: "0%", xs: "0% auto 6%" },
+                  // backgroundImage:  `url(${HMBG.src})`,
+                  // backgroundImage: `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,
+                  backgroundImage: backgroundImage
+                    ? `url(${backgroundImage})`
+                    : `url(${uploadImage.src})`,
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  objectFit: "cover",
+                  // backgroundBlendMode: "overlay",
+                  borderRadius: "25px",
+                  transition: "all 0.1s linear",
+                  position: "relative",
+                  "&:hover": {
+                    // transform:'scale(1.1)'
+                    // background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.22
+                    )}`,
+                    border: `1px solid ${theme.palette.customColors.orange}`,
+                  },
+                }}
+              >
+                <Typography
+                  sx={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "40%",
+                    transform: "translate(-50%,-50%)",
+                    color: "#fff",
+                    fontFamily: "impact",
+                    fontSize: { md: "5vh", xs: "3vh" },
+                    textAlign: "center",
+                    lineHeight: "4.8vh",
+                    letterSpacing: "2px",
+                    fontStyle: "italic",
+                  }}
+                >
+                  DESIGN YOUR EVENT PAGE
+                </Typography>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    transform: "translate(-50%,-50%)",
+                  }}
+                >
+                  {backgroundImage ? (
+                    <Button
+                      sx={{
+                        background: `${hexToRGBA(
+                          theme.palette.customColors.primaryDark1,
+                          0.2
+                        )}`,
+                        border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                        color: theme.palette.customColors.primaryWhite,
+                        // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
+                        // border: "1px solid #ff914d",
+                        // background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                        borderRadius: "25px",
+                      }}
+                      variant="contained"
+                      onClick={() => setBackgroundImage(null)}
+                      // sx={{ position: 'absolute', bottom: '20px' }}
+                    >
+                      Upload Poster
+                    </Button>
+                  ) : (
+                    <>
+                      <label
+                        htmlFor="file-upload"
+                        style={{
+                          background: `${hexToRGBA(
+                            theme.palette.customColors.primaryDark1,
+                            0.2
+                          )}`,
+                          border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                          boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                            theme.palette.customColors.orange,
+                            0.22
+                          )}`,
+                          color: theme.palette.customColors.primaryWhite,
+                          padding: "12px 25px",
+                          borderRadius: "25px",
+                          fontSize: "1.8vh",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Upload Poster <sup>*</sup>
+                      </label>
+                      <input
+                        id="file-upload"
+                        style={{
+                          // border: "1px solid #ff914d",
+                          background: `${hexToRGBA(
+                            theme.palette.customColors.primaryDark1,
+                            0.2
+                          )}`,
+                          border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                          width: "150px",
+                          display: "none",
+                          padding: "5px 25px",
+                        }}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                      />
+                    </>
+                  )}
+                </Box>
+                {/* search bar start  */}
+                <Box
+                  sx={{
+                    p: "2px 4px",
+                    display: "flex",
+                    alignItems: "center",
+                    width: "95%",
+                    // border: "1px solid #ff914d",
+                    margin: "4% auto 0",
+                    borderRadius: "10px",
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                    color: theme.palette.customColors.primaryWhite,
+                    backdropFilter: "blur( 4px )",
+                  }}
+                >
+                  {/* <IconButton sx={{ p: '10px' }} aria-label="menu"> */}
+                  {/* <MenuIcon /> */}
+                  <Image
+                    src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-download-logo-30.png"
+                    alt=""
+                    style={{ height: "20px" }}
+                    height={20}
+                    width={20}
+                  />
+                  {/* </IconButton> */}
+                  <InputBase
+                    sx={{
+                      ml: 1,
+                      flex: 1,
+                      color: theme.palette.customColors.primaryWhite,
+                    }}
+                    placeholder="Search Google Maps"
+                    inputProps={{ "aria-label": "search google maps" }}
+                  />
+                  <SearchIcon
+                    sx={{ color: theme.palette.customColors.primaryWhite }}
+                  />
+                </Box>
+                {/* search bar end  */}
+
+                <Box
+                  sx={{
+                    width: { md: "90%", xs: "90%" },
+                    margin: "0px auto 0",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    position: "absolute",
+                    bottom: "3%",
+                    left: "0%",
+                    right: "0%",
+                  }}
+                >
+                  {/* popup 3 */}
+                  <Modal
+                    open={open3}
+                    onClose={handleClose3}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      {/* <Typography id="modal-modal-title" variant="h6" component="h2">
+                          Text in a modal
+                        </Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                        </Typography> */}
+                      {/* Tickets start */}
+
+                      <Typography
+                        variant="h2"
+                        sx={{
+                          mt: 2,
+                          fontSize: "20px",
+                          fontWeight: "bold",
+                          //       background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
+                          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                          // color: theme.palette.customColors.primaryWhite,
+                        }}
+                      >
+                        Admission Settings
+                      </Typography>
+
+                      <TextField
+                        autoComplete="off"
+                        sx={{
+                          width: "100%",
+                          marginTop: "10px",
+                          "& .MuiInput-root": {
+                            color: theme.palette.customColors.primaryWhite,
+                            fontFamily: "Arial",
+                            fontWeight: "normal",
+                            borderBottom: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                          },
+                          // Label
+                          "& .MuiInputLabel-standard": {
+                            color: theme.palette.customColors.primaryWhite,
+                            fontWeight: "normal",
+                          },
+                        }}
+                        id="standard-basic"
+                        // label="Search for Gifs"
+                        placeholder="Ticket Details"
+                        variant="standard"
+                      />
+
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          marginTop: "20px",
+                        }}
+                      >
+                        <Box>
+                          <Typography
+                            variant="h2"
+                            sx={{
+                              display: "flex",
+                              mt: 2,
+                              // color: "#fff",
+                              fontSize: "20px",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            Admission Settings{" "}
+                            <Typography sx={{ marginLeft: "15px" }}>
+                              $10.00
+                            </Typography>
+                          </Typography>
+                        </Box>
+                        <Box>
+                          <ContentCopyIcon
+                            sx={{
+                              color: theme.palette.customColors.primaryWhite,
+                              // background: "#ff914d",
+                              background: `${hexToRGBA(
+                                theme.palette.customColors.primaryDark1,
+                                0.2
+                              )}`,
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                              // color: theme.palette.customColors.primaryWhite,
+                              padding: "10px",
+                              boxShadow:
+                                "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
+                              fontSize: "40px",
+                              borderRadius: "50%",
+                              marginRight: "15px",
+                            }}
+                          />
+                          <EditIcon
+                            sx={{
+                              color: theme.palette.customColors.primaryWhite,
+                              background: `${hexToRGBA(
+                                theme.palette.customColors.primaryDark1,
+                                0.2
+                              )}`,
+                              padding: "10px",
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+
+                              boxShadow:
+                                "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
+                              fontSize: "40px",
+                              borderRadius: "50%",
+                            }}
+                          />
+                        </Box>
+                      </Box>
+
+                      {/* button part start  */}
+                      <Box
+                        sx={{
+                          paddingTop: "7%",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Box>
+                          <Link href="#" color="#fff">
+                            Switch to RSVP Event
+                          </Link>
+                          {/* <Link href="#">Link</Link> */}
+                        </Box>
+                        <Box>
+                          <Button
+                            sx={{
+                              // background: "#151618",
+                              padding: "9px 25px",
+                              color: theme.palette.customColors.primaryWhite,
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                              borderRadius: "25px",
+                              marginRight: "15px",
+                              "&:hover": {
+                                cursor: "pointer",
+                                background:
+                                  theme.palette.customColors.primaryWhite,
+                                color: theme.palette.customColors.primaryDark1,
+                                // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                              },
+                            }}
+                          >
+                            Cancle
+                          </Button>
+                          <Button
+                            sx={{
+                              background:
+                                theme.palette.customColors.primaryWhite,
+                              padding: "9px 25px",
+                              color: theme.palette.customColors.primaryDark1,
+                              borderRadius: "25px",
+                              "&:hover": {
+                                cursor: "pointer",
+                                // background: "#151618",
+                                color: theme.palette.customColors.primaryWhite,
+                                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                              },
+                            }}
+                          >
+                            Create New Ticket
+                          </Button>
+                        </Box>
+                      </Box>
+                      {/* button part end */}
+                      <CloseIcon
+                        onClick={handleClose3}
+                        sx={{
+                          position: "absolute",
+                          right: "2%",
+                          top: "5%",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </Box>
+                  </Modal>
+
+                  {/* popup 3 end */}
+
+                  {/* popup 2 start */}
+
+                  {/* <HtmlTooltip
+                    title={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ textAlign: "center" }}
+                          color="inherit"
+                        >
+                          Customize your event font, accent color, and
+                          light/dark mode.
+                        </Typography>
+                      </React.Fragment>
+                    }
+                  >
+                    <Button>
+                      <TuneIcon
+                        // onClick={handleOpen2}
+                        sx={{
+                          background: theme.palette.customColors.primaryWhite,
+                          color: theme.palette.customColors.primaryDark1,
+                          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                          fontSize: "40px",
+                          padding: "5px",
+                          transform: "rotate(180deg)",
+                          transition: "all 0.21s linear",
+                          borderRadius: "50%",
+                          "&:hover": {
+                            cursor: "pointer",
+                            transform: "rotate(90deg)",
+                          },
+                        }}
+                      />
+                    </Button>
+                  </HtmlTooltip> */}
+                  <Button>
+                    <TuneIcon
+                      // onClick={handleOpen2}
+                      sx={{
+                        background: theme.palette.customColors.primaryWhite,
+                        color: theme.palette.customColors.primaryDark1,
+                        // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                        fontSize: "40px",
+                        padding: "5px",
+                        transform: "rotate(180deg)",
+                        transition: "all 0.21s linear",
+                        borderRadius: "50%",
+                        "&:hover": {
+                          cursor: "pointer",
+                          transform: "rotate(90deg)",
+                        },
+                      }}
+                    />
+                  </Button>
+
+                  <Modal
+                    open={open2}
+                    onClose={handleClose2}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
+                        // sx={{ color: "#fff" }}
+                      >
+                        Event Page Design
+                      </Typography>
+                      <Typography
+                        // sx={{ color: "#fff" }}
+                        id="modal-modal-title"
+                        variant="subtitle1"
+                      >
+                        Event Title Font
+                      </Typography>
+
+                      <FormControl sx={{ m: 1, width: "100%" }}>
+                        <InputLabel id="demo-multiple-name-label">
+                          Name
+                        </InputLabel>
+                        <Select
+                          labelId="demo-multiple-name-label"
+                          id="demo-multiple-name"
+                          multiple
+                          value={personName}
+                          onChange={handleChange2}
+                          sx={{
+                            width: "100%",
+                            // background: theme.palette.customColors.primaryWhite,
+                            // color: theme.palette.customColors.primaryDark1,
+                            border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                            borderRadius: "35px",
+                            overflow: "auto",
+                            "& .MuiSvgIcon-root": {
+                              color: theme.palette.customColors.primaryWhite,
+                            },
+                          }}
+                          // input={<OutlinedInput label="Name" />}
+                          // MenuProps={MenuProps}
+                        >
+                          {names.map((name) => (
+                            <MenuItem
+                              key={name}
+                              value={name}
+                              // style={getStyles(name, personName, theme)}
+                            >
+                              {name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+
+                      {/* color picker & switch start */}
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Box sx={{ color: "#fff" }}>Accent color</Box>
+                        <Box>{/* <SwitchP /> */}</Box>
+                      </Box>
+                      {/* color picker & switch end */}
+                    </Box>
+                  </Modal>
+
+                  {/* popup 2 end  */}
+
+                  {/* popup 1 start */}
+
+                  <HtmlTooltip
+                    title={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ textAlign: "center" }}
+                          color="inherit"
+                        >
+                          Choose an image from your gallery or search for
+                          GIFs/images online for your events flyer
+                        </Typography>
+                      </React.Fragment>
+                    }
+                  >
+                    <Button>
+                      <InsertPhotoIcon
+                        onClick={handleOpen}
+                        sx={{
+                          background: theme.palette.customColors.primaryWhite,
+                          color: theme.palette.customColors.primaryDark1,
+                          fontSize: "40px",
+                          padding: "5px",
+                          borderRadius: "50%",
+                          "&:hover": { cursor: "pointer" },
+                        }}
+                      />
+                    </Button>
+                  </HtmlTooltip>
+
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      {/* Tickets start */}
+                      <Box
+                        sx={{
+                          padding: "5% 0% 0%",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          marginBottom: "25px",
+                        }}
+                      >
+                        {/* Tickets left start */}
+                        <Box
+                          sx={{
+                            borderBottom: `1px solid ${theme.palette.customColors.primaryWhite} `,
+                            width: "75%",
+                          }}
+                        >
+                          {/* <Typography variant='h6' sx={{fontWeight:'Normal',fontSize:'30px',margin:'10px 0px'}}>Search for Gifs</Typography> */}
+                          <TextField
+                            sx={{
+                              width: "100%",
+                              "& .MuiInput-root": {
+                                color: theme.palette.customColors.primaryWhite,
+                                fontFamily: "Arial",
+                                fontWeight: "normal",
+                              },
+                              // Label
+                              "& .MuiInputLabel-standard": {
+                                color: theme.palette.customColors.primaryWhite,
+                                fontWeight: "normal",
+                              },
+                            }}
+                            id="standard-basic"
+                            label="Search for Gifs"
+                            placeholder="Search for Gifs"
+                            variant="standard"
+                          />
+                        </Box>
+                        {/* Tickets left end */}
+                        {/* Tickets right start */}
+                        <Box>
+                          {/* <Button sx={{background:'#ff914d',padding:'9px 25px',color:'#fff',borderRadius:'35px'}}>Edit Tickets</Button> */}
+                          {/* <Button
+                          sx={{
+                            padding: "9px 25px",
+                            color: "#fff",
+                            borderRadius: "35px",
+                            background: "rgba( 255, 145, 77, 0.45 )",
+                            boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                            fontSize:'1.8vh',
+                            backdropFilter: "blur( 4px )",
+                          }}
+                          variant="contained"
+                          startIcon={<ArrowOutwardIcon />}
+                        >
+                          use your own
+                        </Button> */}
+
+                          {backgroundImage ? (
+                            <Button
+                              sx={{
+                                // background: "#202524",
+                                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                                color: theme.palette.customColors.primaryDark1,
+                                borderRadius: "25px",
+                              }}
+                              variant="contained"
+                              onClick={() => setBackgroundImage(null)}
+                              // sx={{ position: 'absolute', bottom: '20px' }}
+                            >
+                              Upload Poster
+                            </Button>
+                          ) : (
+                            <>
+                              <label
+                                htmlFor="file-upload"
+                                style={{
+                                  // background: "#202524",
+                                  border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                                  color:
+                                    theme.palette.customColors.primaryWhite,
+                                  padding: "12px 25px",
+                                  borderRadius: "25px",
+                                  fontSize: "2vh",
+                                  cursor: "pointer",
+                                }}
+                              >
+                                Use your own
+                              </label>
+                              <input
+                                id="file-upload"
+                                style={{
+                                  border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                                  // color: theme.palette.customColors.primaryWhite,
+                                  width: "150px",
+                                  display: "none",
+                                  padding: "5px 25px",
+                                }}
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                              />
+                            </>
+                          )}
+                        </Box>
+                        {/* Tickets right end */}
+                      </Box>
+                      {/* Tickets end */}
+
+                      <ImageList
+                        sx={{
+                          width: "60%",
+                          height: 400,
+                          margin: "0 auto",
+                          "&::-webkit-scrollbar": {
+                            width: "5px",
+                          },
+                          "&::-webkit-scrollbar-track": {
+                            background: "#151618",
+                            // borderRadius:'5px'
+                          },
+                          "&::-webkit-scrollbar-thumb": {
+                            backgroundColor:
+                              theme.palette.customColors.primaryWhite,
+                            color: theme.palette.customColors.primaryWhite,
+                            // borderRadius:'5px'
+                          },
+                        }}
+                        variant="quilted"
+                        cols={4}
+                        rowHeight={125}
+                      >
+                        {itemData.map((item) => (
+                          <ImageListItem
+                            key={item.img}
+                            cols={item.cols || 1}
+                            rows={item.rows || 1}
+                          >
+                            <Image
+                              {...srcset(item.img, 121, item.rows, item.cols)}
+                              alt={item.title}
+                              loading="lazy"
+                              height={20}
+                              width={20}
+                            />
+                          </ImageListItem>
+                        ))}
+                      </ImageList>
+                      <CloseIcon
+                        onClick={handleClose}
+                        sx={{
+                          position: "absolute",
+                          right: "2%",
+                          top: "2%",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </Box>
+                  </Modal>
+
+                  {/* popup 1 end  */}
+                </Box>
+              </Box>
+              {/* image part end  */}
+            </Box>
+
+            {/*Guestlist Preview */}
+            <Box sx={{ margin: "5% 0" }}>
+              <Guestlist />
+            </Box>
+            {/* Guestlist Preview  end */}
+
+            <Box>
+              {/* event setting start */}
+              <Box
+                sx={{
+                  borderBottom: `2px solid ${theme.palette.customColors.primaryWhite}`,
+                  margin: "10px 0px",
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: "bold", fontSize: "18px" }}
+                >
+                  Event Settings
+                </Typography>
+              </Box>
+              <Typography>
+                Increase sales by driving organic discovery and list your event
+                on the HILINK Explore Page
+              </Typography>
+              {/* event setting end */}
+
+              {/* data 1   */}
+              <Box sx={{ display: "flex", marginTop: "15px" }}>
+                <Box sx={{ marginRight: "20px" }}>
+                  <Checkbox
+                    sx={{ color: theme.palette.customColors.primaryWhite }}
+                    {...label}
+                    icon={<CropSquareIcon />}
+                    checkedIcon={
+                      <SquareIcon
+                        sx={{
+                          color: theme.palette.customColors.primaryWhite,
+                          borderRadius: "200px",
+                        }}
+                      />
+                    }
+                  />
+                </Box>
+                <Box>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      margin: "0px 0px",
+                      color: "#fff",
+                    }}
+                  >
+                    Show on Explore
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "16px",
+                      margin: "0px 0px",
+                      color: "#fff",
+                    }}
+                  >
+                    This lists your event publicly on the HILINK Explore Page
+                  </Typography>
+                </Box>
+              </Box>
+              {/* data 1   */}
+              {/* data 2   */}
+              <Box sx={{ display: "flex", marginTop: "15px" }}>
+                <Box sx={{ marginRight: "20px" }}>
+                  <Checkbox
+                    value={isPass}
+                    onChange={() => setIsPass((prev) => !prev)}
+                    sx={{ color: theme.palette.customColors.primaryWhite }}
+                    {...label}
+                    icon={<CropSquareIcon />}
+                    checkedIcon={
+                      <SquareIcon
+                        sx={{
+                          color: theme.palette.customColors.primaryWhite,
+                          borderRadius: "200px",
+                        }}
+                      />
+                    }
+                  />
+                </Box>
+                <Box>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      margin: "0px 0px",
+                      // color: "#fff",
+                    }}
+                  >
+                    Password Protected Event
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "16px",
+                      margin: "0px 0px",
+                      // color: "#fff",
+                    }}
+                  >
+                    Attendees will need a password to access the event page
+                  </Typography>
+                </Box>
+              </Box>
+              <TextField
+                autoComplete="off"
+                id="outlined-basic"
+                // label="My Event"
+                variant="outlined"
+                placeholder="Password"
+                size="small"
+                sx={{
+                  background: `${hexToRGBA(
+                    theme.palette.customColors.primaryDark1,
+                    0.2
+                  )}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                    theme.palette.customColors.orange,
+                    0.12
+                  )}`,
+                  // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                  backdropFilter: "blur( 4px )",
+                  transformOrigin: "center top",
+                  transition: "all 0.5s linear",
+                  transform: isPass ? "scale(1)" : "scale(0)",
+                  width: "100%",
+                  "& .MuiOutlinedInput-root": {
+                    color: theme.palette.customColors.primaryWhite,
+                    fontFamily: "Arial",
+                    fontWeight: "noraml",
+                    // Class for the border around the input field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: theme.palette.customColors.primaryWhite,
+                      borderWidth: "1px",
+                    },
+                  },
+                  // Class for the label of the input field
+                  "& .MuiInputLabel-outlined": {
+                    color: theme.palette.customColors.primaryWhite,
+                    fontWeight: "normal",
+                  },
+                }}
+              />
+              {/* data 2   */}
+
+              {/* Rich Text editor */}
+              {description && (
+                <Box sx={{ margin: "4% 0" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      borderBottom: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: "22px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Description
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <DeleteIcon
+                        onClick={handleCloseDescription}
+                        sx={{
+                          color: theme.palette.customColors.primaryWhite,
+                          "&:hover": { cursor: "pointer" },
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                  <UncontrolledRte />
+                </Box>
+              )}
+              {/* Rich Text editor */}
+
+              {/* Guestlist start */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { md: "row", xs: "column" },
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  margin: "5% 0",
+                }}
+              >
+                {/* Guestlist left  */}
+                <Box sx={{ width: { md: "48%", xs: "95%" } }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      borderBottom: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          color: "#fff",
+                          fontSize: "22px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Guestlist
+                      </Typography>
+                    </Box>
+                    <Box>
+                      {/* <VisibilityIcon sx={{color:'#fff',"&:hover": { cursor: "pointer"}}}/> */}
+                      {!isVisible && (
+                        <VisibilityIcon
+                          onClick={handleOpenVisible}
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                            "&:hover": { cursor: "pointer" },
+                          }}
+                        />
+                      )}
+
+                      {isVisible && (
+                        <VisibilityOffIcon
+                          onClick={handleCloseVisible}
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                            "&:hover": { cursor: "pointer" },
+                          }}
+                        />
+                      )}
+                    </Box>
+                  </Box>
+                  <Typography sx={{ marginTop: "5px" }}>
+                    Your guestlist will appear here
+                  </Typography>
+                </Box>
+                {/* Guestlist left  */}
+                {/* Guestlist right */}
+                <Box sx={{ width: { md: "48%", xs: "95%" } }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      borderBottom: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: "22px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Activity
+                      </Typography>
+                    </Box>
+                    <Box>
+                      {/* <VisibilityIcon sx={{color:'#fff',"&:hover": { cursor: "pointer"}}}/> */}
+                      {!isOpacity && (
+                        <VisibilityIcon
+                          onClick={handleOpenOpacity}
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                            "&:hover": { cursor: "pointer" },
+                          }}
+                        />
+                      )}
+
+                      {isOpacity && (
+                        <VisibilityOffIcon
+                          onClick={handleCloseOpacity}
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                            "&:hover": { cursor: "pointer" },
+                          }}
+                        />
+                      )}
+                    </Box>
+                  </Box>
+                  <Typography sx={{ marginTop: "5px" }}>
+                    Guest comments will appear here
+                  </Typography>
+                </Box>
+                {/* Guestlist right */}
+              </Box>
+              {/* Guestlist end */}
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexDirection: { md: "row", xs: "column" },
+                  marginBottom: "5%",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: { md: "48%", xs: "95%" },
+                    transition: "all .5s linear",
+                    transform: isVisible ? "scale(1)" : "scale(0)",
+                  }}
+                >
+                  {/* GuestImages start  */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      flexWrap: "wrap",
+                      gap: 2,
+                    }}
+                  >
+                    <Box sx={{ width: "20%" }}>
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{
+                          width: "100%",
+                          borderRadius: "100%",
+                          height: "100%",
+                        }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "20%" }}>
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{
+                          width: "100%",
+                          borderRadius: "100%",
+                          height: "100%",
+                        }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "20%" }}>
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{
+                          width: "100%",
+                          borderRadius: "100%",
+                          height: "100%",
+                        }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "20%" }}>
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{
+                          width: "100%",
+                          borderRadius: "100%",
+                          height: "100%",
+                        }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "20%" }}>
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{
+                          width: "100%",
+                          borderRadius: "100%",
+                          height: "100%",
+                        }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "20%" }}>
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{
+                          width: "100%",
+                          borderRadius: "100%",
+                          height: "100%",
+                        }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "20%" }}>
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{
+                          width: "100%",
+                          borderRadius: "100%",
+                          height: "100%",
+                        }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "20%" }}>
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{
+                          width: "100%",
+                          borderRadius: "100%",
+                          height: "100%",
+                        }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "20%" }}>
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{
+                          width: "100%",
+                          borderRadius: "100%",
+                          height: "100%",
+                        }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "20%" }}>
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{
+                          width: "100%",
+                          borderRadius: "100%",
+                          height: "100%",
+                        }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                  </Box>
+                  {/* GuestImages start  */}
+                </Box>
+                <Box
+                  sx={{
+                    width: { md: "48%", xs: "95%" },
+                    transition: "all .5s linear",
+                    transform: isOpacity ? "scale(1)" : "scale(0)",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginTop: "3%",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: "15%",
+                        borderRadius: "100%",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <Image
+                        alt=""
+                        height={20}
+                        width={20}
+                        style={{ width: "100%", height: "100%" }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "75%", paddingLeft: "20px" }}>
+                      <Typography sx={{ color: "#fff" }}>
+                        Eli Taylor-Lemiere
+                      </Typography>
+                      <Typography sx={{ color: "#fff" }}>
+                        so excited for this event!!
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginTop: "3%",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: "15%",
+                        borderRadius: "100%",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <Image
+                        alt=""
+                        height={20}
+                        width={20}
+                        style={{ width: "100%", height: "100%" }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "75%", paddingLeft: "20px" }}>
+                      <Typography>Kendall Jenner</Typography>
+                      <Typography>{`OMG you're going Eli???`}</Typography>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginTop: "3%",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: "15%",
+                        borderRadius: "100%",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <Image
+                        alt=""
+                        width={20}
+                        height={20}
+                        style={{ width: "100%", height: "100%" }}
+                        src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                      />
+                    </Box>
+                    <Box sx={{ width: "75%", paddingLeft: "20px" }}>
+                      <Typography>David Davidov</Typography>
+                      <Typography>
+                        Anyone wanna meet up before the event? 👀
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+
+              {/* Gallery popup start  */}
+              {isGallery && (
+                <Box sx={{ margin: "6% 0%" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      borderBottom: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: "22px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Gallery
+                      </Typography>
+                    </Box>
+                    <Box>
+                      {/* <AddCircleIcon
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                            "&:hover": { cursor: "pointer" },
+                            marginRight: "8px",
+                          }}
+                        /> */}
+                      <DeleteIcon
+                        onClick={handleCloseGallery}
+                        sx={{
+                          color: theme.palette.customColors.primaryWhite,
+                          "&:hover": { cursor: "pointer" },
+                        }}
+                      />
+                    </Box>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      border: `2px dashed ${theme.palette.customColors.primaryWhite}`,
+                      padding: "20px",
+                      borderRadius: "20px",
+                      margin: "3% 0%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        position: "absolute",
+                        left: "50%",
+                        top: "50%",
+                        transform: "translate(-50%,-50%)",
+                        zIndex: 88,
+                        transition: "background .3s linear",
+                        "&:hover": {
+                          // background: "#151618",
+                          padding: "5px 20px",
+                          borderRadius: "30px",
+                          color: theme.palette.customColors.primaryWhite,
+                        },
+                      }}
+                    >
+                      Drop an image here or click
+                      <Button
+                        component="label"
+                        role={undefined}
+                        variant="contained"
+                        tabIndex={-1}
+                        sx={{ background: "none", boxShadow: "none" }}
+                      >
+                        {/* Upload files */}
+                        <AddCircleIcon
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                          }}
+                        />
+                        <VisuallyHiddenInput
+                          type="file"
+                          onChange={handleAddImage}
+                          multiple
+                        />
+                      </Button>
+                      to add photos
+                    </Typography>
+
+                    <Grid
+                      container
+                      justifyContent="center"
+                      alignItems="center"
+                      gap={2}
+                      mt={5}
+                    >
+                      {/* <Grid container spacing={2} sx={{ border: '1px dashed black', padding: '10px' }}> */}
+                      {images.map((image, index) => (
+                        <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                          <Box
+                            sx={{
+                              width: "100%",
+                              height: 200,
+                              backgroundColor: "grey",
+                              backgroundImage: `url(${image.src})`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                              position: "relative",
+                              borderRadius: "8px",
+                              gap: 1,
+                              transition: "all .2s linear",
+                              "&:hover": { transform: "scale(1.1)" },
+                            }}
+                          >
+                            <IconButton
+                              onClick={() => handleDeleteImage(index)}
+                              sx={{
+                                position: "absolute",
+                                top: 5,
+                                right: 5,
+                                background:
+                                  theme.palette.customColors.primaryDark1,
+                                // backgroundColor: "white",
+                                borderRadius: "100%",
+                                opacity: 0.8,
+                                "&:hover": {
+                                  color: theme.palette.customColors.orange,
+                                },
+                              }}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </Box>
+                        </Grid>
+                      ))}
+
+                      {/* </Grid> */}
+                      {/* </Grid> */}
+                    </Grid>
+                  </Box>
+                </Box>
+              )}
+              {/* Gallery popup end  */}
+
+              {/* add event feature popup start  */}
+              {isAddEvent && (
+                <Box>
+                  <Box sx={{ margin: "3% 0%" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        borderBottom: ` 1px solid ${theme.palette.customColors.primaryWhite}`,
+                        paddingBottom: "10px",
+                      }}
+                    >
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontSize: "22px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {isTitle ? isTitle : "Lineup"}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        {/* <AddCircleIcon
+                            sx={{
+                              color: theme.palette.customColors.primaryWhite,
+                              "&:hover": { cursor: "pointer" },
+                              marginRight: "8px",
+                            }}
+                          /> */}
+                        <DeleteIcon
+                          onClick={handleCloseAddEvent}
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                            "&:hover": { cursor: "pointer" },
+                          }}
+                        />
+                      </Box>
+                    </Box>
+
+                    <Box>
+                      <Typography
+                        onClick={() => setShowTitle((prev) => !prev)}
+                        sx={{
+                          // color: "#fff",
+                          margin: "5px 0px",
+                          "&:hover": {
+                            cursor: "pointer",
+                            color: theme.palette.customColors.primaryWhite,
+                            textDecoration: "underline 1px solid",
+                          },
+                        }}
+                      >
+                        <Checkbox
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                          }}
+                          {...label}
+                          icon={<CropSquareIcon />}
+                          checkedIcon={
+                            <SquareIcon
+                              sx={{
+                                color: theme.palette.customColors.primaryWhite,
+                                borderRadius: "200px",
+                              }}
+                            />
+                          }
+                        />{" "}
+                        {`Customize this section's title`}
+                      </Typography>
+
+                      {showTitle && (
+                        <TextField
+                          autoComplete="off"
+                          onChange={(e) => setIsTitle(e.target.value)}
+                          value={isTitle}
+                          id="outlined-basic"
+                          // label="venue Name"
+                          placeholder="Lineup section title"
+                          size="small"
+                          variant="outlined"
+                          sx={{
+                            background: `${hexToRGBA(
+                              theme.palette.customColors.primaryDark1,
+                              0.2
+                            )}`,
+                            boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                              theme.palette.customColors.orange,
+                              0.12
+                            )}`,
+                            // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                            backdropFilter: "blur( 4px )",
+                            width: "100%",
+                            margin: "2% 0% 0%",
+                            "& .MuiOutlinedInput-root": {
+                              color: theme.palette.customColors.primaryWhite,
+                              fontFamily: "Arial",
+                              fontWeight: "noraml",
+                              // Class for the border around the input field
+                              "& .MuiOutlinedInput-notchedOutline": {
+                                borderColor:
+                                  theme.palette.customColors.primaryWhite,
+                                borderWidth: "1px",
+                              },
+                            },
+                            // Class for the label of the input field
+                            "& .MuiInputLabel-outlined": {
+                              color: theme.palette.customColors.primaryWhite,
+                              fontWeight: "normal",
+                            },
+                          }}
+                        />
+                      )}
+                    </Box>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      width: { md: "60%", xs: "100%" },
+                      padding: "20px",
+                      background: `${hexToRGBA(
+                        theme.palette.customColors.primaryDark1,
+                        0.2
+                      )}`,
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                        theme.palette.customColors.orange,
+                        0.12
+                      )}`,
+                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      borderRadius: "25px",
+                    }}
+                  >
+                    {/* up start  */}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Box sx={{ width: "20%" }}>
+                        <Button
+                          sx={{
+                            color: theme.palette.customColors.primaryWhite,
+                            padding: { md: "25px  ", xs: "10px" },
+                            fontSize: "50px",
+                            borderRadius: "50%",
+                            // border: "1px solid #ff914d",
+                            background: `${hexToRGBA(
+                              theme.palette.customColors.primaryDark1,
+                              0.2
+                            )}`,
+                            boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                              theme.palette.customColors.orange,
+                              0.12
+                            )}`,
+                            border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                            backdropFilter: "blur( 4px )",
+                          }}
+                        >
+                          <EditIcon
+                            sx={{
+                              // border: "1px solid #ff914d",
+                              color: theme.palette.customColors.primaryWhite,
+                              padding: "10px",
+                              fontSize: "50px",
+                              borderRadius: "50%",
+                              background: `${hexToRGBA(
+                                theme.palette.customColors.primaryDark1,
+                                0.2
+                              )}`,
+                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                                theme.palette.customColors.orange,
+                                0.12
+                              )}`,
+                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                              backdropFilter: "blur( 4px )",
+                            }}
+                          />
+                        </Button>
+                      </Box>
+                      <Box sx={{ width: "75%" }}>
+                        <TextField
+                          autoComplete="off"
+                          id="outlined-basic"
+                          // label="venue Name"
+                          placeholder="Name"
+                          size="small"
+                          variant="outlined"
+                          sx={{
+                            background: `${hexToRGBA(
+                              theme.palette.customColors.primaryDark1,
+                              0.2
+                            )}`,
+                            boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                              theme.palette.customColors.orange,
+                              0.12
+                            )}`,
+                            // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                            width: "100%",
+                            "& .MuiOutlinedInput-root": {
+                              color: theme.palette.customColors.primaryWhite,
+                              fontFamily: "Arial",
+                              fontWeight: "noraml",
+                              // Class for the border around the input field
+                              "& .MuiOutlinedInput-notchedOutline": {
+                                borderColor:
+                                  theme.palette.customColors.primaryWhite,
+                                borderWidth: "1px",
+                              },
+                            },
+                            // Class for the label of the input field
+                            "& .MuiInputLabel-outlined": {
+                              color: theme.palette.customColors.primaryWhite,
+                              fontWeight: "normal",
+                            },
+                          }}
+                        />
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              margin: "2% 0",
+                            }}
+                          >
+                            <Box sx={{ width: "48%" }}>
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                  // slotProps={{ field: { size: "small" } }}
+                                  enableAccessibleFieldDOMStructure
+                                  sx={{
+                                    svg: {
+                                      color:
+                                        theme.palette.customColors.primaryWhite,
+                                      opacity: "0.4",
+                                    },
+                                    label: {
+                                      color:
+                                        theme.palette.customColors.primaryWhite,
+                                      opacity: "0.4",
+                                    },
+                                    width: "100%",
+                                    color:
+                                      theme.palette.customColors.primaryWhite,
+                                    // border: "1px solid #ff914d",
+                                    borderRadius: "5px",
+                                    background: `${hexToRGBA(
+                                      theme.palette.customColors.primaryDark1,
+                                      0.2
+                                    )}`,
+                                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                                      theme.palette.customColors.orange,
+                                      0.12
+                                    )}`,
+                                    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                                    backdropFilter: "blur( 4px )",
+                                    "& .MuiInputLabel-root.Mui-focused": {
+                                      color:
+                                        theme.palette.customColors.primaryWhite,
+                                    }, //styles the label
+                                    "& .MuiOutlinedInput-root": {
+                                      "&:hover > fieldset": {
+                                        borderColor: "",
+                                      },
+                                      height: "48px",
+                                      borderRadius: "6px",
+                                    },
+                                  }}
+                                  label="Start Time"
+                                />
+                              </LocalizationProvider>
+                            </Box>
+                            <Box sx={{ width: "48%" }}>
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                  // slotProps={{ field: { size: "small" } }}
+                                  enableAccessibleFieldDOMStructure
+                                  sx={{
+                                    svg: {
+                                      color:
+                                        theme.palette.customColors.primaryWhite,
+                                      opacity: "0.4",
+                                    },
+                                    label: {
+                                      color:
+                                        theme.palette.customColors.primaryWhite,
+                                      opacity: "0.4",
+                                    },
+                                    width: "100%",
+                                    color:
+                                      theme.palette.customColors.primaryWhite,
+                                    // border: "1px solid #ff914d",
+                                    borderRadius: "5px",
+                                    background: `${hexToRGBA(
+                                      theme.palette.customColors.primaryDark1,
+                                      0.2
+                                    )}`,
+                                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                                      theme.palette.customColors.orange,
+                                      0.12
+                                    )}`,
+                                    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                                    backdropFilter: "blur( 4px )",
+                                    "& .MuiInputLabel-root.Mui-focused": {
+                                      color:
+                                        theme.palette.customColors.primaryWhite,
+                                    }, //styles the label
+                                    "& .MuiOutlinedInput-root": {
+                                      "&:hover > fieldset": {
+                                        borderColor: "",
+                                      },
+                                      height: "48px",
+                                      borderRadius: "6px",
+                                    },
+                                  }}
+                                  label="End Time"
+                                />
+                              </LocalizationProvider>
+                            </Box>
+                          </Box>
+                        </LocalizationProvider>
+                      </Box>
+                    </Box>
+                    {/* up end  */}
+                    <TextField
+                      autoComplete="off"
+                      id="outlined-basic"
+                      // label="venue Name"
+                      placeholder="Link"
+                      size="small"
+                      variant="outlined"
+                      sx={{
+                        background: `${hexToRGBA(
+                          theme.palette.customColors.primaryDark1,
+                          0.2
+                        )}`,
+                        boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                          theme.palette.customColors.orange,
+                          0.12
+                        )}`,
+                        // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                        backdropFilter: "blur( 4px )",
+                        width: "100%",
+                        marginTop: "2%",
+                        "& .MuiOutlinedInput-root": {
+                          color: theme.palette.customColors.primaryWhite,
+                          fontFamily: "Arial",
+                          fontWeight: "noraml",
+                          // Class for the border around the input field
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor:
+                              theme.palette.customColors.primaryWhite,
+                            borderWidth: "1px",
+                          },
+                        },
+                        // Class for the label of the input field
+                        "& .MuiInputLabel-outlined": {
+                          // color: "#ff914d",
+                          fontWeight: "normal",
+                        },
+                      }}
+                    />
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        padding: "5% 0",
+                      }}
+                    >
+                      <Button
+                        onClick={handleCloseAddEvent}
+                        sx={{
+                          width: "49%",
+                          background: `${hexToRGBA(
+                            theme.palette.customColors.primaryDark1,
+                            0.2
+                          )}`,
+                          boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                            theme.palette.customColors.orange,
+                            0.12
+                          )}`,
+                          border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                          padding: "9px 25px",
+                          borderRadius: "25px",
+                        }}
+                        variant="contained"
+                        startIcon={<DeleteIcon />}
+                      >
+                        {" "}
+                        Cancle{" "}
+                      </Button>
+                      <Button
+                        sx={{
+                          width: "49%",
+                          background: `${hexToRGBA(
+                            theme.palette.customColors.primaryWhite,
+                            1
+                          )}`,
+                          boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                            theme.palette.customColors.orange,
+                            0.12
+                          )}`,
+                          border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                          padding: "9px 25px",
+                          color: theme.palette.customColors.primaryDark1,
+                          borderRadius: "25px",
+                          "&:hover": {
+                            color: theme.palette.customColors.primaryWhite,
+                          },
+                        }}
+                      >
+                        save
+                      </Button>
+                    </Box>
+                  </Box>
+                </Box>
+              )}
+              {/* add event feature popup end  */}
+
+              {/* youtube popup start */}
+              {isYoutube && (
+                <Box sx={{ margin: "6% 0%" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      borderBottom: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: "22px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        YouTube Video
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <DeleteIcon
+                        onClick={handleCloseYoutube}
+                        sx={{
+                          color: theme.palette.customColors.primaryWhite,
+                          "&:hover": { cursor: "pointer" },
+                        }}
+                      />
+                    </Box>
+                  </Box>
+
+                  {/* search bar start  */}
+                  <Box
+                    sx={{
+                      p: "2px 10px",
+                      display: "flex",
+                      alignItems: "center",
+                      width: "100%",
+                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      margin: "2% auto 0",
+                      borderRadius: "10px",
+                      background: "rgba( 32, 37, 36, 0.45 )",
+                      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                      backdropFilter: "blur( 4px )",
+                    }}
+                  >
+                    <YouTubeIcon sx={{ color: "#ff0033" }} />
+                    {/* </IconButton> */}
+                    <InputBase
+                      sx={{
+                        ml: 1,
+                        flex: 1,
+                        color: theme.palette.customColors.primaryWhite,
+                      }}
+                      placeholder="Search Google Maps"
+                      inputProps={{ "aria-label": "search google maps" }}
+                    />
+                    <SearchIcon
+                      sx={{ color: theme.palette.customColors.primaryWhite }}
+                    />
+                  </Box>
+                  {/* search bar end  */}
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      marginTop: "20px",
+                    }}
+                  >
+                    {`By adding a YouTube video, you agree to YouTube's`}{" "}
+                    <Link href="#" color="#fff">
+                      terms of service
+                    </Link>
+                  </Typography>
+                </Box>
+              )}
+              {/* youtube popup end */}
+
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
+                  padding: "5% 0%",
+                  gap: 2,
+                }}
+              >
+                <Box
+                  sx={{
+                    minHeight: "180px",
+                    width: { md: "45%", xs: "100%" },
+                    padding: "25px",
+                    // border: "1px solid #ff914d",
+                    borderRadius: "12px",
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.12
+                    )}`,
+                    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                    backdropFilter: "blur( 4px )",
+                  }}
+                >
+                  <Typography sx={{ color: "#fff", margin: "3% 0%" }}>
+                    Embed a YouTube video to give guests a preview of what to
+                    expect.
+                  </Typography>
+                  <Button
+                    onClick={handleOpenYoutube}
+                    sx={{
+                      background: `${hexToRGBA(
+                        theme.palette.customColors.primaryDark1,
+                        0.2
+                      )}`,
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                        theme.palette.customColors.orange,
+                        0.12
+                      )}`,
+                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      color: theme.palette.customColors.primaryWhite,
+                      borderRadius: "25px",
+                      padding: "9px 25px",
+                      textTransform: "capitalize",
+                    }}
+                    variant="outlined"
+                    startIcon={<YouTubeIcon sx={{ color: "#fff" }} />}
+                    endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
+                  >
+                    Add Youtube Video
+                  </Button>
+                </Box>
+                <Box
+                  sx={{
+                    minHeight: "180px",
+                    width: { md: "45%", xs: "100%" },
+                    padding: "25px",
+                    // border: "1px solid #ff914d",
+                    borderRadius: "12px",
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.12
+                    )}`,
+                    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                    backdropFilter: "blur( 4px )",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: theme.palette.customColors.primaryWhite,
+                      margin: "3% 0%",
+                    }}
+                  >
+                    {`From DJs to sponsors, showcase your event's key players.`}
+                  </Typography>
+                  <Button
+                    onClick={handleOpenAddEvent}
+                    sx={{
+                      // background: "#202524",
+                      background: `${hexToRGBA(
+                        theme.palette.customColors.primaryDark1,
+                        0.2
+                      )}`,
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                        theme.palette.customColors.orange,
+                        0.12
+                      )}`,
+                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      borderRadius: "25px",
+                      padding: "9px 25px",
+                      textTransform: "capitalize",
+                    }}
+                    variant="outlined"
+                    startIcon={
+                      <StarIcon
+                        sx={{
+                          color: theme.palette.customColors.primaryWhite,
+                        }}
+                      />
+                    }
+                    endIcon={
+                      <ArrowRightAltIcon
+                        sx={{
+                          color: theme.palette.customColors.primaryWhite,
+                        }}
+                      />
+                    }
+                  >
+                    Add Event Features
+                  </Button>
+                </Box>
+                <Box
+                  sx={{
+                    minHeight: "180px",
+                    width: { md: "45%", xs: "100%" },
+                    padding: "25px",
+                    // border: "1px solid #ff914d",
+                    borderRadius: "12px",
+                    background: `${hexToRGBA(
+                      theme.palette.customColors.primaryDark1,
+                      0.2
+                    )}`,
+                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                      theme.palette.customColors.orange,
+                      0.12
+                    )}`,
+                    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                    backdropFilter: "blur( 4px )",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: theme.palette.customColors.primaryWhite,
+                      margin: "3% 0%",
+                    }}
+                  >
+                    {`Add images to showcase your event's vibe.`}
+                  </Typography>
+                  <Button
+                    onClick={handleOpenGallery}
+                    sx={{
+                      background: `${hexToRGBA(
+                        theme.palette.customColors.primaryDark1,
+                        0.2
+                      )}`,
+                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                        theme.palette.customColors.orange,
+                        0.12
+                      )}`,
+                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                      color: theme.palette.customColors.primaryWhite,
+                      borderRadius: "25px",
+                      padding: "9px 25px",
+                      textTransform: "capitalize",
+                    }}
+                    variant="outlined"
+                    startIcon={
+                      <CollectionsIcon
+                        sx={{
+                          color: theme.palette.customColors.primaryWhite,
+                        }}
+                      />
+                    }
+                    endIcon={
+                      <ArrowRightAltIcon
+                        sx={{
+                          color: theme.palette.customColors.primaryWhite,
+                        }}
+                      />
+                    }
+                  >
+                    Add a Gallery
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
+
+            {/* Show Advance settings */}
+
+            {/* mn end  */}
+          </Box>
+          {/* container end  */}
+        </Box>
+        {/* section end  */}
+      </Box>
+      {/* main end  */}
+      {/* mobile header start  */}
+      <Box
+        sx={{
+          display: { xs: "flex", md: "none" },
+          flexDirection: "column-reverse",
+          width: { xs: "100%" },
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "10px 25px",
+          position: "fixed",
+          bottom: "0",
+          background: `${hexToRGBA(
+            theme.palette.customColors.primaryDark1,
+            0.2
+          )}`,
+          boxShadow: `0 8px 32px 0 ${hexToRGBA(
+            theme.palette.customColors.orange,
+            0.12
+          )}`,
+          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+          backdropFilter: "blur( 10px )",
+        }}
+      >
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Button
+            sx={{
+              // background: "#151618",
+              background: `${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.2
+              )}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              padding: "9px 25px",
+              color: theme.palette.customColors.primaryWhite,
+              borderRadius: "15px",
+            }}
+          >
+            Exit Event Creator
+          </Button>
+          <Button
+            // onClick={handleOpenCreate}
+            onClick={handleSubmit}
+            sx={{
+              background: `${hexToRGBA(
+                theme.palette.customColors.primaryDark1,
+                0.2
+              )}`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              padding: "9px 25px",
+              color: theme.palette.customColors.primaryWhite,
+              borderRadius: "15px",
+            }}
+          >
+            Create Event
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            width: "60%",
+            justifyContent: "space-between",
+            margin: "20px 0px",
+          }}
+        >
+          <Box
+            sx={{
+              width: "30%",
+              background: `repeating-linear-gradient(65deg,${hexToRGBA(
+                theme.palette.customColors.primaryDark2,
+                1
+              )} 20px,${hexToRGBA(
+                theme.palette.customColors.primaryWhite,
+                1
+              )} 20px,${hexToRGBA(
+                theme.palette.customColors.orange,
+                1
+              )} 600px)`,
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+              height: "15px",
+              borderRadius: "5px",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: "30%",
+              background: "#151618",
+              height: "15px",
+              borderRadius: "5px",
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: "30%",
+              background: "#151618",
+              height: "15px",
+              borderRadius: "5px",
+              boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                theme.palette.customColors.orange,
+                0.12
+              )}`,
+              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+            }}
+          ></Box>
+        </Box>
+      </Box>
+      {/* mobile header end  */}
+    </>
+  );
+}
+
+// export default EventPage;
+export default withAuth(EventPage);

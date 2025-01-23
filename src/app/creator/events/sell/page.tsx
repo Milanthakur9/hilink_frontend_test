@@ -12,6 +12,7 @@ import {
 import React, { useState } from "react";
 // import HMBG from "../../hmbg.png";
 import HMBG from "../../../../../hmbg.png";
+import uploadImage from "../../../../assets/background_patterns/uploadImage.webp";
 // import  Grid from '@mui/material';
 import Grid from "@mui/material/Grid";
 
@@ -2161,7 +2162,7 @@ function EventPage() {
                   // backgroundImage: `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,
                   backgroundImage: backgroundImage
                     ? `url(${backgroundImage})`
-                    : `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,
+                    : `url(${uploadImage.src})`,
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",

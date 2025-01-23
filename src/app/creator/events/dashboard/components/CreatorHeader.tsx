@@ -124,7 +124,8 @@ export default function CreatorHeader() {
               />
             </IconButton>
 
-            <HtmlTooltip
+            {/* notification start     */}
+            {/* <HtmlTooltip
               title={
                 <React.Fragment>
                   <Box>
@@ -156,7 +157,8 @@ export default function CreatorHeader() {
                   }}
                 />
               </IconButton>
-            </HtmlTooltip>
+            </HtmlTooltip> */}
+            {/* notification end     */}
 
             <IconButton
               sx={{

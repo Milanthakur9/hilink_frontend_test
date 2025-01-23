@@ -18,7 +18,7 @@ import Modal from "@mui/material/Modal";
 // icon
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 // select
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -229,7 +229,7 @@ function SettingHeader() {
                 alignItems: "center",
                 width: "80%",
                 margin: "2% auto",
-                height: "200px",
+                height: { md: "200px", xs: "120px" },
                 overflowY: "scroll",
                 "&::-webkit-scrollbar": {
                   width: "8px",
@@ -244,7 +244,7 @@ function SettingHeader() {
             >
               {checkBoxData.map((item) => {
                 return (
-                  <Box key={item.name} sx={{ width: "32%" }}>
+                  <Box key={item.name} sx={{ width: { md: "32%", xs: "95%" } }}>
                     <FormGroup>
                       <FormControlLabel
                         control={<Checkbox sx={{ color: orange }} />}
@@ -273,7 +273,7 @@ function SettingHeader() {
               <Button
                 sx={{
                   background: orange,
-                  color:white,
+                  color: white,
                   transition: "all .1s linear",
                   fontWeight: "normal",
                   paddingInline: "20px",
@@ -283,7 +283,17 @@ function SettingHeader() {
                 Export Report
               </Button>
             </Box>
-            <CloseIcon  onClick={() => setOpenReport(false)} sx={{cursor:'pointer',position:'absolute',right:'5%',top:'5%',fontSize:'25px','&:hover':{color:`${orange}`}}}/>
+            <CloseIcon
+              onClick={() => setOpenReport(false)}
+              sx={{
+                cursor: "pointer",
+                position: "absolute",
+                right: "5%",
+                top: "5%",
+                fontSize: "25px",
+                "&:hover": { color: `${orange}` },
+              }}
+            />
           </Box>
         </Modal>
         {/* modal 1 end */}
@@ -298,7 +308,7 @@ function SettingHeader() {
           <Box sx={style}>
             <Typography
               sx={{
-                fontSize: "35px",
+                fontSize: { md: "35px", xs: "25px" },
                 fontWeight: "bold",
                 textAlign: "center",
                 margin: "2% 0",
@@ -306,7 +316,9 @@ function SettingHeader() {
             >
               Refund Full Event Refund
             </Typography>
-            <Typography sx={{ fontSize: "16px", textAlign: "center" }}>
+            <Typography
+              sx={{ fontSize: { md: "16px", xs: "14px" }, textAlign: "center" }}
+            >
               If you would like to refund EVERY ATTENDEE of your event all at
               once, fill out the brief form below to submit a request.
             </Typography>
@@ -364,7 +376,7 @@ function SettingHeader() {
 
             <Box
               sx={{
-                height: "250px",
+                height: { md: "250px", xs: "120px" },
                 overflowY: "scroll",
                 "&::-webkit-scrollbar": {
                   width: "8px",
@@ -506,11 +518,28 @@ function SettingHeader() {
                 3-5 business days to be issued. Processing fees are not
                 refunded.
               </Typography>
-              <Button sx={{ background: orange, color:white,paddingInline:'20px',margin: "2% 0 0" }}>
+              <Button
+                sx={{
+                  background: orange,
+                  color: white,
+                  paddingInline: "20px",
+                  margin: "2% 0 0",
+                }}
+              >
                 Request Full Event Refund
               </Button>
             </Box>
-            <CloseIcon  onClick={() => setOpenRefund(false)} sx={{cursor:'pointer',position:'absolute',right:'5%',top:'5%',fontSize:'25px','&:hover':{color:`${orange}`}}}/>
+            <CloseIcon
+              onClick={() => setOpenRefund(false)}
+              sx={{
+                cursor: "pointer",
+                position: "absolute",
+                right: "5%",
+                top: "5%",
+                fontSize: "25px",
+                "&:hover": { color: `${orange}` },
+              }}
+            />
           </Box>
         </Modal>
         {/* modal 2 end */}

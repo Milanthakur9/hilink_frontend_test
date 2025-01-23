@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import {
   Box,
@@ -19,8 +20,11 @@ import Image from "next/image";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
+import { useRouter } from "next/navigation";
 // import Divider from '@mui/material/Divider';
 export default function CreatorFooter() {
+  const router = useRouter();
+
   return (
     <Box sx={{ flexGrow: 1, background: "#151618" }}>
       <Container maxWidth="lg" sx={{ mt: 4 }}>
@@ -196,6 +200,7 @@ export default function CreatorFooter() {
               primary=" ©  HILINK all rights reserved."
             />
             <ListItemText
+              onClick={() => router.push(`/privacy`)}
               sx={{
                 color: "#fff",
                 "&:hover": {
@@ -207,6 +212,7 @@ export default function CreatorFooter() {
               primary="Privacy Policy"
             />
             <ListItemText
+              onClick={() => router.push(`/tos`)}
               sx={{
                 color: "#fff",
                 "&:hover": {

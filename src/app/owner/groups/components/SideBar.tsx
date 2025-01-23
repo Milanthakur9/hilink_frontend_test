@@ -10,6 +10,8 @@ import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
 import GroupsIcon from "@mui/icons-material/Groups";
 import SettingsIcon from "@mui/icons-material/Settings";
+import BrushIcon from "@mui/icons-material/Brush";
+// import withAuth from "../../../../context/hoc/withAuth";
 
 const groupsNavigation = [
   {
@@ -23,10 +25,15 @@ const groupsNavigation = [
     icon: <ConfirmationNumberIcon sx={{ fontSize: "4vh" }} />,
   },
   {
-    name: "setting",
-    link: "/owner/groups/settings/",
-    icon: <SettingsIcon sx={{ fontSize: "4vh" }} />,
+    name: "visuals",
+    link: "/owner/groups/visuals/",
+    icon: <BrushIcon sx={{ fontSize: "4vh" }} />,
   },
+  // {
+  //   name: "setting",
+  //   link: "/owner/groups/settings/",
+  //   icon: <SettingsIcon sx={{ fontSize: "4vh" }} />,
+  // },
   {
     name: "team",
     link: "/owner/groups/team/",
@@ -49,7 +56,7 @@ const SideBar: React.FC<SideBarProps> = ({ children }) => {
   const router = useRouter();
   const orange = theme.palette.customColors.orange;
   return (
-    <div>
+    <>
       <Box
         sx={{
           display: "flex",
@@ -74,33 +81,31 @@ const SideBar: React.FC<SideBarProps> = ({ children }) => {
         >
           {groupsNavigation.map((item) => {
             return (
-              <>
-                <Box
-                  key={item.name}
-                  onClick={() => router.push(item.link)}
-                  sx={{
-                    minWidth: { md: "100%", xs: "60px" },
-                    textAlign: "center",
-                    padding: "5px",
-                    borderRadius: "5px",
-                    transition: "all .1s linear",
-                    marginTop: { md: "20px" },
-                    xs: "0",
-                    backgroundColor: pathName === item.link ? orange : "",
-                    "&:hover": {
-                      cursor: "pointer",
-                      transform: "scale(0.95) translateY(-5px)",
-                    },
-                  }}
-                  title={item.name}
-                >
-                  {item.icon}
+              <Box
+                key={item.name}
+                onClick={() => router.push(item.link)}
+                sx={{
+                  minWidth: { md: "100%", xs: "45px" },
+                  textAlign: "center",
+                  padding: "5px",
+                  borderRadius: "5px",
+                  transition: "all .1s linear",
+                  marginTop: { md: "20px" },
+                  xs: "0",
+                  backgroundColor: pathName === item.link ? orange : "",
+                  "&:hover": {
+                    cursor: "pointer",
+                    transform: "scale(0.95) translateY(-5px)",
+                  },
+                }}
+                title={item.name}
+              >
+                {item.icon}
 
-                  <Typography sx={{ textAlign: "center", fontSize: "2.5vh" }}>
-                    {item.name}
-                  </Typography>
-                </Box>
-              </>
+                <Typography sx={{ textAlign: "center", fontSize: "2.5vh" }}>
+                  {item.name}
+                </Typography>
+              </Box>
             );
           })}
         </Box>
@@ -121,8 +126,9 @@ const SideBar: React.FC<SideBarProps> = ({ children }) => {
           </Box>
         </Box>
       </Box>
-    </div>
+    </>
   );
 };
 
 export default SideBar;
+// export default withAuth(SideBar);

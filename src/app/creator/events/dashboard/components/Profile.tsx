@@ -12,7 +12,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import PanoramaIcon from "@mui/icons-material/Panorama";
 import { axiosInstance } from "@/interceptor/axiosInterceptor";
 import { useRouter } from "next/navigation";
-
+import uploadImage from "../../../../../assets/background_patterns/uploadImage.webp";
 interface OrganizationInfoType {
   id: number;
   name: string;
@@ -62,6 +62,7 @@ function Profile() {
   const dark1 = theme.palette.customColors.primaryDark1;
   const dark2 = theme.palette.customColors.primaryDark2;
 
+  // cover background
   const [profileBackgroundImage, setProfileBackgroundImage] = useState<
     string | null
   >(null);
@@ -72,8 +73,15 @@ function Profile() {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setProfileBackgroundImage(imageUrl);
+      setOrganizationInfo((prev) => ({
+        ...prev,
+        coverPhoto: imageUrl,
+      }));
     }
   };
+  // cover background
+
+  // profile image
 
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const handleProfileImage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,8 +89,13 @@ function Profile() {
     if (file) {
       const imageUrls = URL.createObjectURL(file);
       setProfileImage(imageUrls);
+      setOrganizationInfo((prev) => ({
+        ...prev,
+        profilePhoto: imageUrls,
+      }));
     }
   };
+  // profile image
 
   // get
   const fetchOrganizations = async () => {
@@ -115,6 +128,8 @@ function Profile() {
       twitterLink,
       websiteLink,
       linkedInLink,
+      profilePhoto,
+      coverPhoto,
     } = organizationInfo;
 
     try {
@@ -125,10 +140,8 @@ function Profile() {
         twitterLink: twitterLink,
         websiteLink: websiteLink,
         linkedInLink: linkedInLink,
-        profilePhoto:
-          "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
-        coverPhoto:
-          "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
+        profilePhoto: profilePhoto,
+        coverPhoto: coverPhoto,
       };
       const response = await axiosInstance.put(
         `v1/organization/update/profile/1`,
@@ -172,7 +185,7 @@ function Profile() {
           // margin: { md: "0%", xs: "0% auto 6%" },
           backgroundImage: profileBackgroundImage
             ? `url(${profileBackgroundImage})`
-            : `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,
+            : `url(${uploadImage.src})`,
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -230,6 +243,14 @@ function Profile() {
               </label>
               <input
                 id="file-upload1"
+                name="coverPhoto"
+                accept="image/*"
+                // onChange={(e) =>
+                //   setOrganizationInfo((prev) => ({
+                //     ...prev,
+                //     coverPhoto: e.target.files?.[0].name || "",
+                //   }))
+                // }
                 style={{
                   border: `1px solid ${orange}`,
                   width: "150px",
@@ -237,7 +258,6 @@ function Profile() {
                   padding: "5px 25px",
                 }}
                 type="file"
-                accept="image/*"
                 onChange={handleProfileImageUpload}
               />
             </>
@@ -273,7 +293,7 @@ function Profile() {
                 // margin: { md: "0%", xs: "0% auto 6%" },
                 backgroundImage: profileImage
                   ? `url(${profileImage})`
-                  : `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,
+                  : `url(${uploadImage.src})`,
                 backgroundPosition: "center center",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",

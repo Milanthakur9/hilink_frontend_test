@@ -81,6 +81,15 @@ function DrawerInner() {
     setSplit(false);
   };
   // split btn
+
+  const handleLogout = () => {
+    // Remove authToken from localStorage
+    localStorage.removeItem("authToken");
+
+    // Optionally redirect to the login page
+    router.push("/login");
+  };
+
   return (
     <div>
       <Box
@@ -228,6 +237,7 @@ function DrawerInner() {
           })}
 
           <Typography
+            onClick={handleLogout}
             sx={{ cursor: "pointer", fontSize: "20px", marginTop: "4%" }}
           >
             Logout

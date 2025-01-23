@@ -4,6 +4,7 @@ import { Box, Button, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 // import HMBG from "../../hmbg.png";
 import HMBG from "../../../../../hmbg.png";
+import uploadImage from "../../../../assets/background_patterns/uploadImage.webp";
 // import  Grid from '@mui/material';
 import Grid from "@mui/material/Grid";
 import Drop from "./components/Drop";
@@ -1597,6 +1598,7 @@ function EventPage() {
     eventAddress: string;
     email: string;
     phone: string;
+    // eventPoster: string;
   }
 
   const defaultValues: FormData = {
@@ -1607,6 +1609,7 @@ function EventPage() {
     eventAddress: "",
     email: "",
     phone: "",
+    // eventPoster: "",
   };
 
   const schema = yup.object().shape({
@@ -1617,6 +1620,7 @@ function EventPage() {
     eventAddress: yup.string().required("Please enter the event address"),
     email: yup.string().email("Invalid email format").optional(),
     phone: yup.string().optional(),
+    // eventPoster: yup.string().optional(),
   });
 
   const [formData, setFormData] = useState<FormData>(defaultValues);
@@ -2290,7 +2294,7 @@ function EventPage() {
                   // backgroundImage: `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,
                   backgroundImage: backgroundImage
                     ? `url(${backgroundImage})`
-                    : `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,
+                    : `url(${uploadImage.src})`,
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
@@ -5026,7 +5030,8 @@ function EventPage() {
             Exit Event Creator
           </Button>
           <Button
-            onClick={handleOpenCreate}
+            // onClick={handleOpenCreate}
+            onClick={handleSubmit}
             sx={{
               background: `${hexToRGBA(
                 theme.palette.customColors.primaryDark1,

@@ -91,34 +91,34 @@ export default function CreatorVerticalTab() {
             }}
           >
             <Tab label="Overview" {...a11yProps(0)} />
-            <Tab label="Marketing" {...a11yProps(1)} />
-            <Tab label="Team" {...a11yProps(2)} />
-            <Tab label="Finance" {...a11yProps(3)} />
-            <Tab label="Profile" {...a11yProps(4)} />
-            <Tab label="Settings" {...a11yProps(5)} />
+            {/* <Tab label="Marketing" {...a11yProps(1)} /> */}
+            <Tab label="Team" {...a11yProps(1)} />
+            <Tab label="Finance" {...a11yProps(2)} />
+            <Tab label="Profile" {...a11yProps(3)} />
+            <Tab label="Settings" {...a11yProps(4)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
           {/* Overview Content */}
           <Overview />
         </TabPanel>
+        {/* Marketing Content
         <TabPanel value={value} index={1}>
-          {/* Marketing Content */}
           <Marketing />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
+        </TabPanel> */}
+        <TabPanel value={value} index={1}>
           {/* Team Content */}
           <Team />
         </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel value={value} index={2}>
           {/* Finance Content */}
           <Finance />
         </TabPanel>
-        <TabPanel value={value} index={4}>
+        <TabPanel value={value} index={3}>
           {/* Profile Content */}
           <Profile />
         </TabPanel>
-        <TabPanel value={value} index={5}>
+        <TabPanel value={value} index={4}>
           {/* Settings Content */}
           {/* <Webhooks/> */}
           <General />

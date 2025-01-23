@@ -13,6 +13,7 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
+// import withAuth from "../../../../context/hoc/withAuth";
 // icon
 // import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 
@@ -442,7 +443,7 @@ const OverviewPage = () => {
           <Divider
             sx={{ marginTop: "2%", bgcolor: orange, opacity: 0.4 }}
           ></Divider>
-          {/* divider end  */}
+          {/* divider end */}
         </Box>
 
         <Box
@@ -485,9 +486,9 @@ const OverviewPage = () => {
             <Typography variant="h3" sx={{ color: orange }}>
               Male
             </Typography>
-            {/* gender chart start  */}
+            {/* gender chart start */}
             <CustomActiveGenderPieChart />
-            {/* gender chart start  */}
+            {/* gender chart start */}
             <Typography>Majority Gender</Typography>
           </Box>
           {/* pie chart section */}
@@ -526,9 +527,9 @@ const OverviewPage = () => {
                 </Typography>
                 <Typography>Unique Accounts</Typography>
               </Box>
-              {/* pie chart start  */}
+              {/* pie chart start */}
               <CustomActiveShapePieChart />
-              {/* pie chart end  */}
+              {/* pie chart end */}
             </Box>
           </Box>
           {/* pie chart section */}
@@ -562,13 +563,6 @@ const OverviewPage = () => {
             <Typography>Attendee Location</Typography>
 
             <Box sx={{ paddingTop: "10%", textAlign: "center" }}>
-              {/* <TravelExploreIcon
-                sx={{ fontSize: "10vh", alignSelf: "center" }}
-              />
-              <Typography sx={{ marginTop: "20px", fontSize: "20px" }}>
-                No attendee location available
-              </Typography> */}
-              {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.0360977185!2d-74.30933341658171!3d40.69753995848721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1733224344473!5m2!1sen!2sin"  height="450" style={{border:'0',width:'100%',height:'inherit'}}  loading="lazy"></iframe> */}
               <Mapchart />
             </Box>
           </Box>
@@ -579,3 +573,4 @@ const OverviewPage = () => {
 };
 
 export default OverviewPage;
+// export default withAuth(OverviewPage);

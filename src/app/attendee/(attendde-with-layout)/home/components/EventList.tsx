@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { useCallback, useEffect, useRef, useState } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+// import Grid2 from "@mui/material/Unstable_Grid2"; // Grid2
+
 import {
   Button,
   Card,
@@ -31,6 +33,8 @@ import axios from "axios";
 import { useDebounce } from "use-debounce";
 import Skeleton from "@mui/material/Skeleton";
 import { useRouter } from "next/navigation";
+import { axiosInstance } from "@/interceptor/axiosInterceptor";
+import eventImage from "../../../../../assets/background_patterns/event3.png";
 
 const drawerWidth = 340;
 
@@ -340,14 +344,14 @@ const EventList = ({ isSticky }: { isSticky: boolean }) => {
       if (loading) return;
       if (observer.current) observer.current?.disconnect();
 
-      observer.current = new IntersectionObserver((entries) => {
-        console.log(entries, "entries");
-        if (entries[0].isIntersecting) {
-          setCurrentPageNo((prev) => prev + 1);
-        }
-      });
+      // observer.current = new IntersectionObserver((entries) => {
+      //   console.log(entries, "entries");
+      //   if (entries[0].isIntersecting) {
+      //     setCurrentPageNo((prev) => prev + 1);
+      //   }
+      // });
 
-      if (node) observer.current.observe(node);
+      // if (node) observer.current.observe(node);
     },
 
     [loading]
@@ -367,13 +371,38 @@ const EventList = ({ isSticky }: { isSticky: boolean }) => {
         selectedRange[1] < priceMarks.length - 1
     )?.actualValue || "no upper limit";
 
-  console.log({ lowestTicketPrice, highestTicketPrice });
+  // console.log({ lowestTicketPrice, highestTicketPrice });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSliderChange = (_event: any, newValue: number | number[]) => {
     if (typeof newValue == "number") return;
     setSelectedRange(newValue);
   };
+
+  const [eventData, setEventData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Load event data function
+  const loadEventData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axiosInstance.get(
+        `v1/event/list?sort=Newest&when=this week&location=&chosenPriceValue=["0","infinity"]&limit=10&currentPageNo=1`
+      );
+      console.log(response.data.data);
+      setEventData(response.data.data || []); // Update according to your API response structure
+    } catch (error) {
+      console.error("Error fetching event data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch data on component mount
+  useEffect(() => {
+    console.log("test");
+    loadEventData();
+  }, []);
 
   return (
     <>
@@ -644,10 +673,11 @@ const EventList = ({ isSticky }: { isSticky: boolean }) => {
             <Button variant="contained">Apply</Button>
           </Box>
         </Box>
+        {/* filter end */}
 
         <Main open={open} sx={{ mt: { xs: 3, md: 5 } }}>
           {/* // make a new component for this */}
-          <Container maxWidth="lg">
+          {/* <Container maxWidth="lg">
             <Grid container spacing={{ xs: 6 }}>
               {data?.map((event, index) => {
                 return (
@@ -663,7 +693,6 @@ const EventList = ({ isSticky }: { isSticky: boolean }) => {
                         borderRadius: "40px",
                         minHeight: "280px",
                         cursor: "pointer",
-                        // border: "1px solid green",
                         transition: "transform 300ms ease-in-out",
                         "&:hover": {
                           transform: "scale(1.04)",
@@ -717,13 +746,121 @@ const EventList = ({ isSticky }: { isSticky: boolean }) => {
                         </Box>
 
                         <Box sx={{ height: "100px", width: "100%" }} />
-                        {/* <Box sx={{ height: '100px', width: '100%', background: 'url(https://example.com/background.jpg) no-repeat center center' }} /> */}
+                        <Box
+                          sx={{
+                            height: "100px",
+                            width: "100%",
+                            background:
+                              "url(https://example.com/background.jpg) no-repeat center center",
+                          }}
+                        />
                       </CardContent>
                     </Card>
                   </Grid>
                 );
               })}
               {loading && eventSkeletonGroupList(isSmallScreen ? 1 : 4)}
+            </Grid>
+          </Container> */}
+          <Container maxWidth="lg">
+            <Grid container spacing={{ xs: 6 }}>
+              {eventData?.map((event, index) => {
+                return (
+                  <Grid
+                    // ref={index === eventData.length - 1 ? lastEventRef : null}
+                    // key={index}
+                    // sx={{ position: "relative", width: "30%" }}
+
+                    ref={index === eventData.length - 1 ? lastEventRef : null}
+                    key={index}
+                    size={{ xs: 12, sm: 6, md: 6, lg: 4 }}
+                    sx={{ position: "relative" }}
+                  >
+                    <Card
+                      sx={{
+                        background: `linear-gradient(to bottom,transparent,${hexToRGBA(
+                          theme.palette.customColors.primaryDark1,
+                          1
+                        )}),url(${eventImage.src})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        borderRadius: "40px",
+                        minHeight: "320px",
+                        cursor: "pointer",
+                        zIndex: "2",
+                        transition: "transform 300ms ease-in-out",
+                        // backgroundColor:
+                        //   theme.palette.customColors.primaryDark1,
+                        // backgroundBlendMode: "screen",
+                        "&:hover": {
+                          transform: "scale(1.04)",
+                        },
+                      }}
+                      onClick={() => router.push(`/e/`)}
+                      // onClick={() => router.push(`/e/${event.id}`)} // Assuming `event.id` exists
+                    >
+                      <CardContent
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "space-around",
+                          height: "inherit",
+                        }}
+                      >
+                        <Box
+                          sx={
+                            {
+                              // display: "flex",
+                              // justifyContent: "space-between",
+                              // alignItems: "center",
+                            }
+                          }
+                        >
+                          <Typography
+                            variant="h2"
+                            component="h2"
+                            sx={{
+                              color: theme.palette.customColors.primaryDark1,
+                              height: "42px",
+                              width: "42px",
+                              borderRadius: "50%",
+                              background:
+                                theme.palette.customColors.primaryWhite,
+                              fontSize: "14px",
+                              fontWeight: "bold",
+                              textAlign: "center",
+                              lineHeight: "42px",
+                              textTransform: "uppercase",
+                              letterSpacing: "-1px",
+                            }}
+                          >
+                            {event.day}
+                          </Typography>
+                        </Box>
+
+                        <Box
+                          sx={{
+                            // display: "flex",
+                            // justifyContent: "flex-start",
+                            // alignItems: "flex-end",
+                            backdropFilter: "blur(0.6px)",
+                            transition: "all .2s linear",
+                          }}
+                        >
+                          <Typography variant="subtitle1">
+                            {event.eventName}
+                          </Typography>
+                          <Typography variant="subtitle1">
+                            {event.startDateAndTime}
+                          </Typography>
+                        </Box>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                );
+              })}
+              {isLoading && <>{/* Add skeleton loading components here */}</>}
             </Grid>
           </Container>
         </Main>
