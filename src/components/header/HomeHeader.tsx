@@ -32,6 +32,10 @@ const homePages = [
     name: "Admin Dashboard",
     link: "/creator/events/dashboard/",
   },
+  {
+    name: "Super Admin Dashboard",
+    link: "/superAdmin/",
+  },
 ];
 
 function HomeHeader() {
