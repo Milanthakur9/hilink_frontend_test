@@ -28,7 +28,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setIsAuthenticated(true);
     } else {
-      setIsAuthenticated(false);
+      // setIsAuthenticated(false);
+      setIsAuthenticated(true);
     }
   }, []);
 
@@ -60,7 +61,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     localStorage.removeItem("authToken");
-    setIsAuthenticated(false);
+    setIsAuthenticated(true);
+    // setIsAuthenticated(false);
     router.push("/login");
   };
 

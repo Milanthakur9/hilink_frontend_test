@@ -677,7 +677,7 @@ const EventList = ({ isSticky }: { isSticky: boolean }) => {
 
         <Main open={open} sx={{ mt: { xs: 3, md: 5 } }}>
           {/* // make a new component for this */}
-          {/* <Container maxWidth="lg">
+          <Container maxWidth="lg">
             <Grid container spacing={{ xs: 6 }}>
               {data?.map((event, index) => {
                 return (
@@ -761,8 +761,8 @@ const EventList = ({ isSticky }: { isSticky: boolean }) => {
               })}
               {loading && eventSkeletonGroupList(isSmallScreen ? 1 : 4)}
             </Grid>
-          </Container> */}
-          <Container maxWidth="lg">
+          </Container>
+          {/* <Container maxWidth="lg">
             <Grid container spacing={{ xs: 6 }}>
               {eventData?.map((event, index) => {
                 return (
@@ -860,9 +860,9 @@ const EventList = ({ isSticky }: { isSticky: boolean }) => {
                   </Grid>
                 );
               })}
-              {isLoading && <>{/* Add skeleton loading components here */}</>}
+              {isLoading && <>{"loding ...."}</>}
             </Grid>
-          </Container>
+          </Container> */}
         </Main>
       </Box>
     </>

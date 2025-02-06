@@ -179,9 +179,9 @@ function Page() {
     fetchEventData();
   }, []);
 
-  if (!eventData) {
-    return <Typography>Loading...</Typography>; // Show a loading indicator while fetching data
-  }
+  // if (!eventData) {
+  //   return <Typography>Loading...</Typography>; // Show a loading indicator while fetching data
+  // }
 
   return (
     <div>
