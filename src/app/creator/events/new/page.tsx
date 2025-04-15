@@ -1,36 +1,24 @@
 "use client";
-// |import { useTheme } from "@mui/material";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
-// import HMBG from "../../hmbg.png";
 import HMBG from "../../../../../hmbg.png";
 import uploadImage from "../../../../assets/background_patterns/uploadImage.webp";
-// import  Grid from '@mui/material';
 import Grid from "@mui/material/Grid";
 import Drop from "./components/Drop";
-
-// import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import Tabpage from "./components/Tabpage";
+import TestSlider from "../new/components/TestSlider";
 import InputBase from "@mui/material/InputBase";
-// import Divider from "@mui/material/Divider";
-// import IconButton from '@mui/material/IconButton';
-// import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 // import DirectionsIcon from "@mui/icons-material/Directions";
 import EmailIcon from "@mui/icons-material/Email";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
-// import Tabs from '@mui/material/Tabs';
-// import Tab from '@mui/material/Tab';
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-// import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-// import ApartmentIcon from "@mui/icons-material/Apartment";
+
 import RoomIcon from "@mui/icons-material/Room";
-// import Tiptap from "../backup/Tiptap";
-// import Editor from "../backup/Editor";
-// import TxtEditor from "./TxtEditor";
-// import Drop from "./Drop";
+
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import EditIcon from "@mui/icons-material/Edit";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -44,10 +32,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import StarIcon from "@mui/icons-material/Star";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import Grid from '@mui/material';
 
-// image list
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 // popup 2
@@ -68,26 +53,15 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-// import FormGroup from "@mui/material/FormGroup";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import Switch, { SwitchProps } from "@mui/material/Switch";
-// import Stack from "@mui/material/Stack";
-
-// import SwitchP from "./Switch";
-// import dayjs, { Dayjs } from "dayjs";
-// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-// import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-// import { Margin } from "@mui/icons-material";
 
 import { styled } from "@mui/material/styles";
-
+import EventForm from "./components/EventForm";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import withAuth from "../../../../context/hoc/withAuth";
@@ -126,11 +100,6 @@ const PhoneInputStyled = styled(PhoneInput)(({ theme }) => ({
     color: "black",
   },
 }));
-
-// interface Country {
-// code: string;
-// name: string;
-// }
 
 function srcset(image: string, size: number, rows = 1, cols = 1) {
   return {
@@ -216,8 +185,6 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
-// tooltip end for image popup message
-
 const names = [
   "Inter-Bold",
   "Armino",
@@ -246,16 +213,7 @@ const names = [
   "Ubuntu",
 ];
 
-import {
-  // AppBar,
-  // CssBaseline,
-  IconButton,
-  // ThemeProvider,
-  // Toolbar,
-  // createTheme,
-  // useMediaQuery,
-  // type PaletteMode,
-} from "@mui/material";
+import { IconButton } from "@mui/material";
 import Image from "next/image";
 import UncontrolledRte from "@/components/richTextEditor/UncontrolledRte";
 import { useRouter } from "next/navigation";
@@ -289,28 +247,6 @@ interface OrganizationInfoType {
   createdAt?: string;
   updatedAt?: string;
 }
-// const currencies = [
-//   {
-//     value: "Festival",
-//     label: "Festival",
-//   },
-//   {
-//     value: "Nightlife",
-//     label: "Nightlife",
-//   },
-//   {
-//     value: "Individual",
-//     label: "Individual",
-//   },
-//   {
-//     value: "Crusie",
-//     label: "Crusie",
-//   },
-//   {
-//     value: "Business / Card",
-//     label: "Business / Card",
-//   },
-// ];
 
 // popup style
 const style = {
@@ -326,18 +262,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-// const VisuallyHiddenInput = styled('input')({
-//   clip: 'rect(0 0 0 0)',
-//   clipPath: 'inset(50%)',
-//   height: 1,
-//   overflow: 'hidden',
-//   position: 'absolute',
-//   bottom: 0,
-//   left: 0,
-//   whiteSpace: 'nowrap',
-//   width: 1,
-// });
 
 interface Image {
   src: string;
@@ -486,6 +410,7 @@ function EventPage() {
             autoComplete="off"
             id="outlined-basic"
             // label="My Event"
+            name="eventName"
             variant="outlined"
             size="small"
             sx={{
@@ -527,6 +452,7 @@ function EventPage() {
             autoComplete="off"
             id="outlined-basic"
             // label="My Event"
+            name="eventName"
             variant="outlined"
             size="small"
             sx={{
@@ -1210,7 +1136,7 @@ function EventPage() {
             </Box>
             <Box>
               <Typography sx={{ fontSize: "18px", margin: "0px 0px" }}>
-                Password Protected
+                Password Protected Event
               </Typography>
               <Typography
                 sx={{
@@ -1225,6 +1151,7 @@ function EventPage() {
                 autoComplete="off"
                 id="outlined-basic"
                 // label="My Event"
+                name="eventName"
                 variant="outlined"
                 placeholder="Password"
                 size="small"
@@ -1331,6 +1258,7 @@ function EventPage() {
   const handlePhoneNumberChange = (value: any, country: any) => {
     console.log(value, country);
     setNumberPhone(value);
+    setFormData((prev) => ({ ...prev, phone: value }));
   };
 
   const [isPhone, setPhone] = useState(false);
@@ -1494,74 +1422,6 @@ function EventPage() {
     }
   };
 
-  // const updateOrganizationProfile = async () => {
-  //   const {
-  //     eventStatus,
-  //     organizationId,
-  //     isRsvp,
-  //     eventCapacity,
-  //     eventName,
-  //     startDateAndTime,
-  //     endDateAndTime,
-  //     venueName,
-  //     address,
-  //     category,
-  //     description,
-  //     activity,
-  //     email,
-  //     phoneNo,
-  //     youtubeVideoLink,
-  //     showOnExplore,
-  //     eventPassword,
-  //     showGuestList,
-  //     eventPoster,
-  //     galleryImages,
-  //   } = organizationInfo;
-
-  //   try {
-  //     const requestData = {
-  //       organizationId,
-  //       eventStatus: eventStatus,
-  //       isRsvp: isRsvp,
-  //       eventCapacity: eventCapacity,
-  //       eventName: eventName,
-  //       startDateAndTime: startDateAndTime,
-  //       endDateAndTime: endDateAndTime,
-  //       venueName: venueName,
-  //       address: address,
-  //       category: category,
-  //       description: description,
-  //       email: email,
-  //       phoneNo: phoneNo,
-  //       activity: activity,
-  //       youtubeVideoLink: youtubeVideoLink,
-  //       showOnExplore: showOnExplore,
-  //       eventPassword: eventPassword,
-  //       showGuestList: showGuestList,
-  //       galleryImages: galleryImages,
-  //       eventPoster:
-  //         "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
-  //       // coverPhoto:
-  //       //   "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
-  //     };
-  //     const response = await axiosInstance.post(`v1/event/create`, requestData);
-
-  //     setRefresh((prev) => !prev);
-
-  //     console.log("event post  successfully:", response.data);
-  //   } catch (error) {
-  //     console.error("event post Error updating profile:", error);
-  //     // console.error(
-  //     //   "Error updating profile:",
-  //     //   error.response?.data || error.message
-  //     // );
-  //   }
-  // };
-
-  // post request
-
-  // yup validation
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -1575,6 +1435,7 @@ function EventPage() {
   };
 
   const handleSubmit = async () => {
+    console.log("Form data before submission:", formData);
     try {
       await schema.validate(formData, { abortEarly: false });
       alert("Event created successfully!");
@@ -1587,7 +1448,7 @@ function EventPage() {
       setErrors(validationErrorsMap);
     }
 
-    console.log({ formData });
+    console.log("Form data after validation:", formData);
   };
 
   interface FormData {
@@ -1868,7 +1729,7 @@ function EventPage() {
               </Box>
 
               <Typography id="modal-modal-title" variant="h3">
-                or,savec as a draft and do this later
+                or,save as a draft and do this later
               </Typography>
 
               <Typography
@@ -1927,7 +1788,7 @@ function EventPage() {
           {/* container      */}
           <Box sx={{ width: { md: "65%", xs: "90%" }, margin: "0px auto 0" }}>
             {/* mn start  */}
-            <Typography
+            {/* <Typography
               variant="h4"
               sx={{
                 fontWeight: "bold",
@@ -1937,7 +1798,7 @@ function EventPage() {
               }}
             >
               Event Details
-            </Typography>
+            </Typography> */}
             <Box
               sx={{
                 width: "100%",
@@ -1946,1035 +1807,9 @@ function EventPage() {
                 justifyContent: "space-between",
               }}
             >
-              <Box sx={{ width: { md: "48%", xs: "100%" } }}>
-                <TextField
-                  autoComplete="off"
-                  id="outlined-basic"
-                  label="My Event"
-                  variant="outlined"
-                  name="eventName"
-                  value={formData.eventName}
-                  onChange={handleChange}
-                  sx={{
-                    background: `${hexToRGBA(
-                      theme.palette.customColors.primaryDark1,
-                      0.2
-                    )}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                      theme.palette.customColors.orange,
-                      0.22
-                    )}`,
-                    // background: "rgba( 21, 22, 24, 0.25 )",
-                    // boxShadow: "0 8px 32px 0 rgba(255,145,77,0.32)",
-                    backdropFilter: "blur( 14px )",
-                    width: "100%",
-                    "& .MuiOutlinedInput-root": {
-                      color: "#fff",
-                      fontFamily: "Arial",
-                      fontWeight: "noraml",
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: theme.palette.customColors.primaryWhite,
-                        borderWidth: "1px",
-                      },
-                    },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      // color: "#ff914d",
-                      fontWeight: "normal",
-                    },
-                  }}
-                />
-                {errors.eventName && (
-                  <p style={{ color: "red" }}>{errors.eventName}</p>
-                )}
-                {/* inner main  */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "space-between",
-                    padding: "15px 0px",
-                  }}
-                >
-                  {/* left */}
-                  <Box sx={{ width: "49%" }}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DemoItem label="">
-                        <MobileDateTimePicker
-                          sx={{
-                            // Custom styling for the TextField
-                            "& .MuiInputBase-root": {
-                              width: "100%",
-                              color: theme.palette.customColors.primaryWhite, // Change input text color
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                                theme.palette.customColors.orange,
-                                0.22
-                              )}`,
-                              borderRadius: "5px",
-                            },
-                            "& .MuiOutlinedInput-notchedOutline": {
-                              borderColor:
-                                theme.palette.customColors.primaryWhite, // Change border color
-                            },
-                            "&:hover .MuiOutlinedInput-notchedOutline": {
-                              borderColor:
-                                theme.palette.customColors.primaryWhite, // Hover effect
-                            },
-                          }}
-                          defaultValue={dayjs("2022-04-17T15:30")}
-                          name="startTime"
-                          value={dayjs(formData.startTime)}
-                          // onChange={handleChange}
-                          onChange={(newValue) =>
-                            handleDateChange("startTime", newValue)
-                          }
-                        />
-                      </DemoItem>
-                    </LocalizationProvider>
-                    {errors.startTime && (
-                      <p style={{ color: "red" }}>{errors.startTime}</p>
-                    )}
-                  </Box>
-                  {/* right */}
-                  <Box sx={{ width: "49%" }}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DemoItem label="">
-                        <MobileDateTimePicker
-                          sx={{
-                            // Custom styling for the TextField
-                            "& .MuiInputBase-root": {
-                              width: "100%",
-                              color: theme.palette.customColors.primaryWhite, // Change input text color
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
-                              boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                                theme.palette.customColors.orange,
-                                0.22
-                              )}`,
-                              borderRadius: "5px",
-                            },
-                            "& .MuiOutlinedInput-notchedOutline": {
-                              borderColor:
-                                theme.palette.customColors.primaryWhite, // Change border color
-                            },
-                            "&:hover .MuiOutlinedInput-notchedOutline": {
-                              borderColor:
-                                theme.palette.customColors.primaryWhite, // Hover effect
-                            },
-                          }}
-                          name="endTime"
-                          value={dayjs(formData.endTime)}
-                          // onChange={handleChange}
-                          onChange={(newValue) =>
-                            handleDateChange("endTime", newValue)
-                          }
-                          defaultValue={dayjs("2022-04-17T15:30")}
-                        />
-                      </DemoItem>
-                    </LocalizationProvider>
-                    {errors.endTime && (
-                      <p style={{ color: "red" }}>{errors.endTime}</p>
-                    )}
-                  </Box>
-                </Box>
-                {/* inner main  */}
-
-                {/* venue Name */}
-                <TextField
-                  autoComplete="off"
-                  id="outlined-basic"
-                  label="venue Name"
-                  size="small"
-                  variant="outlined"
-                  name="venueName"
-                  value={formData.venueName}
-                  onChange={handleChange}
-                  sx={{
-                    // background: "rgba( 255, 145, 77, 0.25 )",
-                    // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-                    background: `${hexToRGBA(
-                      theme.palette.customColors.primaryDark1,
-                      0.2
-                    )}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                      theme.palette.customColors.orange,
-                      0.22
-                    )}`,
-                    backdropFilter: "blur( 4px )",
-                    width: "100%",
-                    "& .MuiOutlinedInput-root": {
-                      color: "#fff",
-                      fontFamily: "Arial",
-                      fontWeight: "noraml",
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: theme.palette.customColors.primaryWhite,
-                        borderWidth: "1px",
-                      },
-                    },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      color: theme.palette.customColors.primaryWhite,
-                      fontWeight: "normal",
-                    },
-                  }}
-                />
-                {errors.venueName && (
-                  <p style={{ color: "red" }}>{errors.venueName}</p>
-                )}
-                {/* venue Name */}
-
-                {/* Address */}
-                <TextField
-                  id="outlined-basic"
-                  label="Address"
-                  size="small"
-                  variant="outlined"
-                  name="eventAddress"
-                  value={formData.eventAddress}
-                  onChange={handleChange}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="end">
-                        <RoomIcon
-                          sx={{
-                            color: theme.palette.customColors.primaryWhite,
-                          }}
-                        />
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{
-                    mt: 2,
-                    background: `${hexToRGBA(
-                      theme.palette.customColors.primaryDark1,
-                      0.2
-                    )}`,
-                    // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
-                    backdropFilter: "blur( 4px )",
-                    width: "100%",
-                    "& .MuiOutlinedInput-root": {
-                      color: "#fff",
-                      fontFamily: "Arial",
-                      fontWeight: "noraml",
-                      // Class for the border around the input field
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: theme.palette.customColors.primaryWhite,
-                        borderWidth: "1px",
-                      },
-                    },
-                    // Class for the label of the input field
-                    "& .MuiInputLabel-outlined": {
-                      color: theme.palette.customColors.primaryWhite,
-                      fontWeight: "normal",
-                    },
-                  }}
-                />
-                {errors.eventAddress && (
-                  <p style={{ color: "red" }}>{errors.eventAddress}</p>
-                )}
-                {/* Address         */}
-
-                {/* select start  */}
-                <Drop />
-                {/* select end   */}
-
-                {/* <TxtEditor /> */}
-
-                <UncontrolledRte />
-                {/* text editor  */}
-
-                {/* Email of phone number start  */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginTop: "50px",
-                  }}
-                >
-                  <Box>
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        fontWeight: "bold",
-                        fontSize: "18px",
-                        color: "#fff",
-                      }}
-                    >
-                      Email or Phone Number
-                    </Typography>
-                  </Box>
-                  <Box
-                    onClick={() => setPhone((prev) => !prev)}
-                    sx={{ cursor: "pointer" }}
-                  >
-                    <EmailIcon sx={{ color: "#fff" }} />
-                    <ChangeCircleIcon
-                      sx={{
-                        transform: "translate(-10px , 5px)",
-                        fontSize: "25px",
-                        color: "#fff",
-                      }}
-                    />
-                  </Box>
-                </Box>
-                {isPhone ? (
-                  <>
-                    <TextField
-                      autoComplete="off"
-                      id="outlined-basic"
-                      // label="Email or Phone Number"
-                      placeholder="Email "
-                      size="small"
-                      variant="outlined"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      sx={{
-                        background: `${hexToRGBA(
-                          theme.palette.customColors.primaryDark1,
-                          0.2
-                        )}`,
-                        // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-                        backdropFilter: "blur( 4px )",
-                        marginTop: "8px",
-                        width: "100%",
-                        "& .MuiOutlinedInput-root": {
-                          color: "#fff",
-                          fontFamily: "Arial",
-                          fontWeight: "noraml",
-                          // Class for the border around the input field
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor:
-                              theme.palette.customColors.primaryWhite,
-                            borderWidth: "1px",
-                          },
-                        },
-                        // Class for the label of the input field
-                        "& .MuiInputLabel-outlined": {
-                          // color: "#ff914d",
-                          fontWeight: "normal",
-                        },
-                      }}
-                    />
-                    {errors.email && (
-                      <p style={{ color: "red" }}>{errors.email}</p>
-                    )}
-                  </>
-                ) : (
-                  <PhoneInputStyled
-                    sx={{ width: "100%" }}
-                    country={"us"}
-                    value={phone}
-                    // onChange={phone => setPhone(phone)}
-                    onChange={handlePhoneNumberChange}
-                    countryCodeEditable={false}
-                    disableCountryCode={false}
-                  />
-                )}
-                {/* Email of phone number end */}
-              </Box>
-
-              {/* image part start */}
-              <Box
-                sx={{
-                  width: { md: "48%", xs: "80%" },
-                  // height: '50vh',
-                  minHeight: "450px",
-                  margin: { md: "0%", xs: "0% auto 6%" },
-                  // backgroundImage:  `url(${HMBG.src})`,
-                  // backgroundImage: `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,
-                  backgroundImage: backgroundImage
-                    ? `url(${backgroundImage})`
-                    : `url(${uploadImage.src})`,
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  objectFit: "cover",
-                  // backgroundBlendMode: "overlay",
-                  borderRadius: "25px",
-                  transition: "all 0.1s linear",
-                  position: "relative",
-                  "&:hover": {
-                    // transform:'scale(1.1)'
-                    // background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                    boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                      theme.palette.customColors.orange,
-                      0.22
-                    )}`,
-                    border: `1px solid ${theme.palette.customColors.orange}`,
-                  },
-                }}
-              >
-                <Typography
-                  sx={{
-                    position: "absolute",
-                    left: "50%",
-                    top: "40%",
-                    transform: "translate(-50%,-50%)",
-                    color: "#fff",
-                    fontFamily: "impact",
-                    fontSize: { md: "5vh", xs: "3vh" },
-                    textAlign: "center",
-                    lineHeight: "4.8vh",
-                    letterSpacing: "2px",
-                    fontStyle: "italic",
-                  }}
-                >
-                  DESIGN YOUR EVENT PAGE
-                </Typography>
-                <Box
-                  sx={{
-                    position: "absolute",
-                    left: "50%",
-                    top: "50%",
-                    transform: "translate(-50%,-50%)",
-                  }}
-                >
-                  {backgroundImage ? (
-                    <Button
-                      sx={{
-                        background: `${hexToRGBA(
-                          theme.palette.customColors.primaryDark1,
-                          0.2
-                        )}`,
-                        border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                        color: theme.palette.customColors.primaryWhite,
-                        // boxShadow: `0 8px 32px 0 ${hexToRGBA(theme.palette.customColors.orange,0.22)}`,
-                        // border: "1px solid #ff914d",
-                        // background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                        borderRadius: "25px",
-                      }}
-                      variant="contained"
-                      onClick={() => setBackgroundImage(null)}
-                      // sx={{ position: 'absolute', bottom: '20px' }}
-                    >
-                      Upload Poster
-                    </Button>
-                  ) : (
-                    <>
-                      <label
-                        htmlFor="file-upload"
-                        style={{
-                          background: `${hexToRGBA(
-                            theme.palette.customColors.primaryDark1,
-                            0.2
-                          )}`,
-                          border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                          boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                            theme.palette.customColors.orange,
-                            0.22
-                          )}`,
-                          color: theme.palette.customColors.primaryWhite,
-                          padding: "12px 25px",
-                          borderRadius: "25px",
-                          fontSize: "1.8vh",
-                          cursor: "pointer",
-                        }}
-                      >
-                        Upload Poster <sup>*</sup>
-                      </label>
-                      <input
-                        id="file-upload"
-                        style={{
-                          // border: "1px solid #ff914d",
-                          background: `${hexToRGBA(
-                            theme.palette.customColors.primaryDark1,
-                            0.2
-                          )}`,
-                          border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                          width: "150px",
-                          display: "none",
-                          padding: "5px 25px",
-                        }}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                      />
-                    </>
-                  )}
-                </Box>
-                {/* search bar start  */}
-                <Box
-                  sx={{
-                    p: "2px 4px",
-                    display: "flex",
-                    alignItems: "center",
-                    width: "95%",
-                    // border: "1px solid #ff914d",
-                    margin: "4% auto 0",
-                    borderRadius: "10px",
-                    background: `${hexToRGBA(
-                      theme.palette.customColors.primaryDark1,
-                      0.2
-                    )}`,
-                    border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                    color: theme.palette.customColors.primaryWhite,
-                    backdropFilter: "blur( 4px )",
-                  }}
-                >
-                  {/* <IconButton sx={{ p: '10px' }} aria-label="menu"> */}
-                  {/* <MenuIcon /> */}
-                  <Image
-                    src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-download-logo-30.png"
-                    alt=""
-                    style={{ height: "20px" }}
-                    height={20}
-                    width={20}
-                  />
-                  {/* </IconButton> */}
-                  <InputBase
-                    sx={{
-                      ml: 1,
-                      flex: 1,
-                      color: theme.palette.customColors.primaryWhite,
-                    }}
-                    placeholder="Search Google Maps"
-                    inputProps={{ "aria-label": "search google maps" }}
-                  />
-                  <SearchIcon
-                    sx={{ color: theme.palette.customColors.primaryWhite }}
-                  />
-                </Box>
-                {/* search bar end  */}
-
-                <Box
-                  sx={{
-                    width: { md: "90%", xs: "90%" },
-                    margin: "0px auto 0",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    position: "absolute",
-                    bottom: "3%",
-                    left: "0%",
-                    right: "0%",
-                  }}
-                >
-                  {/* popup 3 */}
-                  <Modal
-                    open={open3}
-                    onClose={handleClose3}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                  >
-                    <Box sx={style}>
-                      {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-                          Text in a modal
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                        </Typography> */}
-                      {/* Tickets start */}
-
-                      <Typography
-                        variant="h2"
-                        sx={{
-                          mt: 2,
-                          fontSize: "20px",
-                          fontWeight: "bold",
-                          //       background: `${hexToRGBA(theme.palette.customColors.primaryDark1,0.2)}`,
-                          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                          // color: theme.palette.customColors.primaryWhite,
-                        }}
-                      >
-                        Admission Settings
-                      </Typography>
-
-                      <TextField
-                        autoComplete="off"
-                        sx={{
-                          width: "100%",
-                          marginTop: "10px",
-                          "& .MuiInput-root": {
-                            color: theme.palette.customColors.primaryWhite,
-                            fontFamily: "Arial",
-                            fontWeight: "normal",
-                            borderBottom: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                          },
-                          // Label
-                          "& .MuiInputLabel-standard": {
-                            color: theme.palette.customColors.primaryWhite,
-                            fontWeight: "normal",
-                          },
-                        }}
-                        id="standard-basic"
-                        // label="Search for Gifs"
-                        placeholder="Ticket Details"
-                        variant="standard"
-                      />
-
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          marginTop: "20px",
-                        }}
-                      >
-                        <Box>
-                          <Typography
-                            variant="h2"
-                            sx={{
-                              display: "flex",
-                              mt: 2,
-                              // color: "#fff",
-                              fontSize: "20px",
-                              fontWeight: "bold",
-                            }}
-                          >
-                            Admission Settings{" "}
-                            <Typography sx={{ marginLeft: "15px" }}>
-                              $10.00
-                            </Typography>
-                          </Typography>
-                        </Box>
-                        <Box>
-                          <ContentCopyIcon
-                            sx={{
-                              color: theme.palette.customColors.primaryWhite,
-                              // background: "#ff914d",
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
-                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                              // color: theme.palette.customColors.primaryWhite,
-                              padding: "10px",
-                              boxShadow:
-                                "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
-                              fontSize: "40px",
-                              borderRadius: "50%",
-                              marginRight: "15px",
-                            }}
-                          />
-                          <EditIcon
-                            sx={{
-                              color: theme.palette.customColors.primaryWhite,
-                              background: `${hexToRGBA(
-                                theme.palette.customColors.primaryDark1,
-                                0.2
-                              )}`,
-                              padding: "10px",
-                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-
-                              boxShadow:
-                                "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
-                              fontSize: "40px",
-                              borderRadius: "50%",
-                            }}
-                          />
-                        </Box>
-                      </Box>
-
-                      {/* button part start  */}
-                      <Box
-                        sx={{
-                          paddingTop: "7%",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Box>
-                          <Link href="#" color="#fff">
-                            Switch to RSVP Event
-                          </Link>
-                          {/* <Link href="#">Link</Link> */}
-                        </Box>
-                        <Box>
-                          <Button
-                            sx={{
-                              // background: "#151618",
-                              padding: "9px 25px",
-                              color: theme.palette.customColors.primaryWhite,
-                              border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                              borderRadius: "25px",
-                              marginRight: "15px",
-                              "&:hover": {
-                                cursor: "pointer",
-                                background:
-                                  theme.palette.customColors.primaryWhite,
-                                color: theme.palette.customColors.primaryDark1,
-                                // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                              },
-                            }}
-                          >
-                            Cancle
-                          </Button>
-                          <Button
-                            sx={{
-                              background:
-                                theme.palette.customColors.primaryWhite,
-                              padding: "9px 25px",
-                              color: theme.palette.customColors.primaryDark1,
-                              borderRadius: "25px",
-                              "&:hover": {
-                                cursor: "pointer",
-                                // background: "#151618",
-                                color: theme.palette.customColors.primaryWhite,
-                                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                              },
-                            }}
-                          >
-                            Create New Ticket
-                          </Button>
-                        </Box>
-                      </Box>
-                      {/* button part end */}
-                      <CloseIcon
-                        onClick={handleClose3}
-                        sx={{
-                          position: "absolute",
-                          right: "2%",
-                          top: "5%",
-                          cursor: "pointer",
-                        }}
-                      />
-                    </Box>
-                  </Modal>
-
-                  {/* popup 3 end */}
-
-                  {/* popup 2 start */}
-
-                  {/* <HtmlTooltip
-                    title={
-                      <React.Fragment>
-                        <Typography
-                          sx={{ textAlign: "center" }}
-                          color="inherit"
-                        >
-                          Customize your event font, accent color, and
-                          light/dark mode.
-                        </Typography>
-                      </React.Fragment>
-                    }
-                  >
-                    <Button>
-                      <TuneIcon
-                        // onClick={handleOpen2}
-                        sx={{
-                          background: theme.palette.customColors.primaryWhite,
-                          color: theme.palette.customColors.primaryDark1,
-                          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                          fontSize: "40px",
-                          padding: "5px",
-                          transform: "rotate(180deg)",
-                          transition: "all 0.21s linear",
-                          borderRadius: "50%",
-                          "&:hover": {
-                            cursor: "pointer",
-                            transform: "rotate(90deg)",
-                          },
-                        }}
-                      />
-                    </Button>
-                  </HtmlTooltip> */}
-                  <Button>
-                    <TuneIcon
-                      // onClick={handleOpen2}
-                      sx={{
-                        background: theme.palette.customColors.primaryWhite,
-                        color: theme.palette.customColors.primaryDark1,
-                        // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                        fontSize: "40px",
-                        padding: "5px",
-                        transform: "rotate(180deg)",
-                        transition: "all 0.21s linear",
-                        borderRadius: "50%",
-                        "&:hover": {
-                          cursor: "pointer",
-                          transform: "rotate(90deg)",
-                        },
-                      }}
-                    />
-                  </Button>
-
-                  <Modal
-                    open={open2}
-                    onClose={handleClose2}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                  >
-                    <Box sx={style}>
-                      <Typography
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                        // sx={{ color: "#fff" }}
-                      >
-                        Event Page Design
-                      </Typography>
-                      <Typography
-                        // sx={{ color: "#fff" }}
-                        id="modal-modal-title"
-                        variant="subtitle1"
-                      >
-                        Event Title Font
-                      </Typography>
-
-                      <FormControl sx={{ m: 1, width: "100%" }}>
-                        <InputLabel id="demo-multiple-name-label">
-                          Name
-                        </InputLabel>
-                        <Select
-                          labelId="demo-multiple-name-label"
-                          id="demo-multiple-name"
-                          multiple
-                          value={personName}
-                          onChange={handleChange2}
-                          sx={{
-                            width: "100%",
-                            // background: theme.palette.customColors.primaryWhite,
-                            // color: theme.palette.customColors.primaryDark1,
-                            border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                            borderRadius: "35px",
-                            overflow: "auto",
-                            "& .MuiSvgIcon-root": {
-                              color: theme.palette.customColors.primaryWhite,
-                            },
-                          }}
-                          // input={<OutlinedInput label="Name" />}
-                          // MenuProps={MenuProps}
-                        >
-                          {names.map((name) => (
-                            <MenuItem
-                              key={name}
-                              value={name}
-                              // style={getStyles(name, personName, theme)}
-                            >
-                              {name}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-
-                      {/* color picker & switch start */}
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Box sx={{ color: "#fff" }}>Accent color</Box>
-                        <Box>{/* <SwitchP /> */}</Box>
-                      </Box>
-                      {/* color picker & switch end */}
-                    </Box>
-                  </Modal>
-
-                  {/* popup 2 end  */}
-
-                  {/* popup 1 start */}
-
-                  <HtmlTooltip
-                    title={
-                      <React.Fragment>
-                        <Typography
-                          sx={{ textAlign: "center" }}
-                          color="inherit"
-                        >
-                          Choose an image from your gallery or search for
-                          GIFs/images online for your events flyer
-                        </Typography>
-                      </React.Fragment>
-                    }
-                  >
-                    <Button>
-                      <InsertPhotoIcon
-                        onClick={handleOpen}
-                        sx={{
-                          background: theme.palette.customColors.primaryWhite,
-                          color: theme.palette.customColors.primaryDark1,
-                          fontSize: "40px",
-                          padding: "5px",
-                          borderRadius: "50%",
-                          "&:hover": { cursor: "pointer" },
-                        }}
-                      />
-                    </Button>
-                  </HtmlTooltip>
-
-                  <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                  >
-                    <Box sx={style}>
-                      {/* Tickets start */}
-                      <Box
-                        sx={{
-                          padding: "5% 0% 0%",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          marginBottom: "25px",
-                        }}
-                      >
-                        {/* Tickets left start */}
-                        <Box
-                          sx={{
-                            borderBottom: `1px solid ${theme.palette.customColors.primaryWhite} `,
-                            width: "75%",
-                          }}
-                        >
-                          {/* <Typography variant='h6' sx={{fontWeight:'Normal',fontSize:'30px',margin:'10px 0px'}}>Search for Gifs</Typography> */}
-                          <TextField
-                            sx={{
-                              width: "100%",
-                              "& .MuiInput-root": {
-                                color: theme.palette.customColors.primaryWhite,
-                                fontFamily: "Arial",
-                                fontWeight: "normal",
-                              },
-                              // Label
-                              "& .MuiInputLabel-standard": {
-                                color: theme.palette.customColors.primaryWhite,
-                                fontWeight: "normal",
-                              },
-                            }}
-                            id="standard-basic"
-                            label="Search for Gifs"
-                            placeholder="Search for Gifs"
-                            variant="standard"
-                          />
-                        </Box>
-                        {/* Tickets left end */}
-                        {/* Tickets right start */}
-                        <Box>
-                          {/* <Button sx={{background:'#ff914d',padding:'9px 25px',color:'#fff',borderRadius:'35px'}}>Edit Tickets</Button> */}
-                          {/* <Button
-                          sx={{
-                            padding: "9px 25px",
-                            color: "#fff",
-                            borderRadius: "35px",
-                            background: "rgba( 255, 145, 77, 0.45 )",
-                            boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-                            fontSize:'1.8vh',
-                            backdropFilter: "blur( 4px )",
-                          }}
-                          variant="contained"
-                          startIcon={<ArrowOutwardIcon />}
-                        >
-                          use your own
-                        </Button> */}
-
-                          {backgroundImage ? (
-                            <Button
-                              sx={{
-                                // background: "#202524",
-                                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                                color: theme.palette.customColors.primaryDark1,
-                                borderRadius: "25px",
-                              }}
-                              variant="contained"
-                              onClick={() => setBackgroundImage(null)}
-                              // sx={{ position: 'absolute', bottom: '20px' }}
-                            >
-                              Upload Poster
-                            </Button>
-                          ) : (
-                            <>
-                              <label
-                                htmlFor="file-upload"
-                                style={{
-                                  // background: "#202524",
-                                  border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                                  color:
-                                    theme.palette.customColors.primaryWhite,
-                                  padding: "12px 25px",
-                                  borderRadius: "25px",
-                                  fontSize: "2vh",
-                                  cursor: "pointer",
-                                }}
-                              >
-                                Use your own
-                              </label>
-                              <input
-                                id="file-upload"
-                                style={{
-                                  border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                                  // color: theme.palette.customColors.primaryWhite,
-                                  width: "150px",
-                                  display: "none",
-                                  padding: "5px 25px",
-                                }}
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageUpload}
-                              />
-                            </>
-                          )}
-                        </Box>
-                        {/* Tickets right end */}
-                      </Box>
-                      {/* Tickets end */}
-
-                      <ImageList
-                        sx={{
-                          width: "60%",
-                          height: 400,
-                          margin: "0 auto",
-                          "&::-webkit-scrollbar": {
-                            width: "5px",
-                          },
-                          "&::-webkit-scrollbar-track": {
-                            background: "#151618",
-                            // borderRadius:'5px'
-                          },
-                          "&::-webkit-scrollbar-thumb": {
-                            backgroundColor:
-                              theme.palette.customColors.primaryWhite,
-                            color: theme.palette.customColors.primaryWhite,
-                            // borderRadius:'5px'
-                          },
-                        }}
-                        variant="quilted"
-                        cols={4}
-                        rowHeight={125}
-                      >
-                        {itemData.map((item) => (
-                          <ImageListItem
-                            key={item.img}
-                            cols={item.cols || 1}
-                            rows={item.rows || 1}
-                          >
-                            <Image
-                              {...srcset(item.img, 121, item.rows, item.cols)}
-                              alt={item.title}
-                              loading="lazy"
-                              height={20}
-                              width={20}
-                            />
-                          </ImageListItem>
-                        ))}
-                      </ImageList>
-                      <CloseIcon
-                        onClick={handleClose}
-                        sx={{
-                          position: "absolute",
-                          right: "2%",
-                          top: "2%",
-                          cursor: "pointer",
-                        }}
-                      />
-                    </Box>
-                  </Modal>
-
-                  {/* popup 1 end  */}
-                </Box>
-              </Box>
-              {/* image part end  */}
+              {/* Tab page  */}
+              <Tabpage />
+              {/* Tab page  */}
             </Box>
 
             {/* Tickets start */}
@@ -3031,79 +1866,151 @@ function EventPage() {
             <Box
               sx={{
                 display: "flex",
+                flexWrap: "wrap",
                 justifyContent: "space-between",
-                alignItems: "center",
-                // background: "#ff914d",
-                background: `${hexToRGBA(
-                  theme.palette.customColors.primaryDark1,
-                  0.2
-                )}`,
-                boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                  theme.palette.customColors.orange,
-                  0.22
-                )}`,
-                border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                borderRadius: "15px",
-                padding: "2%",
-                margin: "6% 0%",
               }}
             >
-              {/* Default Tickets left start  */}
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography
-                  sx={{
-                    fontWeight: "normal",
-                    fontSize: "20px",
-                    margin: "10px 0px 0px",
-                    color: "#fff",
-                  }}
-                >
-                  Default Tickets
-                </Typography>
-                <Typography
-                  sx={{
-                    fontWeight: "normal",
-                    fontSize: "20px",
-                    margin: "10px 0px",
-                    // color: "#fff",
-                  }}
-                >
-                  $ 10
-                </Typography>
-              </Box>
-              {/* Default Tickets left end  */}
-
-              {/* Default Tickets right start  */}
-              <Box>
-                {/* offcanvas add */}
-                <Button onClick={toggleDrawer(true)}>
-                  <EditIcon
+              <Box
+                sx={{
+                  width: { md: "31%", xs: "100%" },
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  // background: "#ff914d",
+                  background: `${hexToRGBA(
+                    theme.palette.customColors.primaryDark1,
+                    0.2
+                  )}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                    theme.palette.customColors.orange,
+                    0.22
+                  )}`,
+                  border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                  borderRadius: "220px",
+                  padding: "1% 4%",
+                  margin: "6% 0%",
+                }}
+              >
+                {/* Default Tickets left start  */}
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Typography
                     sx={{
-                      color: theme.palette.customColors.primaryWhite,
-                      // background: "#151618",
-                      // boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
-                      background: `${hexToRGBA(
-                        theme.palette.customColors.primaryDark1,
-                        0.2
-                      )}`,
-                      boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                        theme.palette.customColors.orange,
-                        0.22
-                      )}`,
-                      border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                      padding: "10px",
-                      fontSize: "40px",
-                      borderRadius: "50%",
+                      fontWeight: "normal",
+                      fontSize: "20px",
+                      margin: "0px 0px 0px",
+                      color: "#fff",
                     }}
-                  />
-                </Button>
-                <Drawer open={Canvas} onClose={toggleDrawer(false)}>
-                  {DrawerList}
-                </Drawer>
-                {/* offcanvas add */}
+                  >
+                    Default Tickets
+                  </Typography>
+                </Box>
+                {/* Default Tickets left end  */}
+
+                {/* Default Tickets right start  */}
+                <Box>
+                  {/* offcanvas add */}
+                  <Button onClick={toggleDrawer(true)}>
+                    <EditIcon
+                      sx={{
+                        color: theme.palette.customColors.primaryWhite,
+                        // background: "#151618",
+                        // boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
+                        background: `${hexToRGBA(
+                          theme.palette.customColors.primaryDark1,
+                          0.2
+                        )}`,
+                        boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                          theme.palette.customColors.orange,
+                          0.22
+                        )}`,
+                        border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                        padding: "10px",
+                        fontSize: "40px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  </Button>
+                  <Drawer open={Canvas} onClose={toggleDrawer(false)}>
+                    {DrawerList}
+                  </Drawer>
+                  {/* offcanvas add */}
+                </Box>
+                {/* Default Tickets right end  */}
               </Box>
-              {/* Default Tickets right end  */}
+              <Box
+                sx={{
+                  width: { md: "31%", xs: "100%" },
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  // background: "#ff914d",
+                  background: `${hexToRGBA(
+                    theme.palette.customColors.primaryDark1,
+                    0.2
+                  )}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                    theme.palette.customColors.orange,
+                    0.22
+                  )}`,
+                  border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                  borderRadius: "220px",
+                  padding: "1% 4%",
+                  margin: "6% 0%",
+                }}
+              >
+                {/* Default Tickets left start  */}
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Typography
+                    sx={{
+                      fontWeight: "normal",
+                      fontSize: "20px",
+                      margin: "0px 0px 0px",
+                      color: "#fff",
+                    }}
+                  >
+                    Tickets
+                  </Typography>
+                </Box>
+                {/* Default Tickets left end  */}
+              </Box>
+              <Box
+                sx={{
+                  width: { md: "31%", xs: "100%" },
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  // background: "#ff914d",
+                  background: `${hexToRGBA(
+                    theme.palette.customColors.primaryDark1,
+                    0.2
+                  )}`,
+                  boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                    theme.palette.customColors.orange,
+                    0.22
+                  )}`,
+                  border: `1px solid ${theme.palette.customColors.primaryWhite}`,
+                  borderRadius: "220px",
+                  padding: "1% 4%",
+                  margin: "6% 0%",
+                }}
+              >
+                {/* Default Tickets left start  */}
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Typography
+                    sx={{
+                      fontWeight: "normal",
+                      fontSize: "20px",
+                      margin: "0px 0px 0px",
+                      color: "#fff",
+                    }}
+                  >
+                    Tickets
+                  </Typography>
+                </Box>
+                {/* Default Tickets left end  */}
+              </Box>
             </Box>
+
             {/* Default Tickets end */}
 
             {/* looking start */}
@@ -3358,7 +2265,6 @@ function EventPage() {
                       fontWeight: "normal",
                       fontSize: "20px",
                       margin: "10px 0px 0px",
-                      // color: "#fff",
                     }}
                   >
                     Need a photographer?
@@ -3368,7 +2274,6 @@ function EventPage() {
                       fontWeight: "normal",
                       fontSize: "20px",
                       margin: "0px 0px 0px",
-                      // color: "#fff",
                     }}
                   >
                     We got shooters.
@@ -3710,6 +2615,7 @@ function EventPage() {
                   autoComplete="off"
                   id="outlined-basic"
                   // label="My Event"
+                  name="eventName"
                   variant="outlined"
                   placeholder="Password"
                   size="small"
@@ -4013,6 +2919,240 @@ function EventPage() {
                           src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
                         />
                       </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
+                      <Box sx={{ width: "20%" }}>
+                        <Image
+                          alt=""
+                          width={20}
+                          height={20}
+                          style={{
+                            width: "100%",
+                            borderRadius: "100%",
+                            height: "100%",
+                          }}
+                          src="https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/images/721b7cc6-6637-4cc9-bd3a-eebf63d9d42c.jpg"
+                        />
+                      </Box>
                     </Box>
                     {/* GuestImages start  */}
                   </Box>
@@ -4023,7 +3163,7 @@ function EventPage() {
                       transform: isOpacity ? "scale(1)" : "scale(0)",
                     }}
                   >
-                    <Box
+                    {/* <Box
                       sx={{
                         display: "flex",
                         alignItems: "center",
@@ -4064,9 +3204,9 @@ function EventPage() {
                       <Box
                         sx={{
                           width: "15%",
-                          borderRadius: "100%",
+                            borderRadius: "100%",
                           overflow: "hidden",
-                        }}
+                          }}
                       >
                         <Image
                           alt=""
@@ -4091,9 +3231,9 @@ function EventPage() {
                       <Box
                         sx={{
                           width: "15%",
-                          borderRadius: "100%",
+                            borderRadius: "100%",
                           overflow: "hidden",
-                        }}
+                          }}
                       >
                         <Image
                           alt=""
@@ -4109,7 +3249,8 @@ function EventPage() {
                           Anyone wanna meet up before the event? 👀
                         </Typography>
                       </Box>
-                    </Box>
+                    </Box> */}
+                    <TestSlider />
                   </Box>
                 </Box>
 
@@ -4536,6 +3677,7 @@ function EventPage() {
                                       },
                                     }}
                                     label="Start Time"
+                                    name="startTime"
                                   />
                                 </LocalizationProvider>
                               </Box>
@@ -4588,6 +3730,7 @@ function EventPage() {
                                       },
                                     }}
                                     label="End Time"
+                                    name="endTime"
                                   />
                                 </LocalizationProvider>
                               </Box>
@@ -4600,6 +3743,7 @@ function EventPage() {
                         autoComplete="off"
                         id="outlined-basic"
                         // label="venue Name"
+                        name="venueName"
                         placeholder="Link"
                         size="small"
                         variant="outlined"
@@ -4774,7 +3918,8 @@ function EventPage() {
                 <Box
                   sx={{
                     display: "flex",
-                    flexWrap: "wrap",
+                    flexDirection: "column",
+                    // flexWrap: "wrap",
                     justifyContent: "space-between",
                     padding: "5% 0%",
                     gap: 2,
@@ -4783,7 +3928,9 @@ function EventPage() {
                   <Box
                     sx={{
                       minHeight: "180px",
-                      width: { md: "45%", xs: "100%" },
+                      width: { md: "85%", xs: "100%" },
+                      margin: { md: "0 auto", xs: "0" },
+
                       padding: "25px",
                       // border: "1px solid #ff914d",
                       borderRadius: "12px",
@@ -4830,7 +3977,9 @@ function EventPage() {
                   <Box
                     sx={{
                       minHeight: "180px",
-                      width: { md: "45%", xs: "100%" },
+                      width: { md: "85%", xs: "100%" },
+                      margin: { md: "0 auto", xs: "0" },
+
                       padding: "25px",
                       // border: "1px solid #ff914d",
                       borderRadius: "12px",
@@ -4893,7 +4042,9 @@ function EventPage() {
                   <Box
                     sx={{
                       minHeight: "180px",
-                      width: { md: "45%", xs: "100%" },
+                      width: { md: "85%", xs: "100%" },
+                      margin: { md: "0 auto", xs: "0" },
+
                       padding: "25px",
                       // border: "1px solid #ff914d",
                       borderRadius: "12px",

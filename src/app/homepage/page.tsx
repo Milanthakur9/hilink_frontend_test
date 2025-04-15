@@ -20,6 +20,7 @@ import image2 from "../../assets/background_patterns/event2.png";
 import event1 from "../../assets/background_patterns/event1.png";
 import event3 from "../../assets/background_patterns/event4.png";
 import ScrollToTop from "./components/ScrollTop";
+import { useRouter } from "next/navigation";
 // import StackingCards from './components/StackingCard';
 
 const slides = [
@@ -64,6 +65,7 @@ function HomePage() {
   const white = theme.palette.customColors.primaryWhite;
   const dark1 = theme.palette.customColors.primaryDark1;
   const cards = Array.from({ length: 10 });
+  const router = useRouter();
 
   return (
     <>
@@ -159,6 +161,9 @@ function HomePage() {
                       most innovative live events platform.
                     </Typography>
                     <Button
+                      onClick={() => {
+                        router.push("/register");
+                      }}
                       sx={{
                         marginTop: "3%",
                         background: orange,

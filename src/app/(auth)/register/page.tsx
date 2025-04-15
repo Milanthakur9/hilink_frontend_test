@@ -132,21 +132,9 @@ const RegisterPage = () => {
 
     if (!isTermsAndConditionAccepted) {
       setIsTermsAndConditionAcceptedError(true);
-      // toast.error("Please Accept Terms And Condition");
 
       return;
     }
-
-    // const { confirmPassword, email, firstName, lastName, password } = data;
-
-    // return data;
-    // axios.post(`http://localhost:3333/v1/auth/register`, {
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   email: email,
-    //   password: password,
-    //   confirmPassword: confirmPassword,
-    // });
 
     const { confirmPassword, email, firstName, lastName, password } = data;
 
@@ -434,28 +422,8 @@ const RegisterPage = () => {
                     }}
                   >
                     submit.
-                    {/* {loading ? <CustomCircularProgressForButton /> : "Login"} */}
                   </Button>
                 </Grid>
-
-                {/* <Box
-                  component="div"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between",
-                    mt: 2,
-                  }}
-                >
-                  <Typography sx={{ color: theme.palette.customColors?.primaryWhite, mr: 2 }}>
-                    Already have an account?
-                  </Typography>
-                  <LinkWithUnderline
-                    link="/login"
-                    linkTitle="Sign in instead"
-                  />
-                </Box> */}
               </form>
               <Box></Box>
             </Box>

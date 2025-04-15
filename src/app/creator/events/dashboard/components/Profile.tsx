@@ -272,10 +272,16 @@ function Profile() {
           justifyContent: "space-between",
           width: { md: "70%", xs: "95%" },
           margin: "0 auto",
-          padding: "0 0 5%",
+          marginBottom: "8% !important",
+          padding: "0 5% 5% 5%",
+          background: theme.palette.customColors.primaryDark2,
+          borderBottom: `10px solid ${orange}`,
+          // borderRadius: "30px",
+          borderBottomLeftRadius: "60px",
+          borderBottomRightRadius: "60px",
         }}
       >
-        <Box sx={{ width: "20%", margin: { md: "0", xs: "0 auto" } }}>
+        {/* <Box sx={{ width: "20%", margin: { md: "0", xs: "0 auto" } }}>
           <Box
             sx={{
               marginTop: "-80px",
@@ -284,13 +290,11 @@ function Profile() {
               alignItems: "center",
             }}
           >
-            {/* profile image start  */}
+            profile image start
             <Box
               sx={{
                 width: "150px",
-                // height: '50vh',
                 minHeight: "150px",
-                // margin: { md: "0%", xs: "0% auto 6%" },
                 backgroundImage: profileImage
                   ? `url(${profileImage})`
                   : `url(${uploadImage.src})`,
@@ -299,13 +303,11 @@ function Profile() {
                 backgroundSize: "cover",
                 objectFit: "cover",
                 border: `1px solid ${orange}`,
-                // backgroundBlendMode: "overlay",
                 borderRadius: "50%",
                 transition: "all 0.1s linear",
                 position: "relative",
                 "&:hover": {
                   cursor: "pointer",
-                  // transform:'scale(1.1)'
                   boxShadow: "0px 0px 19px 20px rgba(255,145,77,0.12)",
                   border: `1px solid ${orange}`,
                   backgroundColor: "#1f1f1f",
@@ -356,7 +358,7 @@ function Profile() {
                   </>
                 )}
               </Box>
-              {/* profile image end  */}
+              profile image end
             </Box>
             <Button
               onClick={() => router.push(`/g`)}
@@ -372,9 +374,112 @@ function Profile() {
               view Profile
             </Button>
           </Box>
-        </Box>
-        <Box sx={{ width: { md: "75%", xs: "100%" } }}>
+        </Box> */}
+        <Box sx={{ width: { md: "100%", xs: "100%" } }}>
           <Box sx={{ marginTop: "6%" }}>
+            {/* profile-image  */}
+            <Box
+              sx={{
+                width: "40%",
+                margin: "-140px auto 3%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              {/* profile image start  */}
+              <Box
+                sx={{
+                  width: "180px",
+                  // height: '50vh',
+                  minHeight: "180px",
+                  // margin: { md: "0%", xs: "0% auto 6%" },
+                  backgroundImage: profileImage
+                    ? `url(${profileImage})`
+                    : `url(${uploadImage.src})`,
+                  backgroundPosition: "center center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  objectFit: "cover",
+                  border: `1px solid ${orange}`,
+                  // backgroundBlendMode: "overlay",
+                  borderRadius: "50%",
+                  transition: "all 0.1s linear",
+                  position: "relative",
+                  "&:hover": {
+                    cursor: "pointer",
+                    // transform:'scale(1.1)'
+                    boxShadow: "0px 0px 19px 20px rgba(255,145,77,0.12)",
+                    border: `1px solid ${orange}`,
+                    backgroundColor: "#1f1f1f",
+                    backgroundBlendMode: "overlay",
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    transform: "translate(-50%,-50%)",
+                  }}
+                >
+                  {profileImage ? (
+                    <Button
+                      sx={{
+                        background: "#202524",
+                        border: `1px solid ${orange}`,
+                        color: orange,
+                        borderRadius: "10px",
+                      }}
+                      variant="contained"
+                      onClick={() => setProfileImage(null)}
+                    >
+                      <PanoramaIcon />
+                    </Button>
+                  ) : (
+                    <>
+                      <label
+                        htmlFor="file-upload"
+                        style={{ cursor: "pointer" }}
+                      >
+                        <CloudUploadIcon
+                          sx={{ color: orange, fontSize: "35px" }}
+                        />
+                      </label>
+                      <input
+                        id="file-upload"
+                        style={{
+                          border: `1px solid ${orange}`,
+                          width: "150px",
+                          display: "none",
+                          padding: "5px 25px",
+                        }}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleProfileImage}
+                      />
+                    </>
+                  )}
+                </Box>
+                {/* profile image end  */}
+              </Box>
+              <Button
+                onClick={() => router.push(`/g`)}
+                sx={{
+                  width: { md: "100%", xs: "200px" },
+                  color: white,
+                  background: orange,
+                  paddingInline: "20px",
+                  fontSize: "12px",
+                  marginTop: "10px",
+                }}
+              >
+                view Profile
+              </Button>
+            </Box>
+            {/* profile-image  */}
+
             <TextField
               autoComplete="off"
               id="outlined-basic"

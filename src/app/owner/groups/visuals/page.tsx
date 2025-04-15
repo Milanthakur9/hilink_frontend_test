@@ -43,10 +43,7 @@ import CropSquareIcon from "@mui/icons-material/CropSquare";
 import SquareIcon from "@mui/icons-material/Square";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -249,30 +246,7 @@ interface OrganizationInfoType {
   createdAt?: string;
   updatedAt?: string;
 }
-// const currencies = [
-//   {
-//     value: "Festival",
-//     label: "Festival",
-//   },
-//   {
-//     value: "Nightlife",
-//     label: "Nightlife",
-//   },
-//   {
-//     value: "Individual",
-//     label: "Individual",
-//   },
-//   {
-//     value: "Crusie",
-//     label: "Crusie",
-//   },
-//   {
-//     value: "Business / Card",
-//     label: "Business / Card",
-//   },
-// ];
 
-// popup style
 const style = {
   position: "absolute",
   top: "50%",
@@ -286,18 +260,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-// const VisuallyHiddenInput = styled('input')({
-//   clip: 'rect(0 0 0 0)',
-//   clipPath: 'inset(50%)',
-//   height: 1,
-//   overflow: 'hidden',
-//   position: 'absolute',
-//   bottom: 0,
-//   left: 0,
-//   whiteSpace: 'nowrap',
-//   width: 1,
-// });
 
 interface Image {
   src: string;
@@ -584,74 +546,6 @@ function EventPage() {
   }, [refresh]);
   // get method
 
-  // const updateOrganizationProfile = async () => {
-  //   const {
-  //     eventStatus,
-  //     organizationId,
-  //     isRsvp,
-  //     eventCapacity,
-  //     eventName,
-  //     startDateAndTime,
-  //     endDateAndTime,
-  //     venueName,
-  //     address,
-  //     category,
-  //     description,
-  //     activity,
-  //     email,
-  //     phoneNo,
-  //     youtubeVideoLink,
-  //     showOnExplore,
-  //     eventPassword,
-  //     showGuestList,
-  //     eventPoster,
-  //     galleryImages,
-  //   } = organizationInfo;
-
-  //   try {
-  //     const requestData = {
-  //       organizationId,
-  //       eventStatus: eventStatus,
-  //       isRsvp: isRsvp,
-  //       eventCapacity: eventCapacity,
-  //       eventName: eventName,
-  //       startDateAndTime: startDateAndTime,
-  //       endDateAndTime: endDateAndTime,
-  //       venueName: venueName,
-  //       address: address,
-  //       category: category,
-  //       description: description,
-  //       email: email,
-  //       phoneNo: phoneNo,
-  //       activity: activity,
-  //       youtubeVideoLink: youtubeVideoLink,
-  //       showOnExplore: showOnExplore,
-  //       eventPassword: eventPassword,
-  //       showGuestList: showGuestList,
-  //       galleryImages: galleryImages,
-  //       eventPoster:
-  //         "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
-  //       // coverPhoto:
-  //       //   "https://images.hdqwalls.com/wallpapers/bthumb/novitec-mclaren-750s-twin-turbocharged-v8-zg.jpg",
-  //     };
-  //     const response = await axiosInstance.post(`v1/event/create`, requestData);
-
-  //     setRefresh((prev) => !prev);
-
-  //     console.log("event post  successfully:", response.data);
-  //   } catch (error) {
-  //     console.error("event post Error updating profile:", error);
-  //     // console.error(
-  //     //   "Error updating profile:",
-  //     //   error.response?.data || error.message
-  //     // );
-  //   }
-  // };
-
-  // post request
-
-  // yup validation
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -665,8 +559,10 @@ function EventPage() {
   };
 
   const handleSubmit = async () => {
+    console.log("Form submitted:", formData);
     try {
-      await schema.validate(formData, { abortEarly: false });
+      // Perform your form submission logic here
+      console.log("Form submitted successfully:", formData);
       alert("Event created successfully!");
       setErrors({});
     } catch (validationErrors: any) {
@@ -686,8 +582,8 @@ function EventPage() {
     endTime: string;
     venueName: string;
     eventAddress: string;
-    email: string;
-    phone: string;
+    // email: string;
+    // phone: string;
     // eventPoster: string;
   }
 
@@ -697,21 +593,10 @@ function EventPage() {
     endTime: "",
     venueName: "",
     eventAddress: "",
-    email: "",
-    phone: "",
+    // email: "",
+    // phone: "",
     // eventPoster: "",
   };
-
-  const schema = yup.object().shape({
-    eventName: yup.string().required("Please enter your event name"),
-    startTime: yup.string().required("Please enter the start time"),
-    endTime: yup.string().required("Please enter the end time"),
-    venueName: yup.string().required("Please enter the venue name"),
-    eventAddress: yup.string().required("Please enter the event address"),
-    email: yup.string().email("Invalid email format").optional(),
-    phone: yup.string().optional(),
-    // eventPoster: yup.string().optional(),
-  });
 
   const [formData, setFormData] = useState<FormData>(defaultValues);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -771,8 +656,8 @@ function EventPage() {
                   label="My Event"
                   variant="outlined"
                   name="eventName"
-                  value={organizationInfo?.eventName}
-                  onChange={handleChange}
+                  // value={organizationInfo?.eventName}
+                  // onChange={handleChange}
                   sx={{
                     background: `${hexToRGBA(
                       theme.palette.customColors.primaryDark1,
@@ -914,8 +799,8 @@ function EventPage() {
                   size="small"
                   variant="outlined"
                   name="venueName"
-                  value={organizationInfo?.venueName}
-                  onChange={handleChange}
+                  // value={organizationInfo?.venueName}
+                  // onChange={handleChange}
                   sx={{
                     // background: "rgba( 255, 145, 77, 0.25 )",
                     // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
@@ -959,8 +844,8 @@ function EventPage() {
                   variant="outlined"
                   name="eventAddress"
                   // value={organizationInfo?.eventAddress}
-                  value={organizationInfo?.address}
-                  onChange={handleChange}
+                  // value={organizationInfo?.address}
+                  // onChange={handleChange}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="end">
@@ -1004,7 +889,7 @@ function EventPage() {
                 {/* Address         */}
 
                 {/* select start  */}
-                <Drop />
+                {/* <Drop /> */}
                 {/* select end   */}
 
                 {/* OrgDetails start  */}
@@ -1370,43 +1255,6 @@ function EventPage() {
                     </Box>
                   </Modal>
 
-                  {/* popup 3 end */}
-
-                  {/* popup 2 start */}
-
-                  {/* <HtmlTooltip
-                    title={
-                      <React.Fragment>
-                        <Typography
-                          sx={{ textAlign: "center" }}
-                          color="inherit"
-                        >
-                          Customize your event font, accent color, and
-                          light/dark mode.
-                        </Typography>
-                      </React.Fragment>
-                    }
-                  >
-                    <Button>
-                      <TuneIcon
-                        // onClick={handleOpen2}
-                        sx={{
-                          background: theme.palette.customColors.primaryWhite,
-                          color: theme.palette.customColors.primaryDark1,
-                          // border: `1px solid ${theme.palette.customColors.primaryWhite}`,
-                          fontSize: "40px",
-                          padding: "5px",
-                          transform: "rotate(180deg)",
-                          transition: "all 0.21s linear",
-                          borderRadius: "50%",
-                          "&:hover": {
-                            cursor: "pointer",
-                            transform: "rotate(90deg)",
-                          },
-                        }}
-                      />
-                    </Button>
-                  </HtmlTooltip> */}
                   <Button>
                     <TuneIcon
                       // onClick={handleOpen2}
@@ -1581,23 +1429,6 @@ function EventPage() {
                         {/* Tickets left end */}
                         {/* Tickets right start */}
                         <Box>
-                          {/* <Button sx={{background:'#ff914d',padding:'9px 25px',color:'#fff',borderRadius:'35px'}}>Edit Tickets</Button> */}
-                          {/* <Button
-                          sx={{
-                            padding: "9px 25px",
-                            color: "#fff",
-                            borderRadius: "35px",
-                            background: "rgba( 255, 145, 77, 0.45 )",
-                            boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-                            fontSize:'1.8vh',
-                            backdropFilter: "blur( 4px )",
-                          }}
-                          variant="contained"
-                          startIcon={<ArrowOutwardIcon />}
-                        >
-                          use your own
-                        </Button> */}
-
                           {backgroundImage ? (
                             <Button
                               sx={{
@@ -1815,7 +1646,6 @@ function EventPage() {
               <TextField
                 autoComplete="off"
                 id="outlined-basic"
-                // label="My Event"
                 variant="outlined"
                 placeholder="Password"
                 size="small"

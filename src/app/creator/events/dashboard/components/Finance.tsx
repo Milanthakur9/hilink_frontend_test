@@ -89,16 +89,16 @@ function Finance() {
   return (
     <Box sx={{ width: { md: "80%", xs: "95%" }, margin: "2% auto" }}>
       <div>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexDirection: { md: "row", xs: "column" },
             justifyContent: "space-around",
           }}
-        >
-          <Box sx={{ width: { md: "40%", xs: "100%" } }}>
-            {/* account start  */}
-            <Box
+        > */}
+        {/* <Box sx={{ width: { md: "40%", xs: "100%" } }}> */}
+        {/* account start  */}
+        {/* <Box
               sx={{
                 border: "1px solid #ff914d",
                 borderRadius: "20px",
@@ -114,8 +114,7 @@ function Finance() {
               <Divider
                 sx={{ background: "#ff914d", opacity: 0.4, margin: "3% 0%" }}
               />
-
-              {/* disabled box start  */}
+              disabled box start
               <Box
                 sx={{
                   display: "flex",
@@ -143,9 +142,7 @@ function Finance() {
                   />
                 </Box>
               </Box>
-              {/* disabled box end */}
-
-              {/* disabled box start  */}
+              disabled box end disabled box start
               <Box
                 sx={{
                   display: "flex",
@@ -175,8 +172,7 @@ function Finance() {
                   />
                 </Box>
               </Box>
-              {/* disabled box end */}
-
+              disabled box end
               <Typography
                 onClick={() => setIsView((prev) => !prev)}
                 sx={{
@@ -189,7 +185,6 @@ function Finance() {
               >
                 View Info Requirements
               </Typography>
-
               {isView && (
                 <Box>
                   {viewInfo.map((item) => {
@@ -212,7 +207,6 @@ function Finance() {
                   })}
                 </Box>
               )}
-
               <Button
                 sx={{
                   borderRadius: "5px",
@@ -227,11 +221,11 @@ function Finance() {
               >
                 Submit Required Info
               </Button>
-            </Box>
-            {/* account end  */}
+            </Box> */}
+        {/* account end  */}
 
-            {/* balance start  */}
-            <Box
+        {/* balance start  */}
+        {/* <Box
               sx={{
                 border: "1px solid #ff914d",
                 borderRadius: "20px",
@@ -249,7 +243,7 @@ function Finance() {
                 sx={{ background: "#ff914d", opacity: 0.4, margin: "3% 0%" }}
               />
 
-              {/* disabled box start  */}
+              disabled box start 
               <Box
                 sx={{
                   display: "flex",
@@ -263,12 +257,11 @@ function Finance() {
                 </Box>
                 <Box>
                   <Typography sx={{ color: "#fff" }}>$0.00</Typography>
-                  {/* <HelpIcon sx={{color:'#fff',fontSize:'30px',marginLeft:'5px'}}/> */}
                 </Box>
               </Box>
-              {/* disabled box end */}
+              disabled box end
 
-              {/* disabled box start  */}
+              disabled box start 
               <Box
                 sx={{
                   display: "flex",
@@ -287,9 +280,9 @@ function Finance() {
                   <Typography sx={{ color: "#fff" }}>$0.00</Typography>
                 </Box>
               </Box>
-              {/* disabled box end */}
+              disabled box end
 
-              {/* disabled box start  */}
+              disabled box start 
               <Box
                 sx={{
                   display: "flex",
@@ -310,12 +303,12 @@ function Finance() {
                   <Typography sx={{ color: "#fff" }}>$0.00</Typography>
                 </Box>
               </Box>
-              {/* disabled box end */}
-            </Box>
-            {/* balance end  */}
+              disabled box end
+            </Box> */}
+        {/* balance end  */}
 
-            {/* setting start  */}
-            <Box
+        {/* setting start  */}
+        {/* <Box
               sx={{
                 border: "1px solid #ff914d",
                 borderRadius: "20px",
@@ -333,7 +326,7 @@ function Finance() {
                 sx={{ background: "#ff914d", opacity: 0.4, margin: "3% 0%" }}
               />
 
-              {/* disabled box start  */}
+              disabled box start 
               <Box
                 sx={{
                   display: "flex",
@@ -352,13 +345,11 @@ function Finance() {
                     height={30}
                     width={30}
                   ></Image>
-                  {/* <Typography sx={{color:'#fff'}}>$0.00</Typography> */}
-                  {/* <HelpIcon sx={{color:'#fff',fontSize:'30px',marginLeft:'5px'}}/> */}
                 </Box>
               </Box>
-              {/* disabled box end */}
+              disabled box end
 
-              {/* disabled box start  */}
+              disabled box start 
               <Box
                 sx={{
                   display: "flex",
@@ -374,9 +365,9 @@ function Finance() {
                   <Typography sx={{ color: "#fff" }}>USD</Typography>
                 </Box>
               </Box>
-              {/* disabled box end */}
+              disabled box end
 
-              {/* disabled box start  */}
+              disabled box start 
               <Box
                 sx={{
                   display: "flex",
@@ -394,18 +385,18 @@ function Finance() {
                   <Typography sx={{ color: "#fff" }}>EVENTS BY TEST</Typography>
                 </Box>
               </Box>
-              {/* disabled box end */}
+              disabled box end
 
               <Typography
                 sx={{ color: "#fff", textAlign: "center", marginTop: "20px" }}
               >
                 Payout Schedule: Manual
               </Typography>
-            </Box>
-            {/* setting end  */}
+            </Box> */}
+        {/* setting end  */}
 
-            {/* FinanceBtnCard start  */}
-            <Box
+        {/* FinanceBtnCard start  */}
+        {/* <Box
               sx={{
                 minHeight: "200px",
                 border: "1px solid #ff914d",
@@ -442,13 +433,13 @@ function Finance() {
                   + Add Bank Account
                 </Button>
 
-                {/* Popup end  */}
+                Popup end 
               </Box>
-            </Box>
-            {/* FinanceBtnCard end  */}
+            </Box> */}
+        {/* FinanceBtnCard end  */}
 
-            {/* FinanceBtnCard start  */}
-            <Box
+        {/* FinanceBtnCard start  */}
+        {/* <Box
               sx={{
                 minHeight: "200px",
                 border: "1px solid #ff914d",
@@ -485,11 +476,11 @@ function Finance() {
                   Add Custom Fee
                 </Button>
               </Box>
-            </Box>
-            {/* FinanceBtnCard end  */}
+            </Box> */}
+        {/* FinanceBtnCard end  */}
 
-            {/* FinanceBtnCard start  */}
-            <Box
+        {/* FinanceBtnCard start  */}
+        {/* <Box
               sx={{
                 minHeight: "200px",
                 border: "1px solid #ff914d",
@@ -526,10 +517,10 @@ function Finance() {
                   Check Disputes
                 </Button>
               </Box>
-            </Box>
-            {/* FinanceBtnCard end  */}
-          </Box>
-          <Box sx={{ width: { md: "55%", xs: "100%" } }}>
+            </Box> */}
+        {/* FinanceBtnCard end  */}
+        {/* </Box> */}
+        {/* <Box sx={{ width: { md: "55%", xs: "100%" } }}>
             <Box
               sx={{
                 minHeight: "280px",
@@ -556,8 +547,8 @@ function Finance() {
                 </Typography>
               </Box>
             </Box>
-          </Box>
-        </Box>
+          </Box> */}
+        {/* </Box> */}
 
         {/* model 1  */}
         <Modal
@@ -952,6 +943,420 @@ function Finance() {
           </Box>
         </Modal>
         {/* model 2 end */}
+
+        <Box sx={{ padding: { md: "2% 0", xs: "5% 0" } }}>
+          {/* top */}
+          <Box sx={{ width: { md: "100%", xs: "100%" } }}>
+            <Box
+              sx={{
+                minHeight: "280px",
+                border: "1px solid #ff914d",
+                padding: "40px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                borderRadius: "20px",
+              }}
+            >
+              <Typography
+                variant="h2"
+                sx={{ color: "#fff", fontSize: "25px", fontWeight: "bold" }}
+              >
+                PAYOUTS
+              </Typography>
+              <Box>
+                <Divider sx={{ background: "#ff914d", opacity: 0.4 }} />
+                <Typography
+                  sx={{ color: "#fff", textAlign: "center", margin: "2% 0%" }}
+                >
+                  You currently have no payment history.
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+          {/* top */}
+
+          {/* mid */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: { md: "row", xs: "column" },
+              width: { md: "100%", xs: "100%" },
+              alignItems: "stretch",
+              margin: "3% 0",
+            }}
+          >
+            {/* mid-left */}
+            <Box
+              sx={{
+                border: "1px solid #ff914d",
+                borderRadius: "20px",
+                padding: "20px",
+                width: { md: "48%", xs: "100%" },
+                marginTop: { md: "0%", xs: "3%" },
+              }}
+            >
+              <Typography
+                variant="h2"
+                sx={{ color: "#fff", fontSize: "25px", fontWeight: "bold" }}
+              >
+                Account Status
+              </Typography>
+              <Divider
+                sx={{ background: "#ff914d", opacity: 0.4, margin: "3% 0%" }}
+              />
+
+              {/* disabled box start  */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  margin: "3% 0%",
+                }}
+              >
+                <Box>
+                  <Typography sx={{ color: "#fff" }}>Sell Tickets</Typography>
+                </Box>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Button
+                    sx={{
+                      border: "1px solid #ff914d",
+                      borderRadius: "25px",
+                      color: "#ff914d",
+                      padding: "5px 20px",
+                    }}
+                  >
+                    disabled
+                  </Button>
+                  <HelpIcon
+                    sx={{
+                      color: "#fff",
+                      fontSize: "30px",
+                      marginLeft: "5px",
+                    }}
+                  />
+                </Box>
+              </Box>
+              {/* disabled box end */}
+
+              {/* disabled box start  */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  margin: "3% 0%",
+                }}
+              >
+                <Box>
+                  <Typography sx={{ color: "#fff" }}>
+                    Transfer Balance
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Button
+                    sx={{
+                      border: "1px solid #ff914d",
+                      borderRadius: "25px",
+                      color: "#ff914d",
+                      padding: "5px 20px",
+                    }}
+                  >
+                    disabled
+                  </Button>
+                  <HelpIcon
+                    sx={{
+                      color: "#fff",
+                      fontSize: "30px",
+                      marginLeft: "5px",
+                    }}
+                  />
+                </Box>
+              </Box>
+              {/* disabled box end */}
+
+              <Typography
+                onClick={() => setIsView((prev) => !prev)}
+                sx={{
+                  color: "#fff",
+                  textDecoration: "underline 1px solid",
+                  textAlign: "center",
+                  margin: "25px 0px 20px",
+                  cursor: "pointer",
+                }}
+              >
+                View Info Requirements
+              </Typography>
+
+              {isView && (
+                <Box>
+                  {viewInfo.map((item) => {
+                    return (
+                      <Typography
+                        key={item.name}
+                        sx={{
+                          marginTop: "5px",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        {" "}
+                        <span style={{ fontSize: "5px", marginRight: "13px" }}>
+                          ⚪
+                        </span>{" "}
+                        {item.name}
+                      </Typography>
+                    );
+                  })}
+                </Box>
+              )}
+
+              <Button
+                sx={{
+                  borderRadius: "5px",
+                  color: "#fff",
+                  background: "#ff914d",
+                  width: "100%",
+                  padding: "5px",
+                  textTransform: "capitalize",
+                  fontSize: "18px",
+                  margin: "20px 0 0",
+                }}
+              >
+                Submit Required Info
+              </Button>
+            </Box>
+            {/* mid-left */}
+
+            {/* mid-right */}
+            <Box
+              sx={{
+                border: "1px solid #ff914d",
+                borderRadius: "20px",
+                padding: "20px",
+                width: { md: "48%", xs: "100%" },
+                marginTop: { md: "0%", xs: "3%" },
+              }}
+            >
+              <Typography
+                variant="h2"
+                sx={{ color: "#fff", fontSize: "25px", fontWeight: "bold" }}
+              >
+                Balance
+              </Typography>
+              <Divider
+                sx={{ background: "#ff914d", opacity: 0.4, margin: "3% 0%" }}
+              />
+
+              {/* disabled box start  */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  margin: "3% 0%",
+                }}
+              >
+                <Box>
+                  <Typography sx={{ color: "#fff" }}>Available</Typography>
+                </Box>
+                <Box>
+                  <Typography sx={{ color: "#fff" }}>$0.00</Typography>
+                  {/* <HelpIcon sx={{color:'#fff',fontSize:'30px',marginLeft:'5px'}}/> */}
+                </Box>
+              </Box>
+              {/* disabled box end */}
+
+              {/* disabled box start  */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  margin: "3% 0%",
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Typography sx={{ color: "#fff" }}>Pending</Typography>
+                  <HelpIcon
+                    sx={{
+                      color: "#fff",
+                      fontSize: "30px",
+                      marginLeft: "5px",
+                    }}
+                  />
+                </Box>
+                <Box>
+                  <Typography sx={{ color: "#fff" }}>$0.00</Typography>
+                </Box>
+              </Box>
+              {/* disabled box end */}
+
+              {/* disabled box start  */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  margin: "3% 0%",
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Typography sx={{ color: "#fff" }}>
+                    Instant Available
+                  </Typography>
+                  <HelpIcon
+                    sx={{
+                      color: "#fff",
+                      fontSize: "30px",
+                      marginLeft: "5px",
+                    }}
+                  />
+                </Box>
+                <Box>
+                  <Typography sx={{ color: "#fff" }}>$0.00</Typography>
+                </Box>
+              </Box>
+              {/* disabled box end */}
+            </Box>
+            {/* mid-right */}
+          </Box>
+          {/* mid */}
+
+          {/* bottom */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: { md: "row", xs: "column" },
+              width: { md: "100%", xs: "100%" },
+              alignItems: "stretch",
+            }}
+          >
+            <Box
+              sx={{
+                minHeight: "200px",
+                border: "1px solid #ff914d",
+                borderRadius: "20px",
+                padding: "20px",
+                marginTop: { md: "0%", xs: "3%" },
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: { md: "32%", xs: "100%" },
+              }}
+            >
+              <Typography
+                variant="h2"
+                sx={{ color: "#fff", fontSize: "25px", fontWeight: "bold" }}
+              >
+                BANKS & DEBIT CARDS
+              </Typography>
+              <Box>
+                <Divider sx={{ background: "#ff914d", opacity: 0.4 }} />
+                <Button
+                  onClick={handleOpen}
+                  sx={{
+                    width: "100%",
+                    background: "#ff914d",
+                    color: "#fff",
+                    fontSize: "18px",
+                    padding: "5px",
+                    borderRadius: "5px",
+                    marginTop: "15px",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {" "}
+                  + Add Bank Account
+                </Button>
+
+                {/* Popup end  */}
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                minHeight: "200px",
+                border: "1px solid #ff914d",
+                borderRadius: "20px",
+                padding: "20px",
+                marginTop: { md: "0%", xs: "3%" },
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: { md: "32%", xs: "100%" },
+              }}
+            >
+              <Typography
+                variant="h2"
+                sx={{ color: "#fff", fontSize: "25px", fontWeight: "bold" }}
+              >
+                Custom Fees
+              </Typography>
+              <Box>
+                <Divider sx={{ background: "#ff914d", opacity: 0.4 }} />
+                <Button
+                  onClick={handleCustomOpen}
+                  sx={{
+                    width: "100%",
+                    background: "#ff914d",
+                    color: "#fff",
+                    fontSize: "18px",
+                    padding: "5px",
+                    borderRadius: "5px",
+                    marginTop: "15px",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {" "}
+                  Add Custom Fee
+                </Button>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                minHeight: "200px",
+                border: "1px solid #ff914d",
+                borderRadius: "20px",
+                padding: "20px",
+                marginTop: { md: "0%", xs: "3%" },
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: { md: "32%", xs: "100%" },
+              }}
+            >
+              <Typography
+                variant="h2"
+                sx={{ color: "#fff", fontSize: "25px", fontWeight: "bold" }}
+              >
+                DISPUTES
+              </Typography>
+              <Box>
+                <Divider sx={{ background: "#ff914d", opacity: 0.4 }} />
+                <Button
+                  onClick={() => router.push(`/disputes`)}
+                  sx={{
+                    width: "100%",
+                    background: "#ff914d",
+                    color: "#fff",
+                    fontSize: "18px",
+                    padding: "5px",
+                    borderRadius: "5px",
+                    marginTop: "15px",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {" "}
+                  Check Disputes
+                </Button>
+              </Box>
+            </Box>
+          </Box>
+          {/* bottom */}
+        </Box>
       </div>
     </Box>
   );

@@ -419,187 +419,221 @@ function General() {
             )} */}
 
             {/* backup  */}
-
             <Box>
-              <Typography
-                sx={{ color: "#fff", fontWeight: "Bold" }}
-                variant="h6"
-                align="left"
-              >
-                General
-              </Typography>
-              <Typography
-                sx={{ color: "#fff", fontWeight: "normal", margin: "2% 0%" }}
-                align="left"
-              >
-                Configure general settings for your organization.
-              </Typography>
               <Box
                 sx={{
-                  margin: "3% 0",
-                  width: "70%",
                   display: "flex",
-                  flexDirection: { md: "row", xs: "column" },
-                  justifyContent: "space-between",
+                  flexDirection: "column",
                   alignItems: "center",
+                  // width: "80%",
+                  // margin: "0 auto",
                 }}
               >
-                <Box sx={{ width: { md: "50%", xs: "100%" }, margin: "2% 0%" }}>
-                  <Typography
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    fontWeight: "Bold",
+                    textAlign: "left !important",
+                    width: "70%",
+                  }}
+                  variant="h6"
+                >
+                  General
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    fontWeight: "normal",
+                    margin: "2% 0%",
+                    textAlign: "left !important",
+                    width: "70%",
+                  }}
+                >
+                  Configure general settings for your organization.
+                </Typography>
+
+                <Box
+                  sx={{
+                    margin: "3% 0",
+                    width: "70%",
+                    display: "flex",
+                    flexDirection: { md: "row", xs: "column" },
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Box
                     sx={{
-                      color: "#fff",
-                      fontWeight: "normal",
-                      margin: "2% 0%",
+                      width: { md: "50%", xs: "100%" },
+                      margin: "2% 0% 0%",
                     }}
-                    align="left"
                   >
-                    Organization Type
-                  </Typography>
-                </Box>
-                <Box sx={{ width: "100%" }}>
-                  <TextField
-                    autoComplete="off"
-                    id="outlined-basic"
-                    // label="venue Name"
-                    placeholder="Personal"
-                    size="small"
-                    variant="outlined"
-                    sx={{
-                      backdropFilter: "blur( 4px )",
-                      width: "100%",
-                      "& .MuiOutlinedInput-root": {
-                        background: `${hexToRGBA(
-                          theme.palette.customColors.primaryDark1,
-                          0.2
-                        )}`,
-                        boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                          theme.palette.customColors.orange,
-                          0.12
-                        )}`,
-                        border: `1px solid ${theme.palette.customColors.orange}`,
-                        color: orange,
-                        fontFamily: "Arial",
-                        fontWeight: "noraml",
-                        // Class for the border around the input field
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          borderColor: "",
-                          borderWidth: "1px",
-                        },
-                      },
-                      // Class for the label of the input field
-                      "& .MuiInputLabel-outlined": {
-                        color: "",
+                    <Typography
+                      sx={{
+                        color: "#fff",
                         fontWeight: "normal",
-                      },
-                    }}
-                  />
-                </Box>
-              </Box>
-              <Divider
-                sx={{
-                  background: "#ff914d",
-                  height: "0.2vh",
-                  opacity: "0.3",
-                }}
-              />
-              <Typography
-                sx={{ color: "#fff", fontWeight: "normal", margin: "2% 0%" }}
-                align="left"
-              >
-                Your contact information will be displayed to attendees.
-              </Typography>
-              <Box
-                sx={{
-                  width: "70%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  flexDirection: { md: "row", xs: "column" },
-                  alignItems: "center",
-                }}
-              >
-                <Box sx={{ width: { md: "50%", xs: "100%" }, margin: "2% 0%" }}>
-                  <Typography
-                    sx={{
-                      color: "#fff",
-                      fontWeight: "normal",
-                      margin: "2% 0%",
-                    }}
-                    align="left"
-                  >
-                    Contact Email
-                  </Typography>
-                </Box>
-                <Box sx={{ width: "100%" }}>
-                  <TextField
-                    autoComplete="off"
-                    id="outlined-basic"
-                    // label="venue Name"
-                    placeholder="Email"
-                    size="small"
-                    variant="outlined"
-                    sx={{
-                      backdropFilter: "blur( 4px )",
-                      width: "100%",
-                      "& .MuiOutlinedInput-root": {
-                        background: `${hexToRGBA(
-                          theme.palette.customColors.primaryDark1,
-                          0.2
-                        )}`,
-                        boxShadow: `0 8px 32px 0 ${hexToRGBA(
-                          theme.palette.customColors.orange,
-                          0.12
-                        )}`,
-                        border: `1px solid ${theme.palette.customColors.orange}`,
-                        color: orange,
-                        fontFamily: "Arial",
-                        fontWeight: "noraml",
-                        // Class for the border around the input field
-                        "& .MuiOutlinedInput-notchedOutline": {
-                          borderColor: "",
-                          borderWidth: "1px",
+                        margin: "2% 0%",
+                      }}
+                      align="left"
+                    >
+                      Organization Type
+                    </Typography>
+                  </Box>
+                  <Box sx={{ width: "100%" }}>
+                    <TextField
+                      autoComplete="off"
+                      id="outlined-basic"
+                      // label="venue Name"
+                      placeholder="Personal"
+                      size="small"
+                      variant="outlined"
+                      sx={{
+                        backdropFilter: "blur( 4px )",
+                        width: "100%",
+                        "& .MuiOutlinedInput-root": {
+                          background: `${hexToRGBA(
+                            theme.palette.customColors.primaryDark1,
+                            0.2
+                          )}`,
+                          boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                            theme.palette.customColors.orange,
+                            0.12
+                          )}`,
+                          border: `1px solid ${theme.palette.customColors.orange}`,
+                          color: orange,
+                          fontFamily: "Arial",
+                          fontWeight: "noraml",
+                          // Class for the border around the input field
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "",
+                            borderWidth: "1px",
+                          },
                         },
-                      },
-                      // Class for the label of the input field
-                      "& .MuiInputLabel-outlined": {
-                        color: "",
-                        fontWeight: "normal",
-                      },
-                    }}
-                  />
+                        // Class for the label of the input field
+                        "& .MuiInputLabel-outlined": {
+                          color: "",
+                          fontWeight: "normal",
+                        },
+                      }}
+                    />
+                  </Box>
                 </Box>
-              </Box>
-              <Box
-                sx={{
-                  width: "70%",
-                  marginTop: "4%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  flexDirection: { md: "row", xs: "column" },
-                  alignItems: "center",
-                }}
-              >
-                <Box sx={{ width: { md: "50%", xs: "100%" }, margin: "2% 0%" }}>
-                  <Typography
-                    sx={{
-                      color: "#fff",
-                      fontWeight: "normal",
-                      margin: "2% 0%",
-                    }}
-                    align="left"
+                <Divider
+                  sx={{
+                    background: "#ff914d",
+                    height: "0.2vh",
+                    opacity: "0.3",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    fontWeight: "normal",
+                    margin: "2% 0%",
+                    textAlign: "left !important",
+                    width: "70%",
+                  }}
+                  align="left"
+                >
+                  Your contact information will be displayed to attendees.
+                </Typography>
+                <Box
+                  sx={{
+                    width: "70%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: { md: "row", xs: "column" },
+                    alignItems: "center",
+                  }}
+                >
+                  <Box
+                    sx={{ width: { md: "50%", xs: "100%" }, margin: "2% 0%" }}
                   >
-                    Contact Phone
-                  </Typography>
+                    <Typography
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "normal",
+                        margin: "2% 0%",
+                      }}
+                      align="left"
+                    >
+                      Contact Email
+                    </Typography>
+                  </Box>
+                  <Box sx={{ width: "100%" }}>
+                    <TextField
+                      autoComplete="off"
+                      id="outlined-basic"
+                      // label="venue Name"
+                      placeholder="Email"
+                      size="small"
+                      variant="outlined"
+                      sx={{
+                        backdropFilter: "blur( 4px )",
+                        width: "100%",
+                        "& .MuiOutlinedInput-root": {
+                          background: `${hexToRGBA(
+                            theme.palette.customColors.primaryDark1,
+                            0.2
+                          )}`,
+                          boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                            theme.palette.customColors.orange,
+                            0.12
+                          )}`,
+                          border: `1px solid ${theme.palette.customColors.orange}`,
+                          color: orange,
+                          fontFamily: "Arial",
+                          fontWeight: "noraml",
+                          // Class for the border around the input field
+                          "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "",
+                            borderWidth: "1px",
+                          },
+                        },
+                        // Class for the label of the input field
+                        "& .MuiInputLabel-outlined": {
+                          color: "",
+                          fontWeight: "normal",
+                        },
+                      }}
+                    />
+                  </Box>
                 </Box>
-                <Box sx={{ width: "100%" }}>
-                  <PhoneInputStyled
-                    sx={{ width: "100%" }}
-                    country={"us"}
-                    value={phone}
-                    // onChange={phone => setPhone(phone)}
-                    onChange={handlePhoneNumberChange}
-                    countryCodeEditable={false}
-                    disableCountryCode={false}
-                  />
+                <Box
+                  sx={{
+                    width: "70%",
+                    marginTop: "4%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: { md: "row", xs: "column" },
+                    alignItems: "center",
+                  }}
+                >
+                  <Box
+                    sx={{ width: { md: "50%", xs: "100%" }, margin: "2% 0%" }}
+                  >
+                    <Typography
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "normal",
+                        margin: "2% 0%",
+                      }}
+                      align="left"
+                    >
+                      Contact Phone
+                    </Typography>
+                  </Box>
+                  <Box sx={{ width: "100%" }}>
+                    <PhoneInputStyled
+                      sx={{ width: "100%" }}
+                      country={"us"}
+                      value={phone}
+                      // onChange={phone => setPhone(phone)}
+                      onChange={handlePhoneNumberChange}
+                      countryCodeEditable={false}
+                      disableCountryCode={false}
+                    />
+                  </Box>
                 </Box>
               </Box>
             </Box>

@@ -74,7 +74,7 @@ function Page() {
           flexDirection: { md: "row", xs: "column" },
         }}
       >
-        <Box
+        {/* <Box
           sx={{
             width: { md: "40%", xs: "95%" },
             margin: { md: "0", xs: "0 auto" },
@@ -88,13 +88,12 @@ function Page() {
           <Box sx={{ display: { md: "inline-block", xs: "none" } }}>
             <Image src={hilinkLogo} height={40} width={120} alt="logo" />
           </Box>
-        </Box>
-        <Box
+        </Box> */}
+        {/* <Box
           sx={{
             width: { md: "60%", xs: "95%" },
             padding: { md: "30px", xs: "20px" },
             margin: { md: "0", xs: "0 auto" },
-            // border: `1px solid ${orange}`,
           }}
         >
           <Typography
@@ -111,14 +110,12 @@ function Page() {
             </span>
           </Typography>
           <Typography variant="h1">Create Organization</Typography>
-
-          {/* tickets start  */}
+          tickets start
           <Box sx={{ width: { md: "100%", xs: "100%" }, margin: "5% 0" }}>
             <Typography variant="h5" sx={{ margin: "10px 0px" }}>
               Where will you be selling tickets?
             </Typography>
             <FormControl fullWidth>
-              {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
               <Select
                 value={ticketLocation}
                 onChange={(e) => setTicketLocation(e.target.value)}
@@ -133,10 +130,6 @@ function Page() {
                 }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                // value={age}
-                // label="Age"
-                // size="small"
-                // onChange={handleChange}
               >
                 <MenuItem value="United States">United States</MenuItem>
                 <MenuItem value="Finland">Finland</MenuItem>
@@ -158,9 +151,8 @@ function Page() {
               </Select>
             </FormControl>
           </Box>
-          {/* tickets end  */}
-
-          {/* Brand name start       */}
+          tickets end 
+          Brand name start      
           <Box>
             <Typography variant="h5" sx={{ margin: "10px 0px" }}>
               What is your organization called?
@@ -170,20 +162,16 @@ function Page() {
               onChange={(e) => setOrganizationName(e.target.value)}
               autoComplete="off"
               id="outlined-basic"
-              //   multiline
-              //   rows={4}
               placeholder="Brand Name"
               variant="outlined"
-              //   size="small"
               sx={{
                 marginTop: "2% 0",
-                //   border:` 1px solid ${theme.palette.customColors.primaryWhite}`,
                 backdropFilter: "blur( 4px )",
                 width: "99%",
                 "& .MuiOutlinedInput-root": {
                   color: orange,
                   fontWeight: "noraml",
-                  // Class for the border around the input field
+                  Class for the border around the input field
                   "& .MuiOutlinedInput-notchedOutline": {
                     background: ` ${hexToRGBA(dark1, 0.2)}`,
                     boxShadow: ` 0 8px 32px 0 ${hexToRGBA(orange, 0.12)}`,
@@ -192,7 +180,7 @@ function Page() {
                     borderRadius: "35px",
                   },
                 },
-                // Class for the label of the input field
+                Class for the label of the input field
                 "& .MuiInputLabel-outlined": {
                   color: orange,
                   fontWeight: "normal",
@@ -200,9 +188,8 @@ function Page() {
               }}
             />
           </Box>
-          {/* Brand name end  */}
-
-          {/* brand's logo start    */}
+          Brand name end 
+          brand's logo start   
           <Box sx={{ margin: "5% 0" }}>
             <Typography variant="h5" sx={{ margin: "10px 0px" }}>
               {`Add your brand's logo. (Square)`}
@@ -210,9 +197,7 @@ function Page() {
             <Box
               sx={{
                 width: "150px",
-                // height: '50vh',
                 minHeight: "150px",
-                // margin: { md: "0%", xs: "0% auto 6%" },
                 backgroundImage: profileImage
                   ? `url(${profileImage})`
                   : `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,
@@ -221,13 +206,11 @@ function Page() {
                 backgroundSize: "cover",
                 objectFit: "cover",
                 border: `1px solid ${orange}`,
-                // backgroundBlendMode: "overlay",
                 borderRadius: "20px",
                 transition: "all 0.1s linear",
                 position: "relative",
                 "&:hover": {
                   cursor: "pointer",
-                  // transform:'scale(1.1)'
                   boxShadow: "0px 0px 19px 20px rgba(255,145,77,0.12)",
                   border: `1px solid ${orange}`,
                   backgroundColor: "#1f1f1f",
@@ -278,13 +261,12 @@ function Page() {
                   </>
                 )}
               </Box>
-              {/* profile image end  */}
+              profile image end 
             </Box>
           </Box>
-          {/* brand's logo end  */}
-
+          brand's logo end 
           <Button
-            // onClick={handleSubmit}
+            onClick={handleSubmit}
             onClick={handleSubmit}
             sx={{
               width: "100%",
@@ -295,7 +277,216 @@ function Page() {
           >
             Continue
           </Button>
+        </Box> */}
+      </Box>
+
+      <Box
+        sx={{
+          width: { md: "60%", xs: "95%" },
+          padding: { md: "30px", xs: "20px" },
+          margin: { md: "3% auto", xs: "0 auto" },
+          textAlign: "center",
+          background: theme.palette.customColors.primaryDark2,
+          borderRadius: "30px",
+          borderTop: `20px solid ${theme.palette.customColors.orange}`,
+          boxShadow: `rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset`,
+        }}
+      >
+        <Box sx={{ marginBottom: "5%" }}>
+          <Image src={hilinkLogo} height={40} width={120} alt="logo" />
         </Box>
+
+        <Typography variant="h1">Create Organization</Typography>
+        <Typography
+          variant="h5"
+          sx={{ textAlign: "center", marginBottom: "20px" }}
+        >
+          {` Already have an organization? `}
+          <span
+            style={{ color: orange, cursor: "pointer" }}
+            onClick={() => router.push(`/creator/events/dashboard/`)}
+          >
+            {" "}
+            My Dashboard{" "}
+          </span>
+        </Typography>
+
+        {/* brand's logo start    */}
+        <Box sx={{ margin: "5% 0" }}>
+          <Typography variant="h5" sx={{ margin: "10px 0px" }}>
+            {`Add your brand's logo. (Square)`}
+          </Typography>
+          <Box
+            sx={{
+              width: "150px",
+              // height: '50vh',
+              minHeight: "150px",
+              margin: { md: "0% auto", xs: "0% auto 6%" },
+              backgroundImage: profileImage
+                ? `url(${profileImage})`
+                : `url(https://posh.vip/cdn-cgi/image/quality=85,fit=scale-down,format=webp,width=1920/https://images.posh.vip/create-event-flyer-placeholders/Default_Flyer_Placeholder_2.webp)`,
+              backgroundPosition: "center center",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              objectFit: "cover",
+              border: `1px solid ${orange}`,
+              // backgroundBlendMode: "overlay",
+              borderRadius: "20px",
+              transition: "all 0.1s linear",
+              position: "relative",
+              "&:hover": {
+                cursor: "pointer",
+                // transform:'scale(1.1)'
+                boxShadow: "0px 0px 19px 20px rgba(255,145,77,0.12)",
+                border: `1px solid ${orange}`,
+                backgroundColor: "#1f1f1f",
+                backgroundBlendMode: "overlay",
+              },
+            }}
+          >
+            <Box
+              sx={{
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%,-50%)",
+              }}
+            >
+              {profileImage ? (
+                <Button
+                  sx={{
+                    background: "#202524",
+                    border: `1px solid ${orange}`,
+                    color: orange,
+                    borderRadius: "10px",
+                  }}
+                  variant="contained"
+                  onClick={() => setProfileImage(null)}
+                >
+                  <PanoramaIcon />
+                </Button>
+              ) : (
+                <>
+                  <label htmlFor="file-upload" style={{ cursor: "pointer" }}>
+                    <CloudUploadIcon sx={{ color: orange, fontSize: "35px" }} />
+                  </label>
+                  <input
+                    id="file-upload"
+                    style={{
+                      border: `1px solid ${orange}`,
+                      width: "150px",
+                      display: "none",
+                      padding: "5px 25px",
+                    }}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleProfileImage}
+                  />
+                </>
+              )}
+            </Box>
+            {/* profile image end  */}
+          </Box>
+        </Box>
+        {/* brand's logo end  */}
+
+        {/* tickets start */}
+        <Box sx={{ width: { md: "100%", xs: "100%" }, margin: "5% 0" }}>
+          <Typography variant="h5" sx={{ margin: "10px 0px" }}>
+            Where will you be selling tickets?
+          </Typography>
+          <FormControl fullWidth>
+            <Select
+              value={ticketLocation}
+              onChange={(e) => setTicketLocation(e.target.value)}
+              sx={{
+                background: `${hexToRGBA(dark1, 0.2)}`,
+                boxShadow: `0 8px 32px 0 ${hexToRGBA(
+                  theme.palette.customColors.orange,
+                  0.12
+                )}`,
+                border: `1px solid ${orange}`,
+                borderRadius: "30px",
+              }}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+            >
+              <MenuItem value="United States">United States</MenuItem>
+              <MenuItem value="Finland">Finland</MenuItem>
+              <MenuItem value="Canada">Canada</MenuItem>
+              <MenuItem value="United Kingdom">United Kingdom</MenuItem>
+              <MenuItem value="Spain">Spain</MenuItem>
+              <MenuItem value="Netherlands">Netherlands</MenuItem>
+              <MenuItem value="Greece">Greece</MenuItem>
+              <MenuItem value="Peru">Peru</MenuItem>
+              <MenuItem value="Mexico">Mexico</MenuItem>
+              <MenuItem value="Denmark">Denmark</MenuItem>
+              <MenuItem value="Australia">Australia</MenuItem>
+              <MenuItem value="Switzerland">Switzerland</MenuItem>
+              <MenuItem value="Guatemala">Guatemala</MenuItem>
+              <MenuItem value="Hungary">Hungary</MenuItem>
+              <MenuItem value="United Arab Emirates">
+                United Arab Emirates
+              </MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        {/* tickets end  */}
+        {/* Brand name start       */}
+        <Box>
+          <Typography variant="h5" sx={{ margin: "10px 0px" }}>
+            What is your organization called?
+          </Typography>
+          <TextField
+            value={organizationName}
+            onChange={(e) => setOrganizationName(e.target.value)}
+            autoComplete="off"
+            id="outlined-basic"
+            //   multiline
+            //   rows={4}
+            placeholder="Brand Name"
+            variant="outlined"
+            //   size="small"
+            sx={{
+              marginTop: "2% 0",
+              //   border:` 1px solid ${theme.palette.customColors.primaryWhite}`,
+              backdropFilter: "blur( 4px )",
+              width: "99%",
+              "& .MuiOutlinedInput-root": {
+                color: orange,
+                fontWeight: "noraml",
+                // Class for the border around the input field
+                "& .MuiOutlinedInput-notchedOutline": {
+                  background: ` ${hexToRGBA(dark1, 0.2)}`,
+                  boxShadow: ` 0 8px 32px 0 ${hexToRGBA(orange, 0.12)}`,
+                  borderColor: orange,
+                  borderWidth: "1px",
+                  borderRadius: "35px",
+                },
+              },
+              // Class for the label of the input field
+              "& .MuiInputLabel-outlined": {
+                color: orange,
+                fontWeight: "normal",
+              },
+            }}
+          />
+        </Box>
+        {/* Brand name end  */}
+
+        <Button
+          // onClick={handleSubmit}
+          onClick={handleSubmit}
+          sx={{
+            width: "50%",
+            background: orange,
+            color: white,
+            fontSize: "22px",
+            margin: "4% 0 0",
+          }}
+        >
+          Continue
+        </Button>
       </Box>
     </>
   );

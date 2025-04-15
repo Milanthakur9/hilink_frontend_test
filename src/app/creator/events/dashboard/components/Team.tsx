@@ -146,7 +146,7 @@ const EventsByTestTeam = () => {
             These people are part of your group. They are added to all of your
             events by default.
           </Typography>
-          <Button
+          {/* <Button
             onClick={handleOpen}
             sx={{
               color: "#fff",
@@ -158,7 +158,7 @@ const EventsByTestTeam = () => {
             variant="contained"
           >
             + Add Team Member
-          </Button>
+          </Button> */}
           {/* Popup start  */}
           {/* model 1  */}
           <Modal
@@ -668,7 +668,7 @@ const EventsByTestTeam = () => {
           </Modal>
           {/* modal 3  end  */}
         </Box>
-        <Grid container justifyContent="center" alignItems="center" mb={4}>
+        {/* <Grid container justifyContent="center" alignItems="center" mb={4}>
           <Grid item xs={12} md={6} lg={6}>
             <Box
               sx={{
@@ -684,8 +684,6 @@ const EventsByTestTeam = () => {
                 borderRadius: "10px",
                 "&:hover": {
                   transform: "scale(1.1)",
-                  // boxShadow:'rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;',
-                  // border:'1px solid #ff914d'
                 },
               }}
             >
@@ -735,11 +733,279 @@ const EventsByTestTeam = () => {
               </Typography>
 
               <Permissions />
-              {/* <HostPermissions /> */}
-              {/* <DoormanPermissions /> */}
+              <HostPermissions />
+              <DoormanPermissions />
             </Box>
           </Grid>
-        </Grid>
+        </Grid> */}
+
+        <Box>
+          <Box
+            sx={{
+              padding: "5%",
+              width: "80%",
+              margin: "4% auto 0",
+              textAlign: "center",
+              display: "flex",
+              // flexDirection: "column",
+              flexWrap: "wrap",
+              alignItems: "center",
+              boxShadow:
+                "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
+              transition: "all .3s linear",
+              borderRadius: "10px",
+              "&:hover": {
+                transform: "scale(1.1)",
+                // boxShadow:'rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;',
+                // border:'1px solid #ff914d'
+              },
+            }}
+          >
+            <Avatar
+              sx={{
+                bgcolor: "#202524",
+                // marginBottom: "3%",
+                width: 120,
+                height: 120,
+                boxShadow:
+                  "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+                transition: "all .3s linear",
+                "&:hover": {
+                  transform: "scale(1.2)",
+                },
+              }}
+            >
+              <PersonIcon sx={{ color: "#ff914d", fontSize: "80px" }} />
+            </Avatar>
+
+            <Box
+              sx={{
+                width: { md: "50%", xs: "100%" },
+                marginLeft: "20px",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: theme.palette.customColors.primaryWhite,
+                  fontWeight: 400,
+                  fontFamily: "arial",
+                }}
+                variant="h2"
+                align="left"
+                mt={2}
+              >
+                Sartaj Gill
+              </Typography>
+              <Typography
+                sx={{ color: "#fff" }}
+                variant="h5"
+                align="left"
+                mt={1}
+              >
+                Owner
+              </Typography>
+              <Typography
+                sx={{
+                  color: theme.palette.customColors.primaryWhite,
+                  textTransform: "capitalize",
+                  // fontSize: "17px",
+                }}
+                variant="h4"
+                align="left"
+                mt={1}
+              >
+                Last Login: A day ago
+              </Typography>
+            </Box>
+            {/* <Box>
+              <Permissions />
+            </Box> */}
+            {/* <HostPermissions /> */}
+            {/* <DoormanPermissions /> */}
+          </Box>
+          <Box
+            sx={{
+              padding: "5%",
+              width: "80%",
+              margin: "4% auto 0",
+              textAlign: "center",
+              display: "flex",
+              // flexDirection: "column",
+              flexWrap: "wrap",
+              alignItems: "center",
+              boxShadow:
+                "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
+              transition: "all .3s linear",
+              borderRadius: "10px",
+              "&:hover": {
+                transform: "scale(1.1)",
+                // boxShadow:'rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;',
+                // border:'1px solid #ff914d'
+              },
+            }}
+          >
+            <Avatar
+              sx={{
+                bgcolor: "#202524",
+                // marginBottom: "3%",
+                width: 120,
+                height: 120,
+                boxShadow:
+                  "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+                transition: "all .3s linear",
+                "&:hover": {
+                  transform: "scale(1.2)",
+                },
+              }}
+            >
+              <PersonIcon sx={{ color: "#ff914d", fontSize: "80px" }} />
+            </Avatar>
+
+            <Box
+              sx={{
+                width: { md: "50%", xs: "100%" },
+                marginLeft: "20px",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: theme.palette.customColors.primaryWhite,
+                  fontWeight: 400,
+                  fontFamily: "arial",
+                }}
+                variant="h2"
+                align="left"
+                mt={2}
+              >
+                Sartaj Gill
+              </Typography>
+              <Typography
+                sx={{ color: "#fff" }}
+                variant="h5"
+                align="left"
+                mt={1}
+              >
+                Owner
+              </Typography>
+              <Typography
+                sx={{
+                  color: theme.palette.customColors.primaryWhite,
+                  textTransform: "capitalize",
+                  // fontSize: "17px",
+                }}
+                variant="h4"
+                align="left"
+                mt={1}
+              >
+                Last Login: A day ago
+              </Typography>
+            </Box>
+            {/* <Box>
+              <Permissions />
+            </Box> */}
+            {/* <HostPermissions /> */}
+            {/* <DoormanPermissions /> */}
+          </Box>
+          <Box
+            sx={{
+              padding: "5%",
+              width: "80%",
+              margin: "4% auto 0",
+              textAlign: "center",
+              display: "flex",
+              // flexDirection: "column",
+              flexWrap: "wrap",
+              alignItems: "center",
+              boxShadow:
+                "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;",
+              transition: "all .3s linear",
+              borderRadius: "10px",
+              "&:hover": {
+                transform: "scale(1.1)",
+                // boxShadow:'rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;',
+                // border:'1px solid #ff914d'
+              },
+            }}
+          >
+            <Avatar
+              sx={{
+                bgcolor: "#202524",
+                // marginBottom: "3%",
+                width: 120,
+                height: 120,
+                boxShadow:
+                  "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+                transition: "all .3s linear",
+                "&:hover": {
+                  transform: "scale(1.2)",
+                },
+              }}
+            >
+              <PersonIcon sx={{ color: "#ff914d", fontSize: "80px" }} />
+            </Avatar>
+
+            <Box
+              sx={{
+                width: { md: "50%", xs: "100%" },
+                marginLeft: "20px",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: theme.palette.customColors.primaryWhite,
+                  fontWeight: 400,
+                  fontFamily: "arial",
+                }}
+                variant="h2"
+                align="left"
+                mt={2}
+              >
+                Sartaj Gill
+              </Typography>
+              <Typography
+                sx={{ color: "#fff" }}
+                variant="h5"
+                align="left"
+                mt={1}
+              >
+                Owner
+              </Typography>
+              <Typography
+                sx={{
+                  color: theme.palette.customColors.primaryWhite,
+                  textTransform: "capitalize",
+                  // fontSize: "17px",
+                }}
+                variant="h4"
+                align="left"
+                mt={1}
+              >
+                Last Login: A day ago
+              </Typography>
+            </Box>
+            {/* <Box>
+              <Permissions />
+            </Box> */}
+            {/* <HostPermissions /> */}
+            {/* <DoormanPermissions /> */}
+          </Box>
+
+          <Box sx={{ margin: "5% 0", textAlign: "center" }}>
+            <Button
+              onClick={handleOpen}
+              sx={{
+                color: "#fff",
+                background: "#202524",
+                border: "1px solid #ff914d",
+                mb: 4,
+                align: "center",
+              }}
+              variant="contained"
+            >
+              + Add Team Member
+            </Button>
+          </Box>
+        </Box>
       </Grid>
     </Grid>
   );
